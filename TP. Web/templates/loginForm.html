@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="es" dir="ltr">
   <head>
@@ -15,12 +15,7 @@
   </head>
 
   <body>
-    <iframe
-      class="cabecera"
-      src="cabecera.html"
-      frameborder="0"
-      title="cabecera"
-    ></iframe>
+    <iframe class="cabecera" src="cabecera.html" frameborder="0" title="cabecera"></iframe>
 
     <main>
       <div class="d-flex flex-row justify-content-center">
@@ -29,30 +24,12 @@
 
       <div class="d-flex flex-row justify-content-center">
         <div class="d-flex flex-column align-items-center">
-          <form
-            action="../config/login.php"
-            method="post"
-            id="formInicioSesion"
-          >
-            <input
-              type="email"
-              name="mail"
-              id="mail"
-              placeholder="Ingrese Mail"
-              required
-            />
-            <input
-              type="password"
-              name="pass"
-              id="pass"
-              placeholder="Ingrese contraseña"
-              required
-            />
+          <form action="../config/login.php" method="post" id="formInicioSesion">
+            <input type="email" name="mail" id="mail" placeholder="Ingrese Mail" required />
+            <input type="password" name="pass" id="pass" placeholder="Ingrese contraseña" required />
             <input type="checkbox" name="rememberMe" id="rememberMe" />
             <label for="rememberMe">Recordarme</label>
-            <button type="submit" id="botonIniciar" name="botonIniciar">
-              Iniciar Sesion
-            </button>
+            <button type="submit" id="botonIniciar" name="botonIniciar">Iniciar Sesion</button>
           </form>
         </div>
       </div>
@@ -60,19 +37,12 @@
       <div class="d-flex flex-row justify-content-center">
         <div class="d-flex flex-column align-items-center">
           <a href="cambiarContrseña.html"> ¿Has olvidado la contraseña? </a>
-          <div>
-            ¿No tienes cuenta? <a href="signinForm.html">Registrarse</a>
-          </div>
+          <div>¿No tienes cuenta? <a href="signinForm.html">Registrarse</a></div>
         </div>
       </div>
     </main>
 
-    <object
-      class="pie"
-      src="piePag.html"
-      frameborder="0"
-      title="pie de página"
-    ></object>
+    <object class="pie" src="piePag.html" frameborder="0" title="pie de página"></object>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
