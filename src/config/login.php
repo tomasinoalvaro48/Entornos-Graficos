@@ -18,7 +18,7 @@ if(isset($_POST['botonIniciar'])){
             echo "<br>¡Bienvenido!</br>";
 
         } else{
-            header('Location: ../LoginForm.html');
+            header('Location: ../index.php?page=login');
             echo '
             <br>
             <div style="color: red;"> Usuario o contraseña incorrectos </div>';
