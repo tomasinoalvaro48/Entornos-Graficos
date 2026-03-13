@@ -20,7 +20,7 @@
 
 <body>
   <header>
-    <?php include "templates/components/header.html"; ?>
+    <?php include "components/header.html"; ?>
   </header>
 
   <section>
@@ -33,12 +33,12 @@
     ];
 
     $template = isset($allowedPages[$page]) ? $allowedPages[$page] : $allowedPages["menu"];
-    include "templates/pages/$template";
+    include "pages/$template";
     ?>
   </section>
 
   <footer class="fixed-bottom">
-    <?php include "templates/components/footer.html" ?>
+    <?php include "components/footer.html" ?>
   </footer>
 
   <script
