@@ -20,25 +20,18 @@
 
 <body>
   <header>
-    <?php include "components/header.html"; ?>
+    <?php include "components/header.php"; ?>
   </header>
 
   <section>
-    <?php
-    $page = isset($_GET["page"]) ? $_GET["page"] : "menu";
-    $allowedPages = [
-      "menu" => "menu.php",
-      "login" => "login.html",
-      "signin" => "signin.html"
-    ];
-
-    $template = isset($allowedPages[$page]) ? $allowedPages[$page] : $allowedPages["menu"];
-    include "pages/$template";
+    <?php 
+    include "config/auth.php";
+    include authPages($_GET['page']) // lógica para obtener la página solicitada y autorizar segun el rol del usuario
     ?>
   </section>
 
   <footer class="fixed-bottom">
-    <?php include "components/footer.html" ?>
+    <?php include "components/footer.php" ?>
   </footer>
 
   <script
