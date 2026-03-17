@@ -11,11 +11,6 @@
     crossorigin="anonymous" />
   <link rel="stylesheet" href="styles/styles.css" />
 
-  <?php
-  include "config/db_functions.php";
-  //createDataBase();                 AGREGAR CREACIÓN DE LA BASE DE DATOS
-  ?>
-
 </head>
 
 <body>
@@ -24,9 +19,8 @@
   </header>
 
   <section>
-    <?php 
-    include "config/auth.php";
-    include authPages($_GET['page']) // lógica para obtener la página solicitada y autorizar segun el rol del usuario
+    <?php
+    // lógica para obtener la página solicitada y autorizar segun el rol del usuario
     ?>
   </section>
 
