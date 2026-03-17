@@ -28,10 +28,10 @@
 <div class="container text-align-center">
   <div class="row">
     <div class="col-xl-8">
-      <a class="btn btn-primary btn-lg" href="index.php?page=login.php">Iniciar Sesion</a>
+      <a class="btn btn-primary btn-lg" href="/login">Iniciar Sesion</a>
     </div>
     <div class="col">
-      <a class="btn btn-outline-primary" href="index.php?page=signin.php">Registrarse</a>
+      <a class="btn btn-outline-primary" href="/signin">Registrarse</a>
     </div>
   </div>
 </div>

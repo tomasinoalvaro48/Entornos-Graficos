@@ -10,7 +10,6 @@
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
     crossorigin="anonymous" />
   <link rel="stylesheet" href="styles/styles.css" />
-
 </head>
 
 <body>
@@ -20,7 +19,8 @@
 
   <section>
     <?php
-    // lógica para obtener la página solicitada y autorizar segun el rol del usuario
+    require_once "config/auth.php";
+    include getRoute();
     ?>
   </section>
 
