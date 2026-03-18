@@ -5,8 +5,18 @@ function getRoute()
   $routes = [
     // Rutas públicas
     '/' => [
-      'page' => 'pages/menu_cliente.php',
+      'page' => 'pages/menu_publico.php',
       'roles' => []
+    ],
+
+    '/menu-cliente' => [
+      'page' => 'pages/menu_cliente.php',
+      'roles' => ['cliente']
+    ],
+
+    '/menu-admin' => [
+      'page' => 'pages/menu_admin.php',
+      'roles' => ['admin']
     ],
 
     '/login' => [
@@ -26,18 +36,22 @@ function getRoute()
     // ]
   ];
 
-  $userRole = isset($_SESSION['role']) ?? null;  // Obtener roles del usuario actual (vacío si es anónimo)
-  $uri = $_SERVER['REQUEST_URI'];
-  $path = parse_url($uri)['path'];
+  $userRole = $_SESSION['role'] ?? null; // null si no hay sesion de usuario
+  $uri = $_SERVER['REQUEST_URI'] ?? '/';
+  $path = parse_url($uri)['path'] ?? '/';
+
+  if ($path === '' || $path === '/index.php') {
+    $path = '/';
+  }
 
   if (isset($routes[$path]['page'])) {
     if ($routes[$path]['roles'] === []) {
       return $routes[$path]['page'];
-    }
-
-    if (in_array($userRole, $routes[$path]['roles'], true)) {
+    } else if (in_array($userRole, $routes[$path]['roles'], true)) {
       return $routes[$path]['page'];
     }
   }
+
+  http_response_code(404);
   return 'pages/notfound.php';
 }

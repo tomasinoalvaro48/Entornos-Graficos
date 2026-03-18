@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">TP Entornos</a>
+    <a class="navbar-brand" href="/">LOGO</a>
     <button
       class="navbar-toggler"
       type="button"

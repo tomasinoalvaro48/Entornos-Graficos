@@ -14,7 +14,9 @@
 
 <body>
   <header>
-    <?php include "components/header.php"; ?>
+    <?php
+    include "components/header.php";
+    ?>
   </header>
 
   <section>
@@ -25,7 +27,9 @@
   </section>
 
   <footer class="fixed-bottom">
-    <?php include "components/footer.php" ?>
+    <?php
+    include "components/footer.php"
+    ?>
   </footer>
 
   <script
