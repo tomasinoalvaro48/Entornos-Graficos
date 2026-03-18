@@ -7,22 +7,19 @@
 
 require_once("db_functions.php");
 
-if(isset($_POST['botonIniciar'])){
+if (isset($_POST['botonIniciar'])) {
 
-        $arreglo = $_POST;
+    $arreglo = $_POST;
 
-        $query = "SELECT * FROM usuario WHERE nombreUsr = '".$arreglo['mail']."' AND claveUsr = '".md5($arreglo['pass'])."';";
-        $usuarioValido = querySQL($query);
+    $query = "SELECT * FROM usuario WHERE nombre_usuario = '" . $arreglo['mail'] . "' AND clave_usuario = '" . md5($arreglo['pass']) . "';";
+    $usuarioValido = querySQL($query);
 
-        if($usuarioValido){
-            echo "<br>¡Bienvenido!</br>";
-
-        } else{
-            header('Location: ../index.php?page=login');
-            echo '
+    if ($usuarioValido) {
+        echo "<br>¡Bienvenido!</br>";
+    } else {
+        header('Location: /login');
+        echo '
             <br>
             <div style="color: red;"> Usuario o contraseña incorrectos </div>';
     }
 }
-
-?>

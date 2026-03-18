@@ -22,7 +22,7 @@
   <section>
     <?php
     require_once "config/auth.php";
-    include getRoute();
+    include allowRoutes();
     ?>
   </section>
 

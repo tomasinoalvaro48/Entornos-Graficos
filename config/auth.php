@@ -1,6 +1,6 @@
 <?php
 
-function getRoute()
+function allowRoutes()
 {
   $routes = [
     // Rutas públicas
@@ -28,12 +28,6 @@ function getRoute()
       'page' => 'pages/signin.php',
       'roles' => []
     ],
-
-    // Rutas protegidas:
-    // '/admin' => [
-    //     'page' => 'admin.php',
-    //     'roles' => ['admin']
-    // ]
   ];
 
   $userRole = $_SESSION['role'] ?? null; // null si no hay sesion de usuario
