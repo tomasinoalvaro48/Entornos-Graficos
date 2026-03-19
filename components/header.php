@@ -1,10 +1,11 @@
-<nav class="navbar navbar-expand-lg sticky-top">
+<nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">LOGO</a>
 
     <?php
-    if (!isset($_SESSION["role"])) {
+    if (!isset($_SESSION["role"])  && $_SERVER["REQUEST_URI"] !== "/login" && $_SERVER["REQUEST_URI"] !== "/signin") {
     ?>
+
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Buscar Locales o Promociones" aria-label="Search" />
         <button class="btn btn-outline-success" type="submit">Buscar</button>
@@ -43,7 +44,8 @@
         </ul>
       </div>
     <?php
-    } else if ($_SESSION["role"] === "cliente") {
+    }
+    if ($_SESSION["role"] === "cliente") {
     ?>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
