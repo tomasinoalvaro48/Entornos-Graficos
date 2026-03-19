@@ -12,9 +12,6 @@
          <a href="../../index.php" class="btn btn-primary btn-lg px-4 gap-3">
            <i class="bi bi-house"></i> Volver al Inicio
          </a>
-         <a href="javascript:history.back()" class="btn btn-outline-secondary btn-lg px-4">
-           <i class="bi bi-arrow-left"></i> Volver Atrás
-         </a>
        </div>
 
        <div class="mt-5">

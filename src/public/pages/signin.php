@@ -4,7 +4,7 @@
     <div class="d-flex flex-row justify-content-center">
       <h1>REGISTRARSE</h1>
     </div>
-    <form action="config/handle_signin.php" method="post" id="formInicioSesion">
+    <form action="src/config/handle_signin_cliente.php" method="post" id="formInicioSesion">
       <div class="row">
         <input type="text" name="nombre_usuario" id="nombre" placeholder="Ingrese su Nombre" required />
       </div>

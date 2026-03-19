@@ -17,21 +17,18 @@
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
+    <span class="visually-hidden">Anterior</span>
   </button>
   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
+    <span class="visually-hidden">Siguiente</span>
   </button>
 </div>
 
 <div class="container text-align-center">
   <div class="row">
     <div class="col-xl-8">
-      <a class="btn btn-primary btn-lg" href="/login">Iniciar Sesion</a>
-    </div>
-    <div class="col">
-      <a class="btn btn-outline-primary" href="/signin">Registrarse</a>
+      <a class="btn btn-primary btn-lg" href="#">Opciones de la Cuenta</a>
     </div>
   </div>
 </div>

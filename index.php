@@ -9,26 +9,26 @@
     rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
     crossorigin="anonymous" />
-  <link rel="stylesheet" href="styles/styles.css" />
+  <link rel="stylesheet" href="src/public/styles/styles.css" />
 </head>
 
 <body>
   <header class="sticky-top">
     <?php
-    include "components/header.php";
+    include "src/public/components/header.php";
     ?>
   </header>
 
   <section>
     <?php
-    require_once "config/auth.php";
+    require_once "src/config/auth.php";
     include allowRoutes();
     ?>
   </section>
 
   <footer">
     <?php
-    include "components/footer.php"
+    include "src/public/components/footer.php"
     ?>
     </footer>
 

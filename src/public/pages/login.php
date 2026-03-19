@@ -1,3 +1,11 @@
+<?php
+$errors = [
+  'mail' => '',
+  'pass' => '',
+];
+
+?>
+
 <main>
   <div class="container text-center">
     <div class="row">
@@ -7,7 +15,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <form action="config/handle_login.php" method="post" id="formInicioSesion">
+        <form action="src/config/handle_login.php" method="post" id="formInicioSesion">
           <div class="row">
             <input type="email" name="mail" id="mail" placeholder="Ingrese Mail" required />
           </div>
