@@ -1,5 +1,6 @@
 <?php
 
+/*
 function allowRoutes()
 {
   $routes = [
@@ -56,11 +57,17 @@ function allowRoutes()
   http_response_code(404);
   return 'src/public/pages/notfound.php';
 }
+*/
 
 function startSession($usuario)
 {
-  session_start();
   $_SESSION['id_usuario'] = $usuario['id_usuario'];
   $_SESSION['tipo_usuario'] = $usuario['tipo_usuario'];
   $_SESSION['categoria_cliente'] = $usuario['categoria_cliente'];
+}
+
+function endSession()
+{
+  session_unset();
+  session_destroy();
 }

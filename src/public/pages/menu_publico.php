@@ -28,7 +28,7 @@
 <div class="container text-align-center">
   <div class="row align-items-center">
     <div class="col">
-      <a class="btn btn-primary btn-lg" href="/login">Iniciar Sesion</a>
+      <a class="btn btn-primary btn-lg" href="src/public/pages/login.php">Iniciar Sesion</a>
     </div>
     <div class="col">
       <h1>

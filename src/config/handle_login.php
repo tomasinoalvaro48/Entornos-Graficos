@@ -4,6 +4,7 @@
 
 require_once("db_functions.php");
 require_once("auth.php");
+session_start();
 
 if (isset($_POST['botonIniciar'])) {
 
