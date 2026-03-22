@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" dir="ltr">
 
 <head>
   <meta charset="UTF-8">
@@ -14,6 +14,7 @@
 </head>
 
 <body>
+  <?php session_start(); ?>
   <header>
     <?php include '../components/header.php' ?>
   </header>
@@ -25,6 +26,29 @@
           <h1>Iniciar Sesion</h1>
         </div>
       </div>
+
+      <?php if (isset($_SESSION['error'])): ?>
+        <div class="row mt-3">
+          <div class="col">
+            <div class="alert alert-danger" role="alert">
+              <?php echo htmlspecialchars($_SESSION['error'], ENT_QUOTES, 'UTF-8');
+              unset($_SESSION['error']); ?>
+            </div>
+          </div>
+        </div>
+      <?php endif; ?>
+
+      <?php if (isset($_SESSION['success'])): ?>
+        <div class="row mt-3">
+          <div class="col">
+            <div class="alert alert-success" role="alert">
+              <?php echo htmlspecialchars($_SESSION['success'], ENT_QUOTES, 'UTF-8');
+              unset($_SESSION['success']); ?>
+            </div>
+          </div>
+        </div>
+      <?php endif; ?>
+
       <div class="row">
         <div class="col">
           <form action="../../config/handle_login.php" method="post" id="formInicioSesion">

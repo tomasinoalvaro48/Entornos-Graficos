@@ -7,14 +7,16 @@ if (isset($_POST['botonCrear'])) {
     $catCliente = "inicial";
 
     $query = "SELECT * FROM usuario WHERE email_usuario = '" . $arreglo['email_usuario'] . "';";
-    if (querySQL($query) && querySQL($query)->num_rows > 0) {
-        echo "
-        <br>
-        Email de usuario ya existente";
+    $usuario = querySQL($query);
+    if ($usuario && $usuario->num_rows > 0) {
+        $_SESSION['error'] = "Usuario o contraseña incorrectos";
+        header("Location: /src/public/pages/login.php");
+        exit();
     } else {
         $query = "INSERT INTO usuario (nombre_usuario, email_usuario, clave_usuario, tipo_usuario, categoria_cliente) 
                 VALUES ('" . $arreglo['nombre_usuario'] . "', '" . $arreglo['email_usuario'] . "', '" . md5($arreglo['clave_usuario']) . "', '" . $rol . "', '" . $catCliente . "');";
         querySQL($query);
-        header("Location: /login");
+        $_SESSION['success'] = "Usuario creado exitosamente. Por favor, inicie sesión.";
+        header("Location: /src/public/pages/login.php");
     }
 }

@@ -13,11 +13,13 @@ if (isset($_POST['botonIniciar'])) {
     $query = "SELECT * FROM usuario WHERE email_usuario = '" . $arreglo['mail'] . "' AND clave_usuario = '" . md5($arreglo['pass']) . "';";
     $usuarioValido = querySQL($query);
 
-    if ($usuarioValido) {
+    if ($usuarioValido && $usuarioValido->num_rows > 0) {
         $usuario = mysqli_fetch_array($usuarioValido);
         startSession($usuario);
-        echo '<script>window.location.href = "/";</script>';
+        header("Location: /index.php");
     } else {
-        echo '<script>window.location.href = "/login";</script>';
+        $_SESSION['error'] = "Usuario o contraseña incorrectos";
+        header("Location: /src/public/pages/login.php");
+        exit();
     }
 }
