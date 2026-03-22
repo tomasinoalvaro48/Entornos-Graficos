@@ -10,7 +10,7 @@
     rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
     crossorigin="anonymous" />
-  <link rel="stylesheet" href="src/public/styles/styles.css" />
+  <link rel="stylesheet" href="../styles/styles.css" />
 </head>
 
 <body>
@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <?php if (isset($_SESSION['error'])): ?>
+      <?php if (isset($_SESSION['error'])) { ?>
         <div class="row mt-3">
           <div class="col">
             <div class="alert alert-danger" role="alert">
@@ -36,9 +36,9 @@
             </div>
           </div>
         </div>
-      <?php endif; ?>
+      <?php } ?>
 
-      <?php if (isset($_SESSION['success'])): ?>
+      <?php if (isset($_SESSION['success'])) { ?>
         <div class="row mt-3">
           <div class="col">
             <div class="alert alert-success" role="alert">
@@ -47,7 +47,7 @@
             </div>
           </div>
         </div>
-      <?php endif; ?>
+      <?php } ?>
 
       <div class="row">
         <div class="col">
@@ -72,7 +72,7 @@
       <div>
         <div>
           <a href="#"> ¿Has olvidado la contraseña? </a>
-          <div>¿No tienes cuenta? <a href="/signin">Registrarse</a></div>
+          <div>¿No tienes cuenta? <a href="../pages/signin.php">Registrarse</a></div>
         </div>
       </div>
     </div>

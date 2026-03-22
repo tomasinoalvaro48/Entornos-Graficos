@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 
@@ -10,7 +11,7 @@
     rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
     crossorigin="anonymous" />
-  <link rel="stylesheet" href="src/public/styles/styles.css" />
+  <link rel="stylesheet" href="../styles/styles.css" />
 </head>
 
 <body>
@@ -22,10 +23,25 @@
 
   <main>
     <div class="container text-center">
-      <div class="d-flex flex-row justify-content-center">
-        <h1>REGISTRARSE</h1>
+
+      <div class="row">
+        <div class="col">
+          <h1>REGISTRARSE</h1>
+        </div>
       </div>
-      <form action="src/config/handle_signin_cliente.php" method="post" id="formInicioSesion">
+
+      <?php if (isset($_SESSION['error'])) { ?>
+        <div class="row mt-3">
+          <div class="col">
+            <div class="alert alert-danger" role="alert">
+              <?php echo htmlspecialchars($_SESSION['error'], ENT_QUOTES, 'UTF-8');
+              unset($_SESSION['error']); ?>
+            </div>
+          </div>
+        </div>
+      <?php } ?>
+
+      <form action="../../config/handle_signin_cliente.php" method="post" id="formInicioSesion">
         <div class="row">
           <input type="text" name="nombre_usuario" id="nombre" placeholder="Ingrese su Nombre" required />
         </div>
@@ -38,6 +54,10 @@
         <div class="row">
           <button class="btn btn-primary" type="submit" id="botonCrear" name="botonCrear">Crear cuenta</button>
       </form>
+      <div class="row">
+        <div>¿Ya tienes cuenta? <a href="../pages/login.php">Iniciar sesión</a></div>
+
+      </div>
     </div>
   </main>
 

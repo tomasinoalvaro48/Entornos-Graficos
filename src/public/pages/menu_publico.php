@@ -36,7 +36,7 @@
       </h1>
     </div>
     <div class="col">
-      <a class="btn btn-outline-primary" href="/signin">Registrarse</a>
+      <a class="btn btn-outline-primary" href="/src/public/pages/signin.php">Registrarse</a>
     </div>
   </div>
 </div>
