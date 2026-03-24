@@ -1,6 +1,7 @@
 <?php
 
-session_start();
-session_destroy();
+require_once "auth.php";
+
+endSession();
 header("Location: /index.php");
 exit();
