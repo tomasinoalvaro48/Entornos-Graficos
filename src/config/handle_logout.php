@@ -2,5 +2,5 @@
 
 session_start();
 session_destroy();
-header("Location: /index.php");
+header("Location: /TP-Entornos-Graficos/index.php");
 exit();
