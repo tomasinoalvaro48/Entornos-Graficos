@@ -1,6 +1,7 @@
 <?php
 
 require "../model/Usuario.php";
+require "DBFunctions.php";
 
 class UsuarioDAO extends DBFunctions
 {
@@ -40,7 +41,7 @@ class UsuarioDAO extends DBFunctions
   {
     $query = "INSERT INTO usuario (nombre_usuario, email_usuario, clave_usuario, tipo_usuario, categoria_cliente) 
                 VALUES ('" . $usuario->nombre_usuario . "', '" . $usuario->email_usuario . "', 
-                '" . md5($usuario->clave_usuario) . "', '" . $usuario->rol . "', '" . $usuario->catCliente . "');";
+                '" . md5($usuario->clave_usuario) . "', '" . $usuario->tipo_usuario . "', '" . $usuario->categoria_cliente . "');";
     $newUsuario = $this->querySQL($query);
     return $this->sanitizeUser($newUsuario);
   }

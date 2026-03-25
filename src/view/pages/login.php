@@ -51,7 +51,7 @@
 
       <div class="row">
         <div class="col">
-          <form action="../../config/controller/handle_login.php" method="post" id="formInicioSesion">
+          <form action="../../controller/handle_login.php" method="post" id="formInicioSesion">
             <div class="row">
               <input type="email" name="mail" id="mail" placeholder="Ingrese Mail" required />
             </div>

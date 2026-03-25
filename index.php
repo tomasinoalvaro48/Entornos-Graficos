@@ -3,14 +3,14 @@ session_start();
 
 function getMainPage()
 {
-  $page = 'src/public/pages/menu_publico.php'; // usuarios no autenticados
+  $page = 'src/view/pages/menu_publico.php'; // usuarios no autenticados
   if (isset($_SESSION['tipo_usuario'])) {
     if ($_SESSION['tipo_usuario'] === 'cliente') {
-      $page = 'src/public/pages/menu_cliente.php';
+      $page = 'src/view/pages/menu_cliente.php';
     } else if ($_SESSION['tipo_usuario'] === 'admin') {
-      $page = 'src/public/pages/menu_admin.php';
+      $page = 'src/view/pages/menu_admin.php';
     } else if ($_SESSION['tipo_usuario'] === 'dueno') {
-      $page = 'src/public/pages/menu_dueno.php';
+      $page = 'src/view/pages/menu_dueno.php';
     }
   }
   return $page;
@@ -30,13 +30,13 @@ function getMainPage()
     rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
     crossorigin="anonymous" />
-  <link rel="stylesheet" href="src/public/styles/styles.css" />
+  <link rel="stylesheet" href="src/view/styles/styles.css" />
 </head>
 
 <body>
   <header class="sticky-top">
     <?php
-    include "src/public/components/header.php";
+    include "src/view/components/header.php";
     ?>
   </header>
 
@@ -48,7 +48,7 @@ function getMainPage()
 
   <footer>
     <?php
-    include "src/public/components/footer.php"
+    include "src/view/components/footer.php"
     ?>
   </footer>
 

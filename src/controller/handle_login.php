@@ -12,9 +12,9 @@ if (isset($_POST['botonIniciar'])) {
     if ($usuario) {
         $auth = new Auth();
         $auth->startSession($usuario);
-        return true;
+        header("Location: /index.php");
     } else {
         $_SESSION['error'] = "Usuario o contraseña incorrectos";
-        return false;
+        header("Location: /src/view/pages/login.php");
     }
 }

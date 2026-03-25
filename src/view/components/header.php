@@ -10,8 +10,8 @@
     <?php
     if (
       !isset($_SESSION["tipo_usuario"])
-      && $_SERVER["REQUEST_URI"] !== "/src/public/pages/login.php"
-      && $_SERVER["REQUEST_URI"] !== "/src/public/pages/signin.php"
+      && $_SERVER["REQUEST_URI"] !== "/src/view/pages/login.php"
+      && $_SERVER["REQUEST_URI"] !== "/src/view/pages/signin.php"
     ) {
     ?>
       <form class="d-flex" role="search">
@@ -34,13 +34,13 @@
             <a class="nav-link" href="/promociones-list">Promociones</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/src/public/pages/locales_list.php">Locales</a>
+            <a class="nav-link" href="/src/view/pages/locales_list.php">Locales</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/src/public/pages/login.php">Iniciar sesion</a>
+            <a class="nav-link" href="/src/view/pages/login.php">Iniciar sesion</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/src/public/pages/signin.php">Registrarse</a>
+            <a class="nav-link" href="/src/view/pages/signin.php">Registrarse</a>
           </li>
         </ul>
       </div>
@@ -54,7 +54,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/src/public/pages/index.php">Inicio ADMIN</a>
+              <a class="nav-link" href="/src/view/pages/index.php">Inicio ADMIN</a>
             </li>
           </ul>
         </div>
@@ -67,7 +67,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/src/public/pages/index.php">Inicio CLIENTE</a>
+              <a class="nav-link" href="/src/view/pages/index.php">Inicio CLIENTE</a>
             </li>
           </ul>
         </div>
@@ -80,7 +80,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/src/public/pages/index.php">Inicio DUEÑO</a>
+              <a class="nav-link" href="/src/view/pages/index.php">Inicio DUEÑO</a>
             </li>
           </ul>
         </div>
@@ -91,7 +91,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="/TP-Entornos-Graficos/src/config/handle_logout.php">Cerrar Sesión</a>
+            <a class="nav-link" href="/controllers/handle_logout.php">Cerrar Sesión</a>
           </li>
         </ul>
       </div>

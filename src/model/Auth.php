@@ -4,7 +4,6 @@ class Auth
 {
   public function startSession($usuario)
   {
-    session_start();
     $_SESSION['id_usuario'] = $usuario->id_usuario;
     $_SESSION['tipo_usuario'] = $usuario->tipo_usuario;
     $_SESSION['categoria_cliente'] = $usuario->categoria_cliente;

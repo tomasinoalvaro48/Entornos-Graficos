@@ -1,12 +1,13 @@
 <?php
 require "../data/UsuarioDAO.php";
+session_start();
 
 if (isset($_POST['botonCrear'])) {
     $udao = new UsuarioDAO();
     $usuario = $udao->getByEmail($_POST['email_usuario']);
     if ($usuario) {
         $_SESSION['error'] = "Este usuario ya existe. Por favor, intente con otro correo electrónico o inicie sesión.";
-        header("Location: /src/public/pages/signin.php");
+        header("Location: /src/view/pages/signin.php");
     } else {
         $udao->create(new Usuario(
             null,
@@ -17,6 +18,6 @@ if (isset($_POST['botonCrear'])) {
             'inicial'
         ));
         $_SESSION['success'] = "Usuario creado exitosamente. Por favor, inicie sesión.";
-        header("Location: /src/public/pages/login.php");
+        header("Location: /src/view/pages/login.php");
     }
 }
