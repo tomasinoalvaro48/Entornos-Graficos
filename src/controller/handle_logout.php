@@ -1,6 +1,6 @@
 <?php
 
-require "Auth.php";
+require "../model/Auth.php";
 
 $auth = new Auth();
 $auth->endSession();
