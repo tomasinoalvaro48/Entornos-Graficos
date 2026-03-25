@@ -1,3 +1,23 @@
+<?php
+session_start();
+
+function getMainPage()
+{
+  $page = 'src/public/pages/menu_publico.php'; // usuarios no autenticados
+  if (isset($_SESSION['tipo_usuario'])) {
+    if ($_SESSION['tipo_usuario'] === 'cliente') {
+      $page = 'src/public/pages/menu_cliente.php';
+    } else if ($_SESSION['tipo_usuario'] === 'admin') {
+      $page = 'src/public/pages/menu_admin.php';
+    } else if ($_SESSION['tipo_usuario'] === 'dueno') {
+      $page = 'src/public/pages/menu_dueno.php';
+    }
+  }
+  return $page;
+}
+?>
+
+
 <!doctype html>
 <html lang="es" dir="ltr">
 
@@ -16,25 +36,13 @@
 <body>
   <header class="sticky-top">
     <?php
-    session_start();
     include "src/public/components/header.php";
     ?>
   </header>
 
   <section>
     <?php
-    $page = 'src/public/pages/menu_publico.php'; // usuarios no autenticados
-    if (isset($_SESSION['tipo_usuario'])) {
-      if ($_SESSION['tipo_usuario'] === 'cliente') {
-        $page = 'src/public/pages/menu_cliente.php';
-      } else if ($_SESSION['tipo_usuario'] === 'admin') {
-        $page = 'src/public/pages/menu_admin.php';
-      } else if ($_SESSION['tipo_usuario'] === 'dueno') {
-        $page = 'src/public/pages/menu_dueno.php';
-      }
-    }
-
-    include $page;
+    include getMainPage();
     ?>
   </section>
 
