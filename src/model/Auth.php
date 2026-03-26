@@ -2,11 +2,11 @@
 
 class Auth
 {
-  public function startSession($usuario)
+  public function startSession(Usuario $usuario)
   {
-    $_SESSION['id_usuario'] = $usuario->id_usuario;
-    $_SESSION['tipo_usuario'] = $usuario->tipo_usuario;
-    $_SESSION['categoria_cliente'] = $usuario->categoria_cliente;
+    $_SESSION['id_usuario'] = $usuario->idUsuario;
+    $_SESSION['tipo_usuario'] = $usuario->tipoUsuario;
+    $_SESSION['categoria_cliente'] = $usuario->categoriaCliente;
   }
 
   public function endSession()
@@ -16,9 +16,9 @@ class Auth
     session_destroy();
   }
 
-  public function startCookies($usuario)
+  public function startCookies(Usuario $usuario)
   {
-    setcookie('tipo_usuario', $usuario->tipo_usuario, time() + (86400 * 30), "/"); // 30 días
-    setcookie('categoria_cliente', $usuario->categoria_cliente, time() + (86400 * 30), "/");
+    setcookie('tipo_usuario', $usuario->tipoUsuario, time() + (86400 * 30), "/"); // 30 días
+    setcookie('categoria_cliente', $usuario->categoriaCliente, time() + (86400 * 30), "/");
   }
 }

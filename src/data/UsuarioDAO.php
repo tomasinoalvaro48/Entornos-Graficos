@@ -37,11 +37,11 @@ class UsuarioDAO extends DBFunctions
     return $this->sanitizeUser($usuarioValido);
   }
 
-  public function create($usuario)
+  public function create(Usuario $usuario)
   {
     $query = "INSERT INTO usuario (nombre_usuario, email_usuario, clave_usuario, tipo_usuario, categoria_cliente) 
-                VALUES ('" . $usuario->nombre_usuario . "', '" . $usuario->email_usuario . "', 
-                '" . md5($usuario->clave_usuario) . "', '" . $usuario->tipo_usuario . "', '" . $usuario->categoria_cliente . "');";
+                VALUES ('" . $usuario->nombreUsuario . "', '" . $usuario->emailUsuario . "', 
+                '" . md5($usuario->claveUsuario) . "', '" . $usuario->tipoUsuario . "', '" . $usuario->categoriaCliente . "');";
     $newUsuario = $this->querySQL($query);
     return $this->sanitizeUser($newUsuario);
   }

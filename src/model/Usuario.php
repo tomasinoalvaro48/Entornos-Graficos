@@ -2,20 +2,20 @@
 
 class Usuario
 {
-  public $id_usuario;
-  public $nombre_usuario;
-  public $email_usuario;
-  public $clave_usuario;
-  public $tipo_usuario;
-  public $categoria_cliente;
+  public ?int $idUsuario;
+  public string $nombreUsuario;
+  public string $emailUsuario;
+  public string $claveUsuario;
+  public string $tipoUsuario;
+  public string $categoriaCliente;
 
-  public function __construct($id_usuario, $nombre_usuario, $email_usuario, $clave_usuario, $tipo_usuario, $categoria_cliente)
+  public function __construct($id_usuario, $nombre_usuario, $email_usuario, $claveUsuario, $tipo_usuario, $categoria_cliente)
   {
-    $this->id_usuario = $id_usuario;
-    $this->nombre_usuario = $nombre_usuario;
-    $this->email_usuario = $email_usuario;
-    $this->clave_usuario = $clave_usuario;
-    $this->tipo_usuario = $tipo_usuario;
-    $this->categoria_cliente = $categoria_cliente;
+    $this->idUsuario = $id_usuario;
+    $this->nombreUsuario = $nombre_usuario;
+    $this->emailUsuario = $email_usuario;
+    $this->claveUsuario = $claveUsuario;
+    $this->tipoUsuario = $tipo_usuario;
+    $this->categoriaCliente = $categoria_cliente;
   }
 }
