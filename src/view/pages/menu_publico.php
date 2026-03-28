@@ -1,5 +1,5 @@
 <?php
-include "src/view/components/carousel.php";
+include __DIR__ . "/../components/carousel.php";
 ?>
 
 <div class="container text-align-center">

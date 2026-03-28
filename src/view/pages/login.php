@@ -1,3 +1,9 @@
+<?php
+require_once __DIR__ . "/../../controller/auth.php";
+$error = getSessionError();
+clearSessionError();
+?>
+
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 
@@ -14,7 +20,6 @@
 </head>
 
 <body>
-  <?php session_start(); ?>
   <header>
     <?php include '../components/header.php' ?>
   </header>
@@ -27,12 +32,13 @@
         </div>
       </div>
 
-      <?php if (isset($_SESSION['error'])) { ?>
+      <?php
+      if ($error) { ?>
         <div class="row mt-3">
           <div class="col">
             <div class="alert alert-danger" role="alert">
-              <?php echo htmlspecialchars($_SESSION['error'], ENT_QUOTES, 'UTF-8');
-              unset($_SESSION['error']); ?>
+              <?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8');
+              ?>
             </div>
           </div>
         </div>

@@ -2,19 +2,17 @@
 
 //$_GET[]: Array asociativo de variables pasadas al script actual a través de la URL. 
 //$_POST[]: Array asociativo de variables pasadas al script actual a través del método HTTP POST.
-require_once "../data/UsuarioDAO.php";
-require_once "../model/Auth.php";
-session_start();
+require_once __DIR__ . "/../data/UsuarioDAO.php";
+require_once __DIR__ . "/../controller/auth.php";
 
 if (isset($_POST['botonIniciar'])) {
     $usuario = (new UsuarioDAO())->getByEmailAndClave($_POST['mail'], $_POST['pass']);
 
     if ($usuario) {
-        $auth = new Auth();
-        $auth->startSession($usuario);
+        startSession($usuario);
         header("Location: /index.php");
     } else {
-        $_SESSION['error'] = "Usuario o contraseña incorrectos";
+        setSessionError("Usuario o contraseña incorrectos");
         header("Location: /src/view/pages/login.php");
     }
 }

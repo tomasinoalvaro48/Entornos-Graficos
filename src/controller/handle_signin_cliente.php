@@ -1,12 +1,15 @@
 <?php
-require "../data/UsuarioDAO.php";
-session_start();
+require_once __DIR__ . "/../data/UsuarioDAO.php";
+require_once __DIR__ . "/auth.php";
 
 if (isset($_POST['botonCrear'])) {
     $udao = new UsuarioDAO();
     $usuario = $udao->getByEmail($_POST['email_usuario']);
     if ($usuario) {
-        $_SESSION['error'] = "Este usuario ya existe. Por favor, intente con otro correo electrónico o inicie sesión.";
+        setSessionError("Este usuario ya existe. Por favor, intente con otro correo electrónico o inicie sesión.");
+        header("Location: /src/view/pages/signin.php");
+    } else if ($_POST['clave_usuario'] !== $_POST['clave_usuario_conf']) {
+        setSessionError("Las contraseñas no coinciden. Por favor, intente nuevamente.");
         header("Location: /src/view/pages/signin.php");
     } else {
         $udao->create(new Usuario(
@@ -17,7 +20,7 @@ if (isset($_POST['botonCrear'])) {
             'cliente',
             'inicial'
         ));
-        $_SESSION['success'] = "Usuario creado exitosamente. Por favor, inicie sesión.";
+        setSessionSuccess("Usuario creado exitosamente. Por favor, inicie sesión.");
         header("Location: /src/view/pages/login.php");
     }
 }

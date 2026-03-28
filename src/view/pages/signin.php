@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php
+require_once __DIR__ . "/../../controller/auth.php";
+$error = getSessionError();
+clearSessionError();
+?>
+
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 
@@ -30,12 +35,11 @@
         </div>
       </div>
 
-      <?php if (isset($_SESSION['error'])) { ?>
+      <?php if ($error) { ?>
         <div class="row mt-3">
           <div class="col">
             <div class="alert alert-danger" role="alert">
-              <?php echo htmlspecialchars($_SESSION['error'], ENT_QUOTES, 'UTF-8');
-              unset($_SESSION['error']); ?>
+              <?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?>
             </div>
           </div>
         </div>
@@ -52,12 +56,15 @@
           <input type="password" name="clave_usuario" id="pass" placeholder="Ingrese su Contraseña" required />
         </div>
         <div class="row">
+          <input type="password" name="clave_usuario_conf" id="pass" placeholder="Ingrese su Contraseña Nuevamente" required />
+        </div>
+        <div class="row">
           <button class="btn btn-primary" type="submit" id="botonCrear" name="botonCrear">Crear cuenta</button>
+        </div>
       </form>
-      <div class="row">
-        <div>¿Ya tienes cuenta? <a href="../pages/login.php">Iniciar sesión</a></div>
+      <div>¿Ya tienes cuenta? <a href="../pages/login.php">Iniciar sesión</a></div>
 
-      </div>
+    </div>
     </div>
   </main>
 

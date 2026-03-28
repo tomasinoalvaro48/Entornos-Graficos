@@ -1,5 +1,6 @@
 <?php
-$tipo = $_SESSION["tipo_usuario"] ?? null;
+require_once __DIR__ . "/../../controller/auth.php";
+$tipo = getTipoUsuario();
 $serverUri = $_SERVER["REQUEST_URI"];
 ?>
 
@@ -11,10 +12,10 @@ $serverUri = $_SERVER["REQUEST_URI"];
     </div>
 
 
-    <!-- USUARIO NO LOGUEADO -->
+    <!-- ---------------------- USUARIO NO LOGUEADO ---------------------- -->
     <?php
     if (
-      !isset($tipo)
+      !$tipo
       && $serverUri !== "/src/view/pages/login.php"
       && $serverUri !== "/src/view/pages/signin.php"
     ) {
@@ -36,10 +37,10 @@ $serverUri = $_SERVER["REQUEST_URI"];
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="/promociones-list">Promociones</a>
+            <a class="nav-link" href="/src/view/pages/promocion/promocion_list.php">Promociones</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/src/view/pages/locales_list.php">Locales</a>
+            <a class="nav-link" href="/src/view/pages/local/local_list.php">Locales</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/src/view/pages/login.php">Iniciar sesion</a>
@@ -51,41 +52,44 @@ $serverUri = $_SERVER["REQUEST_URI"];
       </div>
 
 
-      <!-- ADMIN -->
+      <!-- ---------------------- ADMIN ---------------------- -->
       <?php
-    } else if (isset($tipo)) {
+    } else if ($tipo) {
       if ($tipo === "admin") {
       ?>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/src/view/pages/index.php">Inicio ADMIN</a>
+              <a class="nav-link" href="/">Inicio ADMIN</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/src/view/pages/local/local_list.php">Locales</a>
             </li>
           </ul>
         </div>
 
 
-        <!-- CLIENTE -->
+        <!-- ---------------------- CLIENTE ---------------------- -->
       <?php
       } else if ($tipo === "cliente") {
       ?>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/src/view/pages/index.php">Inicio CLIENTE</a>
+              <a class="nav-link" href="/">Inicio CLIENTE</a>
             </li>
           </ul>
         </div>
 
 
-        <!-- DUEÑO DE LOCAL -->
+        <!-- ---------------------- DUEÑO DE LOCAL ---------------------- -->
       <?php
       } else if ($tipo === "dueno") {
       ?>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/src/view/pages/index.php">Inicio DUEÑO</a>
+              <a class="nav-link" href="/">Inicio DUEÑO</a>
             </li>
           </ul>
         </div>

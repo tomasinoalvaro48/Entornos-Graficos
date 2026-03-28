@@ -1,11 +1,11 @@
 <?php
-session_start();
 
 function getMainPage()
 {
-  $tipo = $_SESSION["tipo_usuario"] ?? null;
+  require_once __DIR__ . "/src/controller/auth.php";
+  $tipo = getTipoUsuario();
   $page = 'src/view/pages/menu_publico.php'; // usuarios no autenticados
-  if (isset($tipo)) {
+  if ($tipo) {
     if ($tipo === 'cliente') {
       $page = 'src/view/pages/menu_cliente.php';
     } else if ($tipo === 'admin') {

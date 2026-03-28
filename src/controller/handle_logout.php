@@ -1,7 +1,6 @@
 <?php
 
-require "../model/Auth.php";
+require_once __DIR__ . "/../controller/auth.php";
 
-$auth = new Auth();
-$auth->endSession();
+endSession();
 header("Location: /index.php");

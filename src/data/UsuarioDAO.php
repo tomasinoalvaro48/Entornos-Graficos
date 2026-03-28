@@ -1,40 +1,84 @@
 <?php
 
-require "../model/Usuario.php";
-require "DBFunctions.php";
+require_once __DIR__ . "/../model/Usuario.php";
+require_once __DIR__ . "/DBFunctions.php";
 
 class UsuarioDAO extends DBFunctions
 {
-
-  function sanitizeUser($usuarioMySQLiResult)
+  // Función para convertir un array de resultado de la base de datos en un objeto Usuario
+  public function sanitizeUser($usuarioFecthArray)
   {
     $u = null;
-    if ($usuarioMySQLiResult && $usuarioMySQLiResult->num_rows > 0) {
-      $usuario = mysqli_fetch_array($usuarioMySQLiResult);
+    if ($usuarioFecthArray) {
       $u = new Usuario(
-        $usuario['id_usuario'],
-        $usuario['nombre_usuario'],
-        $usuario['email_usuario'],
-        $usuario['clave_usuario'],
-        $usuario['tipo_usuario'],
-        $usuario['categoria_cliente']
+        $usuarioFecthArray['id_usuario'],
+        $usuarioFecthArray['nombre_usuario'],
+        $usuarioFecthArray['email_usuario'],
+        $usuarioFecthArray['clave_usuario'],
+        $usuarioFecthArray['tipo_usuario'],
+        $usuarioFecthArray['categoria_cliente']
       );
     }
     return $u;
   }
 
-  function getByEmail($email)
+  public function getAll()
   {
+    $usuariosArray = [];
+    $query = "SELECT * FROM usuario;";
+    $usuarios = $this->querySQL($query);
+    if ($usuarios && $usuarios->num_rows > 0) {
+      while ($usuario = mysqli_fetch_array($usuarios)) {
+        array_push($usuariosArray, $this->sanitizeUser($usuario));
+      }
+    }
+    return $usuariosArray;
+  }
+
+  public function getAllDuenos()
+  {
+    $duenosArray = [];
+    $query = "SELECT * FROM usuario WHERE tipo_usuario = 'dueno';";
+    $duenos = $this->querySQL($query);
+    if ($duenos && $duenos->num_rows > 0) {
+      while ($dueno = mysqli_fetch_array($duenos)) {
+        array_push($duenosArray, $this->sanitizeUser($dueno));
+      }
+    }
+    return $duenosArray;
+  }
+
+  public function getByEmail($email)
+  {
+    $u = null;
     $query = "SELECT * FROM usuario WHERE email_usuario = '" . $email . "';";
     $usuario = $this->querySQL($query);
-    return $this->sanitizeUser($usuario);
+    if ($usuario && $usuario->num_rows > 0) {
+      $u = $this->sanitizeUser(mysqli_fetch_array($usuario));
+    }
+    return $u;
   }
 
   public function getByEmailAndClave($email, $clave)
   {
+    $u = null;
     $query = "SELECT * FROM usuario WHERE email_usuario = '" . $email . "' AND clave_usuario = '" . md5($clave) . "';";
     $usuarioValido = $this->querySQL($query);
-    return $this->sanitizeUser($usuarioValido);
+    if ($usuarioValido && $usuarioValido->num_rows > 0) {
+      $u = $this->sanitizeUser(mysqli_fetch_array($usuarioValido));
+    }
+    return $u;
+  }
+
+  public function getById($id)
+  {
+    $u = null;
+    $query = "SELECT * FROM usuario WHERE id_usuario = '" . $id . "';";
+    $usuario = $this->querySQL($query);
+    if ($usuario && $usuario->num_rows > 0) {
+      $u = $this->sanitizeUser(mysqli_fetch_array($usuario));
+    }
+    return $u;
   }
 
   public function create(Usuario $usuario)
@@ -42,7 +86,6 @@ class UsuarioDAO extends DBFunctions
     $query = "INSERT INTO usuario (nombre_usuario, email_usuario, clave_usuario, tipo_usuario, categoria_cliente) 
                 VALUES ('" . $usuario->nombreUsuario . "', '" . $usuario->emailUsuario . "', 
                 '" . md5($usuario->claveUsuario) . "', '" . $usuario->tipoUsuario . "', '" . $usuario->categoriaCliente . "');";
-    $newUsuario = $this->querySQL($query);
-    return $this->sanitizeUser($newUsuario);
+    return $this->querySQL($query);
   }
 }
