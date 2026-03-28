@@ -1,17 +1,22 @@
+<?php
+$tipo = $_SESSION["tipo_usuario"] ?? null;
+$serverUri = $_SERVER["REQUEST_URI"];
+?>
+
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">LOGO</a>
     <div>
-      Bienvenido <?php echo $_SESSION["tipo_usuario"] ?? 'No hay tipo'; ?>
+      Bienvenido <?php echo $tipo ?? 'No hay tipo'; ?>
     </div>
 
 
     <!-- USUARIO NO LOGUEADO -->
     <?php
     if (
-      !isset($_SESSION["tipo_usuario"])
-      && $_SERVER["REQUEST_URI"] !== "/src/view/pages/login.php"
-      && $_SERVER["REQUEST_URI"] !== "/src/view/pages/signin.php"
+      !isset($tipo)
+      && $serverUri !== "/src/view/pages/login.php"
+      && $serverUri !== "/src/view/pages/signin.php"
     ) {
     ?>
       <form class="d-flex" role="search">
@@ -48,8 +53,8 @@
 
       <!-- ADMIN -->
       <?php
-    } else if (isset($_SESSION["tipo_usuario"])) {
-      if ($_SESSION["tipo_usuario"] === "admin") {
+    } else if (isset($tipo)) {
+      if ($tipo === "admin") {
       ?>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -62,7 +67,7 @@
 
         <!-- CLIENTE -->
       <?php
-      } else if ($_SESSION["tipo_usuario"] === "cliente") {
+      } else if ($tipo === "cliente") {
       ?>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -75,7 +80,7 @@
 
         <!-- DUEÑO DE LOCAL -->
       <?php
-      } else if ($_SESSION["tipo_usuario"] === "dueno") {
+      } else if ($tipo === "dueno") {
       ?>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">

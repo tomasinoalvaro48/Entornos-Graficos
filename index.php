@@ -3,13 +3,14 @@ session_start();
 
 function getMainPage()
 {
+  $tipo = $_SESSION["tipo_usuario"] ?? null;
   $page = 'src/view/pages/menu_publico.php'; // usuarios no autenticados
-  if (isset($_SESSION['tipo_usuario'])) {
-    if ($_SESSION['tipo_usuario'] === 'cliente') {
+  if (isset($tipo)) {
+    if ($tipo === 'cliente') {
       $page = 'src/view/pages/menu_cliente.php';
-    } else if ($_SESSION['tipo_usuario'] === 'admin') {
+    } else if ($tipo === 'admin') {
       $page = 'src/view/pages/menu_admin.php';
-    } else if ($_SESSION['tipo_usuario'] === 'dueno') {
+    } else if ($tipo === 'dueno') {
       $page = 'src/view/pages/menu_dueno.php';
     }
   }
