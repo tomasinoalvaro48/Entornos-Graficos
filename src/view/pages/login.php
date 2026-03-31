@@ -1,7 +1,9 @@
 <?php
 require_once __DIR__ . "/../../controller/auth.php";
+
 $error = getSessionError();
-clearSessionError();
+$success = getSessionSuccess();
+clearSessionMessages();
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +34,7 @@ clearSessionError();
         </div>
       </div>
 
+      <!-- Mostrar mensaje de error si existe -->
       <?php
       if ($error) { ?>
         <div class="row mt-3">
@@ -44,17 +47,19 @@ clearSessionError();
         </div>
       <?php } ?>
 
-      <?php if (isset($_SESSION['success'])) { ?>
+      <!-- Mostrar mensaje de éxito si existe -->
+      <?php if ($success) { ?>
         <div class="row mt-3">
           <div class="col">
             <div class="alert alert-success" role="alert">
-              <?php echo htmlspecialchars($_SESSION['success'], ENT_QUOTES, 'UTF-8');
-              unset($_SESSION['success']); ?>
+              <?php echo htmlspecialchars($success, ENT_QUOTES, 'UTF-8');
+              unset($success); ?>
             </div>
           </div>
         </div>
       <?php } ?>
 
+      <!-- Formulario de inicio de sesión -->
       <div class="row">
         <div class="col">
           <form action="../../controller/handle_login.php" method="post" id="formInicioSesion">
@@ -84,6 +89,9 @@ clearSessionError();
     </div>
 
   </main>
+
+
+
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"

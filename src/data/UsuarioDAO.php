@@ -6,7 +6,7 @@ require_once __DIR__ . "/DBFunctions.php";
 class UsuarioDAO extends DBFunctions
 {
   // Función para convertir un array de resultado de la base de datos en un objeto Usuario
-  public function sanitizeUser($usuarioFecthArray)
+  protected function sanitizeUser($usuarioFecthArray)
   {
     $u = null;
     if ($usuarioFecthArray) {

@@ -34,6 +34,13 @@ function setSessionSuccess($message)
   $_SESSION["success"] = $message;
 }
 
+// Función para obtener el mensaje de éxito guardado en la sesión, si existe, o null si no hay mensaje.
+function getSessionSuccess()
+{
+  ensureSessionActive();
+  return $_SESSION["success"] ?? null;
+}
+
 // Función para setear un mensaje de error en la sesión, que puede ser mostrado en la siguiente página 
 // a la que se redirige.
 function setSessionError($error)
@@ -50,9 +57,10 @@ function getSessionError()
 }
 
 // Función para limpiar el mensaje de error guardado en la sesión.
-function clearSessionError()
+function clearSessionMessages()
 {
   ensureSessionActive();
+  unset($_SESSION["success"]);
   unset($_SESSION["error"]);
 }
 

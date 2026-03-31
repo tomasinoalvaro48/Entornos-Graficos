@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . "/../../controller/auth.php";
 $error = getSessionError();
-clearSessionError();
+clearSessionMessages();
 ?>
 
 <!DOCTYPE html>
