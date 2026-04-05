@@ -6,10 +6,11 @@ require_once __DIR__ . "/../../env.php";
 
 class DBFunctions
 {
-  protected $DB_HOSTNAME = "localhost";
-  protected $DB_USERNAME = "root";
-  protected $DB_PASSWORD = "root";
-  protected $DB_NAME = "tp_entornos_graficos";
+  protected $DB_HOSTNAME = DB_HOSTNAME;
+  protected $DB_USERNAME = DB_USERNAME;
+  protected $DB_PASSWORD = DB_PASSWORD;
+  protected $DB_NAME = DB_NAME;
+  protected $DB_PORT = DB_PORT;
 
   // Función para ejecutar una consulta SQL y devolver el resultado (usada por los DAOs)
   public function querySQL($query)
