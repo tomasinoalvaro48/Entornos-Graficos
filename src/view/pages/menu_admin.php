@@ -15,7 +15,7 @@
           <i class="bi bi-newspaper" style="font-size: 2rem; color: #000000;"></i>
           <h5 class=" card-title mt-3">Novedades</h5>
           <p class="card-text">Gestionar Novedades. Crear novedades para Clientes o Dueños.</p>
-          <a href="#" class="btn btn-dark btn-sm">Administrar Novedades</a>
+          <a href="/src/view/pages/novedad/novedad_list.php" class="btn btn-dark btn-sm">Administrar Novedades</a>
         </div>
       </div>
     </div>
