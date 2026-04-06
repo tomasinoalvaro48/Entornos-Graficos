@@ -2,24 +2,19 @@
 require_once __DIR__ . "/../../controller/auth.php";
 $tipo = getTipoUsuario();
 $serverUri = $_SERVER["REQUEST_URI"];
+$excludePaths = [ // Rutas donde solo se muestra el logo en el header
+  "/src/view/pages/login.php",
+  "/src/view/pages/signin.php",
+  "/src/view/pages/dueno/signin_dueno.php"
+];
 ?>
 
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">LOGO</a>
-    <div>
-      Bienvenido <?php echo $tipo ?? 'No hay tipo'; ?>
-    </div>
-
 
     <!-- ---------------------- USUARIO NO LOGUEADO ---------------------- -->
-    <?php
-    if (
-      !$tipo
-      && $serverUri !== "/src/view/pages/login.php"
-      && $serverUri !== "/src/view/pages/signin.php"
-    ) {
-    ?>
+    <?php if (!$tipo && in_array($serverUri, $excludePaths) === false) { ?>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Buscar Locales o Promociones" aria-label="Search" />
         <button class="btn btn-outline-success" type="submit">Buscar</button>
@@ -70,9 +65,7 @@ $serverUri = $_SERVER["REQUEST_URI"];
 
 
         <!-- ---------------------- CLIENTE ---------------------- -->
-      <?php
-      } else if ($tipo === "cliente") {
-      ?>
+      <?php } else if ($tipo === "cliente") { ?>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
@@ -83,9 +76,7 @@ $serverUri = $_SERVER["REQUEST_URI"];
 
 
         <!-- ---------------------- DUEÑO DE LOCAL ---------------------- -->
-      <?php
-      } else if ($tipo === "dueno") {
-      ?>
+      <?php } else if ($tipo === "dueno") { ?>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
@@ -93,9 +84,7 @@ $serverUri = $_SERVER["REQUEST_URI"];
             </li>
           </ul>
         </div>
-      <?php
-      }
-      ?>
+      <?php } ?>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -104,8 +93,7 @@ $serverUri = $_SERVER["REQUEST_URI"];
           </li>
         </ul>
       </div>
-    <?php
-    }
-    ?>
+
+    <?php } ?>
   </div>
 </nav>
