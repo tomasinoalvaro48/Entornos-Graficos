@@ -10,7 +10,7 @@
         <h1 class="modal-title fs-5" id="<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>Label">Editar Local</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="/src/controller/local/handle_update_local.php" method="POST">
+      <form action="/src/controller/local/handle_update_local.php?id=<?php echo htmlspecialchars($localToEdit->idLocal, ENT_QUOTES, 'UTF-8') ?>" method="POST">
         <div class="modal-body text-start">
           <input type="hidden" name="id_local" value="<?php echo htmlspecialchars($localToEdit->idLocal, ENT_QUOTES, 'UTF-8'); ?>">
 
@@ -56,12 +56,14 @@
               required>
               <option value="">Seleccionar un dueño</option>
               <?php foreach ($duenos as $d) { ?>
-                <option
-                  value="<?php echo htmlspecialchars($d->idUsuario, ENT_QUOTES, 'UTF-8'); ?>"
-                  <?php echo $d->idUsuario === $localToEdit->usuario->idUsuario ? 'selected' : ''; ?>>
-                  <?php echo htmlspecialchars($d->nombreUsuario, ENT_QUOTES, 'UTF-8'); ?>
-                </option>
-              <?php } ?>
+                <?php if ($d->estadoDueno !== 'pendiente') { ?>
+                  <option
+                    value="<?php echo htmlspecialchars($d->idUsuario, ENT_QUOTES, 'UTF-8'); ?>"
+                    <?php echo $d->idUsuario === $localToEdit->usuario->idUsuario ? 'selected' : ''; ?>>
+                    <?php echo htmlspecialchars($d->nombreUsuario, ENT_QUOTES, 'UTF-8'); ?>
+                  </option>
+              <?php }
+              } ?>
             </select>
           </div>
         </div>
