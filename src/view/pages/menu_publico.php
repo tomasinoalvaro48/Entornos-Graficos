@@ -15,5 +15,10 @@ include __DIR__ . "/../components/carousel.php";
     <div class="col">
       <a class="btn btn-outline-primary" href="/src/view/pages/signin.php">Registrarse</a>
     </div>
+
+    <!-- registrarse como dueño -->
+    <div class="col">
+      <p>¿Eres dueño? <a href="/src/view/pages/dueno/signin_dueno.php">Registrarse como Dueño</a></p>
+    </div>
   </div>
 </div>

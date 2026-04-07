@@ -62,7 +62,7 @@ clearSessionMessages();
       <!-- Formulario de inicio de sesión -->
       <div class="row">
         <div class="col">
-          <form action="../../controller/handle_login.php" method="post" id="formInicioSesion">
+          <form action="../../controller/handle_login.php" method="post" id="formLogin">
             <div class="row">
               <input type="email" name="mail" id="mail" placeholder="Ingrese Mail" required />
             </div>
