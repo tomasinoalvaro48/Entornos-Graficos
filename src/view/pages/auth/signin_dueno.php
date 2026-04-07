@@ -55,7 +55,7 @@ clearSessionMessages();
         </div>
       <?php } ?>
 
-      <form action="../../controller/handle_signin_dueno.php" method="post" id="formSigninDueno">
+      <form action="../../../controller/dueno/handle_signin_dueno.php" method="post" id="formSigninDueno">
         <div class="row">
           <input type="text" name="nombre_dueno" id="nombre" placeholder="Ingrese su Nombre y Apellido" required />
         </div>

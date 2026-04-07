@@ -8,11 +8,22 @@ require_once __DIR__ . "/../controller/auth.php";
 if (isset($_POST['botonIniciar'])) {
     $usuario = (new UsuarioDAO())->getByEmailAndClave($_POST['mail'], $_POST['pass']);
 
-    if ($usuario) {
-        startSession($usuario);
-        header("Location: /index.php");
-    } else {
+    // Verificar si el usuario existe
+    if (!$usuario) {
         setSessionError("Usuario o contraseña incorrectos");
-        header("Location: /src/view/pages/login.php");
+        header("Location: /src/view/pages/auth/login.php");
+        exit();
     }
+
+    // Verificar si el usuario es un dueño pendiente de aprobación
+    if ($usuario->estadoDueno === 'pendiente') {
+        setSessionError("Su cuenta de dueño está pendiente de aprobación. Le avisaremos a su mail cuando su cuenta sea aprobada por un administrador.");
+        header("Location: /src/view/pages/auth/login.php");
+        exit();
+    }
+
+    // Iniciar sesión y redirigir al usuario a la página principal
+    startSession($usuario);
+    header("Location: /index.php");
+    exit();
 }

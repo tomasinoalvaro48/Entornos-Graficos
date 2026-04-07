@@ -3,9 +3,9 @@ require_once __DIR__ . "/../../controller/auth.php";
 $tipo = getTipoUsuario();
 $serverUri = $_SERVER["REQUEST_URI"];
 $excludePaths = [ // Rutas donde solo se muestra el logo en el header
-  "/src/view/pages/login.php",
-  "/src/view/pages/signin.php",
-  "/src/view/pages/dueno/signin_dueno.php"
+  "/src/view/pages/auth/login.php",
+  "/src/view/pages/auth/signin.php",
+  "/src/view/pages/auth/signin_dueno.php"
 ];
 ?>
 
@@ -38,10 +38,10 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
             <a class="nav-link" href="/src/view/pages/local/local_list.php">Locales</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/src/view/pages/login.php">Iniciar sesion</a>
+            <a class="nav-link" href="/src/view/pages/auth/login.php">Iniciar sesion</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/src/view/pages/signin.php">Registrarse</a>
+            <a class="nav-link" href="/src/view/pages/auth/signin.php">Registrarse</a>
           </li>
         </ul>
       </div>

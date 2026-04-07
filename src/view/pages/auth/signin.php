@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../../controller/auth.php";
+require_once __DIR__ . "/../../../controller/auth.php";
 $error = getSessionError();
 clearSessionMessages();
 ?>
@@ -21,7 +21,7 @@ clearSessionMessages();
 
 <body>
   <header>
-    <?php include '../components/header.php' ?>
+    <?php include '../../components/header.php' ?>
   </header>
 
 
@@ -45,7 +45,7 @@ clearSessionMessages();
         </div>
       <?php } ?>
 
-      <form action="../../controller/handle_signin_cliente.php" method="post" id="formSigninCliente">
+      <form action="../../../controller/handle_signin_cliente.php" method="post" id="formSigninCliente">
         <div class="row">
           <input type="text" name="nombre_usuario" id="nombre" placeholder="Ingrese su Nombre y Apellido" required />
         </div>
@@ -62,7 +62,7 @@ clearSessionMessages();
           <button class="btn btn-primary" type="submit" id="botonCrear" name="botonCrear">Crear cuenta</button>
         </div>
       </form>
-      <div>¿Ya tienes cuenta? <a href="../pages/login.php">Iniciar sesión</a></div>
+      <div>¿Ya tienes cuenta? <a href="/src/view/pages/auth/login.php">Iniciar sesión</a></div>
 
     </div>
     </div>

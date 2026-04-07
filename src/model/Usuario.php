@@ -12,14 +12,24 @@ class Usuario
   public string $claveUsuario;
   public string $tipoUsuario;
   public ?string $categoriaCliente;
+  public ?string $estadoDueno;
 
-  public function __construct(?int $id_usuario, string $nombre_usuario, string $email_usuario, string $claveUsuario, string $tipo_usuario, ?string $categoria_cliente)
-  {
+  // Constructor
+  public function __construct(
+    ?int $id_usuario,
+    string $nombre_usuario,
+    string $email_usuario,
+    string $claveUsuario,
+    string $tipo_usuario,
+    ?string $categoria_cliente,
+    ?string $estado_dueno
+  ) {
     $this->idUsuario = $id_usuario;
     $this->nombreUsuario = $nombre_usuario;
     $this->emailUsuario = $email_usuario;
     $this->claveUsuario = $claveUsuario;
     $this->tipoUsuario = $tipo_usuario;
     $this->categoriaCliente = $categoria_cliente;
+    $this->estadoDueno = $estado_dueno;
   }
 }

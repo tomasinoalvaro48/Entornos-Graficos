@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../../controller/auth.php";
+require_once __DIR__ . "/../../../controller/auth.php";
 
 $error = getSessionError();
 $success = getSessionSuccess();
@@ -23,7 +23,7 @@ clearSessionMessages();
 
 <body>
   <header>
-    <?php include '../components/header.php' ?>
+    <?php include '../../components/header.php' ?>
   </header>
 
   <main>
@@ -62,7 +62,7 @@ clearSessionMessages();
       <!-- Formulario de inicio de sesión -->
       <div class="row">
         <div class="col">
-          <form action="../../controller/handle_login.php" method="post" id="formLogin">
+          <form action="../../../controller/handle_login.php" method="post" id="formLogin">
             <div class="row">
               <input type="email" name="mail" id="mail" placeholder="Ingrese Mail" required />
             </div>
@@ -83,7 +83,7 @@ clearSessionMessages();
       <div>
         <div>
           <a href="#"> ¿Has olvidado la contraseña? </a>
-          <div>¿No tienes cuenta? <a href="../pages/signin.php">Registrarse</a></div>
+          <div>¿No tienes cuenta? <a href="/src/view/pages/auth/signin.php">Registrarse</a></div>
         </div>
       </div>
     </div>

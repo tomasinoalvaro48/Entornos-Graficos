@@ -16,7 +16,8 @@ class UsuarioDAO extends DBFunctions
         $usuarioFecthArray['email_usuario'],
         $usuarioFecthArray['clave_usuario'],
         $usuarioFecthArray['tipo_usuario'],
-        $usuarioFecthArray['categoria_cliente']
+        $usuarioFecthArray['categoria_cliente'],
+        $usuarioFecthArray['estado_dueno']
       );
     }
     return $u;
@@ -83,9 +84,10 @@ class UsuarioDAO extends DBFunctions
 
   public function create(Usuario $usuario)
   {
-    $query = "INSERT INTO usuario (nombre_usuario, email_usuario, clave_usuario, tipo_usuario, categoria_cliente) 
+    $query = "INSERT INTO usuario (nombre_usuario, email_usuario, clave_usuario, tipo_usuario, categoria_cliente, estado_dueno) 
                 VALUES ('" . $usuario->nombreUsuario . "', '" . $usuario->emailUsuario . "', 
-                '" . md5($usuario->claveUsuario) . "', '" . $usuario->tipoUsuario . "', '" . $usuario->categoriaCliente . "');";
+                '" . md5($usuario->claveUsuario) . "', '" . $usuario->tipoUsuario . "', '" . $usuario->categoriaCliente . "',
+                '" . $usuario->estadoDueno . "');";
     return $this->querySQL($query);
   }
 }

@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__ . "/../model/Usuario.php";
 // auth.php: Funciones relacionadas con la autenticación de usuarios, 
 // manejo de sesiones, cookies y mensajes de error o éxito entre páginas.
 
@@ -13,7 +13,6 @@ function ensureSessionActive()
 // Función para iniciar una sesión de usuario, guardando su id, tipo y categoría en la sesión.
 function startSession(Usuario $usuario)
 {
-  require_once __DIR__ . "/../model/Usuario.php";
   ensureSessionActive();
   $_SESSION['id_usuario'] = $usuario->idUsuario;
   $_SESSION['tipo_usuario'] = $usuario->tipoUsuario;
