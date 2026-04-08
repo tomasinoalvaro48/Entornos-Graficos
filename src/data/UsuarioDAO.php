@@ -39,7 +39,7 @@ class UsuarioDAO extends DBFunctions
   public function getAllDuenos()
   {
     $duenosArray = [];
-    $query = "SELECT * FROM usuario WHERE tipo_usuario = 'dueno';";
+    $query = "SELECT * FROM usuario WHERE tipo_usuario = 'dueno' ORDER BY estado_dueno DESC;";
     $duenos = $this->querySQL($query);
     if ($duenos && $duenos->num_rows > 0) {
       while ($dueno = mysqli_fetch_array($duenos)) {

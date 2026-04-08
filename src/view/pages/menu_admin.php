@@ -67,8 +67,18 @@
         <div class="card-body text-center">
           <i class="bi bi-shop" style="font-size: 2rem; color: #ff0000;"></i>
           <h5 class="card-title mt-3">Dueños de Locales</h5>
-          <p class="card-text">Gestionar cuentas de propietarios de establecimientos.</p>
-          <a href="#" class="btn btn-danger btn-sm">Administrar Dueños</a>
+          <p class="card-text">Aprobar o rechazar cuentas de Dueños pendientes.</p>
+          <a href="/src/view/pages/usuario/validar_cuentas_dueno.php?estado=pendiente" class="btn btn-danger btn-sm">Administrar Dueños</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-3">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body text-center">
+          <i class="bi bi-shop" style="font-size: 2rem; color: #ff0000;"></i>
+          <h5 class="card-title mt-3">Ver Todas las Duentas de Dueños de Locales</h5>
+          <a href="/src/view/pages/usuario/validar_cuentas_dueno.php" class="btn btn-danger btn-sm">Ver Dueños</a>
         </div>
       </div>
     </div>
