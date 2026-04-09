@@ -1,11 +1,3 @@
-<?php
-require_once __DIR__ . "/../../../controller/auth.php";
-
-$error = getSessionError();
-clearSessionMessages();
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,19 +21,7 @@ clearSessionMessages();
       </div>
     </div>
     <div class="row">
-      <div class="col">
-        <?php if ($error) { ?>
-          <div class="row mt-3">
-            <div class="col">
-              <div class="alert alert-danger" role='alert'>
-                <?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?>
-              </div>
-            </div>
-
-          </div>
-
-        <?php } ?>
-      </div>
+      <?php include __DIR__ . "/../../components/alerts.php"; ?>
 
       <form action="/src/controller/novedad/handle_create_novedad.php" method="POST">
         <div>

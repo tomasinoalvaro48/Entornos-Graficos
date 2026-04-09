@@ -1,9 +1,3 @@
-<?php
-require_once __DIR__ . "/../../../controller/auth.php";
-$error = getSessionError();
-clearSessionMessages();
-?>
-
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 
@@ -35,15 +29,7 @@ clearSessionMessages();
         </div>
       </div>
 
-      <?php if ($error) { ?>
-        <div class="row mt-3">
-          <div class="col">
-            <div class="alert alert-danger" role="alert">
-              <?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?>
-            </div>
-          </div>
-        </div>
-      <?php } ?>
+      <?php include '../../components/alerts.php' ?>
 
       <form action="../../../controller/handle_signin_cliente.php" method="post" id="formSigninCliente">
         <div class="row">
