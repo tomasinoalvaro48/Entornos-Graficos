@@ -1,13 +1,7 @@
 <?php
 require_once __DIR__ . "/../../../controller/dueno/show_duenos.php";
-require_once __DIR__ . "/../../../controller/auth.php";
-
-$error = getSessionError();
-$success = getSessionSuccess();
-clearSessionMessages();
 
 $duenos = showDuenos();
-
 ?>
 
 <!DOCTYPE html>
@@ -36,25 +30,7 @@ $duenos = showDuenos();
       </div>
     </div>
 
-    <?php if ($error) { ?>
-      <div class="row mb-3">
-        <div class="col">
-          <div class="alert alert-danger" role="alert">
-            <?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?>
-          </div>
-        </div>
-      </div>
-    <?php } ?>
-
-    <?php if ($success) { ?>
-      <div class="row mb-3">
-        <div class="col">
-          <div class="alert alert-success" role="alert">
-            <?php echo htmlspecialchars($success, ENT_QUOTES, 'UTF-8'); ?>
-          </div>
-        </div>
-      </div>
-    <?php } ?>
+    <?php include __DIR__ . '/../../components/alerts.php'; ?>
 
     <div class="row">
       <div class="col">
@@ -72,31 +48,76 @@ $duenos = showDuenos();
             <tbody>
               <?php if (empty($duenos)) { ?>
                 <tr>
-                  <td colspan="4" class="text-center">No hay cuentas de Dueños registradas.</td>
+                  <td colspan="5" class="text-center">No hay cuentas de Dueños registradas.</td>
                 </tr>
               <?php } else { ?>
                 <?php foreach ($duenos as $dueno) {
                   if (isset($_GET['estado']) && $dueno->estadoDueno !== $_GET['estado']) {
                     continue; // Saltar este dueño si no coincide con el filtro de estado
                   }
+
+                  $estadoDueno = strtolower((string)$dueno->estadoDueno);
+                  $estadoBadgeClass = 'text-bg-secondary';
+                  if ($estadoDueno === 'pendiente') {
+                    $estadoBadgeClass = 'text-bg-warning';
+                  } else if ($estadoDueno === 'aprobado') {
+                    $estadoBadgeClass = 'text-bg-success';
+                  } else if ($estadoDueno === 'rechazado') {
+                    $estadoBadgeClass = 'text-bg-danger';
+                  }
+
+                  $modalId = 'modal-validar-dueno-' . (int)$dueno->idUsuario;
                 ?>
                   <tr>
                     <td><?php echo htmlspecialchars($dueno->idUsuario, ENT_QUOTES, 'UTF-8'); ?></td>
                     <td><?php echo htmlspecialchars($dueno->nombreUsuario, ENT_QUOTES, 'UTF-8'); ?></td>
                     <td><?php echo htmlspecialchars($dueno->emailUsuario, ENT_QUOTES, 'UTF-8'); ?></td>
                     <td>
-                      <span class="badge text-bg-success">
+                      <span class="badge <?php echo $estadoBadgeClass; ?>">
                         <?php echo strtoupper(htmlspecialchars($dueno->estadoDueno, ENT_QUOTES, 'UTF-8')); ?>
                       </span>
                     </td>
                     <td>
                       <?php if ($dueno->estadoDueno === 'pendiente') { ?>
-                        <a href="/src/controller/dueno/handle_validar_cuenta.php?id=<?php echo urlencode($dueno->idUsuario); ?>"
-                          class="btn btn-sm btn-primary">
-                          Validar Cuenta
-                        </a>
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-primary"
+                          data-bs-toggle="modal"
+                          data-bs-target="#<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>">
+                          Gestionar Cuenta
+                        </button>
+
+                        <div class="modal fade" id="<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>" tabindex="-1" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title">Validar cuenta de dueño</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                              </div>
+                              <div class="modal-body">
+                                <p class="mb-3">¿Qué desea hacer con esta cuenta?</p>
+                                <ul class="list-group">
+                                  <li class="list-group-item"><strong>Nombre:</strong> <?php echo htmlspecialchars($dueno->nombreUsuario, ENT_QUOTES, 'UTF-8'); ?></li>
+                                  <li class="list-group-item"><strong>Email:</strong> <?php echo htmlspecialchars($dueno->emailUsuario, ENT_QUOTES, 'UTF-8'); ?></li>
+                                </ul>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+
+                                <a class="btn btn-danger" href="/src/controller/dueno/handle_validar_cuenta.php?estado=rechazado&id=<?php echo $dueno->idUsuario; ?>">
+                                  Rechazar
+                                </a>
+
+                                <a class="btn btn-success" href="/src/controller/dueno/handle_validar_cuenta.php?estado=aceptado&id=<?php echo $dueno->idUsuario; ?>">
+                                  Aceptar
+                                </a>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       <?php } else { ?>
-                        <div class="text-muted">Ya Validado</div>
+                        <div class="text-muted">Cuenta gestionada</div>
                       <?php } ?>
                     </td>
                   </tr>

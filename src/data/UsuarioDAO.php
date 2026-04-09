@@ -90,4 +90,12 @@ class UsuarioDAO extends DBFunctions
                 '" . $usuario->estadoDueno . "');";
     return $this->querySQL($query);
   }
+
+  public function updateEstadoDueno($idUsuario, $nuevoEstado)
+  {
+    $query = "UPDATE usuario
+              SET estado_dueno = '" . $nuevoEstado . "'
+              WHERE id_usuario = '" . (int)$idUsuario . "';";
+    return $this->querySQL($query);
+  }
 }

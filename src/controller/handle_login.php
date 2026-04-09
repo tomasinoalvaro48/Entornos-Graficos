@@ -22,6 +22,12 @@ if (isset($_POST['botonIniciar'])) {
         exit();
     }
 
+    if ($usuario->estadoDueno === 'rechazado') {
+        setSessionError("Su cuenta de dueño fue rechazada por un administrador.");
+        header("Location: /src/view/pages/auth/login.php");
+        exit();
+    }
+
     // Iniciar sesión y redirigir al usuario a la página principal
     startSession($usuario);
     header("Location: /index.php");
