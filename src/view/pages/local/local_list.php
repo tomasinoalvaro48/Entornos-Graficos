@@ -3,6 +3,8 @@ require_once __DIR__ . "/../../../controller/local/show_local.php";
 require_once __DIR__ . "/../../../controller/dueno/show_duenos.php";
 require_once __DIR__ . "/../../../controller/auth.php";
 
+$tipo = getTipoUsuario();
+
 $error = getSessionError();
 $success = getSessionSuccess();
 clearSessionMessages();
@@ -88,14 +90,20 @@ $duenos = showDuenos();
                   <p class='card-text'>Rubro: <?php echo htmlspecialchars($l->rubroLocal, ENT_QUOTES, 'UTF-8') ?></p>
                   <p class='card-text'>Dueño: <?php echo htmlspecialchars($l->usuario->nombreUsuario, ENT_QUOTES, 'UTF-8') ?></p>
                   <div class='d-flex justify-content-end'>
-                    <button
-                      type="button"
-                      class="btn btn-primary me-2"
-                      data-bs-toggle="modal"
-                      data-bs-target="#<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>">
-                      Editar
-                    </button>
-                    <a href="/src/controller/local/handle_delete_local.php?id=<?php echo htmlspecialchars($l->idLocal, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-danger">Eliminar</a>
+
+                    <!-- Botones de Editar y Eliminar, solo visibles para admin -->
+                    <?php if ($tipo === "admin") { ?>
+                      <button
+                        type="button"
+                        class="btn btn-primary me-2"
+                        data-bs-toggle="modal"
+                        data-bs-target="#<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>">
+                        Editar
+                      </button>
+                      <a href="/src/controller/local/handle_delete_local.php?id=<?php echo htmlspecialchars($l->idLocal, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-danger">
+                        Eliminar
+                      </a>
+                    <?php } ?>
                   </div>
                 </div>
               </div>
@@ -107,13 +115,16 @@ $duenos = showDuenos();
         ?>
           </div>
 
-          <div class="container text-center">
-            <div class="row mt-5">
-              <div class="col">
-                <a href="/src/view/pages/local/create_local.php" class="btn btn-success">Crear Local</a>
+          <!-- Botón para crear nuevo local, solo visible para admin -->
+          <?php if ($tipo === "admin") { ?>
+            <div class="container text-center">
+              <div class="row mt-5">
+                <div class="col">
+                  <a href="/src/view/pages/local/create_local.php" class="btn btn-success">Crear Local</a>
+                </div>
               </div>
             </div>
-          </div>
+          <?php } ?>
 
           <div class="container text-center">
             <div class="row mt-5">

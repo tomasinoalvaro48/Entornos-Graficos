@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../../../controller/novedad/show_novedad.php';
+require_once __DIR__ . '/../../../controller/auth.php';
 
+$tipo = getTipoUsuario();
 $novedades = showNovedades();
 ?>
 
@@ -54,14 +56,16 @@ $novedades = showNovedades();
       <?php } ?>
     <?php } ?>
 
-    <div class="container text-center">
-      <div class='row mt-5'>
-        <div class="col">
-          <a href="/src/view/pages/novedad/novedad_create.php" class="btn btn-success">Crear Novedad</a>
+    <!-- Botón para crear nueva novedad, solo visible para admin -->
+    <?php if ($tipo === "admin") { ?>
+      <div class="container text-center">
+        <div class='row mt-5'>
+          <div class="col">
+            <a href="/src/view/pages/novedad/novedad_create.php" class="btn btn-success">Crear Novedad</a>
+          </div>
         </div>
-
       </div>
-    </div>
+    <?php } ?>
 
 
 

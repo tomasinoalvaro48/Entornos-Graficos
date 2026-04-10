@@ -97,7 +97,7 @@
           <i class="bi bi-shop" style="font-size: 2rem; color: #fd7e14;"></i>
           <h5 class="card-title mt-3">Locales</h5>
           <p class="card-text">Crear, editar y eliminar locales del sistema.</p>
-          <a href="/local/local_list.php" class="btn btn-warning btn-sm">Gestionar Locales</a>
+          <a href="/src/view/pages/local/local_list.php" class="btn btn-warning btn-sm">Gestionar Locales</a>
         </div>
       </div>
     </div>
