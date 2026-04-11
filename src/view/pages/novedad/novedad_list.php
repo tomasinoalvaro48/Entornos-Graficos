@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../../../controller/novedad/show_novedad.php';
+require_once __DIR__ . '/../../../controller/novedad/handle_update_novedad.php';
 require_once __DIR__ . '/../../../controller/auth.php';
+
 
 $tipo = getTipoUsuario();
 $novedades = showNovedades();
@@ -42,7 +44,11 @@ $novedades = showNovedades();
         </div>
       </div>
     <?php } else { ?>
-      <?php foreach ($novedades as $n) { ?>
+      <?php foreach ($novedades as $n) {
+        $modalId = 'editNovedadModal_' . $n->codNovedad;
+        $novedadToEdit = $n;
+
+      ?>
         <div class="row mt-3">
           <div class="col">
             <div class="card">
@@ -52,6 +58,14 @@ $novedades = showNovedades();
                 <p class="card text">Tipo usuario: <?php echo htmlspecialchars($n->tipoCliente, ENT_QUOTES, 'UTF-8') ?></p>
 
                 <?php if ($tipo === 'admin') { ?>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>">
+
+                    Editar
+                  </button>
                   <a
                     class="btn btn-danger"
                     href="/src/controller/novedad/handle_delete_novedad.php?id=<?php echo htmlspecialchars($n->codNovedad, ENT_QUOTES, 'UTF-8'); ?>">
@@ -60,6 +74,7 @@ $novedades = showNovedades();
                 <?php } ?>
               </div>
             </div>
+            <?php include __DIR__ . '/novedad_update.php'; ?>
           </div>
         </div>
       <?php } ?>
@@ -90,7 +105,11 @@ $novedades = showNovedades();
   </main>
 
 
-
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous">
+  </script>
 </body>
 
 </html>

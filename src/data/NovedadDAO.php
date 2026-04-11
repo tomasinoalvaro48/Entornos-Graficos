@@ -47,5 +47,11 @@ class NovedadDAO extends DBFunctions
 
   public function getByType() {}
 
-  public function update(Novedad $novedad) {}
+  public function update(Novedad $novedad)
+  {
+    $fechaDesde = $novedad->fechaDesdeNovedad ? "'" . $novedad->fechaDesdeNovedad->format('Y-m-d') . "'" : "NULL";
+    $fechaHasta = $novedad->fechaHastaNovedad ? "'" . $novedad->fechaHastaNovedad->format('Y-m-d') . "'" : "NULL";
+    $query = "UPDATE novedad SET texto_nov = '" . $novedad->textoNovedad . "', fecha_desde_nov = " . $fechaDesde . ", fecha_hasta_nov = " . $fechaHasta . ", tipo_cliente_nov = '" . $novedad->tipoCliente . "' WHERE id_novedad = '" . $novedad->codNovedad . "'";
+    return $this->querySQL($query);
+  }
 }
