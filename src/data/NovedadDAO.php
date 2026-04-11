@@ -38,4 +38,10 @@ class NovedadDAO extends DBFunctions
     $query = "INSERT INTO novedad(texto_nov, fecha_desde_nov, fecha_hasta_nov, tipo_usuario_nov) VALUES ('" . $novedad->textoNovedad . "', " . $fechaDesde . ", " . $fechaHasta . ", '" . $novedad->tipoUsuario . "')";
     return $this->querySQL($query);
   }
+
+  public function delete($idNovedad)
+  {
+    $query = "DELETE FROM novedad WHERE id_novedad = '" . $idNovedad . "'";
+    return $this->querySQL($query);
+  }
 }
