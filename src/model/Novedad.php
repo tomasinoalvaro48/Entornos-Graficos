@@ -11,14 +11,14 @@ class Novedad
   public string $textoNovedad;
   public ?DateTime $fechaDesdeNovedad;
   public ?DateTime $fechaHastaNovedad;
-  public string $tipoUsuario;
+  public string $tipoCliente;
 
-  public function __construct(?int $codNovedad, string $textoNovedad, ?DateTime $fechaDesdeNovedad, ?DateTime $fechaHastaNovedad, string $tipoUsuario)
+  public function __construct(?int $codNovedad, string $textoNovedad, ?DateTime $fechaDesdeNovedad, ?DateTime $fechaHastaNovedad, string $tipoCliente)
   {
     $this->codNovedad = $codNovedad;
     $this->textoNovedad = substr($textoNovedad, 0, 200);
     $this->fechaDesdeNovedad = $fechaDesdeNovedad;
     $this->fechaHastaNovedad = $fechaHastaNovedad;
-    $this->tipoUsuario = substr($tipoUsuario, 0, 15);
+    $this->tipoCliente = substr($tipoCliente, 0, 15);
   }
 }

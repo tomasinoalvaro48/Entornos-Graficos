@@ -38,14 +38,14 @@
         </div>
         <div>
           <label for="texto_novedad">Descripción de la Novedad</label>
-          <select class='form-control' id='tipo_usuario' name="tipo_usuario" required>
-            <option value="">Seleccione un Tipo de Usuario
+          <select class='form-control' id='tipo_cliente' name="tipo_cliente" required>
+            <option value="">Seleccione un Tipo de Cliente
             </option>
-            <option value="administrador">Administrador
+            <option value="inicial">Inicial
             </option>
-            <option value="dueno">Dueño de local
+            <option value="medium">Medium
             </option>
-            <option value="cliente">Cliente
+            <option value="premium">Premium
             </option>
 
           </select>

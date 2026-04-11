@@ -13,7 +13,7 @@ class NovedadDAO extends DBFunctions
         $novedadFetchArray['texto_nov'],
         $novedadFetchArray['fecha_desde_nov'] ? new DateTime($novedadFetchArray['fecha_desde_nov']) : null,
         $novedadFetchArray['fecha_hasta_nov'] ? new DateTime($novedadFetchArray['fecha_hasta_nov']) : null,
-        $novedadFetchArray['tipo_usuario_nov'],
+        $novedadFetchArray['tipo_cliente_nov'],
       );
     return $n;
   }
@@ -35,7 +35,7 @@ class NovedadDAO extends DBFunctions
   {
     $fechaDesde = $novedad->fechaDesdeNovedad ? "'" . $novedad->fechaDesdeNovedad->format('Y-m-d') . "'" : "NULL";
     $fechaHasta = $novedad->fechaHastaNovedad ? "'" . $novedad->fechaHastaNovedad->format('Y-m-d') . "'" : "NULL";
-    $query = "INSERT INTO novedad(texto_nov, fecha_desde_nov, fecha_hasta_nov, tipo_usuario_nov) VALUES ('" . $novedad->textoNovedad . "', " . $fechaDesde . ", " . $fechaHasta . ", '" . $novedad->tipoUsuario . "')";
+    $query = "INSERT INTO novedad(texto_nov, fecha_desde_nov, fecha_hasta_nov, tipo_cliente_nov) VALUES ('" . $novedad->textoNovedad . "', " . $fechaDesde . ", " . $fechaHasta . ", '" . $novedad->tipoCliente . "')";
     return $this->querySQL($query);
   }
 
@@ -44,4 +44,8 @@ class NovedadDAO extends DBFunctions
     $query = "DELETE FROM novedad WHERE id_novedad = '" . $idNovedad . "'";
     return $this->querySQL($query);
   }
+
+  public function getByType() {}
+
+  public function update(Novedad $novedad) {}
 }

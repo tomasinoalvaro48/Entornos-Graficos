@@ -49,11 +49,15 @@ $novedades = showNovedades();
               <div class="card-body">
                 <h5 class="card-title">Codigo: <?php echo htmlspecialchars($n->codNovedad, ENT_QUOTES, 'UTF-8') ?></h5>
                 <p class="card-text">Descripcion: <?php echo htmlspecialchars($n->textoNovedad, ENT_QUOTES, 'UTF-8') ?></p>
-                <a
-                  class="btn btn-danger"
-                  href="/src/controller/novedad/handle_delete_novedad.php?id=<?php echo htmlspecialchars($n->codNovedad, ENT_QUOTES, 'UTF-8'); ?>">
-                  Eliminar
-                </a>
+                <p class="card text">Tipo usuario: <?php echo htmlspecialchars($n->tipoCliente, ENT_QUOTES, 'UTF-8') ?></p>
+
+                <?php if ($tipo === 'admin') { ?>
+                  <a
+                    class="btn btn-danger"
+                    href="/src/controller/novedad/handle_delete_novedad.php?id=<?php echo htmlspecialchars($n->codNovedad, ENT_QUOTES, 'UTF-8'); ?>">
+                    Eliminar
+                  </a>
+                <?php } ?>
               </div>
             </div>
           </div>
