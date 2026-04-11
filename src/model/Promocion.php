@@ -12,4 +12,24 @@ class Promocion
   public ArrayObject $diasSemanaPromo;
   public string $estadoPromo;
   public Local $local;
+
+  function __construct(
+    ?int $idPromo,
+    string $textoPromo,
+    DateTime $fechaDesdePromo,
+    DateTime $fechaHastaPromo,
+    string $categoriaClientePromo,
+    $diasSemanaPromo,
+    string $estadoPromo,
+    Local $local
+  ) {
+    $this->idPromo = $idPromo;
+    $this->textoPromo = $textoPromo;
+    $this->fechaDesdePromo = $fechaDesdePromo;
+    $this->fechaHastaProm = $fechaHastaPromo;
+    $this->categoriaClientePromo = $categoriaClientePromo;
+    $this->diasSemanaPromo = $diasSemanaPromo;
+    $this->estadoPromo = $estadoPromo;
+    $this->local = $local;
+  }
 }

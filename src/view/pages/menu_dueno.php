@@ -54,6 +54,17 @@ include __DIR__ . "/../components/carousel.php";
         </div>
       </div>
     </div>
+
+    <div class="col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body text-center">
+          <i class="bi bi-plus-circle" style="font-size: 2rem; color: #198754;"></i>
+          <h5 class="card-title mt-3">Crear Promoción</h5>
+          <p class="card-text">Crear una nueva promoción.</p>
+          <a href="/src/view/pages/promocion/create_promocion.php" class="btn btn-success btn-sm">Nueva Promoción</a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="row mt-5">
