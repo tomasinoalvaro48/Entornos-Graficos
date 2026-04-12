@@ -102,7 +102,7 @@ $locales = showLocales();
             </button>
           </form>
             
-          <a href="/src/view/pages/menu_dueno.php" class="btn btn-secondary">
+          <a href="/" class="btn btn-secondary">
             Volver al menú
           </a>
         </div>

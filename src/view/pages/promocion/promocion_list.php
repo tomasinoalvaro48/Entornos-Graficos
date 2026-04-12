@@ -145,7 +145,7 @@ $locales = showLocales();
         <div class="container text-center">
           <div class="row mt-5">
             <div class="col">
-              <a href="/src/view/pages/menu_dueno.php" class="btn btn-secondary">
+              <a href="/" class="btn btn-secondary">
                 Volver al menú
               </a>
             </div>
