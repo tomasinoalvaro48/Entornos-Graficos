@@ -14,8 +14,8 @@ class PromocionDAO extends DBFunctions
       $p = new Promocion(
         $promocionFetchArray['id_promo'],
         $promocionFetchArray['texto_promo'],
-        $promocionFetchArray['fecha_desde_promo'],
-        $promocionFetchArray['fecha_hasta_promo'],
+        new DateTime($promocionFetchArray['fecha_desde_promo']),
+        new DateTime($promocionFetchArray['fecha_hasta_promo']),
         $promocionFetchArray['categoria_cliente_promo'],
         new ArrayObject(),
         $promocionFetchArray['estado_promo'],
@@ -29,6 +29,41 @@ class PromocionDAO extends DBFunctions
       );
     }
     return $p;
+  }
+
+  public function getAll()
+  {
+    $promocionesArray = [];
+
+    $query = "SELECT *
+              FROM promocion p
+              INNER JOIN local l ON p.id_local = l.id_local;";
+
+    $promociones = $this->querySQL($query);
+
+    if ($promociones && $promociones->num_rows > 0) {
+      while ($promocion = mysqli_fetch_array($promociones)) {
+        $p = $this->sanitizePromocion($promocion);
+
+        $dias = [];
+        $diasQuery = "SELECT id_dia
+                      FROM dias_promo
+                      WHERE id_promo = " . $promocion['id_promo'];
+        $diasResult = $this->querySQL($diasQuery);
+
+        if ($diasResult && $diasResult->num_rows > 0) {
+          while ($d = mysqli_fetch_array($diasResult)) {
+            $dias[] = $d['id_dia'];
+          }
+        }
+
+        $p->diasSemanaPromo = new ArrayObject($dias);
+
+        array_push($promocionesArray, $p);
+      }
+    }
+
+    return $promocionesArray;
   }
 
   public function getByLocalId($idLocal)
