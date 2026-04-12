@@ -84,7 +84,7 @@ class PromocionDAO extends DBFunctions
     VALUES (
       '{$p->textoPromo}',
       '{$p->fechaDesdePromo->format('Y-m-d')}',
-      '{$p->fechaHastaProm->format('Y-m-d')}',
+      '{$p->fechaHastaPromo->format('Y-m-d')}',
       '{$p->categoriaClientePromo}',
       '{$p->estadoPromo}',
       {$p->local->idLocal}
@@ -104,5 +104,16 @@ class PromocionDAO extends DBFunctions
     }
 
     return true;
+  }
+
+  public function delete($id)
+  {
+    $queryDias = "DELETE FROM dias_promo
+                  WHERE id_promo = '" . $id . "';";
+    $this->querySQL($queryDias);
+
+    $query = "DELETE FROM promocion
+              WHERE id_promo = '" . $id . "';";
+    return $this->querySQL($query);
   }
 }

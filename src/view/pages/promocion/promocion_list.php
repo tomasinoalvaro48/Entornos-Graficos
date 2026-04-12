@@ -85,7 +85,7 @@ $locales = showLocales();
                       Vigencia:
                       <?php echo $p->fechaDesdePromo->format('d/m/Y'); ?>
                       -
-                      <?php echo $p->fechaHastaProm->format('d/m/Y'); ?>
+                      <?php echo $p->fechaHastaPromo->format('d/m/Y'); ?>
                     </p>
                   
                     <p class="card-text">
@@ -117,8 +117,7 @@ $locales = showLocales();
                   
                     <div class="d-flex justify-content-end">
                       <?php if ($tipo === "dueno") { ?>
-                      <!-- falta eliminar -->
-                      <a href="#" class="btn btn-danger">
+                      <a href="/src/controller/promocion/handle_delete_promocion.php?id=<?php echo htmlspecialchars($p->idPromo, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-danger">
                         Eliminar
                       </a>
                       <?php } ?>

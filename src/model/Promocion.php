@@ -7,7 +7,7 @@ class Promocion
   public ?int $idPromo;
   public string $textoPromo;
   public DateTime $fechaDesdePromo;
-  public DateTime $fechaHastaProm;
+  public DateTime $fechaHastaPromo;
   public string $categoriaClientePromo;
   public ArrayObject $diasSemanaPromo;
   public string $estadoPromo;
@@ -26,7 +26,7 @@ class Promocion
     $this->idPromo = $idPromo;
     $this->textoPromo = $textoPromo;
     $this->fechaDesdePromo = $fechaDesdePromo;
-    $this->fechaHastaProm = $fechaHastaPromo;
+    $this->fechaHastaPromo = $fechaHastaPromo;
     $this->categoriaClientePromo = $categoriaClientePromo;
     $this->diasSemanaPromo = $diasSemanaPromo;
     $this->estadoPromo = $estadoPromo;
