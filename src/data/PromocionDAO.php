@@ -66,6 +66,39 @@ class PromocionDAO extends DBFunctions
     return $promocionesArray;
   }
 
+  public function getById($idPromo)
+  {
+    $p = null;
+
+    $query = "SELECT *
+              FROM promocion p
+              INNER JOIN local l ON p.id_local = l.id_local
+              WHERE p.id_promo = '" . $idPromo . "';";
+
+    $promocion = $this->querySQL($query);
+
+    if ($promocion && $promocion->num_rows > 0) {
+      $promo = mysqli_fetch_array($promocion);
+      $p = $this->sanitizePromocion($promo);
+
+      $dias = [];
+      $diasQuery = "SELECT id_dia
+                    FROM dias_promo
+                    WHERE id_promo = " . $promo['id_promo'];
+      $diasPromocion = $this->querySQL($diasQuery);
+
+      if ($diasPromocion && $diasPromocion->num_rows > 0) {
+        while ($d = mysqli_fetch_array($diasPromocion)) {
+          $dias[] = $d['id_dia'];
+        }
+      }
+
+      $p->diasSemanaPromo = new ArrayObject($dias);
+    }
+
+    return $p;
+  }
+
   public function getByLocalId($idLocal)
   {
     $p = null;
@@ -104,6 +137,14 @@ class PromocionDAO extends DBFunctions
     }
 
     return true;
+  }
+
+  public function updateEstadoPromo($idPromo, $nuevoEstado)
+  {
+    $query = "UPDATE promocion
+              SET estado_promo = '" . $nuevoEstado . "'
+              WHERE id_promo = '" . (int)$idPromo . "';";
+    return $this->querySQL($query);
   }
 
   public function delete($id)

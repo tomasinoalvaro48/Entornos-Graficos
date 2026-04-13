@@ -107,8 +107,8 @@
         <div class="card-body text-center">
           <i class="bi bi-tag" style="font-size: 2rem; color: #20c997;"></i>
           <h5 class="card-title mt-3">Promociones</h5>
-          <p class="card-text">Crear, editar y administrar promociones activas.</p>
-          <a href="#" class="btn btn-success btn-sm">Gestionar Promociones</a>
+          <p class="card-text">Aprobar y denegar promociones.</p>
+          <a href="/src/view/pages/promocion/validar_promociones.php" class="btn btn-success btn-sm">Gestionar Promociones</a>
         </div>
       </div>
     </div>
