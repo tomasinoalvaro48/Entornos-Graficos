@@ -12,7 +12,7 @@ if (isset($_POST['botonCrear'])) {
   $duplicatedLocal = $localDAO->getByNombre($nombreLocal);
 
   if ($duplicatedLocal) {
-    setSessionError("Ya existe un local con el nombre: {$duplicatedLocal->nombreLocal}.");
+    setSessionError("Ya existe un local con el nombre: {$duplicatedLocal->nombreLocal}");
     header("Location: /src/view/pages/local/create_local.php");
   } else {
     $localDAO->create(new Local(

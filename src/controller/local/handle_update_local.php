@@ -13,7 +13,7 @@ if (isset($_POST['botonActualizar'])) {
   $duplicatedLocal = $localDAO->getByNombre($nombreLocal);
 
   if ($duplicatedLocal && $duplicatedLocal->idLocal != $_GET['id']) {
-    setSessionError("Ya existe un local con el nombre: {$duplicatedLocal->nombreLocal}.");
+    setSessionError("Ya existe un local con el nombre: {$duplicatedLocal->nombreLocal}");
     header("Location: /src/view/pages/local/local_list.php");
   } else {
     // Si no hay duplicados, proceder a actualizar el local
