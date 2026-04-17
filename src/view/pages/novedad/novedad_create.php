@@ -23,7 +23,7 @@
     <div class="row">
       <?php include __DIR__ . "/../../components/alerts.php"; ?>
 
-      <form action="/src/controller/novedad/handle_create_novedad.php" method="POST">
+      <form action="<?php echo app_path('src/controller/novedad/handle_create_novedad.php'); ?>" method="POST">
         <div>
           <label for="texto_novedad">Descripción de la Novedad</label>
           <input type="text" class="form-control" id="texto_novedad" name="texto_novedad" required>
@@ -51,7 +51,7 @@
           </select>
         </div>
         <button type="submit" class='btn btn-primary' id='botonCrearNovedad' name="botonCrearNovedad">Crear Novedad</button>
-        <a href="/src/view/pages/novedad/novedad_list.php" class="btn btn-secondary">Volver a la Lista de Novedades</a>
+        <a href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>" class="btn btn-secondary">Volver a la Lista de Novedades</a>
 
 
       </form>

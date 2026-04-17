@@ -13,7 +13,7 @@ if (isset($_POST['botonCrear'])) {
 
   if ($duplicatedLocal) {
     setSessionError("Ya existe un local con el nombre: {$duplicatedLocal->nombreLocal}");
-    header("Location: /src/view/pages/local/create_local.php");
+    header("Location: " . app_path('src/view/pages/local/create_local.php'));
   } else {
     $localDAO->create(new Local(
       null,
@@ -23,6 +23,6 @@ if (isset($_POST['botonCrear'])) {
       $dueno = (new UsuarioDAO())->getById($_POST['dueno_local'])
     ));
     setSessionSuccess("Local creado exitosamente.");
-    header("Location: /src/view/pages/local/local_list.php");
+    header("Location: " . app_path('src/view/pages/local/local_list.php'));
   }
 }

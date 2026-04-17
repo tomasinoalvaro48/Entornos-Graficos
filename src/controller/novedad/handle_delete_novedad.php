@@ -8,5 +8,5 @@ if (isset($_GET['id'])) {
   $novedadDAO = new NovedadDAO();
   $novedadDAO->delete($_GET['id']);
   setSessionSuccess("Novedad eliminada exitosamente.");
-  header("Location: /src/view/pages/novedad/novedad_list.php");
+  header("Location: " . app_path('src/view/pages/novedad/novedad_list.php'));
 }

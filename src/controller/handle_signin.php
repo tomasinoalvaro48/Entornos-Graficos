@@ -20,14 +20,14 @@ if (isset($_POST['botonCrearCliente'])) {
   // Verificar si el correo electrónico ya está registrado
   if ($usuario) {
     setSessionError("Este usuario ya existe. Por favor, intente con otro correo electrónico o inicie sesión.");
-    header("Location: /src/view/pages/auth/signin.php");
+    header("Location: " . app_path('src/view/pages/auth/signin.php'));
     exit();
   }
 
   // Verificar que las contraseñas coincidan
   if ($claveUsuario !== $claveUsuarioConf) {
     setSessionError("Las contraseñas no coinciden. Por favor, intente nuevamente.");
-    header("Location: /src/view/pages/auth/signin.php");
+    header("Location: " . app_path('src/view/pages/auth/signin.php'));
     exit();
   }
 
@@ -37,7 +37,7 @@ if (isset($_POST['botonCrearCliente'])) {
   $mailSent = sendVerificationEmail($emailUsuario, $token, $nombreUsuario);
   if (!$mailSent) {
     setSessionError("No se pudo enviar el correo de verificación. Por favor, intente nuevamente.");
-    header("Location: /src/view/pages/auth/signin.php");
+    header("Location: " . app_path('src/view/pages/auth/signin.php'));
     exit();
   }
 
@@ -67,14 +67,14 @@ if (isset($_POST['botonSolicitarDueno'])) {
   $usuario = $udao->getByEmail($emailUsuario);
   if ($usuario) {
     setSessionError("Este usuario ya existe. Por favor, intente con otro correo electrónico o inicie sesión.");
-    header("Location: /src/view/pages/auth/signin_dueno.php");
+    header("Location: " . app_path('src/view/pages/auth/signin_dueno.php'));
     exit();
   }
 
   // Verificar que las contraseñas coincidan
   if ($claveUsuario !== $claveUsuarioConf) {
     setSessionError("Las contraseñas no coinciden. Por favor, intente nuevamente.");
-    header("Location: /src/view/pages/auth/signin_dueno.php");
+    header("Location: " . app_path('src/view/pages/auth/signin_dueno.php'));
     exit();
   }
 
@@ -84,7 +84,7 @@ if (isset($_POST['botonSolicitarDueno'])) {
   $emailSent = sendVerificationEmail($emailUsuario, $token, $nombreUsuario);
   if (!$emailSent) {
     setSessionError("No se pudo enviar el correo de verificación. Por favor, intente nuevamente.");
-    header("Location: /src/view/pages/auth/signin.php");
+    header("Location: " . app_path('src/view/pages/auth/signin.php'));
     exit();
   }
 
@@ -104,5 +104,5 @@ if (isset($_POST['botonSolicitarDueno'])) {
   setSessionSuccess("Por favor, verifique su mail antes de continuar.");
 }
 
-header("Location: /src/view/pages/auth/login.php");
+header("Location: " . app_path('src/view/pages/auth/login.php'));
 exit();

@@ -8,5 +8,5 @@ if (isset($_GET['id'])) {
   $promocionDAO->delete($_GET['id']);
 
   setSessionSuccess("Promoción eliminada exitosamente.");
-  header("Location: /src/view/pages/promocion/promocion_list.php");
+  header("Location: " . app_path('src/view/pages/promocion/promocion_list.php'));
 }

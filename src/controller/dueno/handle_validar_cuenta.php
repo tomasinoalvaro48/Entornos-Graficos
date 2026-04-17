@@ -28,6 +28,6 @@ if (isset($_GET['id']) && isset($_GET['estado'])) {
     setSessionError("Hubo un error al actualizar el estado del dueño con ID $idDueno. Por favor, intente nuevamente.");
   }
 
-  header("Location: /src/view/pages/usuario/validar_cuentas_dueno.php");
+  header("Location: " . app_path('src/view/pages/usuario/validar_cuentas_dueno.php'));
   exit();
 }

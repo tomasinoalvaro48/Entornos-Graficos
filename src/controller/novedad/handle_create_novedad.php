@@ -17,12 +17,12 @@ if (isset($_POST['botonCrearNovedad'])) {
 
   if ($_POST['fecha_desde_novedad'] !== '' && !$fechaDesdeNovedad) {
     setSessionError("La fecha desde no es valida.");
-    header("Location: /src/view/pages/novedad/novedad_create.php");
+    header("Location: " . app_path('src/view/pages/novedad/novedad_create.php'));
   }
 
   if ($_POST['fecha_hasta_novedad'] !== '' && !$fechaHastaNovedad) {
     setSessionError("La fecha hasta no es valida.");
-    header("Location: /src/view/pages/novedad/novedad_create.php");
+    header("Location: " . app_path('src/view/pages/novedad/novedad_create.php'));
   }
 
   $novedadDAO->create(new Novedad(
@@ -33,5 +33,5 @@ if (isset($_POST['botonCrearNovedad'])) {
     $tipoCliente
   ));
   setSessionSuccess("Novedad creada exitosamente.");
-  header("Location: /src/view/pages/novedad/novedad_list.php");
+  header("Location: " . app_path('src/view/pages/novedad/novedad_list.php'));
 }

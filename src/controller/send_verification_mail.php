@@ -9,7 +9,8 @@ require_once __DIR__ . '/../config/env.php';
 function sendVerificationEmail($mailUsuario, $token, $nombreUsuario)
 {
   $appUrl = rtrim($_ENV['APP_URL'], '/');
-  $verifyUrl = $appUrl . '/src/controller/verify_email.php?mail=' . urlencode($mailUsuario) . '&token=' . urlencode($token);
+  $basePath = rtrim($_ENV['APP_BASE_PATH'] ?? '', '/');
+  $verifyUrl = $appUrl . $basePath . '/src/controller/verify_email.php?mail=' . urlencode($mailUsuario) . '&token=' . urlencode($token);
 
   // Capturar el contenido HTML usando output buffering
   ob_start();

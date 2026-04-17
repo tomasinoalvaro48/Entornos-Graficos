@@ -52,7 +52,7 @@
       <div>
         <div>
           <a href="#"> ¿Has olvidado la contraseña? </a>
-          <div>¿No tienes cuenta? <a href="/src/view/pages/auth/signin.php">Registrarse</a></div>
+          <div>¿No tienes cuenta? <a href="<?php echo app_path('src/view/pages/auth/signin.php'); ?>">Registrarse</a></div>
         </div>
       </div>
     </div>

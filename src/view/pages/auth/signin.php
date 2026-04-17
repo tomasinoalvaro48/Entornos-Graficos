@@ -48,7 +48,7 @@
           <button class="btn btn-primary" type="submit" id="botonCrearCliente" name="botonCrearCliente">Crear cuenta</button>
         </div>
       </form>
-      <div>¿Ya tienes cuenta? <a href="/src/view/pages/auth/login.php">Iniciar sesión</a></div>
+      <div>¿Ya tienes cuenta? <a href="<?php echo app_path('src/view/pages/auth/login.php'); ?>">Iniciar sesión</a></div>
 
     </div>
     </div>

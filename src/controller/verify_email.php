@@ -19,12 +19,12 @@ if (isset($_GET['mail']) && isset($_GET['token'])) {
     } else {
       setSessionSuccess("Correo verificado exitosamente. Ya puede iniciar sesión.");
     }
-    header("Location: /src/view/pages/auth/login.php");
+    header("Location: " . app_path('src/view/pages/auth/login.php'));
   } else {
     setSessionError("No se encontró un usuario con ese correo electrónico. Por favor, intente nuevamente.");
-    header("Location: /src/view/pages/auth/signin.php");
+    header("Location: " . app_path('src/view/pages/auth/signin.php'));
   }
 } else {
   setSessionError("No se proporcionó un correo electrónico para verificar. Por favor, intente nuevamente.");
-  header("Location: /src/view/pages/auth/signin.php");
+  header("Location: " . app_path('src/view/pages/auth/signin.php'));
 }

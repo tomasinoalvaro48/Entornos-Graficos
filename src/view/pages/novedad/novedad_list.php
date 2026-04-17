@@ -68,7 +68,7 @@ $novedades = showNovedades();
                   </button>
                   <a
                     class="btn btn-danger"
-                    href="/src/controller/novedad/handle_delete_novedad.php?id=<?php echo htmlspecialchars($n->codNovedad, ENT_QUOTES, 'UTF-8'); ?>">
+                    href="<?php echo app_path('src/controller/novedad/handle_delete_novedad.php'); ?>?id=<?php echo htmlspecialchars($n->codNovedad, ENT_QUOTES, 'UTF-8'); ?>">
                     Eliminar
                   </a>
                 <?php } ?>
@@ -85,7 +85,7 @@ $novedades = showNovedades();
       <div class="container text-center">
         <div class='row mt-5'>
           <div class="col">
-            <a href="/src/view/pages/novedad/novedad_create.php" class="btn btn-success">Crear Novedad</a>
+            <a href="<?php echo app_path('src/view/pages/novedad/novedad_create.php'); ?>" class="btn btn-success">Crear Novedad</a>
           </div>
         </div>
       </div>
@@ -94,7 +94,7 @@ $novedades = showNovedades();
     <div class="container text-center">
       <div class="row mt-5">
         <div class="col">
-          <a href="/" class="btn btn-secondary">Volver al Menú</a>
+          <a href="<?php echo app_path(); ?>" class="btn btn-secondary">Volver al Menú</a>
         </div>
       </div>
     </div>

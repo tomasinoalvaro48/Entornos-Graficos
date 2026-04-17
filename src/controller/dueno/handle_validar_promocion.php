@@ -22,6 +22,6 @@ if (isset($_GET['id']) && isset($_GET['estado'])) {
     setSessionError("Error al actualizar la promoción con ID $idPromo. Vuelva a intentarlo.");
   }
 
-  header("Location: /src/view/pages/promocion/validar_promociones.php");
+  header("Location: " . app_path('src/view/pages/promocion/validar_promociones.php'));
   exit();
 }

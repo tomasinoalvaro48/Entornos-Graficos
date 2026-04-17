@@ -15,7 +15,7 @@
           <i class="bi bi-newspaper" style="font-size: 2rem; color: #000000;"></i>
           <h5 class=" card-title mt-3">Novedades</h5>
           <p class="card-text">Gestionar Novedades. Crear novedades para Clientes o Dueños.</p>
-          <a href="/src/view/pages/novedad/novedad_list.php" class="btn btn-dark btn-sm">Administrar Novedades</a>
+          <a href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>" class="btn btn-dark btn-sm">Administrar Novedades</a>
         </div>
       </div>
     </div>
@@ -68,7 +68,7 @@
           <i class="bi bi-shop" style="font-size: 2rem; color: #ff0000;"></i>
           <h5 class="card-title mt-3">Dueños de Locales</h5>
           <p class="card-text">Aprobar o rechazar cuentas de Dueños pendientes.</p>
-          <a href="/src/view/pages/usuario/validar_cuentas_dueno.php?estado=pendiente" class="btn btn-danger btn-sm">Administrar Dueños</a>
+          <a href="<?php echo app_path('src/view/pages/usuario/validar_cuentas_dueno.php'); ?>?estado=pendiente" class="btn btn-danger btn-sm">Administrar Dueños</a>
         </div>
       </div>
     </div>
@@ -78,7 +78,7 @@
         <div class="card-body text-center">
           <i class="bi bi-shop" style="font-size: 2rem; color: #ff0000;"></i>
           <h5 class="card-title mt-3">Ver Todas las Duentas de Dueños de Locales</h5>
-          <a href="/src/view/pages/usuario/validar_cuentas_dueno.php" class="btn btn-danger btn-sm">Ver Dueños</a>
+          <a href="<?php echo app_path('src/view/pages/usuario/validar_cuentas_dueno.php'); ?>" class="btn btn-danger btn-sm">Ver Dueños</a>
         </div>
       </div>
     </div>
@@ -97,7 +97,7 @@
           <i class="bi bi-shop" style="font-size: 2rem; color: #fd7e14;"></i>
           <h5 class="card-title mt-3">Locales</h5>
           <p class="card-text">Crear, editar y eliminar locales del sistema.</p>
-          <a href="/src/view/pages/local/local_list.php" class="btn btn-warning btn-sm">Gestionar Locales</a>
+          <a href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>" class="btn btn-warning btn-sm">Gestionar Locales</a>
         </div>
       </div>
     </div>
@@ -108,7 +108,7 @@
           <i class="bi bi-tag" style="font-size: 2rem; color: #20c997;"></i>
           <h5 class="card-title mt-3">Promociones</h5>
           <p class="card-text">Aprobar y denegar promociones.</p>
-          <a href="/src/view/pages/promocion/validar_promociones.php" class="btn btn-success btn-sm">Gestionar Promociones</a>
+          <a href="<?php echo app_path('src/view/pages/promocion/validar_promociones.php'); ?>" class="btn btn-success btn-sm">Gestionar Promociones</a>
         </div>
       </div>
     </div>

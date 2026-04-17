@@ -10,7 +10,7 @@
         <h1 class="modal-title fs-5" id="<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>Label">Editar Local</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="/src/controller/local/handle_update_local.php?id=<?php echo htmlspecialchars($localToEdit->idLocal, ENT_QUOTES, 'UTF-8') ?>" method="POST">
+      <form action="<?php echo app_path('src/controller/local/handle_update_local.php'); ?>?id=<?php echo htmlspecialchars($localToEdit->idLocal, ENT_QUOTES, 'UTF-8') ?>" method="POST">
         <div class="modal-body text-start">
           <input type="hidden" name="id_local" value="<?php echo htmlspecialchars($localToEdit->idLocal, ENT_QUOTES, 'UTF-8'); ?>">
 

@@ -36,10 +36,10 @@ $duenos = showDuenos();
         <!-- ------Formulario para crear un nuevo local------ -->
 
         <!--
-          <form enctype="multipart/form-data" action="/src/controller/local/handle_create_local.php" method="POST">
+          <form enctype="multipart/form-data" action="<?php echo app_path('src/controller/local/handle_create_local.php'); ?>" method="POST">
         -->
 
-        <form action="/src/controller/local/handle_create_local.php" method="POST">
+        <form action="<?php echo app_path('src/controller/local/handle_create_local.php'); ?>" method="POST">
           <!-- Campo para el nombre del local -->
           <div>
             <label for="nombre_local" class="form-label">Nombre del Local</label>
@@ -87,7 +87,7 @@ $duenos = showDuenos();
           <button type="submit" class="btn btn-primary" id="botonCrear" name="botonCrear">Crear Local</button>
         </form>
 
-        <a href="/src/view/pages/local/local_list.php" class="btn btn-secondary">Volver a la Lista de Locales</a>
+        <a href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>" class="btn btn-secondary">Volver a la Lista de Locales</a>
       </div>
     </div>
   </div>

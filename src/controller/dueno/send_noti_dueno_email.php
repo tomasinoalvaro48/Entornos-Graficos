@@ -8,6 +8,10 @@ require_once __DIR__ . '/../../config/env.php';
 
 function sendNotiDuenoEmail($mailUsuario, $nombreUsuario)
 {
+  $appUrl = rtrim($_ENV['APP_URL'], '/');
+  $basePath = rtrim($_ENV['APP_BASE_PATH'] ?? '', '/');
+  $loginUrl = $appUrl . $basePath . '/src/view/pages/auth/login.php';
+
   // Capturar el contenido HTML usando output buffering
   ob_start();
   include __DIR__ . "/../../view/pages/usuario/noti_dueno_email.php";
@@ -33,7 +37,7 @@ function sendNotiDuenoEmail($mailUsuario, $nombreUsuario)
   $mail->isHTML(true); //Set email format to HTML
   $mail->CharSet = 'UTF-8';
   $mail->Encoding = 'base64';
-  $mail->Subject = 'SITIO - cambio de Estado en su Cuenta';
+  $mail->Subject = 'SITIO - Cambio de Estado en su Cuenta';
   $mail->Body = $mailContent;
   $mail->AltBody = 'Hola ' . $nombreUsuario . '. Le informamos que su cuenta ha sido aprobada por un administrador. Ya puede iniciar sesión.';
 

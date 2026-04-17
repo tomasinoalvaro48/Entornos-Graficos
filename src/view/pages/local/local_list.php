@@ -52,7 +52,7 @@ $duenos = showDuenos();
 
                 <!-- Botón para crear nuevo local, solo visible para admin -->
                 <?php if ($tipo === "admin") { ?>
-                  <a href="/src/view/pages/local/create_local.php" class="btn btn-sm btn-success w-100">Crear Local</a>
+                  <a href="<?php echo app_path('src/view/pages/local/create_local.php'); ?>" class="btn btn-sm btn-success w-100">Crear Local</a>
                 <?php } ?>
 
               </div>
@@ -101,7 +101,7 @@ $duenos = showDuenos();
                             data-bs-target="#<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>">
                             Editar
                           </button>
-                          <a href="/src/controller/local/handle_delete_local.php?id=<?php echo htmlspecialchars($l->idLocal, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-danger">
+                          <a href="<?php echo app_path('src/controller/local/handle_delete_local.php'); ?>?id=<?php echo htmlspecialchars($l->idLocal, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-danger">
                             Eliminar
                           </a>
                         <?php } ?>
@@ -120,7 +120,7 @@ $duenos = showDuenos();
               <div class="container text-center">
                 <div class="row">
                   <div class="col">
-                    <a href="/src/view/pages/local/create_local.php" class="btn btn-success">Crear Local</a>
+                    <a href="<?php echo app_path('src/view/pages/local/create_local.php'); ?>" class="btn btn-success">Crear Local</a>
                   </div>
                 </div>
               </div>
@@ -129,7 +129,7 @@ $duenos = showDuenos();
             <div class="container text-center">
               <div class="row">
                 <div class="col">
-                  <a href="/" class="btn btn-secondary">Volver al Menú</a>
+                  <a href="<?php echo app_path(); ?>" class="btn btn-secondary">Volver al Menú</a>
                 </div>
               </div>
             </div>

@@ -13,12 +13,12 @@ include __DIR__ . "/../components/carousel.php";
       </h1>
     </div>
     <div class="col">
-      <a class="btn btn-outline-primary" href="/src/view/pages/auth/signin.php">Registrarse</a>
+      <a class="btn btn-outline-primary" href="<?php echo app_path('src/view/pages/auth/signin.php'); ?>">Registrarse</a>
     </div>
 
     <!-- registrarse como dueño -->
     <div class="col">
-      <p>¿Eres dueño? <a href="/src/view/pages/auth/signin_dueno.php">Registrarse como Dueño</a></p>
+      <p>¿Eres dueño? <a href="<?php echo app_path('src/view/pages/auth/signin_dueno.php'); ?>">Registrarse como Dueño</a></p>
     </div>
   </div>
 </div>

@@ -26,5 +26,5 @@ if (isset($_POST['botonActualizar'])) {
     $tipoCliente
   ));
   setSessionSuccess("Novedad actualizada exitosamente");
-  header("Location: /src/view/pages/novedad/novedad_list.php");
+  header("Location: " . app_path('src/view/pages/novedad/novedad_list.php'));
 };
