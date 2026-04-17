@@ -13,6 +13,8 @@ class Usuario
   public string $tipoUsuario;
   public ?string $categoriaCliente;
   public ?string $estadoDueno;
+  public ?string $estadoMail;
+  public ?string $tokenVerificacion;
 
   // Constructor
   public function __construct(
@@ -22,7 +24,9 @@ class Usuario
     string $claveUsuario,
     string $tipo_usuario,
     ?string $categoria_cliente,
-    ?string $estado_dueno
+    ?string $estado_dueno,
+    ?string $estado_mail,
+    ?string $token_verificacion
   ) {
     $this->idUsuario = $id_usuario;
     $this->nombreUsuario = $nombre_usuario;
@@ -31,5 +35,7 @@ class Usuario
     $this->tipoUsuario = $tipo_usuario;
     $this->categoriaCliente = $categoria_cliente;
     $this->estadoDueno = $estado_dueno;
+    $this->estadoMail = $estado_mail;
+    $this->tokenVerificacion = $token_verificacion;
   }
 }

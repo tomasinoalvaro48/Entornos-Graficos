@@ -23,7 +23,9 @@ class LocalDAO extends DBFunctions
           $localFetchArray['clave_usuario'],
           $localFetchArray['tipo_usuario'],
           $localFetchArray['categoria_cliente'],
-          $localFetchArray['estado_dueno']
+          $localFetchArray['estado_dueno'],
+          $localFetchArray['estado_mail'],
+          $localFetchArray['token_verificacion']
         )
       );
     }

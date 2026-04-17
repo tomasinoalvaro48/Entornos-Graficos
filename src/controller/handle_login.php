@@ -15,8 +15,15 @@ if (isset($_POST['botonIniciar'])) {
         exit();
     }
 
+    // Verificar si el usuario es un cliente sin confirmar
+    if ($usuario->estadoMail === 'no_confirmado') {
+        setSessionError("Su cuenta no ha sido confirmada. Por favor, revise su correo electrónico para confirmar su cuenta.");
+        header("Location: /src/view/pages/auth/login.php");
+        exit();
+    }
+
     // Verificar si el usuario es un dueño pendiente de aprobación
-    if ($usuario->estadoDueno === 'pendiente') {
+    if ($usuario->estadoDueno && $usuario->estadoDueno === 'pendiente') {
         setSessionError("Su cuenta de dueño está pendiente de aprobación. Le avisaremos a su mail cuando su cuenta sea aprobada por un administrador.");
         header("Location: /src/view/pages/auth/login.php");
         exit();

@@ -30,78 +30,109 @@ $duenos = showDuenos();
   </header>
 
   <main>
-    <div class="container text-center">
+    <div class="container-fluid">
+
+      <!-- Sidebar de navegación -->
       <div class="row">
-        <div class="col">
-          <h1>Locales</h1>
-        </div>
-      </div>
+        <aside class="col-12 col-md-3 col-lg-2">
+          <button
+            class="btn btn-outline-dark d-md-none"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#sidebarLocales"
+            aria-expanded="false"
+            aria-controls="sidebarLocales">
+            Ver panel
+          </button>
 
-      <?php include "../../components/alerts.php"; ?>
+          <div class="collapse d-md-block" id="sidebarLocales">
+            <div class="card text-start">
+              <div class="card-body">
+                <h5 class="card-title">Panel</h5>
 
-      <!-- Lista de locales -->
-      <?php if (empty($locales)) { ?>
-        <div class='row'>
-          <div class='col'>
-            <p>No hay locales registrados.</p>
-          </div>
-        </div>
-        <?php
-      } else {
-        foreach ($locales as $l) {
-          $modalId = 'editLocalModal_' . $l->idLocal;
-          $localToEdit = $l;
-        ?>
-          <div class='row'>
-            <div class='col'>
-              <div class='card'>
-                <div class='card-body'>
-                  <h5 class='card-title'> <?php echo htmlspecialchars($l->nombreLocal, ENT_QUOTES, 'UTF-8') ?></h5>
-                  <p class='card-text'>Ubicación: <?php echo htmlspecialchars($l->ubiLocal, ENT_QUOTES, 'UTF-8') ?></p>
-                  <p class='card-text'>Rubro: <?php echo htmlspecialchars($l->rubroLocal, ENT_QUOTES, 'UTF-8') ?></p>
+                <!-- Botón para crear nuevo local, solo visible para admin -->
+                <?php if ($tipo === "admin") { ?>
+                  <a href="/src/view/pages/local/create_local.php" class="btn btn-sm btn-success w-100">Crear Local</a>
+                <?php } ?>
 
-                  <!-- Dueño del Local y botones de Editar y Eliminar solo visibles para admin -->
-                  <?php if ($tipo === "admin") { ?>
-                    <p class='card-text'>Dueño: <?php echo htmlspecialchars($l->usuario->nombreUsuario, ENT_QUOTES, 'UTF-8') ?></p>
-                    <button
-                      type="button"
-                      class="btn btn-primary"
-                      data-bs-toggle="modal"
-                      data-bs-target="#<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>">
-                      Editar
-                    </button>
-                    <a href="/src/controller/local/handle_delete_local.php?id=<?php echo htmlspecialchars($l->idLocal, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-danger">
-                      Eliminar
-                    </a>
-                  <?php } ?>
-                </div>
               </div>
             </div>
           </div>
-          <?php include __DIR__ . '/edit_local.php'; ?>
-      <?php
-        }
-      }
-      ?>
+        </aside>
 
-      <!-- Botón para crear nuevo local, solo visible para admin -->
-      <?php if ($tipo === "admin") { ?>
-        <div class="container text-center">
-          <div class="row">
-            <div class="col">
-              <a href="/src/view/pages/local/create_local.php" class="btn btn-success">Crear Local</a>
+        <section class="col-12 col-md-9 col-lg-10">
+          <div class="container text-center">
+            <div class="row">
+              <div class="col">
+                <h1>Locales</h1>
+              </div>
             </div>
-          </div>
-        </div>
-      <?php } ?>
 
-      <div class="container text-center">
-        <div class="row">
-          <div class="col">
-            <a href="/" class="btn btn-secondary">Volver al Menú</a>
-          </div>
-        </div>
-      </div>
+            <?php include "../../components/alerts.php"; ?>
+
+            <!-- Lista de locales -->
+            <?php if (empty($locales)) { ?>
+              <div class='row'>
+                <div class='col'>
+                  <p>No hay locales registrados.</p>
+                </div>
+              </div>
+              <?php
+            } else {
+              foreach ($locales as $l) {
+                $modalId = 'editLocalModal_' . $l->idLocal;
+                $localToEdit = $l;
+              ?>
+                <div class='row'>
+                  <div class='col'>
+                    <div class='card'>
+                      <div class='card-body'>
+                        <h5 class='card-title'> <?php echo htmlspecialchars($l->nombreLocal, ENT_QUOTES, 'UTF-8') ?></h5>
+                        <p class='card-text'>Ubicación: <?php echo htmlspecialchars($l->ubiLocal, ENT_QUOTES, 'UTF-8') ?></p>
+                        <p class='card-text'>Rubro: <?php echo htmlspecialchars($l->rubroLocal, ENT_QUOTES, 'UTF-8') ?></p>
+
+                        <!-- Dueño del Local y botones de Editar y Eliminar solo visibles para admin -->
+                        <?php if ($tipo === "admin") { ?>
+                          <p class='card-text'>Dueño: <?php echo htmlspecialchars($l->usuario->nombreUsuario, ENT_QUOTES, 'UTF-8') ?></p>
+                          <button
+                            type="button"
+                            class="btn btn-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>">
+                            Editar
+                          </button>
+                          <a href="/src/controller/local/handle_delete_local.php?id=<?php echo htmlspecialchars($l->idLocal, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-danger">
+                            Eliminar
+                          </a>
+                        <?php } ?>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <?php include __DIR__ . '/edit_local.php'; ?>
+            <?php
+              }
+            }
+            ?>
+
+            <!-- Botón para crear nuevo local, solo visible para admin -->
+            <?php if ($tipo === "admin") { ?>
+              <div class="container text-center">
+                <div class="row">
+                  <div class="col">
+                    <a href="/src/view/pages/local/create_local.php" class="btn btn-success">Crear Local</a>
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
+
+            <div class="container text-center">
+              <div class="row">
+                <div class="col">
+                  <a href="/" class="btn btn-secondary">Volver al Menú</a>
+                </div>
+              </div>
+            </div>
 
   </main>
   <script

@@ -41,7 +41,7 @@
 
       <?php include '../../components/alerts.php' ?>
 
-      <form action="../../../controller/dueno/handle_signin_dueno.php" method="post" id="formSigninDueno">
+      <form action="../../../controller/handle_signin.php" method="post" id="formSigninDueno">
         <div class="row">
           <input type="text" name="nombre_dueno" id="nombre" placeholder="Ingrese su Nombre y Apellido" required />
         </div>
@@ -55,7 +55,7 @@
           <input type="password" name="clave_dueno_conf" id="pass" placeholder="Ingrese su Contraseña Nuevamente" required />
         </div>
         <div class="row">
-          <button class="btn btn-primary" type="submit" id="botonSolicitar" name="botonSolicitar">Enviar Solicitud</button>
+          <button class="btn btn-primary" type="submit" id="botonSolicitarDueno" name="botonSolicitarDueno">Enviar Solicitud</button>
         </div>
       </form>
       <div>¿Ya tienes cuenta? <a href="../../pages/login.php">Iniciar sesión</a></div>

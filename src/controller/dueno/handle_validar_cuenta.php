@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . "/../../data/UsuarioDAO.php";
 require_once __DIR__ . "/../auth.php";
+require_once __DIR__ . "/send_noti_dueno_email.php";
 
 if (isset($_GET['id']) && isset($_GET['estado'])) {
   $idDueno = $_GET['id'];
@@ -20,10 +21,13 @@ if (isset($_GET['id']) && isset($_GET['estado'])) {
 
   // Si se actualizó correctamente
   if ($updateResult) {
+    // Enviar mail de aviso al dueño sobre el cambio de estado de su cuenta
+    $mailSent = sendNotiDuenoEmail($dueno->emailUsuario, $dueno->nombreUsuario);
     setSessionSuccess("El estado del dueño con ID $idDueno ha sido actualizado a '$estado' exitosamente.");
   } else {
     setSessionError("Hubo un error al actualizar el estado del dueño con ID $idDueno. Por favor, intente nuevamente.");
   }
+
   header("Location: /src/view/pages/usuario/validar_cuentas_dueno.php");
   exit();
 }
