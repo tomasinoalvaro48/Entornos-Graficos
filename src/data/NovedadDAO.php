@@ -45,7 +45,12 @@ class NovedadDAO extends DBFunctions
     return $this->querySQL($query);
   }
 
-  public function getByType() {}
+  public function getByType() {
+    $novedadesArray = [];
+    $query = "SELECT * FROM novedad n WHERE n."
+    ;
+
+  }
 
   public function update(Novedad $novedad)
   {
