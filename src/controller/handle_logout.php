@@ -3,4 +3,4 @@
 require_once __DIR__ . "/../controller/auth.php";
 
 endSession();
-header("Location: /index.php");
+header("Location: " . app_path("index.php"));
