@@ -31,7 +31,7 @@
 
       <?php include '../../components/alerts.php' ?>
 
-      <form action="../../../controller/handle_signin_cliente.php" method="post" id="formSigninCliente">
+      <form action="../../../controller/handle_signin.php" method="post" id="formSigninCliente">
         <div class="row">
           <input type="text" name="nombre_usuario" id="nombre" placeholder="Ingrese su Nombre y Apellido" required />
         </div>
@@ -45,10 +45,10 @@
           <input type="password" name="clave_usuario_conf" id="pass" placeholder="Ingrese su Contraseña Nuevamente" required />
         </div>
         <div class="row">
-          <button class="btn btn-primary" type="submit" id="botonCrear" name="botonCrear">Crear cuenta</button>
+          <button class="btn btn-primary" type="submit" id="botonCrearCliente" name="botonCrearCliente">Crear cuenta</button>
         </div>
       </form>
-      <div>¿Ya tienes cuenta? <a href="/src/view/pages/auth/login.php">Iniciar sesión</a></div>
+      <div>¿Ya tienes cuenta? <a href="<?php echo app_path('src/view/pages/auth/login.php'); ?>">Iniciar sesión</a></div>
 
     </div>
     </div>

@@ -1,7 +1,37 @@
 <?php
+require_once __DIR__ . "/../config/env.php";
 require_once __DIR__ . "/../model/Usuario.php";
 // auth.php: Funciones relacionadas con la autenticación de usuarios, 
 // manejo de sesiones, cookies y mensajes de error o éxito entre páginas.
+
+function app_base_path()
+{
+  return rtrim($_ENV['APP_BASE_PATH'] ?? '', '/');
+}
+
+function app_path($path = '')
+{
+  $basePath = app_base_path();
+  $normalizedPath = ltrim($path, '/');
+
+  if ($normalizedPath === '') {
+    return $basePath === '' ? '/' : $basePath . '/';
+  }
+
+  return ($basePath === '' ? '' : $basePath) . '/' . $normalizedPath;
+}
+
+function app_url($path = '')
+{
+  $appUrl = rtrim($_ENV['APP_URL'], '/');
+  $relativePath = app_path($path);
+
+  if ($relativePath === '/') {
+    return $appUrl . '/';
+  }
+
+  return $appUrl . $relativePath;
+}
 
 function ensureSessionActive()
 {

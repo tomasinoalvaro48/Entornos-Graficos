@@ -17,7 +17,9 @@ class UsuarioDAO extends DBFunctions
         $usuarioFecthArray['clave_usuario'],
         $usuarioFecthArray['tipo_usuario'],
         $usuarioFecthArray['categoria_cliente'],
-        $usuarioFecthArray['estado_dueno']
+        $usuarioFecthArray['estado_dueno'],
+        $usuarioFecthArray['estado_mail'],
+        $usuarioFecthArray['token_verificacion']
       );
     }
     return $u;
@@ -84,10 +86,20 @@ class UsuarioDAO extends DBFunctions
 
   public function create(Usuario $usuario)
   {
-    $query = "INSERT INTO usuario (nombre_usuario, email_usuario, clave_usuario, tipo_usuario, categoria_cliente, estado_dueno) 
+    $query = "INSERT INTO usuario (nombre_usuario, email_usuario, clave_usuario, tipo_usuario, 
+              categoria_cliente, estado_dueno, estado_mail, token_verificacion) 
                 VALUES ('" . $usuario->nombreUsuario . "', '" . $usuario->emailUsuario . "', 
-                '" . md5($usuario->claveUsuario) . "', '" . $usuario->tipoUsuario . "', '" . $usuario->categoriaCliente . "',
-                '" . $usuario->estadoDueno . "');";
+                '" . md5($usuario->claveUsuario) . "', '" . $usuario->tipoUsuario . "', 
+                '" . $usuario->categoriaCliente . "', '" . $usuario->estadoDueno . "', 
+                '" . $usuario->estadoMail . "', '" . $usuario->tokenVerificacion . "');";
+    return $this->querySQL($query);
+  }
+
+  public function updateEstadoMail($idUsuario, $nuevoEstado)
+  {
+    $query = "UPDATE usuario
+              SET estado_mail = '" . $nuevoEstado . "'
+              WHERE id_usuario = '" . (int)$idUsuario . "';";
     return $this->querySQL($query);
   }
 

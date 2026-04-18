@@ -11,10 +11,10 @@ if (isset($_POST['botonCrear'])) {
 
   if (empty($_POST['dias_semana'])) {
     setSessionError("Debe seleccionar al menos un día.");
-    header("Location: /src/view/pages/promocion/create_promocion.php");
+    header("Location: " . app_path('src/view/pages/promocion/create_promocion.php'));
   } else if ($_POST['fecha_desde'] > $_POST['fecha_hasta']) {
     setSessionError("La fecha desde no puede ser mayor a la fecha hasta.");
-    header("Location: /src/view/pages/promocion/create_promocion.php");
+    header("Location: " . app_path('src/view/pages/promocion/create_promocion.php'));
   } else {
     $diasSemana = new ArrayObject($_POST['dias_semana']);
 
@@ -30,6 +30,6 @@ if (isset($_POST['botonCrear'])) {
     ));
 
     setSessionSuccess("Promoción creada exitosamente. Queda pendiente de aprobación.");
-    header("Location: /src/view/pages/promocion/promocion_list.php");
+    header("Location: " . app_path('src/view/pages/promocion/promocion_list.php'));
   }
 }

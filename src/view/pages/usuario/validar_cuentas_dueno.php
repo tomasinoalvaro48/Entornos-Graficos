@@ -104,11 +104,11 @@ $duenos = showDuenos();
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
 
-                                <a class="btn btn-danger" href="/src/controller/dueno/handle_validar_cuenta.php?estado=rechazado&id=<?php echo $dueno->idUsuario; ?>">
+                                <a class="btn btn-danger" href="<?php echo app_path('src/controller/dueno/handle_validar_cuenta.php'); ?>?estado=rechazado&id=<?php echo $dueno->idUsuario; ?>">
                                   Rechazar
                                 </a>
 
-                                <a class="btn btn-success" href="/src/controller/dueno/handle_validar_cuenta.php?estado=aceptado&id=<?php echo $dueno->idUsuario; ?>">
+                                <a class="btn btn-success" href="<?php echo app_path('src/controller/dueno/handle_validar_cuenta.php'); ?>?estado=aceptado&id=<?php echo $dueno->idUsuario; ?>">
                                   Aceptar
                                 </a>
 
@@ -131,7 +131,7 @@ $duenos = showDuenos();
 
     <div class="row mt-4">
       <div class="col text-center">
-        <a href="/" class="btn btn-secondary">Volver al Menú</a>
+        <a href="<?php echo app_path(); ?>" class="btn btn-secondary">Volver al Menú</a>
       </div>
     </div>
   </main>

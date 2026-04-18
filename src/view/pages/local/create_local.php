@@ -2,9 +2,6 @@
 require_once __DIR__ . "/../../../controller/dueno/show_duenos.php";
 require_once __DIR__ . "/../../../controller/auth.php";
 
-$error = getSessionError();
-clearSessionMessages();
-
 $duenos = showDuenos();
 ?>
 
@@ -20,7 +17,6 @@ $duenos = showDuenos();
     rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
     crossorigin="anonymous" />
-  <link rel="stylesheet" href="../styles/styles.css" />
 </head>
 
 <body>
@@ -32,30 +28,37 @@ $duenos = showDuenos();
       </div>
     </div>
 
+    <?php include "../../components/alerts.php"; ?>
+
     <div class="row">
       <div class="col">
-        <?php if ($error) { ?>
-          <div class="row mt-3">
-            <div class="col">
-              <div class="alert alert-danger" role="alert">
-                <?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?>
-              </div>
-            </div>
-          </div>
-        <?php } ?>
-        <form action="/src/controller/local/handle_create_local.php" method="POST">
+
+        <!-- ------Formulario para crear un nuevo local------ -->
+
+        <!--
+          <form enctype="multipart/form-data" action="<?php echo app_path('src/controller/local/handle_create_local.php'); ?>" method="POST">
+        -->
+
+        <form action="<?php echo app_path('src/controller/local/handle_create_local.php'); ?>" method="POST">
+          <!-- Campo para el nombre del local -->
           <div>
             <label for="nombre_local" class="form-label">Nombre del Local</label>
             <input type="text" class="form-control" id="nombre_local" name="nombre_local" required>
           </div>
+
+          <!-- Campo para la descripción del local -->
           <div>
             <label for="ubicacion_local" class="form-label">Ubicación del Local</label>
             <input type="text" class="form-control" id="ubicacion_local" name="ubicacion_local" required>
           </div>
+
+          <!-- Campo para el rubro del local -->
           <div>
             <label for="rubro_local" class="form-label">Rubro del Local</label>
             <input type="text" class="form-control" id="rubro_local" name="rubro_local" required>
           </div>
+
+          <!-- Campo para seleccionar el dueño del local -->
           <div>
             <label for="dueno_local" class="form-label">Dueño del Local</label>
             <select class="form-control" id="dueno_local" name="dueno_local" required>
@@ -69,9 +72,22 @@ $duenos = showDuenos();
               } ?>
             </select>
           </div>
+
+          <!--
+      <!-- Campo para subir la imagen del local 
+      <div>
+          <label for="imagen_local" class="form-label">Imagen del Local</label>
+          <!-- MAX_FILE_SIZE debe preceder al campo input de tipo file 
+          <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+          <!-- El nombre del elemento input determina el nombre en el array $_FILES 
+          <input id="imagen_local" name="imagen_local" type="file" class="form-control" accept="image/*" />
+      </div>
+          -->
+
           <button type="submit" class="btn btn-primary" id="botonCrear" name="botonCrear">Crear Local</button>
         </form>
-        <a href="/src/view/pages/local/local_list.php" class="btn btn-secondary">Volver a la Lista de Locales</a>
+
+        <a href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>" class="btn btn-secondary">Volver a la Lista de Locales</a>
       </div>
     </div>
   </div>

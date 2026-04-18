@@ -11,25 +11,32 @@ if (isset($_POST['botonIniciar'])) {
     // Verificar si el usuario existe
     if (!$usuario) {
         setSessionError("Usuario o contraseña incorrectos");
-        header("Location: /src/view/pages/auth/login.php");
+        header("Location: " . app_path('src/view/pages/auth/login.php'));
+        exit();
+    }
+
+    // Verificar si el usuario es un cliente sin confirmar
+    if ($usuario->estadoMail === 'no_confirmado') {
+        setSessionError("Su cuenta no ha sido confirmada. Por favor, revise su correo electrónico para confirmar su cuenta.");
+        header("Location: " . app_path('src/view/pages/auth/login.php'));
         exit();
     }
 
     // Verificar si el usuario es un dueño pendiente de aprobación
-    if ($usuario->estadoDueno === 'pendiente') {
+    if ($usuario->estadoDueno && $usuario->estadoDueno === 'pendiente') {
         setSessionError("Su cuenta de dueño está pendiente de aprobación. Le avisaremos a su mail cuando su cuenta sea aprobada por un administrador.");
-        header("Location: /src/view/pages/auth/login.php");
+        header("Location: " . app_path('src/view/pages/auth/login.php'));
         exit();
     }
 
     if ($usuario->estadoDueno === 'rechazado') {
         setSessionError("Su cuenta de dueño fue rechazada por un administrador.");
-        header("Location: /src/view/pages/auth/login.php");
+        header("Location: " . app_path('src/view/pages/auth/login.php'));
         exit();
     }
 
     // Iniciar sesión y redirigir al usuario a la página principal
     startSession($usuario);
-    header("Location: /index.php");
+    header("Location: " . app_path('index.php'));
     exit();
 }
