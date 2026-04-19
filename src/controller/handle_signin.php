@@ -3,6 +3,11 @@ require_once __DIR__ . "/../data/UsuarioDAO.php";
 require_once __DIR__ . "/auth.php";
 require_once __DIR__ . "/send_verification_mail.php";
 
+function isValidEmailAddress($email)
+{
+  return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+}
+
 // Este controlador maneja el proceso de registro tanto para clientes como para dueños, 
 // incluyendo la validación de datos, generación de tokens de verificación y envío de 
 // correos electrónicos de confirmación.
@@ -14,6 +19,12 @@ if (isset($_POST['botonCrearCliente'])) {
   $claveUsuario = $_POST['clave_usuario'];
   $claveUsuarioConf = $_POST['clave_usuario_conf'];
   $nombreUsuario = $_POST['nombre_usuario'];
+
+  if (!isValidEmailAddress($emailUsuario)) {
+    setSessionError("Ingrese un correo electrónico válido.");
+    header("Location: " . app_path('src/view/pages/auth/signin.php'));
+    exit();
+  }
 
   $usuario = $udao->getByEmail($emailUsuario);
 
@@ -63,6 +74,12 @@ if (isset($_POST['botonSolicitarDueno'])) {
   $claveUsuarioConf = $_POST['clave_dueno_conf'];
   $nombreUsuario = $_POST['nombre_dueno'];
 
+  if (!isValidEmailAddress($emailUsuario)) {
+    setSessionError("Ingrese un correo electrónico válido.");
+    header("Location: " . app_path('src/view/pages/auth/signin_dueno.php'));
+    exit();
+  }
+
   // Verificar si el correo electrónico ya está registrado
   $usuario = $udao->getByEmail($emailUsuario);
   if ($usuario) {
@@ -84,7 +101,7 @@ if (isset($_POST['botonSolicitarDueno'])) {
   $emailSent = sendVerificationEmail($emailUsuario, $token, $nombreUsuario);
   if (!$emailSent) {
     setSessionError("No se pudo enviar el correo de verificación. Por favor, intente nuevamente.");
-    header("Location: " . app_path('src/view/pages/auth/signin.php'));
+    header("Location: " . app_path('src/view/pages/auth/signin_dueno.php'));
     exit();
   }
 

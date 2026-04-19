@@ -2,12 +2,17 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 require __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../config/env.php';
 
 function sendVerificationEmail($mailUsuario, $token, $nombreUsuario)
 {
+  if (filter_var($mailUsuario, FILTER_VALIDATE_EMAIL) === false) {
+    return false;
+  }
+
   $appUrl = rtrim($_ENV['APP_URL'], '/');
   $basePath = rtrim($_ENV['APP_BASE_PATH'] ?? '', '/');
   $verifyUrl = $appUrl . $basePath . '/src/controller/verify_email.php?mail=' . urlencode($mailUsuario) . '&token=' . urlencode($token);
@@ -44,5 +49,9 @@ function sendVerificationEmail($mailUsuario, $token, $nombreUsuario)
   $mail->Body = $mailContent;
   $mail->AltBody = 'Hola ' . $nombreUsuario . '. Verifica tu direccion de email en: ' . $verifyUrl;
 
-  return $mail->send();
+  try {
+    return $mail->send();
+  } catch (Exception $exception) {
+    return false;
+  }
 }
