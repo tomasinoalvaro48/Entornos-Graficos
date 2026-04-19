@@ -21,7 +21,7 @@ class NovedadDAO extends DBFunctions
   public function getAll()
   {
     $novedadesArray = [];
-    $query = 'SELECT * FROM novedad';
+    $query = 'SELECT * FROM novedad ORDER BY fecha_desde_nov DESC';
     $novedades = $this->querySQL($query);
     if ($novedades && $novedades->num_rows > 0) {
       while ($novedad = mysqli_fetch_array($novedades)) {
