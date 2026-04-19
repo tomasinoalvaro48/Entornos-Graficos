@@ -25,7 +25,7 @@ $locales = showLocales();
 
   <link
     rel="stylesheet"
-    href="../styles/styles.css" />
+    href="../../styles/styles.css" />
 </head>
 
 <body>
