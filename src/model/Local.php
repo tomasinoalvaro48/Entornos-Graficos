@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . "/../enums.php";
 
 class Local
 {
@@ -16,6 +17,7 @@ class Local
     string $nombre_local,
     string $rubro_local,
     ?Usuario $usuario,
+    ?string $estado_local
 
   ) {
     $this->idLocal = $id_local;
@@ -23,6 +25,6 @@ class Local
     $this->nombreLocal = $nombre_local;
     $this->rubroLocal = $rubro_local;
     $this->usuario = $usuario;
-    $this->estadoLocal =  'activo';
+    $this->estadoLocal = $estado_local;
   }
 }

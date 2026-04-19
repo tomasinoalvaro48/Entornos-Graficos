@@ -3,6 +3,7 @@
 require_once __DIR__ . "/../model/Local.php";
 require_once __DIR__ . "/../model/Usuario.php";
 require_once __DIR__ . "/DBFunctions.php";
+require_once __DIR__ . "/../enums.php";
 
 class LocalDAO extends DBFunctions
 {

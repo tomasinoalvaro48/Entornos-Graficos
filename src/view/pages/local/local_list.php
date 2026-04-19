@@ -52,9 +52,19 @@ $duenos = showDuenos();
 
                 <!-- Botón para crear nuevo local, solo visible para admin -->
                 <?php if ($tipo === "admin") { ?>
-                  <a href="<?php echo app_path('src/view/pages/local/create_local.php'); ?>" class="btn btn-sm btn-success w-100">Crear Local</a>
+                  <div class="container text-center">
+                    <div class="row">
+                      <div class="col">
+                        <a href="<?php echo app_path('src/view/pages/local/create_local.php'); ?>" class="btn btn-success">Crear Local</a>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <a href="<?php echo app_path(); ?>" class="btn btn-secondary">Volver al Menú</a>
+                      </div>
+                    </div>
+                  </div>
                 <?php } ?>
-
               </div>
             </div>
           </div>
@@ -115,24 +125,7 @@ $duenos = showDuenos();
             }
             ?>
 
-            <!-- Botón para crear nuevo local, solo visible para admin -->
-            <?php if ($tipo === "admin") { ?>
-              <div class="container text-center">
-                <div class="row">
-                  <div class="col">
-                    <a href="<?php echo app_path('src/view/pages/local/create_local.php'); ?>" class="btn btn-success">Crear Local</a>
-                  </div>
-                </div>
-              </div>
-            <?php } ?>
 
-            <div class="container text-center">
-              <div class="row">
-                <div class="col">
-                  <a href="<?php echo app_path(); ?>" class="btn btn-secondary">Volver al Menú</a>
-                </div>
-              </div>
-            </div>
 
   </main>
   <script

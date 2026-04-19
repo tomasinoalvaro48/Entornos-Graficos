@@ -17,6 +17,6 @@ enum CategoriaCliente: string
 
 enum EstadoLocal: string
 {
-  case ACTIVO = 'activo';
-  case ELIMINADO = 'eliminado';
+  case ACTIVO = 'Activo';
+  case ELIMINADO = 'Eliminado';
 }
