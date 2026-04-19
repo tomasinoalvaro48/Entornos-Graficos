@@ -5,7 +5,12 @@ require_once __DIR__ . '/../../../controller/auth.php';
 
 
 $tipo = getTipoUsuario();
-$novedades = showNovedades();
+if ($tipo === 'cliente') {
+  $categoriaCliente = getCategoriaCliente();
+  $novedades = showNovedadesByClientType($categoriaCliente);
+} else {
+  $novedades = showNovedades();
+}
 ?>
 
 
@@ -55,7 +60,7 @@ $novedades = showNovedades();
               <div class="card-body">
                 <h5 class="card-title">Codigo: <?php echo htmlspecialchars($n->codNovedad, ENT_QUOTES, 'UTF-8') ?></h5>
                 <p class="card-text">Descripcion: <?php echo htmlspecialchars($n->textoNovedad, ENT_QUOTES, 'UTF-8') ?></p>
-                <p class="card text">Tipo usuario: <?php echo htmlspecialchars($n->tipoCliente, ENT_QUOTES, 'UTF-8') ?></p>
+                <p class="card text">Tipo usuario: <?php echo htmlspecialchars($n->categoriaCliente, ENT_QUOTES, 'UTF-8') ?></p>
 
                 <?php if ($tipo === 'admin') { ?>
                   <button

@@ -13,7 +13,7 @@ class NovedadDAO extends DBFunctions
         $novedadFetchArray['texto_nov'],
         $novedadFetchArray['fecha_desde_nov'] ? new DateTime($novedadFetchArray['fecha_desde_nov']) : null,
         $novedadFetchArray['fecha_hasta_nov'] ? new DateTime($novedadFetchArray['fecha_hasta_nov']) : null,
-        $novedadFetchArray['tipo_cliente_nov'],
+        $novedadFetchArray['categoria_cliente_nov'],
       );
     return $n;
   }
@@ -35,7 +35,7 @@ class NovedadDAO extends DBFunctions
   {
     $fechaDesde = $novedad->fechaDesdeNovedad ? "'" . $novedad->fechaDesdeNovedad->format('Y-m-d') . "'" : "NULL";
     $fechaHasta = $novedad->fechaHastaNovedad ? "'" . $novedad->fechaHastaNovedad->format('Y-m-d') . "'" : "NULL";
-    $query = "INSERT INTO novedad(texto_nov, fecha_desde_nov, fecha_hasta_nov, tipo_cliente_nov) VALUES ('" . $novedad->textoNovedad . "', " . $fechaDesde . ", " . $fechaHasta . ", '" . $novedad->tipoCliente . "')";
+    $query = "INSERT INTO novedad(texto_nov, fecha_desde_nov, fecha_hasta_nov, categoria_cliente_nov) VALUES ('" . $novedad->textoNovedad . "', " . $fechaDesde . ", " . $fechaHasta . ", '" . $novedad->categoriaCliente . "')";
     return $this->querySQL($query);
   }
 
@@ -45,18 +45,24 @@ class NovedadDAO extends DBFunctions
     return $this->querySQL($query);
   }
 
-  public function getByType() {
+  public function getByClientType($categoriaCliente)
+  {
     $novedadesArray = [];
-    $query = "SELECT * FROM novedad n WHERE n."
-    ;
-
+    $query = "SELECT * FROM novedad n WHERE n.categoria_cliente_nov = '" . $categoriaCliente . "'";
+    $novedades = $this->querySQL($query);
+    if ($novedades && $novedades->num_rows > 0) {
+      while ($novedad = mysqli_fetch_array($novedades)) {
+        array_push($novedadesArray, $this->sanitizeNovedad($novedad));
+      }
+    }
+    return $novedadesArray;
   }
 
   public function update(Novedad $novedad)
   {
     $fechaDesde = $novedad->fechaDesdeNovedad ? "'" . $novedad->fechaDesdeNovedad->format('Y-m-d') . "'" : "NULL";
     $fechaHasta = $novedad->fechaHastaNovedad ? "'" . $novedad->fechaHastaNovedad->format('Y-m-d') . "'" : "NULL";
-    $query = "UPDATE novedad SET texto_nov = '" . $novedad->textoNovedad . "', fecha_desde_nov = " . $fechaDesde . ", fecha_hasta_nov = " . $fechaHasta . ", tipo_cliente_nov = '" . $novedad->tipoCliente . "' WHERE id_novedad = '" . $novedad->codNovedad . "'";
+    $query = "UPDATE novedad SET texto_nov = '" . $novedad->textoNovedad . "', fecha_desde_nov = " . $fechaDesde . ", fecha_hasta_nov = " . $fechaHasta . ", categoria_cliente_nov = '" . $novedad->categoriaCliente . "' WHERE id_novedad = '" . $novedad->codNovedad . "'";
     return $this->querySQL($query);
   }
 }

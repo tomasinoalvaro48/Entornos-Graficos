@@ -15,7 +15,7 @@ if (isset($_POST['botonActualizar'])) {
   $fechaHastaNovedad = !empty($_POST['fecha_hasta_novedad'])
     ? DateTime::createFromFormat('Y-m-d', $_POST['fecha_hasta_novedad'])
     : null;
-  $tipoCliente = $_POST['tipo_cliente'];
+  $categoriaCliente = $_POST['categoria_cliente'];
 
 
   $novedadDAO->update(new Novedad(
@@ -23,7 +23,7 @@ if (isset($_POST['botonActualizar'])) {
     $textoNovedad,
     $fechaDesdeNovedad,
     $fechaHastaNovedad,
-    $tipoCliente
+    $categoriaCliente
   ));
   setSessionSuccess("Novedad actualizada exitosamente");
   header("Location: " . app_path('src/view/pages/novedad/novedad_list.php'));

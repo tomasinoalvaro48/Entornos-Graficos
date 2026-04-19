@@ -6,3 +6,10 @@ function showNovedades()
   $novedadDAO = new NovedadDAO();
   return $novedadDAO->getAll();
 }
+
+
+function showNovedadesByClientType($categoriaCliente)
+{
+  $novedadDAO = new NovedadDAO();
+  return $novedadDAO->getByClientType($categoriaCliente);
+}

@@ -46,11 +46,11 @@
           </div>
           <div class="mb-3">
             <label for=" texto_novedad" class="form-label">Descripción de la Novedad</label>
-            <select class='form-control' id='tipo_cliente' name="tipo_cliente" required>
-              <option value="">Seleccione un Tipo de Cliente</option>
-              <option value="inicial" <?php echo ($novedadToEdit->tipoCliente === 'inicial') ? 'selected' : ''; ?>>Inicial</option>
-              <option value="medium" <?php echo ($novedadToEdit->tipoCliente === 'medium') ? 'selected' : ''; ?>>Medium</option>
-              <option value="premium" <?php echo ($novedadToEdit->tipoCliente === 'premium') ? 'selected' : ''; ?>>Premium</option>
+            <select class='form-control' id='categoria_cliente' name="categoria_cliente" required>
+              <option value="">Seleccione una Categoría de Cliente</option>
+              <option value="inicial" <?php echo ($novedadToEdit->categoriaCliente === 'inicial') ? 'selected' : ''; ?>>Inicial</option>
+              <option value="medium" <?php echo ($novedadToEdit->categoriaCliente === 'medium') ? 'selected' : ''; ?>>Medium</option>
+              <option value="premium" <?php echo ($novedadToEdit->categoriaCliente === 'premium') ? 'selected' : ''; ?>>Premium</option>
             </select>
           </div>
 

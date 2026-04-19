@@ -46,6 +46,10 @@ function startSession(Usuario $usuario)
   ensureSessionActive();
   $_SESSION['id_usuario'] = $usuario->idUsuario;
   $_SESSION['tipo_usuario'] = $usuario->tipoUsuario;
+  // En caso de ser cliente, también guardamos su categoría para mostrarle las novedades correspondientes a su categoría.
+  if ($usuario->categoriaCliente) {
+    $_SESSION['categoria_cliente'] = $usuario->categoriaCliente;
+  }
 }
 
 // Función para obtener el tipo de usuario de la sesión actual (dueno, cliente o null si no hay sesión)
@@ -53,6 +57,13 @@ function getTipoUsuario()
 {
   ensureSessionActive();
   return $_SESSION["tipo_usuario"] ?? null;
+}
+
+// Función para obtener la categoría de cliente de la sesión actual (inicial, medium, premium o null si no hay sesión o no es cliente)
+function getCategoriaCliente()
+{
+  ensureSessionActive();
+  return $_SESSION["categoria_cliente"] ?? null;
 }
 
 // Función para setear un mensaje de éxito en la sesión, que puede ser mostrado en la siguiente página 
@@ -105,5 +116,5 @@ function startCookies(Usuario $usuario)
 {
   require_once __DIR__ . "/../model/Usuario.php";
   setcookie('tipo_usuario', $usuario->tipoUsuario, time() + (86400 * 30), "/"); // 30 días
-  setcookie('categoria_cliente', $usuario->categoriaCliente, time() + (86400 * 30), "/");
+  setcookie('categoria_cliente', $usuario->categoriaCliente, time() + (86400 * 30), "/"); // 30 días
 }

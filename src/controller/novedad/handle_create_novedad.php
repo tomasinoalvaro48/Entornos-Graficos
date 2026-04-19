@@ -13,7 +13,7 @@ if (isset($_POST['botonCrearNovedad'])) {
   $fechaHastaNovedad = !empty($_POST['fecha_hasta_novedad'])
     ? DateTime::createFromFormat('Y-m-d', $_POST['fecha_hasta_novedad'])
     : null;
-  $tipoCliente = $_POST['tipo_cliente'];
+  $categoriaCliente = $_POST['categoria_cliente'];
 
   if ($_POST['fecha_desde_novedad'] !== '' && !$fechaDesdeNovedad) {
     setSessionError("La fecha desde no es valida.");
@@ -30,7 +30,7 @@ if (isset($_POST['botonCrearNovedad'])) {
     $textoNovedad,
     $fechaDesdeNovedad,
     $fechaHastaNovedad,
-    $tipoCliente
+    $categoriaCliente
   ));
   setSessionSuccess("Novedad creada exitosamente.");
   header("Location: " . app_path('src/view/pages/novedad/novedad_list.php'));

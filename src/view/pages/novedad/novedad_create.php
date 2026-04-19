@@ -38,8 +38,8 @@
         </div>
         <div>
           <label for="texto_novedad">Descripción de la Novedad</label>
-          <select class='form-control' id='tipo_cliente' name="tipo_cliente" required>
-            <option value="">Seleccione un Tipo de Cliente
+          <select class='form-control' id='categoria_cliente' name="categoria_cliente" required>
+            <option value="">Seleccione una Categoría de Cliente
             </option>
             <option value="inicial">Inicial
             </option>
