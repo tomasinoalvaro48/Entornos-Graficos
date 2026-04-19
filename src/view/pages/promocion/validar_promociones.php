@@ -122,7 +122,15 @@ $promociones = showPromociones();
                                     <strong>Días:</strong>
                                     <?php
                                     $dias = [];
-                                    $diasTexto = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+                                    $diasTexto = [
+                                      1 => "Lun",
+                                      2 => "Mar",
+                                      3 => "Mié",
+                                      4 => "Jue",
+                                      5 => "Vie",
+                                      6 => "Sáb",
+                                      7 => "Dom"
+                                    ];
 
                                     foreach ($promo->diasSemanaPromo as $d) {
                                       $dias[] = $diasTexto[$d] ?? $d;

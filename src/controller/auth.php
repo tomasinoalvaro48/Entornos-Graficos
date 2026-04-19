@@ -66,6 +66,17 @@ function getCategoriaCliente()
   return $_SESSION["categoria_cliente"] ?? null;
 }
 
+function getUsuarioLogueado()
+{
+  ensureSessionActive();
+
+  return [
+    'id_usuario' => $_SESSION['id_usuario'] ?? null,
+    'tipo_usuario' => $_SESSION['tipo_usuario'] ?? null,
+    'categoria_cliente' => $_SESSION['categoria_cliente'] ?? null
+  ];
+}
+
 // Función para setear un mensaje de éxito en la sesión, que puede ser mostrado en la siguiente página 
 // a la que se redirige.
 function setSessionSuccess($message)
