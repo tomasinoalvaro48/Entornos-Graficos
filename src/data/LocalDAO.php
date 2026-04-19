@@ -74,7 +74,7 @@ class LocalDAO extends DBFunctions
   {
     $query = "INSERT INTO local (ubicacion_local, nombre_local, rubro_local, id_usuario, estado_local) VALUES 
             ('" . $local->ubiLocal . "', '" . $local->nombreLocal . "', '" . $local->rubroLocal . "', 
-            " . $local->usuario->idUsuario . ", '" . $local->estadoLocal . "');";
+            " . $local->usuario->idUsuario . ", '" . EstadoLocal::ACTIVO->value . "');";
     return $this->querySQL($query);
   }
 
@@ -86,15 +86,15 @@ class LocalDAO extends DBFunctions
     return $this->querySQL($query);
   }
 
-  public function delete($id)
+  public function logicDelete($id)
   {
-    $query = "DELETE FROM local WHERE id_local = '" . $id . "';";
+    $query = "UPDATE local SET estado_local = '" . EstadoLocal::ELIMINADO->value . "' WHERE id_local = '" . $id . "';";
     return $this->querySQL($query);
   }
 
-  public function logicDelete($id)
+  public function delete($id)
   {
-    $query = "UPDATE local SET estado_local = 'eliminado' WHERE id_local = '" . $id . "';";
+    $query = "DELETE FROM local WHERE id_local = '" . $id . "';";
     return $this->querySQL($query);
   }
 }

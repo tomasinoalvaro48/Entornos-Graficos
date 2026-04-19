@@ -101,7 +101,7 @@ $duenos = showDuenos();
                             data-bs-target="#<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>">
                             Editar
                           </button>
-                          <a href="<?php echo app_path('src/controller/local/handle_delete_local.php'); ?>?id=<?php echo htmlspecialchars($l->idLocal, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-danger">
+                          <a href="<?php echo app_path('src/controller/local/handle_logic_delete_local.php'); ?>?id=<?php echo htmlspecialchars($l->idLocal, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-danger">
                             Eliminar
                           </a>
                         <?php } ?>
