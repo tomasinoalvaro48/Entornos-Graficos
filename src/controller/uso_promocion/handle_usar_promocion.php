@@ -17,6 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     setSessionError("Ya solicitaste esta promoción.");
   }
 
-  header("Location: " . app_path('src/view/pages/promocion/promos_cliente.php'));
+  header("Location: " . app_path('src/view/pages/uso_promocion/promos_cliente.php'));
   exit();
 }

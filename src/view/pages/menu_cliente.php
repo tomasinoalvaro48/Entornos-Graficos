@@ -20,7 +20,7 @@ include __DIR__ . "/../components/carousel.php";
         <i class="bi bi-tag" style="font-size: 2rem; color: #198754;"></i>
         <h5 class="card-title mt-3">Promociones</h5>
         <p class="card-text">Buscar promociones por código de local.</p>
-        <a href="<?php echo app_path('src/view/pages/promocion/promos_cliente.php'); ?>" class="btn btn-success btn-sm">
+        <a href="<?php echo app_path('src/view/pages/uso_promocion/promos_cliente.php'); ?>" class="btn btn-success btn-sm">
           Ver Promociones
         </a>
       </div>
