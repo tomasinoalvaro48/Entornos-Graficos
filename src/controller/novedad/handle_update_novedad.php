@@ -17,6 +17,7 @@ if (isset($_POST['botonActualizar'])) {
     : null;
   $categoriaCliente = $_POST['categoria_cliente'];
 
+  require_once __DIR__ . "/validation_novedad.php";
 
   $novedadDAO->update(new Novedad(
     $_GET['id_novedad'],

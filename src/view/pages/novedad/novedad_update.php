@@ -1,3 +1,5 @@
+<?php $today = new DateTime(); ?>
+
 <div
   class="modal fade"
   id="<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>"
@@ -21,7 +23,8 @@
               id="texto_novedad"
               name="texto_novedad"
               value="<?php echo htmlspecialchars($novedadToEdit->textoNovedad, ENT_QUOTES, 'UTF-8'); ?>"
-              require>
+              maxlength="255"
+              required>
           </div>
 
           <div class="mb-3">
@@ -31,6 +34,7 @@
               class="form-control"
               id="fecha_desde_novedad"
               name="fecha_desde_novedad"
+              min="<?php echo $today->format('Y-m-d'); ?>"
               value="<?php echo htmlspecialchars($novedadToEdit->fechaDesdeNovedad->format('Y-m-d'), ENT_QUOTES, 'UTF-8'); ?>"
               required>
           </div>
@@ -41,6 +45,7 @@
               class="form-control"
               id="fecha_hasta_novedad"
               name="fecha_hasta_novedad"
+              min="<?php echo $today->format('Y-m-d'); ?>"
               value="<?php echo htmlspecialchars($novedadToEdit->fechaHastaNovedad->format('Y-m-d'), ENT_QUOTES, 'UTF-8'); ?>"
               required>
           </div>
@@ -71,3 +76,6 @@
 
 
 </div>
+<script>
+  <?php include_once __DIR__ . "/fecha_validator.js"; ?>
+</script>
