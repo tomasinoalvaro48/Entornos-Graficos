@@ -13,4 +13,17 @@ include __DIR__ . "/../components/carousel.php";
       <a class="btn btn-secondary" href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>">Novedades</a>
     </div>
   </div>
+
+  <div class="col-md-6 col-lg-3">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body text-center">
+        <i class="bi bi-tag" style="font-size: 2rem; color: #198754;"></i>
+        <h5 class="card-title mt-3">Promociones</h5>
+        <p class="card-text">Buscar promociones por código de local.</p>
+        <a href="<?php echo app_path('src/view/pages/promocion/promos_cliente.php'); ?>" class="btn btn-success btn-sm">
+          Ver Promociones
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
