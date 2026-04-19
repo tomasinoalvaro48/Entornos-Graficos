@@ -22,7 +22,8 @@ if (isset($_POST['botonActualizar'])) {
       $_POST['ubicacion_local'],
       $_POST['nombre_local'],
       $_POST['rubro_local'],
-      $dueno = (new UsuarioDAO())->getById($_POST['dueno_local'])
+      $dueno = (new UsuarioDAO())->getById($_POST['dueno_local']),
+      $localActual->estadoLocal
     ));
     setSessionSuccess("Local actualizado exitosamente.");
     header("Location: " . app_path('src/view/pages/local/local_list.php'));

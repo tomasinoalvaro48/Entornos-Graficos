@@ -20,7 +20,8 @@ if (isset($_POST['botonCrear'])) {
       $_POST['ubicacion_local'],
       $_POST['nombre_local'],
       $_POST['rubro_local'],
-      $dueno = (new UsuarioDAO())->getById($_POST['dueno_local'])
+      $dueno = (new UsuarioDAO())->getById($_POST['dueno_local']),
+      null
     ));
     setSessionSuccess("Local creado exitosamente.");
     header("Location: " . app_path('src/view/pages/local/local_list.php'));

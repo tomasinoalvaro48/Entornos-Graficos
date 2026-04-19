@@ -24,7 +24,8 @@ class PromocionDAO extends DBFunctions
           $promocionFetchArray['ubicacion_local'],
           $promocionFetchArray['nombre_local'],
           $promocionFetchArray['rubro_local'],
-          null
+          null,
+          $promocionFetchArray['estado_local'],
         )
       );
     }
