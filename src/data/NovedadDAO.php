@@ -48,7 +48,7 @@ class NovedadDAO extends DBFunctions
   public function getByClientType($categoriaCliente)
   {
     $novedadesArray = [];
-    $query = "SELECT * FROM novedad n WHERE n.categoria_cliente_nov = '" . $categoriaCliente . "'";
+    $query = "SELECT * FROM novedad n WHERE n.categoria_cliente_nov = '" . $categoriaCliente . "' ORDER BY n.fecha_desde_nov DESC";
     $novedades = $this->querySQL($query);
     if ($novedades && $novedades->num_rows > 0) {
       while ($novedad = mysqli_fetch_array($novedades)) {
