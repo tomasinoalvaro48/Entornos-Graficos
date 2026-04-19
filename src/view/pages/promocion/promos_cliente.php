@@ -152,7 +152,7 @@ if (isset($_GET['id_local'])) {
 
                     <form
                       method="POST"
-                      action="<?php echo app_path('src/controller/promocion/usar_promocion.php'); ?>"
+                      action="<?php echo app_path('src/controller/promocion/handle_usar_promocion.php'); ?>"
                     >
                       <input
                         type="hidden"
