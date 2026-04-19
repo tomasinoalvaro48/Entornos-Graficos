@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../../../controller/promocion/show_promos_cliente.php";
+require_once __DIR__ . "/../../../controller/uso_promocion/show_promos_cliente.php";
 require_once __DIR__ . "/../../../controller/auth.php";
 
 $tipo = getTipoUsuario();
@@ -152,7 +152,7 @@ if (isset($_GET['id_local'])) {
 
                     <form
                       method="POST"
-                      action="<?php echo app_path('src/controller/promocion/usar_promocion.php'); ?>"
+                      action="<?php echo app_path('src/controller/uso_promocion/handle_usar_promocion.php'); ?>"
                     >
                       <input
                         type="hidden"

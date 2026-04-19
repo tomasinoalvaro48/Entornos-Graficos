@@ -1,9 +1,26 @@
 <?php
 
+require_once __DIR__ . "/../model/UsoPromocion.php";
 require_once __DIR__ . "/DBFunctions.php";
 
 class UsoPromocionDAO extends DBFunctions
 {
+  protected function sanitizeUsoPromocion($usoFetchArray)
+  {
+    $u = null;
+
+    if ($usoFetchArray) {
+      $u = new UsoPromocion(
+        $usoFetchArray['id_cli'],
+        $usoFetchArray['id_promo'],
+        new DateTime($usoFetchArray['fecha_uso_promo']),
+        $usoFetchArray['estado_uso_promo']
+      );
+    }
+
+    return $u;
+  }
+  
   public function create($idCli, $idPromo)
   {
     if ($this->exists($idCli, $idPromo)) {
