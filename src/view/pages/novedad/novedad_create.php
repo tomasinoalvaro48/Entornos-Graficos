@@ -30,19 +30,41 @@ $today = new DateTime();
       <form action="<?php echo app_path('src/controller/novedad/handle_create_novedad.php'); ?>" method="POST">
         <div>
           <label for="texto_novedad">Descripción de la Novedad</label>
-          <input type="text" class="form-control" id="texto_novedad" name="texto_novedad" required maxlength="255">
+          <input
+            type="text"
+            class="form-control"
+            id="texto_novedad"
+            name="texto_novedad"
+            required
+            maxlength="255">
         </div>
         <div>
           <label for="texto_novedad">Fecha Desde</label>
-          <input type="date" class="form-control" min="<?php echo $today->format('Y-m-d'); ?>" id="fecha_desde_novedad" name="fecha_desde_novedad" required>
+          <input
+            type="date"
+            class="form-control"
+            min="<?php echo $today->format('Y-m-d'); ?>"
+            id="fecha_desde_novedad"
+            name="fecha_desde_novedad"
+            required>
         </div>
         <div>
           <label for="texto_novedad">Fecha Hasta</label>
-          <input type="date" class="form-control" min="<?php echo $today->format('Y-m-d'); ?>" id="fecha_hasta_novedad" name="fecha_hasta_novedad" required>
+          <input
+            type="date"
+            class="form-control"
+            min="<?php echo $today->format('Y-m-d'); ?>"
+            id="fecha_hasta_novedad"
+            name="fecha_hasta_novedad"
+            required>
         </div>
         <div>
           <label for="texto_novedad">Descripción de la Novedad</label>
-          <select class='form-control' id='categoria_cliente' name="categoria_cliente" required>
+          <select
+            class='form-control'
+            id='categoria_cliente'
+            name="categoria_cliente"
+            required>
             <option value="">Seleccione una Categoría de Cliente
             </option>
             <option value="inicial">Inicial
