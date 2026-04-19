@@ -20,6 +20,33 @@ class UsoPromocionDAO extends DBFunctions
 
     return $u;
   }
+
+  public function getAll()
+  {
+    $usosArray = [];
+
+    $query = "SELECT *
+              FROM uso_promocion;";
+
+    $usos = $this->querySQL($query);
+
+    if ($usos && $usos->num_rows > 0) {
+      while ($uso = mysqli_fetch_array($usos)) {
+        array_push($usosArray, $this->sanitizeUsoPromocion($uso));
+      }
+    }
+
+    return $usosArray;
+  }
+
+  public function updateEstado($idCli, $idPromo, $nuevoEstado)
+  {
+    $query = "UPDATE uso_promocion
+              SET estado_uso_promo = '$nuevoEstado'
+              WHERE id_cli = $idCli AND id_promo = $idPromo;";
+
+    return $this->querySQL($query);
+  }
   
   public function create($idCli, $idPromo)
   {

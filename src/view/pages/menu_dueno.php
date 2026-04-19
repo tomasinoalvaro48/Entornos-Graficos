@@ -45,6 +45,17 @@ include __DIR__ . "/../components/carousel.php";
         </div>
       </div>
     </div>
+
+    <div class="col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body text-center">
+          <i class="bi bi-shop" style="font-size: 2rem; color: #fd7e14;"></i>
+          <h5 class="card-title mt-3">Usos de Promociones</h5>
+          <p class="card-text">Aceptar o rechazar los usos de promociones.</p>
+          <a href="<?php echo app_path('src/view/pages/uso_promocion/validar_uso_promocion.php'); ?>" class="btn btn-warning btn-sm">Gestionar usos de promociones</a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div>
