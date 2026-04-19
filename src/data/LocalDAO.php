@@ -91,4 +91,10 @@ class LocalDAO extends DBFunctions
     $query = "DELETE FROM local WHERE id_local = '" . $id . "';";
     return $this->querySQL($query);
   }
+
+  public function logicDelete($id)
+  {
+    $query = "UPDATE local SET estado_local = 'eliminado' WHERE id_local = '" . $id . "';";
+    return $this->querySQL($query);
+  }
 }
