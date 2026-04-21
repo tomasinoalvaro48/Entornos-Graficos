@@ -1,3 +1,5 @@
+<?php require_once __DIR__ . '/../../../controller/auth.php'; ?>
+
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 
@@ -10,7 +12,7 @@
     rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
     crossorigin="anonymous" />
-  <link rel="stylesheet" href="../../styles/styles.css" />
+  <link rel="stylesheet" href="<?php echo app_path('src/view/styles/styles.css'); ?>" />
 </head>
 
 <body>
@@ -18,45 +20,44 @@
     <?php include '../../components/header.php' ?>
   </header>
 
-  <main>
-    <div class="container text-center">
-      <div class="row">
-        <div class="col">
-          <h1>Iniciar Sesion</h1>
-        </div>
-      </div>
-
+  <main class="c-page-main">
+    <section class="c-card c-card--login" aria-label="Inicio de sesión">
       <?php include '../../components/alerts.php' ?>
 
-      <!-- Formulario de inicio de sesión -->
-      <div class="row">
-        <div class="col">
-          <form action="../../../controller/handle_login.php" method="post" id="formLogin">
-            <div class="row">
-              <input type="email" name="mail" id="mail" placeholder="Ingrese Mail" required />
-            </div>
-            <div class="row">
-              <input type="password" name="pass" id="pass" placeholder="Ingrese contraseña" required />
-            </div>
-            <div class="row">
-              <div class="col">
-                <input type="checkbox" name="rememberMe" id="rememberMe" />
-                <label for="rememberMe">Recordarme</label>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary" id="botonIniciar" name="botonIniciar">Iniciar Sesion</button>
-          </form>
-        </div>
-      </div>
+      <nav class="c-tabs" aria-label="Navegación autenticación">
+        <a class="c-tab c-tab--active" href="<?php echo app_path('src/view/pages/auth/login.php'); ?>">Ingreso</a>
+        <a class="c-tab" href="<?php echo app_path('src/view/pages/auth/signin.php'); ?>">Registro</a>
+      </nav>
 
-      <div>
-        <div>
-          <a href="#"> ¿Has olvidado la contraseña? </a>
-          <div>¿No tienes cuenta? <a href="<?php echo app_path('src/view/pages/auth/signin.php'); ?>">Registrarse</a></div>
-        </div>
-      </div>
-    </div>
+      <header class="c-hero">
+        <h1 class="c-title">Te extrañamos</h1>
+        <p class="c-subtitle">Ingresá para continuar</p>
+      </header>
 
+      <form action="../../../controller/handle_login.php" method="post" id="formLogin" class="c-form">
+        <div class="c-field">
+          <input class="c-input" type="email" name="mail" id="mail" placeholder=" " autocomplete="email" required />
+          <label class="c-label" for="mail">Correo</label>
+        </div>
+
+        <div class="c-field">
+          <input class="c-input" type="password" name="pass" id="pass" placeholder=" " autocomplete="current-password" required />
+          <label class="c-label" for="pass">Contraseña</label>
+        </div>
+
+        <div class="c-row-between c-meta-row">
+          <label class="c-check" for="rememberMe">
+            <input class="c-check-input" type="checkbox" name="rememberMe" id="rememberMe" />
+            <span>Recordarme</span>
+          </label>
+          <a class="c-link-muted" href="#">¿Has olvidado la contraseña?</a>
+        </div>
+
+        <button type="submit" class="c-btn-primary" id="botonIniciar" name="botonIniciar">Entrar</button>
+
+        <p class="c-footnote">¿No tienes cuenta? <a href="<?php echo app_path('src/view/pages/auth/signin.php'); ?>">Registrarse</a></p>
+      </form>
+    </section>
   </main>
 
 
