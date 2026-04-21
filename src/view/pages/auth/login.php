@@ -26,7 +26,8 @@
 
       <nav class="c-tabs" aria-label="Navegación autenticación">
         <a class="c-tab c-tab--active" href="<?php echo app_path('src/view/pages/auth/login.php'); ?>">Ingreso</a>
-        <a class="c-tab" href="<?php echo app_path('src/view/pages/auth/signin.php'); ?>">Registro</a>
+        <a class="c-tab" href="<?php echo app_path('src/view/pages/auth/signin.php'); ?>">Registro clientes</a>
+        <a class="c-tab" href="<?php echo app_path('src/view/pages/auth/signin_dueno.php'); ?>">Registro dueño</a>
       </nav>
 
       <header class="c-hero">
