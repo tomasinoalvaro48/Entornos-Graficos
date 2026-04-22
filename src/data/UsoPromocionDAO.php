@@ -1,6 +1,8 @@
 <?php
 
 require_once __DIR__ . "/../model/UsoPromocion.php";
+require_once __DIR__ . "/../model/Promocion.php";
+require_once __DIR__ . "/../model/Local.php";
 require_once __DIR__ . "/DBFunctions.php";
 
 class UsoPromocionDAO extends DBFunctions
@@ -33,6 +35,47 @@ class UsoPromocionDAO extends DBFunctions
     if ($usos && $usos->num_rows > 0) {
       while ($uso = mysqli_fetch_array($usos)) {
         array_push($usosArray, $this->sanitizeUsoPromocion($uso));
+      }
+    }
+
+    return $usosArray;
+  }
+
+  public function getByCliente($idCli)
+  {
+    $usosArray = [];
+
+    $query = "SELECT up.*, p.*, l.*
+              FROM uso_promocion up
+              INNER JOIN promocion p ON up.id_promo = p.id_promo
+              INNER JOIN local l ON p.id_local = l.id_local
+              WHERE up.id_cli = $idCli;";
+
+    $result = $this->querySQL($query);
+
+    if ($result && $result->num_rows > 0) {
+      while ($row = mysqli_fetch_array($result)) {
+        $uso = $this->sanitizeUsoPromocion($row);
+
+        $uso->promo = new Promocion(
+          $row['id_promo'],
+          $row['texto_promo'],
+          new DateTime($row['fecha_desde_promo']),
+          new DateTime($row['fecha_hasta_promo']),
+          $row['categoria_cliente_promo'],
+          new ArrayObject(),
+          $row['estado_promo'],
+          new Local(
+            $row['id_local'],
+            $row['ubicacion_local'],
+            $row['nombre_local'],
+            $row['rubro_local'],
+            null,
+            $row['estado_local']
+          )
+        );
+
+        $usosArray[] = $uso;
       }
     }
 
