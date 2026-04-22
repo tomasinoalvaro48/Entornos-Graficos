@@ -71,6 +71,27 @@ class LocalDAO extends DBFunctions
     return $l;
   }
 
+  public function getByRubro($rubro)
+  {
+    $localesArray = [];
+
+    $query = "SELECT *
+              FROM local
+              INNER JOIN usuario ON usuario.id_usuario = local.id_usuario
+              WHERE local.rubro_local = '$rubro'
+                AND local.estado_local = 'Activo';";
+
+    $result = $this->querySQL($query);
+
+    if ($result && $result->num_rows > 0) {
+      while ($row = mysqli_fetch_array($result)) {
+        $localesArray[] = $this->sanitizeLocal($row);
+      }
+    }
+
+    return $localesArray;
+  }
+
   public function create(Local $local)
   {
     $query = "INSERT INTO local (ubicacion_local, nombre_local, rubro_local, id_usuario, estado_local) VALUES 

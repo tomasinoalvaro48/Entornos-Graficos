@@ -17,6 +17,19 @@ include __DIR__ . "/../components/carousel.php";
   <div class="col-md-6 col-lg-3">
     <div class="card h-100 shadow-sm">
       <div class="card-body text-center">
+        <i class="bi bi-shop" style="font-size: 2rem; color: #fd7e14;"></i>
+        <h5 class="card-title mt-3">Locales</h5>
+        <p class="card-text">Ver todos los locales del shopping.</p>
+        <a href="<?php echo app_path('src/view/pages/local/locales_cliente.php'); ?>" class="btn btn-warning btn-sm">
+          Ver Locales
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-lg-3">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body text-center">
         <i class="bi bi-tag" style="font-size: 2rem; color: #198754;"></i>
         <h5 class="card-title mt-3">Promociones solicitadas</h5>
         <p class="card-text">Ver mis usos de promociones.</p>
