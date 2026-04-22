@@ -43,6 +43,7 @@ $usos = showUsosPromocion();
               <tr>
                 <th>Cliente</th>
                 <th>Promo</th>
+                <th>Local</th>
                 <th>Fecha</th>
                 <th>Estado</th>
                 <th>Acción</th>
@@ -71,7 +72,8 @@ $usos = showUsosPromocion();
                 ?>
                   <tr>
                     <td><?php echo htmlspecialchars($uso->idCli, ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><?php echo htmlspecialchars($uso->idPromo, ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><?php echo htmlspecialchars($uso->promo->textoPromo, ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><?php echo htmlspecialchars($uso->promo->local->nombreLocal, ENT_QUOTES, 'UTF-8'); ?></td>
                     <td><?php echo htmlspecialchars($uso->fechaUso->format('d/m/Y'), ENT_QUOTES, 'UTF-8'); ?></td>
 
                     <td>
