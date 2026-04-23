@@ -126,7 +126,7 @@ $usoDAO = new UsoPromocionDAO();
                     <?php echo htmlspecialchars($p->local->nombreLocal, ENT_QUOTES, 'UTF-8'); ?>
                   </p>
 
-                  <?php if ($p->estadoPromo === "aprobada") { 
+                  <?php if ($tipo === "dueno" && $p->estadoPromo === "aprobada") { 
                     $cantidadUsos = $usoDAO->countUsosAceptadosByPromo($p->idPromo);
                   ?>
                     <p class="card-text">
