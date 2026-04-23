@@ -146,6 +146,23 @@ class UsoPromocionDAO extends DBFunctions
     return $this->querySQL($query);
   }
 
+  public function countUsosAceptadosByPromo($idPromo)
+  {
+    $query = "SELECT COUNT(*) as cantidad
+              FROM uso_promocion
+              WHERE id_promo = $idPromo
+              AND estado_uso_promo = 'aceptada';";
+
+    $usos = $this->querySQL($query);
+
+    if ($usos && $usos->num_rows > 0) {
+      $row = mysqli_fetch_array($usos);
+      return (int)$row['cantidad'];
+    }
+
+    return 0;
+  }
+
   public function exists($idCli, $idPromo)
   {
     $query = "SELECT 1 FROM uso_promocion

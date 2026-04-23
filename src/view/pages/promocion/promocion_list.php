@@ -2,6 +2,7 @@
 require_once __DIR__ . "/../../../controller/promocion/show_promocion.php";
 require_once __DIR__ . "/../../../controller/local/show_local.php";
 require_once __DIR__ . "/../../../controller/auth.php";
+require_once __DIR__ . "/../../../data/UsoPromocionDAO.php";
 
 $tipo = getTipoUsuario();
 
@@ -11,6 +12,7 @@ clearSessionMessages();
 
 $promociones = showPromociones();
 $locales = showLocales();
+$usoDAO = new UsoPromocionDAO();
 ?>
 
 <!DOCTYPE html>
@@ -116,13 +118,24 @@ $locales = showLocales();
 
                   <p class="card-text">
                     Estado de la promo:
-                    <?php echo htmlspecialchars($p->estadoPromo, ENT_QUOTES, 'UTF-8'); ?>
+                    <b><?php echo htmlspecialchars($p->estadoPromo, ENT_QUOTES, 'UTF-8'); ?></b>
                   </p>
 
                   <p class="card-text">
                     Local:
                     <?php echo htmlspecialchars($p->local->nombreLocal, ENT_QUOTES, 'UTF-8'); ?>
                   </p>
+
+                  <?php if ($p->estadoPromo === "aprobada") { 
+                    $cantidadUsos = $usoDAO->countUsosAceptadosByPromo($p->idPromo);
+                  ?>
+                    <p class="card-text">
+                      <b>
+                        Cantidad de clientes que usaron la promo:
+                        <?php echo $cantidadUsos; ?>
+                      </b>
+                    </p>
+                  <?php } ?>
 
                   <div class="d-flex justify-content-end">
                     <?php if ($tipo === "dueno") { ?>
