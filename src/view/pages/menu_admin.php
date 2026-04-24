@@ -36,9 +36,9 @@
       <div class="card h-100 shadow-sm">
         <div class="card-body text-center">
           <i class="bi bi-bar-chart" style="font-size: 2rem; color: #198754;"></i>
-          <h5 class="card-title mt-3">Reportes</h5>
-          <p class="card-text">Generar reportes de actividad, usuarios y transacciones.</p>
-          <a href="#" class="btn btn-success btn-sm">Ver Reportes</a>
+          <h5 class="card-title mt-3">Reporte de uso de promociones</h5>
+          <p class="card-text">Ver todas las promociones y sus usos.</p>
+          <a href="<?php echo app_path('src/view/pages/uso_promocion/reporte_promociones.php'); ?>" class="btn btn-success btn-sm">Ver Reporte</a>
         </div>
       </div>
     </div>

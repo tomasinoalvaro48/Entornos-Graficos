@@ -91,10 +91,10 @@ class UsoPromocionDAO extends DBFunctions
               INNER JOIN local l ON p.id_local = l.id_local
               WHERE up.id_cli = $idCli;";
 
-    $result = $this->querySQL($query);
+    $usos = $this->querySQL($query);
 
-    if ($result && $result->num_rows > 0) {
-      while ($row = mysqli_fetch_array($result)) {
+    if ($usos && $usos->num_rows > 0) {
+      while ($row = mysqli_fetch_array($usos)) {
         $uso = $this->sanitizeUsoPromocion($row);
 
         $uso->promo = new Promocion(
@@ -115,6 +115,27 @@ class UsoPromocionDAO extends DBFunctions
           )
         );
 
+        $usosArray[] = $uso;
+      }
+    }
+
+    return $usosArray;
+  }
+
+  public function getAllWithCliente()
+  {
+    $usosArray = [];
+
+    $query = "SELECT up.*, usu.nombre_usuario
+              FROM uso_promocion up
+              INNER JOIN usuario usu ON up.id_cli = usu.id_usuario;";
+
+    $usos = $this->querySQL($query);
+
+    if ($usos && $usos->num_rows > 0) {
+      while ($row = mysqli_fetch_array($usos)) {
+        $uso = $this->sanitizeUsoPromocion($row);
+        $uso->nombreCliente = $row['nombre_usuario'];
         $usosArray[] = $uso;
       }
     }
@@ -169,7 +190,7 @@ class UsoPromocionDAO extends DBFunctions
               WHERE id_cli = $idCli AND id_promo = $idPromo
               LIMIT 1;";
 
-    $result = $this->querySQL($query);
-    return ($result && $result->num_rows > 0);
+    $usos = $this->querySQL($query);
+    return ($usos && $usos->num_rows > 0);
   }
 }
