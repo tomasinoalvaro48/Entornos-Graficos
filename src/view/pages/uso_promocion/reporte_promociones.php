@@ -14,6 +14,10 @@ $usosPorPromo = [];
 foreach ($usos as $u) {
   $usosPorPromo[$u->idPromo][] = $u;
 }
+
+$busqueda = $_GET['busqueda'] ?? '';
+$diaFiltro = $_GET['dia'] ?? '';
+$localFiltro = $_GET['local'] ?? '';
 ?>
 
 <!DOCTYPE html>
@@ -45,11 +49,86 @@ foreach ($usos as $u) {
         </div>
       </div>
 
+      <form method="GET" class="row mt-3 mb-4">
+        <div class="col-md-4">
+          <input 
+            type="text" 
+            name="busqueda" 
+            class="form-control"
+            placeholder="Buscar promoción o local"
+            value="<?php echo $_GET['busqueda'] ?? ''; ?>"
+          >
+        </div>
+
+        <div class="col-md-3">
+          <select name="dia" class="form-select">
+            <option value="">Filtrar por día</option>
+            <?php
+            $diasSelect = [
+              1 => "Lunes",
+              2 => "Martes",
+              3 => "Miércoles",
+              4 => "Jueves",
+              5 => "Viernes",
+              6 => "Sábado",
+              7 => "Domingo"
+            ];
+            foreach ($diasSelect as $num => $nombre) {
+              $selected = (isset($_GET['dia']) && $_GET['dia'] == $num) ? 'selected' : '';
+              echo "<option value='$num' $selected>$nombre</option>";
+            }
+            ?>
+          </select>
+        </div>
+
+        <div class="col-md-3">
+          <select name="local" class="form-select">
+            <option value="">Filtrar por local</option>
+            <?php
+            $locales = [];
+            foreach ($promociones as $p) {
+              $locales[$p->local->idLocal] = $p->local->nombreLocal;
+            }
+            foreach ($locales as $id => $nombre) {
+              $selected = (isset($_GET['local']) && $_GET['local'] == $id) ? 'selected' : '';
+              echo "<option value='$id' $selected>$nombre</option>";
+            }
+            ?>
+          </select>
+        </div>
+
+        <div class="col-md-2">
+          <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+        </div>
+      </form>
+
       <?php if (empty($promociones)) { ?>
         <p class="text-center mt-4">No hay promociones.</p>
       <?php } ?>
 
-      <?php foreach ($promociones as $p) { ?>
+      <?php foreach ($promociones as $p) {
+        if (!empty($busqueda)) {
+          $texto = strtolower($p->textoPromo);
+          $localNombre = strtolower($p->local->nombreLocal);
+          $busquedaLower = strtolower($busqueda);
+
+          if (!str_contains($texto, $busquedaLower) && !str_contains($localNombre, $busquedaLower)) {
+            continue;
+          }
+        }
+
+        if (!empty($diaFiltro)) {
+          if (!in_array($diaFiltro, $p->diasSemanaPromo->getArrayCopy())) {
+            continue;
+          }
+        }
+
+        if (!empty($localFiltro)) {
+          if ($p->local->idLocal != $localFiltro) {
+            continue;
+          }
+        }
+      ?>
         <div class="card mt-4 shadow-sm">
           <div class="card-body">
             <h5 class="card-title">
