@@ -45,7 +45,7 @@ function sendVerificationEmail($mailUsuario, $token, $nombreUsuario)
   $mail->isHTML(true); //Set email format to HTML
   $mail->CharSet = 'UTF-8';
   $mail->Encoding = 'base64';
-  $mail->Subject = 'SITIO - Confirmar Dirección de Correo';
+  $mail->Subject = 'Rivendell Plaza - Confirmar Dirección de Correo';
   $mail->Body = $mailContent;
   $mail->AltBody = 'Hola ' . $nombreUsuario . '. Verifica tu direccion de email en: ' . $verifyUrl;
 

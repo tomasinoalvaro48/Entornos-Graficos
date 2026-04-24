@@ -38,7 +38,7 @@ function getMainPage()
 </head>
 
 <body>
-  <header class="sticky-top">
+  <header>
     <?php
     include "src/view/components/header.php";
     ?>

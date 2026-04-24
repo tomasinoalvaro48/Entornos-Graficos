@@ -9,7 +9,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
 ];
 ?>
 
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg sticky-top" style="z-index: 1030;">
   <div class="container-fluid">
     <a class="navbar-brand" href="<?php echo app_path(); ?>">LOGO</a>
 
