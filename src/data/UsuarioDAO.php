@@ -103,6 +103,14 @@ class UsuarioDAO extends DBFunctions
     return $this->querySQL($query);
   }
 
+  public function updateToken($idUsuario, $token)
+  {
+    $query = "UPDATE usuario 
+              SET token_verificacion = '" . $token . "'
+              WHERE id_usuario = '" . (int)$idUsuario . "';";
+    return $this->querySQL($query);
+  }
+
   public function updateEstadoDueno($idUsuario, $nuevoEstado)
   {
     $query = "UPDATE usuario
