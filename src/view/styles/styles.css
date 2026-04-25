@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Ringbearer&display=swap');
 
 .box {
   background-color: #424769;
@@ -244,4 +244,207 @@
 
 .c-footnote a {
   color: #fff;
+}
+
+/* Header styles aligned with login palette and design reference */
+.c-header-navbar {
+  background: linear-gradient(90deg, #1b1f3a 0%, #20284f 55%, #1b1f3a 100%);
+  border-bottom: 1px solid rgba(249, 177, 122, 0.2);
+  box-shadow: 0 10px 26px rgba(8, 12, 31, 0.35);
+  min-height: 78px;
+}
+
+.c-header-shell {
+  gap: 1rem;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+}
+
+.c-header-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-right: 0.25rem;
+}
+
+.c-header-brand-icon {
+  height: 58px;
+  width: auto;
+  display: block;
+  padding: 0.2rem;
+  border: 2px solid rgba(249, 177, 122, 0.55);
+  border-radius: 999px;
+  background-color: rgba(27, 31, 58, 0.5);
+}
+
+.c-header-brand-text {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  line-height: 0.9;
+  text-shadow: 0 1px 10px rgba(8, 12, 31, 0.45);
+}
+
+.c-header-brand-title {
+  color: #f9b17a;
+  font-family: 'Ringbearer', serif;
+  font-size: 1.95rem;
+  font-weight: 400;
+  letter-spacing: 0.02rem;
+}
+
+.c-header-brand-subtitle {
+  margin-top: 0.1rem;
+  color: #f9b17a;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.28rem;
+  text-transform: uppercase;
+}
+
+.c-header-search {
+  flex: 1 1 280px;
+  max-width: 440px;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  gap: 0.45rem;
+}
+
+.c-header-search-input.form-control {
+  background-color: #424769;
+  border: 1px solid #676f9d;
+  color: #fff;
+}
+
+.c-header-search-input.form-control::placeholder {
+  color: #b8bddc;
+}
+
+.c-header-search-input.form-control:focus {
+  color: #fff;
+  background-color: #424769;
+  border-color: #f9b17a;
+  box-shadow: 0 0 0 0.18rem rgba(249, 177, 122, 0.25);
+}
+
+.c-header-search-btn {
+  background-color: #f9b17a;
+  color: #2d3250;
+  border: none;
+  font-weight: 700;
+}
+
+.c-header-search-btn:hover {
+  background-color: #e6a855;
+  color: #1b1f3a;
+}
+
+.c-header-toggler {
+  border-color: rgba(249, 177, 122, 0.45);
+}
+
+.c-header-toggler:focus {
+  box-shadow: 0 0 0 0.2rem rgba(249, 177, 122, 0.25);
+}
+
+.c-header-collapse {
+  flex-grow: 0;
+}
+
+.c-header-menu {
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.c-header-menu .nav-link {
+  position: relative;
+  color: #f1f2ff;
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: 0.75rem 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.c-header-menu .nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0.95rem;
+  right: 0.95rem;
+  bottom: 0.35rem;
+  height: 3px;
+  border-radius: 99px;
+  background-color: #f9b17a;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.c-header-menu .nav-link:hover,
+.c-header-menu .nav-link:focus,
+.c-header-menu .nav-link.active {
+  color: #fff;
+}
+
+.c-header-menu .nav-link:hover::after,
+.c-header-menu .nav-link:focus::after,
+.c-header-menu .nav-link.active::after {
+  transform: scaleX(1);
+}
+
+@media (max-width: 991.98px) {
+  .c-header-navbar {
+    min-height: 72px;
+  }
+
+  .c-header-shell {
+    row-gap: 0.5rem;
+  }
+
+  .c-header-brand-icon {
+    height: 46px;
+  }
+
+  .c-header-brand-text {
+    line-height: 0.85;
+  }
+
+  .c-header-brand-title {
+    font-size: 1.45rem;
+  }
+
+  .c-header-brand-subtitle {
+    font-size: 0.76rem;
+    letter-spacing: 0.2rem;
+  }
+
+  .c-header-search {
+    order: 3;
+    flex: 1 1 100%;
+    max-width: 100%;
+    margin: 0.35rem 0 0;
+  }
+
+  .c-header-collapse {
+    width: 100%;
+  }
+
+  .c-header-menu {
+    align-items: flex-start;
+    gap: 0;
+    padding-top: 0.35rem;
+  }
+
+  .c-header-menu .nav-link {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .c-header-menu .nav-link::after {
+    left: 0;
+    right: auto;
+    width: 42px;
+    transform-origin: left;
+  }
 }
