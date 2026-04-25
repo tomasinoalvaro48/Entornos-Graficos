@@ -51,7 +51,9 @@
             <input class="c-check-input" type="checkbox" name="rememberMe" id="rememberMe" />
             <span>Recordarme</span>
           </label>
-          <a class="c-link-muted" href="#">¿Has olvidado la contraseña?</a>
+          <a class="c-link-muted" href="<?php echo app_path('src/view/pages/auth/forgot_password.php'); ?>">
+            ¿Has olvidado la contraseña?
+          </a>
         </div>
 
         <button type="submit" class="c-btn-primary" id="botonIniciar" name="botonIniciar">Entrar</button>
