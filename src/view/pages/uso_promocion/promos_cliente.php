@@ -33,7 +33,7 @@ if (isset($_GET['id_local'])) {
   
   <link
     rel="stylesheet"
-    href="../styles/styles.css"
+    href="../../styles/styles.css"
   />
 </head>
 
