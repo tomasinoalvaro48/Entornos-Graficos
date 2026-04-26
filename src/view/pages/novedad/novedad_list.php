@@ -33,80 +33,93 @@ if ($tipo === 'cliente') {
   <header>
     <?php include __DIR__ . '/../../components/header.php' ?>
   </header>
-  <main>
-    <div class='container text-center'>
-      <div class="row">
-        <div class="col">
-          <h1>Novedades</h1>
+  <main class="c-novedad-page">
+    <div class="c-novedad-layout">
+      <aside class="c-novedad-aside">
+        <div class="c-novedad-aside__hero text-center">
+          <p class="c-novedad-aside-kicker">Panel de novedades</p>
+          <h1 class="c-novedad-aside-title">Novedades</h1>
+          <p class="c-novedad-aside-subtitle">Revisá y administrá los avisos publicados para cada tipo de cliente.</p>
         </div>
-      </div>
-    </div>
 
-    <?php if (empty($novedades)) { ?>
-      <div class='row'>
-        <div class='col'>
+        <div class="c-novedad-aside-actions">
+          <!-- Botón para crear nueva novedad, solo visible para admin -->
+          <?php if ($tipo === "admin") { ?>
+            <a href="<?php echo app_path('src/view/pages/novedad/novedad_create.php'); ?>" class="btn btn-success c-novedad-aside-btn">
+              Crear Novedad
+            </a>
+          <?php } ?>
+
+          <a href="<?php echo app_path(); ?>" class="btn btn-secondary c-novedad-aside-btn">
+            Volver al Menú
+          </a>
+        </div>
+      </aside>
+
+      <?php if (empty($novedades)) { ?>
+        <section class="c-novedad-list">
           <p>No hay novedades registradas.</p>
-        </div>
-      </div>
-    <?php } else { ?>
-      <?php foreach ($novedades as $n) {
-        $modalId = 'editNovedadModal_' . $n->codNovedad;
-        $novedadToEdit = $n;
+        </section>
+      <?php } else { ?>
+        <section class="c-novedad-list">
+          <?php foreach ($novedades as $n) {
+            $modalId = 'editNovedadModal_' . $n->codNovedad;
+            $novedadToEdit = $n;
 
-      ?>
-        <div class="row mt-3">
-          <div class="col">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Codigo: <?php echo htmlspecialchars($n->codNovedad, ENT_QUOTES, 'UTF-8') ?></h5>
-                <p class="card-text">Descripcion: <?php echo htmlspecialchars($n->textoNovedad, ENT_QUOTES, 'UTF-8') ?></p>
-                <p class="card text">Tipo usuario: <?php echo htmlspecialchars($n->categoriaCliente, ENT_QUOTES, 'UTF-8') ?></p>
+          ?>
+            <article class="c-novedad-item">
+              <div class="card cg-card-container">
+                <div class="card-body cg-card">
+                  <div class="cg-card-header">
+                    <h5 class="card-title">Codigo: <?php echo htmlspecialchars($n->codNovedad, ENT_QUOTES, 'UTF-8') ?></h5>
+                    <span class="cg-card-badge">Tipo de cliente: <?php echo htmlspecialchars($n->categoriaCliente, ENT_QUOTES, 'UTF-8') ?></span>
+                  </div>
 
-                <?php if ($tipo === 'admin') { ?>
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>">
+                  <div class="cg-card-body-content">
+                    <div class="cg-card-dates">
+                      <div class="cg-card-date-item">
+                        <span class="cg-card-date-label">Fecha Desde:</span>
+                        <span class="cg-card-date-value"><?php echo $n->fechaDesdeNovedad ? htmlspecialchars($n->fechaDesdeNovedad->format('Y-m-d'), ENT_QUOTES, 'UTF-8') : 'N/A'; ?></span>
+                      </div>
+                      <div class="cg-card-date-item">
+                        <span class="cg-card-date-label">Fecha Hasta:</span>
+                        <span class="cg-card-date-value"><?php echo $n->fechaHastaNovedad ? htmlspecialchars($n->fechaHastaNovedad->format('Y-m-d'), ENT_QUOTES, 'UTF-8') : 'N/A'; ?></span>
+                      </div>
+                    </div>
 
-                    Editar
-                  </button>
-                  <a
-                    class="btn btn-danger"
-                    href="<?php echo app_path('src/controller/novedad/handle_delete_novedad.php'); ?>?id=<?php echo htmlspecialchars($n->codNovedad, ENT_QUOTES, 'UTF-8'); ?>">
-                    Eliminar
-                  </a>
-                <?php } ?>
+                    <div class="cg-card-divider"></div>
+
+                    <div class="cg-card-desc">
+                      <?php echo htmlspecialchars($n->textoNovedad, ENT_QUOTES, 'UTF-8') ?>
+                    </div>
+                  </div>
+
+                  <?php if ($tipo === 'admin') { ?>
+                    <div class="cg-card-actions">
+                      <button
+                        type="button"
+                        class="btn cg-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>">
+                        Editar
+                      </button>
+                      <a
+                        class="btn cg-btn"
+                        href="<?php echo app_path('src/controller/novedad/handle_delete_novedad.php'); ?>?id=<?php echo htmlspecialchars($n->codNovedad, ENT_QUOTES, 'UTF-8'); ?>">
+                        Eliminar
+                      </a>
+                    </div>
+                  <?php } ?>
+                </div>
+                <?php include __DIR__ . '/novedad_update.php'; ?>
               </div>
-            </div>
-            <?php include __DIR__ . '/novedad_update.php'; ?>
-          </div>
-        </div>
+            </article>
+
+
+          <?php } ?>
+        </section>
       <?php } ?>
-    <?php } ?>
-
-    <!-- Botón para crear nueva novedad, solo visible para admin -->
-    <?php if ($tipo === "admin") { ?>
-      <div class="container text-center">
-        <div class='row mt-5'>
-          <div class="col">
-            <a href="<?php echo app_path('src/view/pages/novedad/novedad_create.php'); ?>" class="btn btn-success">Crear Novedad</a>
-          </div>
-        </div>
-      </div>
-    <?php } ?>
-
-    <div class="container text-center">
-      <div class="row mt-5">
-        <div class="col">
-          <a href="<?php echo app_path(); ?>" class="btn btn-secondary">Volver al Menú</a>
-        </div>
-      </div>
     </div>
-
-
-
-
   </main>
 
 
