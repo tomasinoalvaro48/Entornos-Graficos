@@ -72,7 +72,7 @@ if ($tipo === 'cliente') {
                 <div class="card-body cg-card">
                   <div class="cg-card-header">
                     <h5 class="card-title">Codigo: <?php echo htmlspecialchars($n->codNovedad, ENT_QUOTES, 'UTF-8') ?></h5>
-                    <span class="cg-card-badge">Tipo de cliente: <?php echo htmlspecialchars($n->categoriaCliente, ENT_QUOTES, 'UTF-8') ?></span>
+                    <span class="cg-card-badge">Tipo de cliente: <?php echo htmlspecialchars(ucfirst($n->categoriaCliente), ENT_QUOTES, 'UTF-8') ?></span>
                   </div>
 
                   <div class="cg-card-body-content">
