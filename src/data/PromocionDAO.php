@@ -2,6 +2,7 @@
 
 require_once __DIR__ . "/../model/Promocion.php";
 require_once __DIR__ . "/../model/Local.php";
+require_once __DIR__ . "/../model/Usuario.php";
 require_once __DIR__ . "/DBFunctions.php";
 
 class PromocionDAO extends DBFunctions
@@ -24,7 +25,17 @@ class PromocionDAO extends DBFunctions
           $promocionFetchArray['ubicacion_local'],
           $promocionFetchArray['nombre_local'],
           $promocionFetchArray['rubro_local'],
-          null,
+          new Usuario(
+            $promocionFetchArray['id_usuario'],
+            $promocionFetchArray['nombre_usuario'],
+            $promocionFetchArray['email_usuario'],
+            $promocionFetchArray['clave_usuario'],
+            $promocionFetchArray['tipo_usuario'],
+            $promocionFetchArray['categoria_cliente'],
+            $promocionFetchArray['estado_dueno'],
+            $promocionFetchArray['estado_mail'],
+            $promocionFetchArray['token_verificacion']
+          ),
           $promocionFetchArray['estado_local'],
         )
       );
@@ -38,7 +49,8 @@ class PromocionDAO extends DBFunctions
 
     $query = "SELECT *
               FROM promocion p
-              INNER JOIN local l ON p.id_local = l.id_local;";
+              INNER JOIN local l ON p.id_local = l.id_local
+              INNER JOIN usuario u ON l.id_usuario = u.id_usuario;";
 
     $promociones = $this->querySQL($query);
 
@@ -74,6 +86,7 @@ class PromocionDAO extends DBFunctions
     $query = "SELECT *
               FROM promocion p
               INNER JOIN local l ON p.id_local = l.id_local
+              INNER JOIN usuario u ON l.id_usuario = u.id_usuario
               WHERE p.id_promo = '" . $idPromo . "';";
 
     $promocion = $this->querySQL($query);
@@ -107,6 +120,7 @@ class PromocionDAO extends DBFunctions
     $query = "SELECT *
               FROM promocion p
               INNER JOIN local l ON p.id_local = l.id_local
+              INNER JOIN usuario u ON l.id_usuario = u.id_usuario
               WHERE p.id_local = '" . $idLocal . "';";
 
     $result = $this->querySQL($query);
@@ -116,7 +130,9 @@ class PromocionDAO extends DBFunctions
         $p = $this->sanitizePromocion($row);
 
         $dias = [];
-        $diasQuery = "SELECT id_dia FROM dias_promo WHERE id_promo = " . $row['id_promo'];
+        $diasQuery = "SELECT id_dia
+                      FROM dias_promo
+                      WHERE id_promo = " . $row['id_promo'];
         $diasResult = $this->querySQL($diasQuery);
 
         while ($d = mysqli_fetch_array($diasResult)) {
@@ -137,9 +153,10 @@ class PromocionDAO extends DBFunctions
     $hoy = date('Y-m-d');
     $diaHoy = date('N');
 
-    $query = "SELECT DISTINCT p.*, l.*
+    $query = "SELECT DISTINCT p.*, l.*, u.*
               FROM promocion p
               INNER JOIN local l ON p.id_local = l.id_local
+              INNER JOIN usuario u ON l.id_usuario = u.id_usuario
               INNER JOIN dias_promo dp ON p.id_promo = dp.id_promo
               WHERE p.id_local = $idLocal
                 AND p.estado_promo = 'aprobada'
@@ -190,7 +207,8 @@ class PromocionDAO extends DBFunctions
 
     $this->querySQL($query);
 
-    $queryId = "SELECT MAX(id_promo) as id FROM promocion;";
+    $queryId = "SELECT MAX(id_promo) as id
+                FROM promocion;";
     $result = $this->querySQL($queryId);
     $row = mysqli_fetch_array($result);
     $idPromo = $row['id'];

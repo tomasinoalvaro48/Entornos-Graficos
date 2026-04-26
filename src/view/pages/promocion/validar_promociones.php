@@ -151,12 +151,12 @@ $promociones = showPromociones();
                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
 
                                 <a class="btn btn-danger"
-                                  href="<?php echo app_path('src/controller/dueno/handle_validar_promocion.php'); ?>?estado=denegada&id=<?php echo $promo->idPromo; ?>">
+                                  href="<?php echo app_path('src/controller/promocion/handle_validar_promocion.php'); ?>?estado=denegada&id=<?php echo $promo->idPromo; ?>">
                                   Denegar
                                 </a>
 
                                 <a class="btn btn-success"
-                                  href="<?php echo app_path('src/controller/dueno/handle_validar_promocion.php'); ?>?estado=aprobada&id=<?php echo $promo->idPromo; ?>">
+                                  href="<?php echo app_path('src/controller/promocion/handle_validar_promocion.php'); ?>?estado=aprobada&id=<?php echo $promo->idPromo; ?>">
                                   Aprobar
                                 </a>
                               </div>

@@ -54,19 +54,92 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link" href="<?php echo app_path('src/view/pages/auth/signin.php'); ?>">Registrarse</a>
             </li>
           <?php } else if ($tipo === "admin") { ?>
-            <li class="nav-item">
-              <a class="nav-link" href="<?php echo app_path(); ?>">Inicio ADMIN</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                Locales
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">Ver locales</a></li>
+                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/local/create_local.php'); ?>">Crear local</a></li>
+              </ul>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">Locales</a>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                Promociones
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/promocion/validar_promociones.php'); ?>">Ver y gestionar promociones</a></li>
+                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/uso_promocion/reporte_promociones.php'); ?>">Reporte de uso de promociones</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                Novedades
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>">Ver novedades</a></li>
+                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/novedad/novedad_create.php'); ?>">Crear novedad</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                Usuarios
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/usuario/validar_cuentas_dueno.php?estado=pendiente'); ?>">Administrar cuentas de dueños</a></li>
+                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/usuario/validar_cuentas_dueno.php'); ?>">Ver cuentas de dueños</a></li>
+              </ul>
             </li>
           <?php } else if ($tipo === "cliente") { ?>
-            <li class="nav-item">
-              <a class="nav-link" href="<?php echo app_path(); ?>">Inicio CLIENTE</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                Locales
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/local/locales_cliente.php'); ?>">Ver locales</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                Promociones
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/uso_promocion/promos_cliente.php'); ?>">Buscar promociones</a></li>
+                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/uso_promocion/mis_usos_cliente.php'); ?>">Mis usos de promociones</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                Novedades
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>">Ver novedades</a></li>
+              </ul>
             </li>
           <?php } else if ($tipo === "dueno") { ?>
-            <li class="nav-item">
-              <a class="nav-link" href="<?php echo app_path(); ?>">Inicio DUEÑO</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                Locales
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">Ver mis locales</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                Promociones
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>">Ver mis promociones</a></li>
+                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/promocion/create_promocion.php'); ?>">Crear promoción</a></li>
+                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/uso_promocion/validar_uso_promocion.php'); ?>">Gestionar usos de promociones</a></li>
+              </ul>
             </li>
           <?php } ?>
 
