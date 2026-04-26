@@ -35,31 +35,31 @@
         <p class="c-subtitle">Completá los datos para registrarte</p>
       </header>
 
-      <form action="../../../controller/handle_signin.php" method="post" id="formSigninCliente" class="c-form">
-        <div class="c-field">
-          <input class="c-input" type="text" name="nombre_usuario" id="nombre" placeholder=" " autocomplete="name" required />
-          <label class="c-label" for="nombre">Nombre y apellido</label>
+      <form action="../../../controller/handle_signin.php" method="post" id="formSigninCliente" class="c-form-layout">
+        <div class="c-form-field">
+          <input class="c-form-input" type="text" name="nombre_usuario" id="nombre" placeholder=" " autocomplete="name" required />
+          <label class="c-form-label" for="nombre">Nombre y apellido</label>
         </div>
 
-        <div class="c-field">
-          <input class="c-input" type="email" name="email_usuario" id="mail" placeholder=" " autocomplete="email" required />
-          <label class="c-label" for="mail">Correo</label>
+        <div class="c-form-field">
+          <input class="c-form-input" type="email" name="email_usuario" id="mail" placeholder=" " autocomplete="email" required />
+          <label class="c-form-label" for="mail">Correo</label>
         </div>
 
-        <div class="c-field">
-          <input class="c-input" type="password" name="clave_usuario" id="pass" placeholder=" " autocomplete="new-password" required />
-          <label class="c-label" for="pass">Contraseña</label>
+        <div class="c-form-field">
+          <input class="c-form-input" type="password" name="clave_usuario" id="pass" placeholder=" " autocomplete="new-password" required />
+          <label class="c-form-label" for="pass">Contraseña</label>
         </div>
 
-        <div class="c-field">
-          <input class="c-input" type="password" name="clave_usuario_conf" id="pass_conf" placeholder=" " autocomplete="new-password" required />
-          <label class="c-label" for="pass_conf">Repetir contraseña</label>
+        <div class="c-form-field">
+          <input class="c-form-input" type="password" name="clave_usuario_conf" id="pass_conf" placeholder=" " autocomplete="new-password" required />
+          <label class="c-form-label" for="pass_conf">Repetir contraseña</label>
         </div>
 
         <button class="c-btn-primary" type="submit" id="botonCrearCliente" name="botonCrearCliente">Crear cuenta</button>
       </form>
 
-      <p class="c-footnote">¿Ya tienes cuenta? <a href="<?php echo app_path('src/view/pages/auth/login.php'); ?>">Iniciar sesión</a></p>
+      <p class="c-form-footnote">¿Ya tienes cuenta? <a href="<?php echo app_path('src/view/pages/auth/login.php'); ?>">Iniciar sesión</a></p>
     </section>
   </main>
 

@@ -35,20 +35,20 @@
         <p class="c-subtitle">Ingresá para continuar</p>
       </header>
 
-      <form action="../../../controller/handle_login.php" method="post" id="formLogin" class="c-form">
-        <div class="c-field">
-          <input class="c-input" type="email" name="mail" id="mail" placeholder=" " autocomplete="email" required />
-          <label class="c-label" for="mail">Correo</label>
+      <form action="../../../controller/handle_login.php" method="post" id="formLogin" class="c-form-layout">
+        <div class="c-form-field">
+          <input class="c-form-input" type="email" name="mail" id="mail" placeholder=" " autocomplete="email" required />
+          <label class="c-form-label" for="mail">Correo</label>
         </div>
 
-        <div class="c-field">
-          <input class="c-input" type="password" name="pass" id="pass" placeholder=" " autocomplete="current-password" required />
-          <label class="c-label" for="pass">Contraseña</label>
+        <div class="c-form-field">
+          <input class="c-form-input" type="password" name="pass" id="pass" placeholder=" " autocomplete="current-password" required />
+          <label class="c-form-label" for="pass">Contraseña</label>
         </div>
 
         <div>
-          <label class="c-check" for="rememberMe">
-            <input class="c-check-input" type="checkbox" name="rememberMe" id="rememberMe" />
+          <label class="c-form-check" for="rememberMe">
+            <input class="c-form-check-input" type="checkbox" name="rememberMe" id="rememberMe" />
             <span>Recordarme</span>
           </label>
         </div>
@@ -56,8 +56,8 @@
         <button type="submit" class="c-btn-primary" id="botonIniciar" name="botonIniciar">Entrar</button>
 
         <div>
-          <p class="c-footnote"> ¿Has olvidado la contraseña? <a href="<?php echo app_path('src/view/pages/auth/forgot_password.php'); ?>">Recuperar contraseña</a></p>
-          <p class="c-footnote">¿No tienes cuenta? <a href="<?php echo app_path('src/view/pages/auth/signin.php'); ?>">Registrarse</a></p>
+          <p class="c-form-footnote"> ¿Has olvidado la contraseña? <a href="<?php echo app_path('src/view/pages/auth/forgot_password.php'); ?>">Recuperar contraseña</a></p>
+          <p class="c-form-footnote">¿No tienes cuenta? <a href="<?php echo app_path('src/view/pages/auth/signin.php'); ?>">Registrarse</a></p>
         </div>
       </form>
     </section>

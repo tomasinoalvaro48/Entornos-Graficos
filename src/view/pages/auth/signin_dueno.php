@@ -35,31 +35,31 @@
         <p class="c-subtitle">Solicitá una cuenta para tu negocio</p>
       </header>
 
-      <form action="../../../controller/handle_signin.php" method="post" id="formSigninDueno" class="c-form">
-        <div class="c-field">
-          <input class="c-input" type="text" name="nombre_dueno" id="nombre_dueno" placeholder=" " autocomplete="name" required />
-          <label class="c-label" for="nombre_dueno">Nombre y apellido</label>
+      <form action="../../../controller/handle_signin.php" method="post" id="formSigninDueno" class="c-form-layout">
+        <div class="c-form-field">
+          <input class="c-form-input" type="text" name="nombre_dueno" id="nombre_dueno" placeholder=" " autocomplete="name" required />
+          <label class="c-form-label" for="nombre_dueno">Nombre y apellido</label>
         </div>
 
-        <div class="c-field">
-          <input class="c-input" type="email" name="email_dueno" id="mail_dueno" placeholder=" " autocomplete="email" required />
-          <label class="c-label" for="mail_dueno">Correo</label>
+        <div class="c-form-field">
+          <input class="c-form-input" type="email" name="email_dueno" id="mail_dueno" placeholder=" " autocomplete="email" required />
+          <label class="c-form-label" for="mail_dueno">Correo</label>
         </div>
 
-        <div class="c-field">
-          <input class="c-input" type="password" name="clave_dueno" id="pass_dueno" placeholder=" " autocomplete="new-password" required />
-          <label class="c-label" for="pass_dueno">Contraseña</label>
+        <div class="c-form-field">
+          <input class="c-form-input" type="password" name="clave_dueno" id="pass_dueno" placeholder=" " autocomplete="new-password" required />
+          <label class="c-form-label" for="pass_dueno">Contraseña</label>
         </div>
 
-        <div class="c-field">
-          <input class="c-input" type="password" name="clave_dueno_conf" id="pass_dueno_conf" placeholder=" " autocomplete="new-password" required />
-          <label class="c-label" for="pass_dueno_conf">Repetir contraseña</label>
+        <div class="c-form-field">
+          <input class="c-form-input" type="password" name="clave_dueno_conf" id="pass_dueno_conf" placeholder=" " autocomplete="new-password" required />
+          <label class="c-form-label" for="pass_dueno_conf">Repetir contraseña</label>
         </div>
 
         <button class="c-btn-primary" type="submit" id="botonSolicitarDueno" name="botonSolicitarDueno">Enviar solicitud</button>
       </form>
 
-      <p class="c-footnote">¿Ya tienes cuenta? <a href="<?php echo app_path('src/view/pages/auth/login.php'); ?>">Iniciar sesión</a></p>
+      <p class="c-form-footnote">¿Ya tienes cuenta? <a href="<?php echo app_path('src/view/pages/auth/login.php'); ?>">Iniciar sesión</a></p>
     </section>
   </main>
 

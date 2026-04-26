@@ -33,93 +33,108 @@ if ($tipo === 'cliente') {
   <header>
     <?php include __DIR__ . '/../../components/header.php' ?>
   </header>
-  <main class="c-novedad-page">
-    <div class="c-novedad-layout">
-      <aside class="c-novedad-aside">
-        <div class="c-novedad-aside__hero text-center">
-          <p class="c-novedad-aside-kicker">Panel de novedades</p>
-          <h1 class="c-novedad-aside-title">Novedades</h1>
-          <p class="c-novedad-aside-subtitle">Revisá y administrá los avisos publicados para cada tipo de cliente.</p>
+  <main class="row c-page-main">
+    <div class="col-md-3 col-12">
+      <aside class=" c-aside">
+        <div class="row c-hero">
+          <h1 class="c-title">Novedades</h1>
+          <p class="c-subtitle">Revisá y administrá los avisos publicados para cada tipo de cliente.</p>
         </div>
 
-        <div class="c-novedad-aside-actions">
+        <div class="row">
           <!-- Botón para crear nueva novedad, solo visible para admin -->
           <?php if ($tipo === "admin") { ?>
-            <a href="<?php echo app_path('src/view/pages/novedad/novedad_create.php'); ?>" class="btn btn-success c-novedad-aside-btn">
-              Crear Novedad
-            </a>
+            <div class="col-md-12 col-6">
+              <a class="c-btn-secondary-tonal" href="<?php echo app_path('src/view/pages/novedad/novedad_create.php'); ?>">
+                Crear Novedad
+              </a>
+            </div>
           <?php } ?>
-
-          <a href="<?php echo app_path(); ?>" class="btn btn-secondary c-novedad-aside-btn">
-            Volver al Menú
-          </a>
+          <div class="col-md-12 col-6">
+            <a class="c-btn-secondary-ghost" href="<?php echo app_path(); ?>">
+              Volver al Menú
+            </a>
+          </div>
         </div>
       </aside>
-
-      <?php if (empty($novedades)) { ?>
-        <section class="c-novedad-list">
-          <p>No hay novedades registradas.</p>
-        </section>
-      <?php } else { ?>
-        <section class="c-novedad-list">
+    </div>
+    <?php if (empty($novedades)) { ?>
+      <section class="col-8">
+        <p>No hay novedades registradas.</p>
+      </section>
+    <?php } else { ?>
+      <section class="col-7">
+        <div class="row c-list">
           <?php foreach ($novedades as $n) {
             $modalId = 'editNovedadModal_' . $n->codNovedad;
             $novedadToEdit = $n;
 
           ?>
-            <article class="c-novedad-item">
-              <div class="card cg-card-container">
-                <div class="card-body cg-card">
-                  <div class="cg-card-header">
-                    <h5 class="card-title">Codigo: <?php echo htmlspecialchars($n->codNovedad, ENT_QUOTES, 'UTF-8') ?></h5>
-                    <span class="cg-card-badge">Tipo de cliente: <?php echo htmlspecialchars(ucfirst($n->categoriaCliente), ENT_QUOTES, 'UTF-8') ?></span>
-                  </div>
-
-                  <div class="cg-card-body-content">
-                    <div class="cg-card-dates">
-                      <div class="cg-card-date-item">
-                        <span class="cg-card-date-label">Fecha Desde:</span>
-                        <span class="cg-card-date-value"><?php echo $n->fechaDesdeNovedad ? htmlspecialchars($n->fechaDesdeNovedad->format('Y-m-d'), ENT_QUOTES, 'UTF-8') : 'N/A'; ?></span>
-                      </div>
-                      <div class="cg-card-date-item">
-                        <span class="cg-card-date-label">Fecha Hasta:</span>
-                        <span class="cg-card-date-value"><?php echo $n->fechaHastaNovedad ? htmlspecialchars($n->fechaHastaNovedad->format('Y-m-d'), ENT_QUOTES, 'UTF-8') : 'N/A'; ?></span>
-                      </div>
-                    </div>
-
-                    <div class="cg-card-divider"></div>
-
-                    <div class="cg-card-desc">
-                      <?php echo htmlspecialchars($n->textoNovedad, ENT_QUOTES, 'UTF-8') ?>
-                    </div>
-                  </div>
-
-                  <?php if ($tipo === 'admin') { ?>
-                    <div class="cg-card-actions">
-                      <button
-                        type="button"
-                        class="btn cg-btn"
-                        data-bs-toggle="modal"
-                        data-bs-target="#<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>">
-                        Editar
-                      </button>
-                      <a
-                        class="btn cg-btn"
-                        href="<?php echo app_path('src/controller/novedad/handle_delete_novedad.php'); ?>?id=<?php echo htmlspecialchars($n->codNovedad, ENT_QUOTES, 'UTF-8'); ?>">
-                        Eliminar
-                      </a>
-                    </div>
-                  <?php } ?>
+            <article class="col-12 c-list-card">
+              <div class="row c-list-card-header">
+                <div class="col-md-6 c-list-card-title">
+                  <h5>Novedad #<?php echo htmlspecialchars($n->codNovedad, ENT_QUOTES, 'UTF-8') ?></h5>
                 </div>
-                <?php include __DIR__ . '/novedad_update.php'; ?>
+                <div class="col-md-6 c-list-card-category">
+                  <span>Tipo de cliente: <?php echo htmlspecialchars(ucfirst($n->categoriaCliente), ENT_QUOTES, 'UTF-8') ?></span>
+                </div>
               </div>
+
+              <div class="c-list-cart-body-container">
+                <div class="row mb-4">
+                  <div class="col-6">
+                    <div class="c-list-cart-body-info-group">
+                      <label class="c-list-cart-body-label">FECHA DESDE</label>
+                      <span class="c-list-cart-body-date"><?php echo $n->fechaDesdeNovedad ? htmlspecialchars($n->fechaDesdeNovedad->format('Y-m-d'), ENT_QUOTES, 'UTF-8') : 'N/A'; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-6 text-end">
+                    <div class="c-list-cart-body-info-group">
+                      <label class="c-list-cart-body-label">FECHA HASTA</label>
+                      <span class="c-list-cart-body-date"><?php echo $n->fechaHastaNovedad ? htmlspecialchars($n->fechaHastaNovedad->format('Y-m-d'), ENT_QUOTES, 'UTF-8') : 'N/A'; ?></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12">
+                    <div class="c-list-cart-body-desc-container">
+                      <label class="c-list-cart-body-label">DESCRIPCIÓN</label>
+                      <p class="c-list-cart-body-desc-text">
+                        <?php echo htmlspecialchars($n->textoNovedad, ENT_QUOTES, 'UTF-8') ?>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <?php if ($tipo === 'admin') { ?>
+                <div class="row">
+                  <div class="col-md-6">
+                    <button
+                      class="c-btn-secondary-tonal"
+                      type="button"
+                      data-bs-toggle="modal"
+                      data-bs-target="#<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>">
+                      Editar
+                    </button>
+                  </div>
+                  <div class="col-md-6">
+                    <a class="c-btn-danger-tonal"
+                      href="<?php echo app_path('src/controller/novedad/handle_delete_novedad.php'); ?>?id=<?php echo htmlspecialchars($n->codNovedad, ENT_QUOTES, 'UTF-8'); ?>">
+                      Eliminar
+                    </a>
+                  </div>
+                </div>
+
+              <?php } ?>
+              <?php include __DIR__ . '/novedad_update.php'; ?>
             </article>
-
-
           <?php } ?>
-        </section>
-      <?php } ?>
-    </div>
+        </div>
+      </section>
+    <?php } ?>
+
   </main>
 
 
