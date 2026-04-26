@@ -20,7 +20,7 @@
     <?php include '../../components/header.php' ?>
   </header>
 
-  <main class="c-page-main">
+  <main class="c-page-main align-items-center">
     <section class="c-card" aria-label="Registro de dueño">
       <?php include '../../components/alerts.php' ?>
 

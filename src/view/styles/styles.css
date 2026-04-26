@@ -6,7 +6,6 @@
 .c-page-main {
   min-height: 90vh;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 /*card*/
@@ -136,23 +135,6 @@
   cursor: pointer;
 }
 
-/* btn primary */
-.c-btn-primary {
-  width: 100%;
-  height: 3rem;
-  border: none;
-  border-radius: 0.45rem;
-  background-color: #ffa866;
-  color: #2d3250;
-  font-weight: 700;
-  transition: all 0.5s ease;
-}
-
-.c-btn-primary:hover {
-  background-color: #f9b17a;
-  box-shadow: 0 0 10px rgba(249, 177, 122, 0.35);
-}
-
 /* Footnote card styles*/
 .c-footnote {
   text-align: center;
@@ -167,6 +149,144 @@
 }
 .c-footnote a:hover {
   color: #fff;
+}
+
+/*Styles pantalla base*/
+.c-aside {
+  margin: 1.25rem;
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  background-color: #1b1f3a;
+  border: 1px solid rgba(249, 177, 122, 0.18);
+  box-shadow: 0 12px 28px rgba(8, 12, 31, 0.35);
+}
+
+/* ================================================================================== */
+.c-btn-primary,
+.c-btn-secondary-ghost,
+.c-btn-secondary-tonal {
+  width: 100%;
+  height: 3rem;
+  border-radius: 0.45rem;
+  font-weight: 700;
+  transition: all 0.5s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  margin: 0.5rem 0;
+}
+
+/* Evitamos el subrayado en el hover para todos */
+.c-link-btn-primary:hover,
+.c-btn-secondary-ghost:hover,
+.c-btn-secondary-tonal:hover {
+  text-decoration: none;
+}
+
+/* --- Primary --- */
+.c-btn-primary {
+  background-color: #ffa866;
+  color: #2d3250;
+  border: none;
+}
+
+.c-btn-primary:hover {
+  background-color: #f9b17a;
+  color: #2d3250;
+  box-shadow: 0 0 10px rgba(249, 177, 122, 0.35);
+}
+
+/* --- Secondary Ghost --- */
+.c-btn-secondary-ghost {
+  background-color: transparent;
+  color: #fca364;
+  border: 2px solid #fca364;
+}
+
+.c-btn-secondary-ghost:hover {
+  background-color: rgba(252, 163, 100, 0.1);
+  color: #fca364;
+}
+
+/* --- Secondary Tonal --- */
+.c-btn-secondary-tonal {
+  background-color: rgba(252, 163, 100, 0.15); /* Naranja al 15% de opacidad */
+  color: #fca364;
+  border: none;
+}
+
+.c-btn-secondary-tonal:hover {
+  background-color: rgba(252, 163, 100, 0.25);
+  color: #fca364;
+}
+
+/* Opción A: Secondary Ghost */
+
+/*
+.c-btn-secondary-ghost {
+  width: 100%;
+  height: 3rem;
+  background-color: transparent;
+  color: #fca364;
+  border: 2px solid #fca364;
+  border-radius: 8px;
+  padding: 0 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.c-btn-secondary-ghost:hover {
+  background-color: rgba(252, 163, 100, 0.1);
+  color: #fca364;
+  text-decoration: none;
+}
+
+/* Opción B: Secondary Tonal */
+/*
+.c-btn-secondary-tonal {
+  background-color: rgba(252, 163, 100, 0.15);
+  color: #fca364;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.c-btn-secondary-tonal:hover {
+  background-color: rgba(252, 163, 100, 0.25);
+}
+
+.c-link-btn-primary {
+  width: 100%;
+  height: 3rem;
+  border: none;
+  border-radius: 0.45rem;
+  background-color: #ffa866;
+  color: #2d3250;
+  font-weight: 700;
+  transition: all 0.5s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.c-link-btn-primary:hover {
+  background-color: #f9b17a;
+  box-shadow: 0 0 10px rgba(249, 177, 122, 0.35);
+  color: #2d3250;
+  text-decoration: none;
 }
 
 /* Novedad aside */
