@@ -21,7 +21,7 @@
   </header>
 
   <main class="c-page-main">
-    <section class="c-card c-card--login" aria-label="Registro de dueño">
+    <section class="c-card" aria-label="Registro de dueño">
       <?php include '../../components/alerts.php' ?>
 
       <nav class="c-tabs" aria-label="Navegación autenticación">

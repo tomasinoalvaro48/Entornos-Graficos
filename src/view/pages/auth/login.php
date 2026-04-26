@@ -21,7 +21,7 @@
   </header>
 
   <main class="c-page-main">
-    <section class="c-card c-card--login" aria-label="Inicio de sesión">
+    <section class="c-card" aria-label="Inicio de sesión">
       <?php include '../../components/alerts.php' ?>
 
       <nav class="c-tabs" aria-label="Navegación autenticación">
@@ -46,19 +46,19 @@
           <label class="c-label" for="pass">Contraseña</label>
         </div>
 
-        <div class="c-row-between c-meta-row">
+        <div>
           <label class="c-check" for="rememberMe">
             <input class="c-check-input" type="checkbox" name="rememberMe" id="rememberMe" />
             <span>Recordarme</span>
           </label>
-          <a class="c-link-muted" href="<?php echo app_path('src/view/pages/auth/forgot_password.php'); ?>">
-            ¿Has olvidado la contraseña?
-          </a>
         </div>
 
         <button type="submit" class="c-btn-primary" id="botonIniciar" name="botonIniciar">Entrar</button>
 
-        <p class="c-footnote">¿No tienes cuenta? <a href="<?php echo app_path('src/view/pages/auth/signin.php'); ?>">Registrarse</a></p>
+        <div>
+          <p class="c-footnote"> ¿Has olvidado la contraseña? <a href="<?php echo app_path('src/view/pages/auth/forgot_password.php'); ?>">Recuperar contraseña</a></p>
+          <p class="c-footnote">¿No tienes cuenta? <a href="<?php echo app_path('src/view/pages/auth/signin.php'); ?>">Registrarse</a></p>
+        </div>
       </form>
     </section>
   </main>
