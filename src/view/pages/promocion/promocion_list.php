@@ -3,6 +3,7 @@ require_once __DIR__ . "/../../../controller/promocion/show_promocion.php";
 require_once __DIR__ . "/../../../controller/local/show_local.php";
 require_once __DIR__ . "/../../../controller/auth.php";
 require_once __DIR__ . "/../../../data/UsoPromocionDAO.php";
+require_once __DIR__ . "/../../../enums.php";
 
 $tipo = getTipoUsuario();
 
@@ -43,28 +44,7 @@ $usoDAO = new UsoPromocionDAO();
         </div>
       </div>
 
-      <?php
-      if ($error) { ?>
-        <div class="row mt-3">
-          <div class="col">
-            <div class="alert alert-danger" role="alert">
-              <?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8');
-              ?>
-            </div>
-          </div>
-        </div>
-      <?php } ?>
-
-      <?php if ($success) { ?>
-        <div class="row mt-3">
-          <div class="col">
-            <div class="alert alert-success" role="alert">
-              <?php echo htmlspecialchars($success, ENT_QUOTES, 'UTF-8');
-              unset($success); ?>
-            </div>
-          </div>
-        </div>
-      <?php } ?>
+      <?php include __DIR__ . "/../../components/alerts.php" ?>
 
       <?php if (empty($promociones)) { ?>
         <div class="row">
@@ -116,17 +96,19 @@ $usoDAO = new UsoPromocionDAO();
                     ?>
                   </p>
 
-                  <p class="card-text">
-                    Estado de la promo:
-                    <b><?php echo htmlspecialchars($p->estadoPromo, ENT_QUOTES, 'UTF-8'); ?></b>
-                  </p>
+                  <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
+                    <p class="card-text">
+                      Estado de la promo:
+                      <b><?php echo htmlspecialchars($p->estadoPromo, ENT_QUOTES, 'UTF-8'); ?></b>
+                    </p>
+                  <?php } ?>
 
                   <p class="card-text">
                     Local:
                     <?php echo htmlspecialchars($p->local->nombreLocal, ENT_QUOTES, 'UTF-8'); ?>
                   </p>
 
-                  <?php if ($tipo === "dueno" && $p->estadoPromo === "aprobada") { 
+                  <?php if ($tipo === TipoUsuario::DUENO->value && $p->estadoPromo === "aprobada") {
                     $cantidadUsos = $usoDAO->countUsosAceptadosByPromo($p->idPromo);
                   ?>
                     <p class="card-text">
@@ -138,7 +120,7 @@ $usoDAO = new UsoPromocionDAO();
                   <?php } ?>
 
                   <div class="d-flex justify-content-end">
-                    <?php if ($tipo === "dueno") { ?>
+                    <?php if ($tipo === TipoUsuario::DUENO->value) { ?>
                       <a href="<?php echo app_path('src/controller/promocion/handle_delete_promocion.php'); ?>?id=<?php echo htmlspecialchars($p->idPromo, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-danger">
                         Eliminar
                       </a>
@@ -151,7 +133,7 @@ $usoDAO = new UsoPromocionDAO();
       <?php }
       } ?>
 
-      <?php if ($tipo === "dueno") { ?>
+      <?php if ($tipo === TipoUsuario::DUENO->value) { ?>
         <div class="container text-center">
           <div class="row mt-5">
             <div class="col">

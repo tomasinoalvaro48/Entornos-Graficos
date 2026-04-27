@@ -2,6 +2,7 @@
 require_once __DIR__ . "/../../../controller/local/show_local.php";
 require_once __DIR__ . "/../../../controller/dueno/show_duenos.php";
 require_once __DIR__ . "/../../../controller/auth.php";
+require_once __DIR__ . "/../../../enums.php";
 
 $tipo = getTipoUsuario();
 
@@ -52,7 +53,7 @@ $duenos = showDuenos();
                 <h5 class="card-title">Panel</h5>
 
                 <!-- Botón para crear nuevo local, solo visible para admin -->
-                <?php if ($tipo === "admin") { ?>
+                <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
                   <div class="container text-center">
                     <div class="row">
                       <div class="col">
@@ -101,9 +102,10 @@ $duenos = showDuenos();
                         <h5 class='card-title'> <?php echo htmlspecialchars($l->nombreLocal, ENT_QUOTES, 'UTF-8') ?></h5>
                         <p class='card-text'>Ubicación: <?php echo htmlspecialchars($l->ubiLocal, ENT_QUOTES, 'UTF-8') ?></p>
                         <p class='card-text'>Rubro: <?php echo htmlspecialchars($l->rubroLocal, ENT_QUOTES, 'UTF-8') ?></p>
-                        <p class="card-text">Estado: <?php echo htmlspecialchars($l->estadoLocal, ENT_QUOTES, 'UTF-8') ?></p>
-                        <!-- Dueño del Local y botones de Editar y Eliminar solo visibles para admin -->
-                        <?php if ($tipo === "admin") { ?>
+
+                        <!-- Dueño del Local, Estado y botones de Editar y Eliminar solo visibles para admin -->
+                        <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
+                          <p class="card-text">Estado: <?php echo htmlspecialchars($l->estadoLocal, ENT_QUOTES, 'UTF-8') ?></p>
                           <p class='card-text'>Dueño: <?php echo htmlspecialchars($l->usuario->nombreUsuario, ENT_QUOTES, 'UTF-8') ?></p>
                           <button
                             type="button"
@@ -125,8 +127,6 @@ $duenos = showDuenos();
               }
             }
             ?>
-
-
 
   </main>
   <script
