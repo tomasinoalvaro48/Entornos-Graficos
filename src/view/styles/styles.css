@@ -336,7 +336,6 @@
 .c-header-navbar {
   background: linear-gradient(90deg, #1b1f3a 0%, #20284f 55%, #1b1f3a 100%);
   border-bottom: 1px solid rgba(249, 177, 122, 0.2);
-  box-shadow: 0 10px 26px rgba(8, 12, 31, 0.35);
   min-height: 78px;
 }
 
