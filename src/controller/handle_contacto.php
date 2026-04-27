@@ -45,6 +45,13 @@ if (isset($_POST['botonContacto'])) {
     exit();
   }
 
+  // Validar que el email sea válido antes de enviar (según norma rfc822: https://datatracker.ietf.org/doc/html/rfc822)
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    setSessionError("El email proporcionado no es válido. No se pudo enviar email.");
+    header("Location: " . app_path());
+    exit();
+  }
+
   if (sendContactEmail($nombre, $email, $mensaje)) {
     setSessionSuccess("Gracias por contactarnos, $nombre. Hemos recibido tu mensaje y nos pondremos en contacto contigo a la brevedad.");
     header("Location: " . app_path());

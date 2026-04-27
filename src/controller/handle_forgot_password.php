@@ -20,12 +20,17 @@ if (isset($_POST['email'])) {
 
   $usuarioDAO->updateToken($usuario->idUsuario, $token);
 
-  $mailSent = sendResetPasswordEmail($email, $token, $usuario->nombreUsuario);
+  // Validar que el email sea válido antes de enviar (según norma rfc822: https://datatracker.ietf.org/doc/html/rfc822)
+  if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $mailSent = sendResetPasswordEmail($email, $token, $usuario->nombreUsuario);
 
-  if (!$mailSent) {
-    setSessionError("Error al enviar el mail.");
+    if (!$mailSent) {
+      setSessionError("Error al enviar el mail.");
+    } else {
+      setSessionSuccess("Se envió un link de recuperación a tu mail.");
+    }
   } else {
-    setSessionSuccess("Se envió un link de recuperación a tu mail.");
+    setSessionError("El email del usuario es inválido.");
   }
 
   header("Location: " . app_path('src/view/pages/auth/login.php'));

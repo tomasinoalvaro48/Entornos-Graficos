@@ -21,9 +21,14 @@ if (isset($_GET['id']) && isset($_GET['estado'])) {
 
   // Si se actualizó correctamente
   if ($updateResult) {
-    // Enviar mail de aviso al dueño sobre el cambio de estado de su cuenta
-    $mailSent = sendNotiDuenoEmail($dueno->emailUsuario, $dueno->nombreUsuario);
-    setSessionSuccess("El estado del dueño con ID $idDueno ha sido actualizado a '$estado' exitosamente.");
+    // Validar que el email sea válido antes de enviar (según norma rfc822: https://datatracker.ietf.org/doc/html/rfc822)
+    if ($dueno && $dueno->emailUsuario && filter_var($dueno->emailUsuario, FILTER_VALIDATE_EMAIL)) {
+      // Enviar mail de aviso al dueño sobre el cambio de estado de su cuenta
+      $mailSent = sendNotiDuenoEmail($dueno->emailUsuario, $dueno->nombreUsuario);
+      setSessionSuccess("El estado del dueño con ID $idDueno ha sido actualizado a '$estado' exitosamente.");
+    } else {
+      setSessionError("Error: El email del dueño es inválido. No se pudo enviar la notificación.");
+    }
   } else {
     setSessionError("Hubo un error al actualizar el estado del dueño con ID $idDueno. Por favor, intente nuevamente.");
   }

@@ -20,14 +20,19 @@ if (isset($_GET['id']) && isset($_GET['estado'])) {
   if ($updateResult) {
     $dueno = $promo->local->usuario;
 
-    $mailSent = sendNotiPromocionEmail(
-      $dueno->emailUsuario,
-      $dueno->nombreUsuario,
-      $promo->textoPromo,
-      $estado
-    );
+    // Validar que el email sea válido antes de enviar (según norma rfc822: https://datatracker.ietf.org/doc/html/rfc822)
+    if ($dueno && $dueno->emailUsuario && filter_var($dueno->emailUsuario, FILTER_VALIDATE_EMAIL)) {
+      $mailSent = sendNotiPromocionEmail(
+        $dueno->emailUsuario,
+        $dueno->nombreUsuario,
+        $promo->textoPromo,
+        $estado
+      );
 
-    setSessionSuccess("El estado de la promoción con ID $idPromo se actualizó a '$estado'.");
+      setSessionSuccess("El estado de la promoción con ID $idPromo se actualizó a '$estado'.");
+    } else {
+      setSessionError("Error: El email del dueño es inválido. No se pudo enviar la notificación.");
+    }
   } else {
     setSessionError("Error al actualizar la promoción con ID $idPromo. Vuelva a intentarlo.");
   }
