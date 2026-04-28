@@ -1,11 +1,12 @@
 <?php
 
+define('NUM_ITEMS_BY_PAGE', 6);
 
 enum TipoUsuario: string
 {
   case CLIENTE = 'cliente';
   case DUENO = 'dueno';
-  case ADMIN = 'administrador';
+  case ADMIN = 'admin';
 }
 
 enum CategoriaCliente: string
