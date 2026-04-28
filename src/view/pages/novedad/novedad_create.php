@@ -18,75 +18,82 @@ $today = new DateTime();
 </head>
 
 <body>
-  <div class="container text-center">
-    <div class="row">
-      <div class="col">
-        <h1>Crear Novedad</h1>
-      </div>
-    </div>
-    <div class="row">
+
+  <header>
+    <?php include_once __DIR__ . '/../../components/header.php' ?>
+  </header>
+  <main class="c-page-main align-items-center">
+    <section class="c-card" aria-label="Crear Novedad">
       <?php include __DIR__ . "/../../components/alerts.php"; ?>
 
-      <form action="<?php echo app_path('src/controller/novedad/handle_create_novedad.php'); ?>" method="POST">
-        <div>
-          <label for="texto_novedad">Descripción de la Novedad</label>
+      <header class="c-hero">
+        <h1 class="c-title">Crear Novedad</h1>
+      </header>
+
+      <form action="<?php echo app_path('src/controller/novedad/handle_create_novedad.php'); ?>" method="POST" class="c-form-layout">
+        <div class="c-form-field">
           <input
             type="text"
-            class="form-control"
+            class="c-form-input"
             id="texto_novedad"
             name="texto_novedad"
+            placeholder=" "
             required
             maxlength="255">
+          <label class="c-form-label" for="texto_novedad">Descripción de la Novedad</label>
         </div>
-        <div>
-          <label for="texto_novedad">Fecha Desde</label>
-          <input
-            type="date"
-            class="form-control"
-            min="<?php echo $today->format('Y-m-d'); ?>"
-            id="fecha_desde_novedad"
-            name="fecha_desde_novedad"
-            required>
+        <div class="row">
+          <div class="col-6">
+            <div class="c-form-field">
+              <input
+                type="date"
+                class="c-form-input c-form-input-date"
+                min="<?php echo $today->format('Y-m-d'); ?>"
+                id="fecha_desde_novedad"
+                name="fecha_desde_novedad"
+                placeholder=" "
+                required>
+              <label class="c-form-label" for="fecha_desde_novedad">Fecha Desde</label>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class=" c-form-field ">
+              <input
+                type="date"
+                class="c-form-input c-form-input-date"
+                min="<?php echo $today->format('Y-m-d'); ?>"
+                id="fecha_hasta_novedad"
+                name="fecha_hasta_novedad"
+                placeholder=" "
+                required>
+              <label class="c-form-label" for="fecha_hasta_novedad">Fecha Hasta</label>
+            </div>
+          </div>
+
         </div>
-        <div>
-          <label for="texto_novedad">Fecha Hasta</label>
-          <input
-            type="date"
-            class="form-control"
-            min="<?php echo $today->format('Y-m-d'); ?>"
-            id="fecha_hasta_novedad"
-            name="fecha_hasta_novedad"
-            required>
-        </div>
-        <div>
-          <label for="texto_novedad">Descripción de la Novedad</label>
+
+        <div class="c-form-field">
           <select
-            class='form-control'
-            id='categoria_cliente'
+            class="c-form-input c-form-input-select"
+            id="categoria_cliente"
             name="categoria_cliente"
             required>
-            <option value="">Seleccione una Categoría de Cliente
-            </option>
-            <option value="inicial">Inicial
-            </option>
-            <option value="medium">Medium
-            </option>
-            <option value="premium">Premium
-            </option>
-
+            <option value="">Seleccione una Categoría de Cliente</option>
+            <option value="inicial">Inicial</option>
+            <option value="medium">Medium</option>
+            <option value="premium">Premium</option>
           </select>
+          <label class="c-form-label" for="categoria_cliente">Categoría de Cliente</label>
         </div>
-        <button type="submit" class='btn btn-primary' id='botonCrearNovedad' name="botonCrearNovedad">Crear Novedad</button>
-        <a href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>" class="btn btn-secondary">Volver a la Lista de Novedades</a>
 
+        <button type="submit" class="c-btn-primary" id="botonCrearNovedad" name="botonCrearNovedad">Crear Novedad</button>
 
+        <div>
+          <a href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>" class="c-btn-secondary-ghost ">Volver a la Lista de Novedades</a>
+        </div>
       </form>
-
-
-    </div>
-
-
-  </div>
+    </section>
+  </main>
 
 </body>
 

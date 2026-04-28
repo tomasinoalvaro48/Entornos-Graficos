@@ -31,7 +31,7 @@ if ($tipo === 'cliente') {
 
 <body>
   <header>
-    <?php include __DIR__ . '/../../components/header.php' ?>
+    <?php include_once __DIR__ . '/../../components/header.php' ?>
   </header>
   <main class="row c-page-main">
     <div class="col-md-3 col-12">
