@@ -36,125 +36,156 @@ $usoDAO = new UsoPromocionDAO();
     <?php include __DIR__ . '/../../components/header.php' ?>
   </header>
 
-  <main>
-    <div class="container text-center">
-      <div class="row">
-        <div class="col">
-          <h1>Promociones</h1>
+  <main class="row c-page-main">
+    <div class="col-md-3 col-12">
+      <aside class="c-aside">
+        <div class="row c-hero">
+          <h1 class="c-title">Promociones</h1>
+          <p class="c-subtitle">
+            <?php
+            if ($tipo === TipoUsuario::DUENO->value) {
+              echo "Visualizá y gestioná tus promociones.";
+            } else {
+              echo "Visualizá todas las promociones disponibles.";
+            }
+            ?>
+          </p>
         </div>
-      </div>
 
-      <?php include __DIR__ . "/../../components/alerts.php" ?>
-
-      <?php if (empty($promociones)) { ?>
         <div class="row">
-          <div class="col">
-            <p>No hay promociones registradas.</p>
-          </div>
-        </div>
-        <?php
-      } else {
-        foreach ($promociones as $p) {
-        ?>
-          <div class="row mt-3">
-            <div class="col">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    <?php echo htmlspecialchars($p->textoPromo, ENT_QUOTES, 'UTF-8'); ?>
-                  </h5>
-
-                  <p class="card-text">
-                    Vigencia:
-                    <?php echo $p->fechaDesdePromo->format('d/m/Y'); ?>
-                    -
-                    <?php echo $p->fechaHastaPromo->format('d/m/Y'); ?>
-                  </p>
-
-                  <p class="card-text">
-                    Categoría cliente:
-                    <?php echo htmlspecialchars($p->categoriaClientePromo, ENT_QUOTES, 'UTF-8'); ?>
-                  </p>
-
-                  <p class="card-text">
-                    Días de la semana:
-                    <?php
-                    $dias = [];
-                    foreach ($p->diasSemanaPromo as $d) {
-                      $diasTexto = [
-                        1 => "Lun",
-                        2 => "Mar",
-                        3 => "Mié",
-                        4 => "Jue",
-                        5 => "Vie",
-                        6 => "Sáb",
-                        7 => "Dom"
-                      ];
-                      $dias[] = $diasTexto[$d] ?? $d;
-                    }
-                    echo implode(", ", $dias);
-                    ?>
-                  </p>
-
-                  <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
-                    <p class="card-text">
-                      Estado de la promo:
-                      <b><?php echo htmlspecialchars($p->estadoPromo, ENT_QUOTES, 'UTF-8'); ?></b>
-                    </p>
-                  <?php } ?>
-
-                  <p class="card-text">
-                    Local:
-                    <?php echo htmlspecialchars($p->local->nombreLocal, ENT_QUOTES, 'UTF-8'); ?>
-                  </p>
-
-                  <?php if ($tipo === TipoUsuario::DUENO->value && $p->estadoPromo === "aprobada") {
-                    $cantidadUsos = $usoDAO->countUsosAceptadosByPromo($p->idPromo);
-                  ?>
-                    <p class="card-text">
-                      <b>
-                        Cantidad de clientes que usaron la promo:
-                        <?php echo $cantidadUsos; ?>
-                      </b>
-                    </p>
-                  <?php } ?>
-
-                  <div class="d-flex justify-content-end">
-                    <?php if ($tipo === TipoUsuario::DUENO->value) { ?>
-                      <a href="<?php echo app_path('src/controller/promocion/handle_delete_promocion.php'); ?>?id=<?php echo htmlspecialchars($p->idPromo, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-danger">
-                        Eliminar
-                      </a>
-                    <?php } ?>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-      <?php }
-      } ?>
-
-      <?php if ($tipo === TipoUsuario::DUENO->value) { ?>
-        <div class="container text-center">
-          <div class="row mt-5">
-            <div class="col">
-              <a href="<?php echo app_path('src/view/pages/promocion/create_promocion.php'); ?>" class="btn btn-success">
+          <?php if ($tipo === TipoUsuario::DUENO->value) { ?>
+            <div class="col-md-12 col-6">
+              <a class="c-btn-secondary-tonal" href="<?php echo app_path('src/view/pages/promocion/create_promocion.php'); ?>">
                 Crear Promoción
               </a>
             </div>
-          </div>
-        </div>
-      <?php } ?>
+          <?php } ?>
 
-      <div class="container text-center">
-        <div class="row mt-5">
-          <div class="col">
-            <a href="<?php echo app_path(); ?>" class="btn btn-secondary">
+          <div class="col-md-12 col-6">
+            <a class="c-btn-secondary-ghost" href="<?php echo app_path(); ?>">
               Volver al menú
             </a>
           </div>
         </div>
-      </div>
+      </aside>
     </div>
+
+    <?php if (empty($promociones)) { ?>
+      <section class="col-8">
+        <p>No hay promociones registradas.</p>
+      </section>
+    <?php } else { ?>
+      <section class="col-7">
+        <?php include __DIR__ . "/../../components/alerts.php" ?>
+
+        <div class="row c-list">
+          <?php foreach ($promociones as $p) {
+            $diasTexto = [
+              1 => "Lun",
+              2 => "Mar",
+              3 => "Mié",
+              4 => "Jue",
+              5 => "Vie",
+              6 => "Sáb",
+              7 => "Dom"
+            ];
+
+            $dias = [];
+            foreach ($p->diasSemanaPromo as $d) {
+              $dias[] = $diasTexto[$d] ?? $d;
+            }
+          ?>
+            <article class="col-12 c-list-card">
+              <div class="row c-list-card-header">
+                <div class="col-md-6 c-list-card-title">
+                  <h5>Promoción #<?php echo htmlspecialchars($p->idPromo, ENT_QUOTES, 'UTF-8'); ?></h5>
+                </div>
+
+                <div class="col-md-6 c-list-card-category">
+                  <span>Categoría de cliente: <?php echo htmlspecialchars(ucfirst($p->categoriaClientePromo), ENT_QUOTES, 'UTF-8'); ?></span>
+                </div>
+              </div>
+
+              <div class="c-list-cart-body-container">
+                <div class="row mb-4">
+                  <div class="col-6">
+                    <div class="c-list-cart-body-info-group">
+                      <label class="c-list-cart-body-label">FECHA DESDE</label>
+                      <span class="c-list-cart-body-date">
+                        <?php echo $p->fechaDesdePromo->format('d-m-Y'); ?>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-6 text-end">
+                    <div class="c-list-cart-body-info-group">
+                      <label class="c-list-cart-body-label">FECHA HASTA</label>
+                      <span class="c-list-cart-body-date">
+                        <?php echo $p->fechaHastaPromo->format('d-m-Y'); ?>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12">
+                    <div class="c-list-cart-body-desc-container">
+                      <label class="c-list-cart-body-label">DESCRIPCIÓN</label>
+                      <p class="c-list-cart-body-desc-text">
+                        <?php echo htmlspecialchars($p->textoPromo, ENT_QUOTES, 'UTF-8'); ?>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-12">
+                    <div class="c-list-cart-body-desc-container">
+                      <label class="c-list-cart-body-label">DETALLE</label>
+                      <p class="c-list-cart-body-desc-text">
+                        Días que aplica: <?php echo implode(", ", $dias); ?> <br>
+                        Local: <?php echo htmlspecialchars($p->local->nombreLocal, ENT_QUOTES, 'UTF-8'); ?>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <?php if ($tipo === TipoUsuario::DUENO->value) { ?>
+                  <div class="mt-3">
+                    <label class="c-list-cart-body-label">ESTADO</label>
+                    <span class="c-list-card-category">
+                      <?php echo strtoupper(htmlspecialchars($p->estadoPromo, ENT_QUOTES, 'UTF-8')); ?>
+                    </span>
+                  </div>
+                <?php } ?>
+
+                <?php if ($tipo === TipoUsuario::DUENO->value && $p->estadoPromo === "aprobada") {
+                  $cantidadUsos = $usoDAO->countUsosAceptadosByPromo($p->idPromo);
+                ?>
+                  <div class="mt-3">
+                    <label class="c-list-cart-body-label">USOS</label>
+                    <span class="c-list-cart-body-date">
+                      <?php echo $cantidadUsos; ?> clientes la usaron
+                    </span>
+                  </div>
+                <?php } ?>
+              </div>
+
+              <?php if ($tipo === TipoUsuario::DUENO->value) { ?>
+                <div class="row">
+                  <div class="col-md-12">
+                    <a class="c-btn-danger-tonal"
+                      href="<?php echo app_path('src/controller/promocion/handle_delete_promocion.php'); ?>?id=<?php echo htmlspecialchars($p->idPromo, ENT_QUOTES, 'UTF-8'); ?>">
+                      Eliminar
+                    </a>
+                  </div>
+                </div>
+              <?php } ?>
+            </article>
+          <?php } ?>
+        </div>
+      </section>
+    <?php } ?>
   </main>
 
   <script
