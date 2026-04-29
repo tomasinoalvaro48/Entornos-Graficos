@@ -107,7 +107,9 @@ $novedades = handleNovedadesList();
     </div>
     <?php if (empty($novedades)) { ?>
       <section class="col-8">
-        <p>No hay novedades registradas.</p>
+        <div class="alert alert-info mt-5 text-center" role="alert">
+          <p>No hay novedades registradas.</p>
+        </div>
       </section>
     <?php } else { ?>
       <section class="col-lg-7 col-12 ">
