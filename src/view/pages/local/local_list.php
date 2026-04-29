@@ -76,7 +76,9 @@ $duenos = showDuenos();
                   <h5> <?php echo htmlspecialchars($l->nombreLocal, ENT_QUOTES, 'UTF-8') ?></h5>
                 </div>
                 <div class="col-lg-6 c-list-card-category">
-                  <span>Rubro: <?php echo htmlspecialchars($l->rubroLocal, ENT_QUOTES, 'UTF-8') ?></span>
+                  <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
+                    <span>Estado: <?php echo htmlspecialchars($l->estadoLocal, ENT_QUOTES, 'UTF-8') ?></span>
+                  <?php } ?>
                 </div>
               </div>
 
@@ -92,22 +94,22 @@ $duenos = showDuenos();
                   </div>
                 </div>
 
-                <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
-                  <div class="row mb-4 mt-3">
-                    <div class="col-6">
-                      <div class="c-list-cart-body-info-group">
-                        <label class="c-list-cart-body-label">ESTADO</label>
-                        <span class="c-list-cart-body-date"><?php echo htmlspecialchars($l->estadoLocal, ENT_QUOTES, 'UTF-8') ?></span>
-                      </div>
+                <div class="row mb-4 mt-3">
+                  <div class="col-6">
+                    <div class="c-list-cart-body-info-group">
+                      <label class="c-list-cart-body-label">RUBRO</label>
+                      <span class="c-list-cart-body-date"><?php echo htmlspecialchars($l->rubroLocal, ENT_QUOTES, 'UTF-8') ?></span>
                     </div>
+                  </div>
+                  <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
                     <div class="col-6 text-end">
                       <div class="c-list-cart-body-info-group">
                         <label class="c-list-cart-body-label">DUEÑO</label>
                         <span class="c-list-cart-body-date"><?php echo htmlspecialchars($l->usuario->nombreUsuario, ENT_QUOTES, 'UTF-8') ?></span>
                       </div>
                     </div>
-                  </div>
-                <?php } ?>
+                  <?php } ?>
+                </div>
               </div>
 
               <!-- Estado y botones de Editar y Eliminar solo visibles para admin -->

@@ -22,76 +22,79 @@ $duenos = showDuenos();
 
 <body>
 
-  <div class="container text-center">
-    <div class="row">
-      <div class="col">
-        <h1>Crear Local</h1>
-      </div>
-    </div>
+  <header>
+    <?php include_once __DIR__ . '/../../components/header.php' ?>
+  </header>
 
-    <?php include "../../components/alerts.php"; ?>
+  <main class="c-page-main align-items-center">
+    <section class="c-card" aria-label="Crear Local">
+      <?php include __DIR__ . "/../../components/alerts.php"; ?>
 
-    <div class="row">
-      <div class="col">
+      <header class="c-hero">
+        <h1 class="c-title">Crear Local</h1>
+      </header>
 
-        <!-- ------Formulario para crear un nuevo local------ -->
+      <form action="<?php echo app_path('src/controller/local/handle_create_local.php'); ?>" method="POST" class="c-form-layout">
 
-        <!--
-          <form enctype="multipart/form-data" action="<?php echo app_path('src/controller/local/handle_create_local.php'); ?>" method="POST">
-        -->
+        <div class="c-form-field">
+          <input
+            type="text"
+            class="c-form-input"
+            id="nombre_local"
+            name="nombre_local"
+            placeholder=" "
+            required>
+          <label class="c-form-label" for="nombre_local">Nombre del Local</label>
+        </div>
 
-        <form action="<?php echo app_path('src/controller/local/handle_create_local.php'); ?>" method="POST">
-          <!-- Campo para el nombre del local -->
-          <div>
-            <label for="nombre_local" class="form-label">Nombre del Local</label>
-            <input type="text" class="form-control" id="nombre_local" name="nombre_local" required>
-          </div>
+        <div class="c-form-field">
+          <input
+            type="text"
+            class="c-form-input"
+            id="ubicacion_local"
+            name="ubicacion_local"
+            placeholder=" "
+            required>
+          <label class="c-form-label" for="ubicacion_local">Ubicación del Local</label>
+        </div>
 
-          <!-- Campo para la descripción del local -->
-          <div>
-            <label for="ubicacion_local" class="form-label">Ubicación del Local</label>
-            <input type="text" class="form-control" id="ubicacion_local" name="ubicacion_local" required>
-          </div>
+        <div class="c-form-field">
+          <input
+            type="text"
+            class="c-form-input"
+            id="rubro_local"
+            name="rubro_local"
+            placeholder=" "
+            required>
+          <label class="c-form-label" for="rubro_local">Rubro del Local</label>
+        </div>
 
-          <!-- Campo para el rubro del local -->
-          <div>
-            <label for="rubro_local" class="form-label">Rubro del Local</label>
-            <input type="text" class="form-control" id="rubro_local" name="rubro_local" required>
-          </div>
+        <div class="c-form-field">
+          <select
+            class="c-form-input c-form-input-select"
+            id="dueno_local"
+            name="dueno_local"
+            required>
+            <option value="">Seleccionar un dueño</option>
+            <?php foreach ($duenos as $d) {
+              echo ("
+              <option value='" . htmlspecialchars($d->idUsuario, ENT_QUOTES, 'UTF-8') . "'>
+                " . htmlspecialchars($d->nombreUsuario, ENT_QUOTES, 'UTF-8') . "
+              </option>"
+              );
+            } ?>
+          </select>
+          <label class="c-form-label" for="dueno_local">Dueño del Local</label>
+        </div>
 
-          <!-- Campo para seleccionar el dueño del local -->
-          <div>
-            <label for="dueno_local" class="form-label">Dueño del Local</label>
-            <select class="form-control" id="dueno_local" name="dueno_local" required>
-              <option value="">Seleccionar un dueño</option>
-              <?php foreach ($duenos as $d) {
-                echo ("
-                <option value='" . htmlspecialchars($d->idUsuario, ENT_QUOTES, 'UTF-8') . "'>
-                  " . htmlspecialchars($d->nombreUsuario, ENT_QUOTES, 'UTF-8') . "
-                </option>"
-                );
-              } ?>
-            </select>
-          </div>
+        <button type="submit" class="c-btn-primary" id="botonCrear" name="botonCrear">Crear Local</button>
 
-          <!--
-      <!-- Campo para subir la imagen del local 
-      <div>
-          <label for="imagen_local" class="form-label">Imagen del Local</label>
-          <!-- MAX_FILE_SIZE debe preceder al campo input de tipo file 
-          <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
-          <!-- El nombre del elemento input determina el nombre en el array $_FILES 
-          <input id="imagen_local" name="imagen_local" type="file" class="form-control" accept="image/*" />
-      </div>
-          -->
-
-          <button type="submit" class="btn btn-primary" id="botonCrear" name="botonCrear">Crear Local</button>
-        </form>
-
-        <a href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>" class="btn btn-secondary">Volver a la Lista de Locales</a>
-      </div>
-    </div>
-  </div>
+        <div>
+          <a href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>" class="c-btn-secondary-ghost ">Volver a la Lista de Locales</a>
+        </div>
+      </form>
+    </section>
+  </main>
 
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
