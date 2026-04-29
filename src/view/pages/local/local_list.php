@@ -4,6 +4,7 @@ require_once __DIR__ . "/../../../controller/dueno/show_duenos.php";
 require_once __DIR__ . "/../../../controller/auth.php";
 require_once __DIR__ . "/../../../enums.php";
 
+
 $tipo = getTipoUsuario();
 
 $locales = showLocales();
@@ -31,102 +32,112 @@ $duenos = showDuenos();
     <?php include __DIR__ . '/../../components/header.php' ?>
   </header>
 
-  <main>
-    <div class="container-fluid">
+  <main class="row c-page-main">
+    <div class="col-lg-3 col-12">
+      <aside class="c-aside">
+        <div class="row c-hero">
+          <h1 class="c-title">Locales</h1>
+          <p class="c-subtitle">Revisá y administrá los locales registrados.</p>
+        </div>
 
-      <!-- Sidebar de navegación -->
-      <div class="row">
-        <aside class="col-12 col-md-3 col-lg-2">
-          <button
-            class="btn btn-outline-dark d-md-none"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#sidebarLocales"
-            aria-expanded="false"
-            aria-controls="sidebarLocales">
-            Ver panel
-          </button>
-
-          <div class="collapse d-md-block" id="sidebarLocales">
-            <div class="card text-start">
-              <div class="card-body">
-                <h5 class="card-title">Panel</h5>
-
-                <!-- Botón para crear nuevo local, solo visible para admin -->
-                <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
-                  <div class="container text-center">
-                    <div class="row">
-                      <div class="col">
-                        <a href="<?php echo app_path('src/view/pages/local/create_local.php'); ?>" class="btn btn-success">Crear Local</a>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col">
-                        <a href="<?php echo app_path(); ?>" class="btn btn-secondary">Volver al Menú</a>
-                      </div>
-                    </div>
-                  </div>
-                <?php } ?>
-              </div>
+        <div class="row">
+          <!-- Botón para crear nuevo local, solo visible para admin -->
+          <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
+            <div class="col-lg-12 col-4 my-1 mt-lg-3">
+              <a href="<?php echo app_path('src/view/pages/local/create_local.php'); ?>" class="c-btn-secondary-tonal">Crear Local</a>
             </div>
+          <?php } ?>
+          <div class="col-lg-12 col-4 my-1 mt-lg-0">
+            <a href="<?php echo app_path(); ?>" class="c-btn-secondary-ghost">Volver al Menú</a>
           </div>
-        </aside>
+        </div>
+      </aside>
+    </div>
 
-        <section class="col-12 col-md-9 col-lg-10">
-          <div class="container text-center">
-            <div class="row">
-              <div class="col">
-                <h1>Locales</h1>
-              </div>
-            </div>
+    <?php include "../../components/alerts.php"; ?>
 
-            <?php include "../../components/alerts.php"; ?>
-
-            <!-- Lista de locales -->
-            <?php if (empty($locales)) { ?>
-              <div class='row'>
-                <div class='col'>
-                  <p>No hay locales registrados.</p>
+    <!-- Lista de locales -->
+    <?php if (empty($locales)) { ?>
+      <section class="col-8">
+        <div class="alert alert-info mt-5 text-center" role="alert">
+          <p>No hay locales registrados.</p>
+        </div>
+      </section>
+    <?php } else { ?>
+      <section class="col-lg-7 col-12">
+        <div class="row c-list">
+          <?php foreach ($locales as $l) {
+            $modalId = 'editLocalModal_' . $l->idLocal;
+            $localToEdit = $l;
+          ?>
+            <article class="col-12 c-list-card">
+              <div class="row c-list-card-header">
+                <div class="col-lg-6 c-list-card-title">
+                  <h5> <?php echo htmlspecialchars($l->nombreLocal, ENT_QUOTES, 'UTF-8') ?></h5>
+                </div>
+                <div class="col-lg-6 c-list-card-category">
+                  <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
+                    <span>Estado: <?php echo htmlspecialchars($l->estadoLocal, ENT_QUOTES, 'UTF-8') ?></span>
+                  <?php } ?>
                 </div>
               </div>
-              <?php
-            } else {
-              foreach ($locales as $l) {
-                $modalId = 'editLocalModal_' . $l->idLocal;
-                $localToEdit = $l;
-              ?>
-                <div class='row'>
-                  <div class='col'>
-                    <div class='card'>
-                      <div class='card-body'>
-                        <h5 class='card-title'> <?php echo htmlspecialchars($l->nombreLocal, ENT_QUOTES, 'UTF-8') ?></h5>
-                        <p class='card-text'>Ubicación: <?php echo htmlspecialchars($l->ubiLocal, ENT_QUOTES, 'UTF-8') ?></p>
-                        <p class='card-text'>Rubro: <?php echo htmlspecialchars($l->rubroLocal, ENT_QUOTES, 'UTF-8') ?></p>
 
-                        <!-- Dueño del Local, Estado y botones de Editar y Eliminar solo visibles para admin -->
-                        <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
-                          <p class="card-text">Estado: <?php echo htmlspecialchars($l->estadoLocal, ENT_QUOTES, 'UTF-8') ?></p>
-                          <p class='card-text'>Dueño: <?php echo htmlspecialchars($l->usuario->nombreUsuario, ENT_QUOTES, 'UTF-8') ?></p>
-                          <button
-                            type="button"
-                            class="btn btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>">
-                            Editar
-                          </button>
-                          <a href="<?php echo app_path('src/controller/local/handle_logic_delete_local.php'); ?>?id=<?php echo htmlspecialchars($l->idLocal, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-danger">
-                            Eliminar
-                          </a>
-                        <?php } ?>
-                      </div>
+              <div class="c-list-cart-body-container">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="c-list-cart-body-desc-container">
+                      <label class="c-list-cart-body-label">UBICACIÓN</label>
+                      <p class="c-list-cart-body-desc-text">
+                        <?php echo htmlspecialchars($l->ubiLocal, ENT_QUOTES, 'UTF-8') ?>
+                      </p>
                     </div>
                   </div>
                 </div>
-                <?php include __DIR__ . '/edit_local.php'; ?>
-            <?php
-              }
-            }
-            ?>
+
+                <div class="row mb-4 mt-3">
+                  <div class="col-6">
+                    <div class="c-list-cart-body-info-group">
+                      <label class="c-list-cart-body-label">RUBRO</label>
+                      <span class="c-list-cart-body-date"><?php echo htmlspecialchars($l->rubroLocal, ENT_QUOTES, 'UTF-8') ?></span>
+                    </div>
+                  </div>
+                  <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
+                    <div class="col-6 text-end">
+                      <div class="c-list-cart-body-info-group">
+                        <label class="c-list-cart-body-label">DUEÑO</label>
+                        <span class="c-list-cart-body-date"><?php echo htmlspecialchars($l->usuario->nombreUsuario, ENT_QUOTES, 'UTF-8') ?></span>
+                      </div>
+                    </div>
+                  <?php } ?>
+                </div>
+              </div>
+
+              <!-- Estado y botones de Editar y Eliminar solo visibles para admin -->
+              <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <button
+                      type="button"
+                      class="c-btn-secondary-tonal"
+                      data-bs-toggle="modal"
+                      data-bs-target="#<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>">
+                      Editar
+                    </button>
+                  </div>
+                  <div class="col-lg-6">
+                    <a href="<?php echo app_path('src/controller/local/handle_logic_delete_local.php'); ?>?id=<?php echo htmlspecialchars($l->idLocal, ENT_QUOTES, 'UTF-8'); ?>" class="c-btn-danger-tonal">
+                      Eliminar
+                    </a>
+                  </div>
+                </div>
+              <?php } ?>
+
+              <?php include __DIR__ . '/edit_local.php'; ?>
+            </article>
+          <?php } ?>
+        </div>
+      </section>
+    <?php } ?>
 
   </main>
   <script

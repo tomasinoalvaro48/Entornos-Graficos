@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__ . "/../data/UsuarioDAO.php";
 include_once __DIR__ . "/auth.php";
+include_once __DIR__ . "/../enums.php";
 
 if (isset($_GET['mail']) && isset($_GET['token'])) {
   $email = $_GET['mail'];
@@ -14,7 +15,7 @@ if (isset($_GET['mail']) && isset($_GET['token'])) {
     $usuario->estadoMail = 'confirmado';
     $udao->updateEstadoMail($usuario->idUsuario, $usuario->estadoMail);
 
-    if ($usuario->tipoUsuario === 'dueno') {
+    if ($usuario->tipoUsuario === TipoUsuario::DUENO->value) {
       setSessionSuccess("Correo verificado exitosamente. Le avisaremos a su mail cuando su cuenta sea aprobada por un administrador.");
     } else {
       setSessionSuccess("Correo verificado exitosamente. Ya puede iniciar sesión.");
