@@ -4,15 +4,16 @@ require_once __DIR__ . '/src/config/env.php';
 
 function getMainPage()
 {
+  require_once __DIR__ . "/src/enums.php";
   require_once __DIR__ . "/src/controller/auth.php";
   $tipo = getTipoUsuario();
   $page = 'src/view/pages/menu_publico.php'; // usuarios no autenticados
   if ($tipo) {
-    if ($tipo === 'cliente') {
+    if ($tipo === TipoUsuario::CLIENTE->value) {
       $page = 'src/view/pages/menu_cliente.php';
-    } else if ($tipo === 'admin') {
+    } else if ($tipo === TipoUsuario::ADMIN->value) {
       $page = 'src/view/pages/menu_admin.php';
-    } else if ($tipo === 'dueno') {
+    } else if ($tipo === TipoUsuario::DUENO->value) {
       $page = 'src/view/pages/menu_dueno.php';
     }
   }

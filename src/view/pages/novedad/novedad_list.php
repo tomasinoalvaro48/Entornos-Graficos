@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../../../controller/novedad/show_novedad.php';
 require_once __DIR__ . '/../../../controller/novedad/handle_update_novedad.php';
 require_once __DIR__ . '/../../../controller/auth.php';
+require_once __DIR__ . '/../../../enums.php';
 
 /*filtro*/
 $tipo = getTipoUsuario();
@@ -64,7 +65,7 @@ $novedades = handleNovedadesList();
                 </div>
               </div>
               <!-- Filtro por categoría de cliente -->
-              <?php if ($tipo === "admin") {  ?>
+              <?php if ($tipo === TipoUsuario::ADMIN->value) {  ?>
                 <div class="col-lg-12 col-4 my-1">
                   <div class="c-form-field">
                     <select
@@ -89,7 +90,7 @@ $novedades = handleNovedadesList();
           </form>
 
           <!-- Botón para crear nueva novedad, solo visible para admin -->
-          <?php if ($tipo === "admin") { ?>
+          <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
             <div class="col-lg-12 col-4 my-1 mt-lg-3">
               <a class="c-btn-secondary-tonal" href="<?php echo app_path('src/view/pages/novedad/novedad_create.php'); ?>">
                 Crear Novedad
@@ -157,7 +158,7 @@ $novedades = handleNovedadesList();
                 </div>
               </div>
 
-              <?php if ($tipo === 'admin') { ?>
+              <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
                 <div class="row">
                   <div class="col-lg-6">
                     <button

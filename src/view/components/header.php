@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/../../controller/auth.php";
+require_once __DIR__ . "/../../enums.php";
 $tipo = getTipoUsuario();
 $serverUri = $_SERVER["REQUEST_URI"];
 $excludePaths = [ // Rutas donde solo se muestra el logo en el header
@@ -53,7 +54,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
             <li class="nav-item">
               <a class="nav-link" href="<?php echo app_path('src/view/pages/auth/signin.php'); ?>">Registrarse</a>
             </li>
-          <?php } else if ($tipo === "admin") { ?>
+          <?php } else if ($tipo === TipoUsuario::ADMIN->value) { ?>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                 Locales
@@ -93,7 +94,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/usuario/validar_cuentas_dueno.php'); ?>">Ver cuentas de dueños</a></li>
               </ul>
             </li>
-          <?php } else if ($tipo === "cliente") { ?>
+          <?php } else if ($tipo === TipoUsuario::CLIENTE->value) { ?>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                 Locales
@@ -121,7 +122,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>">Ver novedades</a></li>
               </ul>
             </li>
-          <?php } else if ($tipo === "dueno") { ?>
+          <?php } else if ($tipo === TipoUsuario::DUENO->value) { ?>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                 Locales
