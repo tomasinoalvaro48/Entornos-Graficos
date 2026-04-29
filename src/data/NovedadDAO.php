@@ -78,10 +78,6 @@ class NovedadDAO extends DBFunctions
 
     $query .= " ORDER BY n.fecha_desde_nov DESC";
 
-
-
-
-
     $novedades = $this->querySQL($query);
     if ($novedades && $novedades->num_rows > 0) {
       while ($novedad = mysqli_fetch_array($novedades)) {
