@@ -192,6 +192,67 @@ class PromocionDAO extends DBFunctions
     return $promocionesArray;
   }
 
+  public function getFilter($fechaDesde, $fechaHasta, $categoriaCliente, $estadoPromo, $idLocal, $dia)
+  {
+    $promocionesArray = [];
+
+    $query = "SELECT DISTINCT p.*, l.*, u.*
+              FROM promocion p
+              INNER JOIN local l ON p.id_local = l.id_local
+              INNER JOIN usuario u ON l.id_usuario = u.id_usuario
+              LEFT JOIN dias_promo dp ON p.id_promo = dp.id_promo
+              WHERE 1=1";
+
+    if ($fechaDesde && $fechaHasta) {
+      $query .= " AND p.fecha_desde_promo >= '" . $fechaDesde . "'";
+      $query .= " AND p.fecha_desde_promo <= '" . $fechaHasta . "'";
+    }
+
+    if (!empty($categoriaCliente)) {
+      $query .= " AND p.categoria_cliente_promo = '" . $categoriaCliente . "'";
+    }
+
+    if (!empty($estadoPromo)) {
+      $query .= " AND p.estado_promo = '$estadoPromo'";
+    }
+
+    if (!empty($idLocal)) {
+      $query .= " AND p.id_local = '$idLocal'";
+    }
+
+    if (!empty($dia)) {
+      $query .= " AND dp.id_dia = '$dia'";
+    }
+
+    $query .= " ORDER BY p.fecha_desde_promo DESC";
+
+    $promociones = $this->querySQL($query);
+
+    if ($promociones && $promociones->num_rows > 0) {
+      while ($row = mysqli_fetch_array($promociones)) {
+        $p = $this->sanitizePromocion($row);
+
+        $dias = [];
+        $diasQuery = "SELECT id_dia
+                      FROM dias_promo
+                      WHERE id_promo = " . $row['id_promo'];
+        $diasPromocion = $this->querySQL($diasQuery);
+
+        if ($diasPromocion && $diasPromocion->num_rows > 0) {
+          while ($d = mysqli_fetch_array($diasPromocion)) {
+            $dias[] = $d['id_dia'];
+          }
+        }
+
+        $p->diasSemanaPromo = new ArrayObject($dias);
+
+        array_push($promocionesArray, $p);
+      }
+    }
+
+    return $promocionesArray;
+  }
+
   public function create(Promocion $p)
   {
     $query = "INSERT INTO promocion 
