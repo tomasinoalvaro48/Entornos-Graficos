@@ -61,7 +61,27 @@ class NovedadDAO extends DBFunctions
   public function getFilter($fechaDesde, $fechaHasta, $categoriaCliente)
   {
     $novedadesArray = [];
-    $query = "SELECT * FROM novedad n WHERE (n.fecha_desde_nov >= '" . $fechaDesde->format('Y-m-d') . "' AND n.fecha_desde_nov <= '" . $fechaHasta->format('Y-m-d') . "') AND n.categoria_cliente_nov = '" . $categoriaCliente . "' ORDER BY n.fecha_desde_nov DESC";
+
+    // Base de la consulta
+    $query = "SELECT * FROM novedad n WHERE 1=1";
+
+    // Filtro de fechas (solo si ambas existen)
+    if ($fechaDesde && $fechaHasta) {
+      $query .= " AND n.fecha_desde_nov >= '" . $fechaDesde . "'";
+      $query .= " AND n.fecha_desde_nov <= '" . $fechaHasta . "'";
+    }
+
+    // Filtro de categoría (Opcional)
+    if (!empty($categoriaCliente)) {
+      $query .= " AND n.categoria_cliente_nov = '" . $categoriaCliente . "'";
+    }
+
+    $query .= " ORDER BY n.fecha_desde_nov DESC";
+
+
+
+
+
     $novedades = $this->querySQL($query);
     if ($novedades && $novedades->num_rows > 0) {
       while ($novedad = mysqli_fetch_array($novedades)) {

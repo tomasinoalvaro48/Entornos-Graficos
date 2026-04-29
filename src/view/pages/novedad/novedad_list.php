@@ -3,14 +3,9 @@ require_once __DIR__ . '/../../../controller/novedad/show_novedad.php';
 require_once __DIR__ . '/../../../controller/novedad/handle_update_novedad.php';
 require_once __DIR__ . '/../../../controller/auth.php';
 
-
+/*filtro*/
 $tipo = getTipoUsuario();
-if ($tipo === 'cliente') {
-  $categoriaCliente = getCategoriaCliente();
-  $novedades = showNovedadesByClientType($categoriaCliente);
-} else {
-  $novedades = showNovedades();
-}
+$novedades = handleNovedadesList();
 ?>
 
 
@@ -75,8 +70,7 @@ if ($tipo === 'cliente') {
                     <select
                       class="c-form-input c-form-input-select"
                       id="categoria_cliente"
-                      name="categoria_cliente"
-                      required>
+                      name="categoria_cliente">
                       <option value="">Seleccione una Categoría</option>
                       <option value="inicial">Inicial</option>
                       <option value="medium">Medium</option>
@@ -92,24 +86,24 @@ if ($tipo === 'cliente') {
               <div class="col-md-12 col-4 my-1">
                 <button type="submit" class="c-btn-primary" id="botonFiltrarNovedades" name="botonFiltrarNovedades">Filtrar</button>
               </div>
-
-              <!-- Botón para crear nueva novedad, solo visible para admin -->
-              <?php if ($tipo === "admin") { ?>
-                <div class="col-md-12 col-4 my-1 mt-md-3">
-                  <a class="c-btn-secondary-tonal" href="<?php echo app_path('src/view/pages/novedad/novedad_create.php'); ?>">
-                    Crear Novedad
-                  </a>
-                </div>
-              <?php } ?>
-              <div class="col-md-12 col-4 my-1 mt-md-0">
-                <a class="c-btn-secondary-ghost" href="<?php echo app_path(); ?>">
-                  Volver al Menú
-                </a>
-              </div>
-            </div>
           </form>
+
+          <!-- Botón para crear nueva novedad, solo visible para admin -->
+          <?php if ($tipo === "admin") { ?>
+            <div class="col-md-12 col-4 my-1 mt-md-3">
+              <a class="c-btn-secondary-tonal" href="<?php echo app_path('src/view/pages/novedad/novedad_create.php'); ?>">
+                Crear Novedad
+              </a>
+            </div>
+          <?php } ?>
+          <div class="col-md-12 col-4 my-1 mt-md-0">
+            <a class="c-btn-secondary-ghost" href="<?php echo app_path(); ?>">
+              Volver al Menú
+            </a>
+          </div>
         </div>
-      </aside>
+    </div>
+    </aside>
     </div>
     <?php if (empty($novedades)) { ?>
       <section class="col-8">
