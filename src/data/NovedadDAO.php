@@ -58,6 +58,20 @@ class NovedadDAO extends DBFunctions
     return $novedadesArray;
   }
 
+  public function getFilter($fechaDesde, $fechaHasta, $categoriaCliente)
+  {
+    $novedadesArray = [];
+    $query = "SELECT * FROM novedad n WHERE (n.fecha_desde_nov >= '" . $fechaDesde->format('Y-m-d') . "' AND n.fecha_desde_nov <= '" . $fechaHasta->format('Y-m-d') . "') AND n.categoria_cliente_nov = '" . $categoriaCliente . "' ORDER BY n.fecha_desde_nov DESC";
+    $novedades = $this->querySQL($query);
+    if ($novedades && $novedades->num_rows > 0) {
+      while ($novedad = mysqli_fetch_array($novedades)) {
+        array_push($novedadesArray, $this->sanitizeNovedad($novedad));
+      }
+    }
+    return $novedadesArray;
+  }
+
+
   public function update(Novedad $novedad)
   {
     $fechaDesde = $novedad->fechaDesdeNovedad ? "'" . $novedad->fechaDesdeNovedad->format('Y-m-d') . "'" : "NULL";

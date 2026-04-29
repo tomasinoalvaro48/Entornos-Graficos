@@ -42,19 +42,72 @@ if ($tipo === 'cliente') {
         </div>
 
         <div class="row">
-          <!-- Botón para crear nueva novedad, solo visible para admin -->
-          <?php if ($tipo === "admin") { ?>
-            <div class="col-md-12 col-6">
-              <a class="c-btn-secondary-tonal" href="<?php echo app_path('src/view/pages/novedad/novedad_create.php'); ?>">
-                Crear Novedad
-              </a>
+
+          <form action="" method="POST" class="c-form-layout">
+            <div class="row">
+              <div class="col-md-12 col-4 my-1">
+
+                <div class=" c-form-field ">
+                  <input
+                    type="date"
+                    class="c-form-input c-form-input-date"
+                    id="fecha_desde_novedad"
+                    name="fecha_desde_novedad"
+                    placeholder=" ">
+                  <label class="c-form-label" for="fecha_desde_novedad">Fecha Desde</label>
+                </div>
+              </div>
+              <div class="col-md-12 col-4 my-1">
+                <div class=" c-form-field ">
+                  <input
+                    type="date"
+                    class="c-form-input c-form-input-date"
+                    id="fecha_hasta_novedad"
+                    name="fecha_hasta_novedad"
+                    placeholder=" ">
+                  <label class="c-form-label" for="fecha_hasta_novedad">Fecha Hasta</label>
+                </div>
+              </div>
+              <!-- Filtro por categoría de cliente -->
+              <?php if ($tipo === "admin") {  ?>
+                <div class="col-md-12 col-4 my-1">
+                  <div class="c-form-field">
+                    <select
+                      class="c-form-input c-form-input-select"
+                      id="categoria_cliente"
+                      name="categoria_cliente"
+                      required>
+                      <option value="">Seleccione una Categoría</option>
+                      <option value="inicial">Inicial</option>
+                      <option value="medium">Medium</option>
+                      <option value="premium">Premium</option>
+                    </select>
+                    <label class="c-form-label" for="categoria_cliente">Categoría de Cliente</label>
+                  </div>
+
+
+                </div>
+              <?php } ?>
+
+              <div class="col-md-12 col-4 my-1">
+                <button type="submit" class="c-btn-primary" id="botonFiltrarNovedades" name="botonFiltrarNovedades">Filtrar</button>
+              </div>
+
+              <!-- Botón para crear nueva novedad, solo visible para admin -->
+              <?php if ($tipo === "admin") { ?>
+                <div class="col-md-12 col-4 my-1 mt-md-3">
+                  <a class="c-btn-secondary-tonal" href="<?php echo app_path('src/view/pages/novedad/novedad_create.php'); ?>">
+                    Crear Novedad
+                  </a>
+                </div>
+              <?php } ?>
+              <div class="col-md-12 col-4 my-1 mt-md-0">
+                <a class="c-btn-secondary-ghost" href="<?php echo app_path(); ?>">
+                  Volver al Menú
+                </a>
+              </div>
             </div>
-          <?php } ?>
-          <div class="col-md-12 col-6">
-            <a class="c-btn-secondary-ghost" href="<?php echo app_path(); ?>">
-              Volver al Menú
-            </a>
-          </div>
+          </form>
         </div>
       </aside>
     </div>
@@ -63,7 +116,7 @@ if ($tipo === 'cliente') {
         <p>No hay novedades registradas.</p>
       </section>
     <?php } else { ?>
-      <section class="col-7">
+      <section class="col-md-7 col-12 ">
         <div class="row c-list">
           <?php foreach ($novedades as $n) {
             $modalId = 'editNovedadModal_' . $n->codNovedad;

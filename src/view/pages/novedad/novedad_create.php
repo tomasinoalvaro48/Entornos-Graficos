@@ -78,7 +78,7 @@ $today = new DateTime();
             id="categoria_cliente"
             name="categoria_cliente"
             required>
-            <option value="">Seleccione una Categoría de Cliente</option>
+            <option value="">Seleccione una Categoría</option>
             <option value="inicial">Inicial</option>
             <option value="medium">Medium</option>
             <option value="premium">Premium</option>

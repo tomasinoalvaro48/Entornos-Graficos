@@ -13,3 +13,10 @@ function showNovedadesByClientType($categoriaCliente)
   $novedadDAO = new NovedadDAO();
   return $novedadDAO->getByClientType($categoriaCliente);
 }
+
+
+function showNovedadesFiltered($fechaDesde, $fechaHasta, $categoriaCliente)
+{
+  $novedadDAO = new NovedadDAO();
+  return $novedades = $novedadDAO->getFilter($fechaDesde, $fechaHasta, $categoriaCliente);
+}
