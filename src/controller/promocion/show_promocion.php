@@ -53,6 +53,8 @@ function handlePromocionesList()
   if ($tipo === TipoUsuario::CLIENTE->value) {
     $usuario = getUsuarioLogueado();
     $categoria = $usuario['categoria_cliente'] ?? null;
+
+    $estado = 'aprobada';
   }
 
   return showPromocionesFiltered($fechaDesde, $fechaHasta, $categoria, $estado, $local, $dia);

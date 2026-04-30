@@ -148,10 +148,23 @@ class PromocionDAO extends DBFunctions
     return $promocionesArray;
   }
 
+  function getCategoriasPermitidas($categoriaCliente)
+  {
+    return match(strtolower($categoriaCliente)) {
+      'premium' => ['inicial', 'medium', 'premium'],
+      'medium' => ['inicial', 'medium'],
+      'inicial' => ['inicial'],
+      default => []
+    };
+  }
+
   public function getPromosValidasParaCliente($idLocal, $categoriaCliente)
   {
     $hoy = date('Y-m-d');
     $diaHoy = date('N');
+
+    $categorias = $this->getCategoriasPermitidas($categoriaCliente);
+    $categoriasSQL = "'" . implode("','", $categorias) . "'";
 
     $query = "SELECT DISTINCT p.*, l.*, u.*
               FROM promocion p
@@ -162,7 +175,7 @@ class PromocionDAO extends DBFunctions
                 AND p.estado_promo = 'aprobada'
                 AND p.fecha_desde_promo <= '$hoy'
                 AND p.fecha_hasta_promo >= '$hoy'
-                AND p.categoria_cliente_promo = '$categoriaCliente'
+                AND LOWER(p.categoria_cliente_promo) IN ($categoriasSQL)
                 AND dp.id_dia = $diaHoy;";
 
     $result = $this->querySQL($query);
@@ -209,7 +222,9 @@ class PromocionDAO extends DBFunctions
     }
 
     if (!empty($categoriaCliente)) {
-      $query .= " AND p.categoria_cliente_promo = '" . $categoriaCliente . "'";
+      $categorias = $this->getCategoriasPermitidas($categoriaCliente);
+      $categoriasSQL = "'" . implode("','", $categorias) . "'";
+      $query .= " AND LOWER(p.categoria_cliente_promo) IN ($categoriasSQL)";
     }
 
     if (!empty($estadoPromo)) {
