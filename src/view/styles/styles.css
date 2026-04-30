@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Ringbearer&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Ringbearer&display=swap');
 
 /* Reusable component styles used by login main */
 
@@ -7,7 +7,10 @@
   min-height: 90vh;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
 }
+
 /*card*/
 .c-card {
   margin: 1.5rem;
@@ -216,7 +219,7 @@
   margin-bottom: 1rem;
 }
 
-/* Estilo para el título de la izquierda */
+/* Estilo para el tÃ­tulo de la izquierda */
 .c-list-card-title {
   color: #ffffff;
   font-weight: 700;
@@ -224,7 +227,7 @@
   font-size: 2rem;
 }
 
-/* Estilo para la píldora de la derecha */
+/* Estilo para la pÃ­ldora de la derecha */
 .c-list-card-category {
   background-color: #ffa866;
   color: #2d3250;
@@ -245,7 +248,7 @@
   padding: 1.25rem 0;
 }
 
-/* Estilo para los labels (Fecha Desde, Hasta, Descripción) */
+/* Estilo para los labels (Fecha Desde, Hasta, DescripciÃ³n) */
 .c-list-cart-body-label {
   display: block;
   color: #ffa866; /* Naranja primary */
@@ -264,7 +267,7 @@
   display: block;
 }
 
-/* Contenedor de la descripción con fondo oscuro sutil */
+/* Contenedor de la descripciÃ³n con fondo oscuro sutil */
 .c-list-cart-body-desc-container {
   background-color: rgba(66, 71, 105, 0.3); /* Tu azul #424769 con opacidad */
   padding: 1.25rem;
@@ -273,7 +276,7 @@
   margin-top: 0.5rem;
 }
 
-/* Texto de la descripción */
+/* Texto de la descripciÃ³n */
 .c-list-cart-body-desc-text {
   color: #e0e0e0;
   margin: 0;
@@ -564,4 +567,60 @@
     width: 42px;
     transform-origin: left;
   }
+}
+/* ================================================================================== */
+/* Custom Table Styles */
+/* ================================================================================== */
+
+.c-table-container {
+  background-color: #2d3462;
+  border-radius: 1.4rem;
+  padding: 1.5rem;
+  box-shadow: 0 20px 42px rgba(8, 12, 31, 0.45);
+  margin: 1.5rem;
+  overflow-x: auto;
+}
+
+.c-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #fff;
+  text-align: left;
+}
+
+.c-table thead tr {
+  border-bottom: 2px solid rgba(252, 163, 100, 0.4);
+}
+
+.c-table th {
+  color: #ffa866;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 1rem;
+}
+
+.c-table td {
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(252, 163, 100, 0.15);
+  vertical-align: middle;
+}
+
+.c-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.c-table tbody tr:hover {
+  background-color: rgba(66, 71, 105, 0.3);
+}
+
+.c-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.c-text-muted {
+  color: #a8add0;
 }
