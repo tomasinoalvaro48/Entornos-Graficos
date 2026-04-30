@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . "/../../../controller/dueno/show_duenos.php";
 
-$duenos = showDuenos();
+$duenos = handleDuenosList();
 ?>
 
 <!DOCTYPE html>
@@ -26,18 +26,49 @@ $duenos = showDuenos();
 
   <main class="row c-page-main">
     <div class="col-lg-4 col-12">
-      <aside class=" c-aside">
+      <aside class="c-aside">
         <div class="row c-hero">
           <h1 class="c-title">Cuentas de Dueños</h1>
           <p class="c-subtitle">Revisá y administrá las cuentas para cada dueño.</p>
         </div>
 
         <div class="row">
-          <div class="col-lg-12 col-md-4 col-12 my-1 mt-lg-0">
-            <a class="c-btn-secondary-ghost" href="<?php echo app_path(); ?>">
-              Volver al Menú
-            </a>
-          </div>
+          <form action="" method="POST" class="c-form-layout">
+            <div class="row">
+              <div class="col-lg-12 col-md-4 col-12 my-1">
+                <div class="c-form-field">
+                  <input
+                    type="text"
+                    class="c-form-input"
+                    id="nombre_dueno"
+                    name="nombre_dueno"
+                    placeholder=" "
+                    value="<?php echo isset($_POST['nombre_dueno']) ? htmlspecialchars($_POST['nombre_dueno'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                  <label class="c-form-label" for="nombre_dueno">Nombre</label>
+                </div>
+              </div>
+
+              <div class="col-lg-12 col-md-4 col-12 my-1">
+                <div class="c-form-field">
+                  <select class="c-form-input c-form-input-select" id="estado_dueno" name="estado_dueno">
+                    <option value="">Cualquier estado</option>
+                    <option value="<?php echo EstadoDueno::PENDIENTE->value; ?>" <?php echo (isset($_POST['estado_dueno']) && $_POST['estado_dueno'] === EstadoDueno::PENDIENTE->value) ? 'selected' : ''; ?>>Pendiente</option>
+                    <option value="<?php echo EstadoDueno::ACEPTADO->value; ?>" <?php echo (isset($_POST['estado_dueno']) && $_POST['estado_dueno'] === EstadoDueno::ACEPTADO->value) ? 'selected' : ''; ?>>Aceptado</option>
+                    <option value="<?php echo EstadoDueno::RECHAZADO->value; ?>" <?php echo (isset($_POST['estado_dueno']) && $_POST['estado_dueno'] === EstadoDueno::RECHAZADO->value) ? 'selected' : ''; ?>>Rechazado</option>
+                  </select>
+                  <label class="c-form-label" for="estado_dueno">Estado</label>
+                </div>
+              </div>
+
+              <div class="col-lg-12 col-md-4 col-12 my-1">
+                <button type="submit" class="c-btn-primary" id="botonFiltrarDuenos" name="botonFiltrarDuenos">Filtrar</button>
+              </div>
+
+              <div class="col-lg-12 col-md-4 col-12 my-1 mt-lg-0">
+                <a class="c-btn-secondary-ghost" href="<?php echo app_path(); ?>">Volver al Menú</a>
+              </div>
+            </div>
+          </form>
         </div>
       </aside>
     </div>
@@ -45,7 +76,7 @@ $duenos = showDuenos();
     <section class="col-lg-8 col-12">
       <?php include __DIR__ . '/../../components/alerts.php'; ?>
 
-      <div class=" c-table-container">
+      <div class="c-table-container">
         <table class="c-table">
           <thead>
             <tr>
@@ -63,21 +94,15 @@ $duenos = showDuenos();
               </tr>
             <?php } else { ?>
               <?php foreach ($duenos as $dueno) {
-                if (isset($_GET['estado']) && $dueno->estadoDueno !== $_GET['estado']) {
-                  continue; // Saltar este dueño si no coincide con el filtro de estado
-                }
-
                 $estadoDueno = strtolower((string)$dueno->estadoDueno);
                 $estadoBadgeClass = 'text-bg-secondary';
-                if ($estadoDueno === 'pendiente') {
+                if ($estadoDueno === EstadoDueno::PENDIENTE->value) {
                   $estadoBadgeClass = 'text-bg-warning';
-                } else if ($estadoDueno === 'aprobado') {
+                } else if ($estadoDueno === EstadoDueno::ACEPTADO->value) {
                   $estadoBadgeClass = 'text-bg-success';
-                } else if ($estadoDueno === 'rechazado') {
+                } else if ($estadoDueno === EstadoDueno::RECHAZADO->value) {
                   $estadoBadgeClass = 'text-bg-danger';
                 }
-
-                $modalId = 'modal-validar-dueno-' . (int)$dueno->idUsuario;
               ?>
                 <tr>
                   <td><?php echo htmlspecialchars($dueno->idUsuario, ENT_QUOTES, 'UTF-8'); ?></td>
@@ -89,43 +114,8 @@ $duenos = showDuenos();
                     </span>
                   </td>
                   <td>
-                    <?php if ($dueno->estadoDueno === 'pendiente') { ?>
-                      <button
-                        type="button"
-                        class="c-btn-secondary-tonal"
-                        data-bs-toggle="modal"
-                        data-bs-target="#<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>">
-                        Gestionar Cuenta
-                      </button>
-
-                      <div class="modal fade" id="<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title">Validar cuenta de dueño</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                            </div>
-                            <div class="modal-body">
-                              <p class="mb-3">¿Qué desea hacer con esta cuenta?</p>
-                              <ul class="list-group">
-                                <li class="list-group-item"><strong>Nombre:</strong> <?php echo htmlspecialchars($dueno->nombreUsuario, ENT_QUOTES, 'UTF-8'); ?></li>
-                                <li class="list-group-item"><strong>Email:</strong> <?php echo htmlspecialchars($dueno->emailUsuario, ENT_QUOTES, 'UTF-8'); ?></li>
-                              </ul>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="c-btn-secondary-ghost" data-bs-dismiss="modal">Cancelar</button>
-
-                              <a class="c-btn-danger-tonal" href="<?php echo app_path('src/controller/dueno/handle_validar_cuenta.php'); ?>?estado=rechazado&id=<?php echo $dueno->idUsuario; ?>">
-                                Rechazar
-                              </a>
-
-                              <a class="c-btn-primary" href="<?php echo app_path('src/controller/dueno/handle_validar_cuenta.php'); ?>?estado=aceptado&id=<?php echo $dueno->idUsuario; ?>">
-                                Aceptar
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                    <?php if ($dueno->estadoDueno === EstadoDueno::PENDIENTE->value) { ?>
+                      <div class="c-text-muted">Cuenta pendiente</div>
                     <?php } else { ?>
                       <div class="c-text-muted">Cuenta gestionada</div>
                     <?php } ?>

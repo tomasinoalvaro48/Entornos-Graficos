@@ -51,6 +51,32 @@ class UsuarioDAO extends DBFunctions
     return $duenosArray;
   }
 
+  public function getFilterDuenos($nombre, $estado)
+  {
+    $duenosArray = [];
+
+    $query = "SELECT * FROM usuario WHERE tipo_usuario = 'dueno'";
+
+    if (!empty($nombre)) {
+      $query .= " AND nombre_usuario LIKE '%" . $nombre . "%'";
+    }
+
+    if (!empty($estado)) {
+      $query .= " AND estado_dueno = '" . $estado . "'";
+    }
+
+    $query .= " ORDER BY estado_dueno DESC";
+
+    $result = $this->querySQL($query);
+    if ($result && $result->num_rows > 0) {
+      while ($row = mysqli_fetch_array($result)) {
+        $duenosArray[] = $this->sanitizeUser($row);
+      }
+    }
+
+    return $duenosArray;
+  }
+
   public function getByEmail($email)
   {
     $u = null;
