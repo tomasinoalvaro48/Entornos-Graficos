@@ -88,18 +88,19 @@ $duenos = showDuenos();
               <div class="col-lg-12 col-md-4 col-12 my-1">
                 <button type="submit" class="c-btn-primary" id="botonFiltrarLocales" name="botonFiltrarLocales">Filtrar</button>
               </div>
+
+              <!-- Botón para crear nuevo local, solo visible para admin -->
+              <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
+                <div class="col-lg-12 col-md-4 col-12 my-1 mt-lg-0">
+                  <a href="<?php echo app_path('src/view/pages/local/create_local.php'); ?>" class="c-btn-secondary-tonal">Crear Local</a>
+                </div>
+              <?php } ?>
+
+              <div class="col-lg-12 col-md-4 col-12 my-1 mt-lg-0">
+                <a href="<?php echo app_path(); ?>" class="c-btn-secondary-ghost">Volver al Menú</a>
+              </div>
             </div>
           </form>
-
-          <!-- Botón para crear nuevo local, solo visible para admin -->
-          <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
-            <div class="col-lg-12 col-4 my-1 mt-lg-3">
-              <a href="<?php echo app_path('src/view/pages/local/create_local.php'); ?>" class="c-btn-secondary-tonal">Crear Local</a>
-            </div>
-          <?php } ?>
-          <div class="col-lg-12 col-4 my-1 mt-lg-0">
-            <a href="<?php echo app_path(); ?>" class="c-btn-secondary-ghost">Volver al Menú</a>
-          </div>
         </div>
       </aside>
     </div>
