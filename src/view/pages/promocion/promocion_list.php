@@ -9,7 +9,6 @@ $tipo = getTipoUsuario();
 
 $error = getSessionError();
 $success = getSessionSuccess();
-clearSessionMessages();
 
 $promociones = handlePromocionesList();
 $locales = showLocales();
@@ -182,6 +181,7 @@ $usoDAO = new UsoPromocionDAO();
     <?php } else { ?>
       <section class="col-lg-7 col-12">
         <?php include __DIR__ . "/../../components/alerts.php" ?>
+        <?php clearSessionMessages(); ?>
 
         <div class="row c-list">
           <?php foreach ($promociones as $p) {
