@@ -4,10 +4,10 @@ require_once __DIR__ . "/../../../controller/dueno/show_duenos.php";
 require_once __DIR__ . "/../../../controller/auth.php";
 require_once __DIR__ . "/../../../enums.php";
 
-
+/*filtro*/
 $tipo = getTipoUsuario();
+$locales = handleLocalesList();
 
-$locales = showLocales();
 $duenos = showDuenos();
 ?>
 
@@ -41,6 +41,56 @@ $duenos = showDuenos();
         </div>
 
         <div class="row">
+          <form action="" method="POST" class="c-form-layout">
+            <div class="row">
+              <div class="col-lg-12 col-md-4 col-12 my-1">
+                <div class="c-form-field">
+                  <input
+                    type="text"
+                    class="c-form-input"
+                    id="nombre_local"
+                    name="nombre_local"
+                    placeholder=" "
+                    value="<?php echo isset($_POST['nombre_local']) ? htmlspecialchars($_POST['nombre_local'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                  <label class="c-form-label" for="nombre_local">Nombre del Local</label>
+                </div>
+              </div>
+
+              <div class="col-lg-12 col-md-4 col-12 my-1">
+                <div class="c-form-field">
+                  <input
+                    type="text"
+                    class="c-form-input"
+                    id="rubro_local"
+                    name="rubro_local"
+                    placeholder=" "
+                    value="<?php echo isset($_POST['rubro_local']) ? htmlspecialchars($_POST['rubro_local'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                  <label class="c-form-label" for="rubro_local">Rubro</label>
+                </div>
+              </div>
+
+              <?php if ($tipo === TipoUsuario::ADMIN->value || $tipo === TipoUsuario::DUENO->value) {  ?>
+                <div class="col-lg-12 col-md-4 col-12 my-1">
+                  <div class="c-form-field">
+                    <select
+                      class="c-form-input c-form-input-select"
+                      id="estado_local"
+                      name="estado_local">
+                      <option value="">Cualquier estado</option>
+                      <option value="Activo" <?php echo (isset($_POST['estado_local']) && $_POST['estado_local'] === 'Activo') ? 'selected' : ''; ?>>Activo</option>
+                      <option value="Eliminado" <?php echo (isset($_POST['estado_local']) && $_POST['estado_local'] === 'Eliminado') ? 'selected' : ''; ?>>Eliminado</option>
+                    </select>
+                    <label class="c-form-label" for="estado_local">Estado</label>
+                  </div>
+                </div>
+              <?php } ?>
+
+              <div class="col-lg-12 col-md-4 col-12 my-1">
+                <button type="submit" class="c-btn-primary" id="botonFiltrarLocales" name="botonFiltrarLocales">Filtrar</button>
+              </div>
+            </div>
+          </form>
+
           <!-- Botón para crear nuevo local, solo visible para admin -->
           <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
             <div class="col-lg-12 col-4 my-1 mt-lg-3">
@@ -75,11 +125,13 @@ $duenos = showDuenos();
                 <div class="col-lg-6 c-list-card-title">
                   <h5> <?php echo htmlspecialchars($l->nombreLocal, ENT_QUOTES, 'UTF-8') ?></h5>
                 </div>
-                <div class="col-lg-6 c-list-card-category">
-                  <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
+                <?php if ($tipo === TipoUsuario::ADMIN->value || $tipo === TipoUsuario::DUENO->value) { ?>
+
+                  <div class="col-lg-6 c-list-card-category">
                     <span>Estado: <?php echo htmlspecialchars($l->estadoLocal, ENT_QUOTES, 'UTF-8') ?></span>
-                  <?php } ?>
-                </div>
+                  </div>
+                <?php } ?>
+
               </div>
 
               <div class="c-list-cart-body-container">

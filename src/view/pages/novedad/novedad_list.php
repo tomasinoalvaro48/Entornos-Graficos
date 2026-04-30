@@ -41,7 +41,7 @@ $novedades = handleNovedadesList();
 
           <form action="" method="POST" class="c-form-layout">
             <div class="row">
-              <div class="col-lg-12 col-4 my-1">
+              <div class="col-lg-12 col-md-4 col-12 my-1">
 
                 <div class=" c-form-field ">
                   <input
@@ -53,7 +53,7 @@ $novedades = handleNovedadesList();
                   <label class="c-form-label" for="fecha_desde_novedad">Fecha Desde</label>
                 </div>
               </div>
-              <div class="col-lg-12 col-4 my-1">
+              <div class="col-lg-12 col-md-4 col-12 my-1">
                 <div class=" c-form-field ">
                   <input
                     type="date"
@@ -66,7 +66,7 @@ $novedades = handleNovedadesList();
               </div>
               <!-- Filtro por categoría de cliente -->
               <?php if ($tipo === TipoUsuario::ADMIN->value) {  ?>
-                <div class="col-lg-12 col-4 my-1">
+                <div class="col-lg-12 col-md-4 col-12 my-1">
                   <div class="c-form-field">
                     <select
                       class="c-form-input c-form-input-select"
@@ -84,20 +84,20 @@ $novedades = handleNovedadesList();
                 </div>
               <?php } ?>
 
-              <div class="col-lg-12 col-4 my-1">
+              <div class="col-lg-12 col-md-4 col-12 my-1">
                 <button type="submit" class="c-btn-primary" id="botonFiltrarNovedades" name="botonFiltrarNovedades">Filtrar</button>
               </div>
           </form>
 
           <!-- Botón para crear nueva novedad, solo visible para admin -->
           <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
-            <div class="col-lg-12 col-4 my-1 mt-lg-3">
+            <div class="col-lg-12 col-md-4 col-12 my-1 mt-lg-3">
               <a class="c-btn-secondary-tonal" href="<?php echo app_path('src/view/pages/novedad/novedad_create.php'); ?>">
                 Crear Novedad
               </a>
             </div>
           <?php } ?>
-          <div class="col-lg-12 col-4 my-1 mt-lg-0">
+          <div class="col-lg-12 col-md-4 col-12 my-1 mt-lg-0">
             <a class="c-btn-secondary-ghost" href="<?php echo app_path(); ?>">
               Volver al Menú
             </a>

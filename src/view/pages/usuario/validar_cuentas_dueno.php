@@ -33,7 +33,7 @@ $duenos = showDuenos();
         </div>
 
         <div class="row">
-          <div class="col-lg-12 col-4 my-1 mt-lg-0">
+          <div class="col-lg-12 col-md-4 col-12 my-1 mt-lg-0">
             <a class="c-btn-secondary-ghost" href="<?php echo app_path(); ?>">
               Volver al Menú
             </a>
