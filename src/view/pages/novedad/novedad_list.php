@@ -7,6 +7,20 @@ require_once __DIR__ . '/../../../enums.php';
 /*filtro*/
 $tipo = getTipoUsuario();
 $novedades = handleNovedadesList();
+
+// ----- Paginacion -----
+$novedadesPerPage = 6;
+$totalNovedades = count($novedades);
+$totalPages = (int) ceil($totalNovedades / $novedadesPerPage);
+$currentPage = 1;
+
+if (isset($_POST['page']) && $totalPages > 0) {
+  $currentPage = (int) $_POST['page'];
+  $currentPage = max(1, min($currentPage, $totalPages));
+}
+
+$startIndex = ($currentPage - 1) * $novedadesPerPage;
+$novedadesPage = $totalNovedades > 0 ? array_slice($novedades, $startIndex, $novedadesPerPage) : [];
 ?>
 
 
@@ -49,7 +63,8 @@ $novedades = handleNovedadesList();
                     class="c-form-input c-form-input-date"
                     id="fecha_desde_novedad"
                     name="fecha_desde_novedad"
-                    placeholder=" ">
+                    placeholder=" "
+                    value="<?php echo isset($_POST['fecha_desde_novedad']) ? htmlspecialchars($_POST['fecha_desde_novedad'], ENT_QUOTES, 'UTF-8') : ''; ?>">
                   <label class="c-form-label" for="fecha_desde_novedad">Fecha Desde</label>
                 </div>
               </div>
@@ -60,7 +75,8 @@ $novedades = handleNovedadesList();
                     class="c-form-input c-form-input-date"
                     id="fecha_hasta_novedad"
                     name="fecha_hasta_novedad"
-                    placeholder=" ">
+                    placeholder=" "
+                    value="<?php echo isset($_POST['fecha_hasta_novedad']) ? htmlspecialchars($_POST['fecha_hasta_novedad'], ENT_QUOTES, 'UTF-8') : ''; ?>">
                   <label class="c-form-label" for="fecha_hasta_novedad">Fecha Hasta</label>
                 </div>
               </div>
@@ -73,9 +89,9 @@ $novedades = handleNovedadesList();
                       id="categoria_cliente"
                       name="categoria_cliente">
                       <option value="">Seleccione una Categoría</option>
-                      <option value="inicial">Inicial</option>
-                      <option value="medium">Medium</option>
-                      <option value="premium">Premium</option>
+                      <option value="inicial" <?php echo (isset($_POST['categoria_cliente']) && $_POST['categoria_cliente'] === 'inicial') ? 'selected' : ''; ?>>Inicial</option>
+                      <option value="medium" <?php echo (isset($_POST['categoria_cliente']) && $_POST['categoria_cliente'] === 'medium') ? 'selected' : ''; ?>>Medium</option>
+                      <option value="premium" <?php echo (isset($_POST['categoria_cliente']) && $_POST['categoria_cliente'] === 'premium') ? 'selected' : ''; ?>>Premium</option>
                     </select>
                     <label class="c-form-label" for="categoria_cliente">Categoría de Cliente</label>
                   </div>
@@ -86,6 +102,12 @@ $novedades = handleNovedadesList();
 
               <div class="col-lg-12 col-md-4 col-12 my-1">
                 <button type="submit" class="c-btn-primary" id="botonFiltrarNovedades" name="botonFiltrarNovedades">Filtrar</button>
+              </div>
+
+              <div class="col-lg-12 col-md-4 col-12 my-1">
+                <a class="c-btn-secondary-tonal" href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>">
+                  Limpiar filtros
+                </a>
               </div>
           </form>
 
@@ -106,7 +128,7 @@ $novedades = handleNovedadesList();
     </div>
     </aside>
     </div>
-    <?php if (empty($novedades)) { ?>
+    <?php if ($totalNovedades === 0) { ?>
       <section class="col-8">
         <div class="alert alert-info mt-5 text-center" role="alert">
           <p>No hay novedades registradas.</p>
@@ -115,7 +137,7 @@ $novedades = handleNovedadesList();
     <?php } else { ?>
       <section class="col-lg-7 col-12 ">
         <div class="row c-list">
-          <?php foreach ($novedades as $n) {
+          <?php foreach ($novedadesPage as $n) {
             $modalId = 'editNovedadModal_' . $n->codNovedad;
             $novedadToEdit = $n;
 
@@ -182,6 +204,56 @@ $novedades = handleNovedadesList();
             </article>
           <?php } ?>
         </div>
+
+        <?php if ($totalPages > 1) { ?>
+          <nav aria-label="Navegación de páginas">
+            <form method="POST" class="d-flex justify-content-center">
+              <?php if (isset($_POST['botonFiltrarNovedades'])) { ?>
+                <input type="hidden" name="botonFiltrarNovedades" value="1">
+              <?php } ?>
+              <?php if (isset($_POST['fecha_desde_novedad'])) { ?>
+                <input type="hidden" name="fecha_desde_novedad" value="<?php echo htmlspecialchars($_POST['fecha_desde_novedad'], ENT_QUOTES, 'UTF-8'); ?>">
+              <?php } ?>
+              <?php if (isset($_POST['fecha_hasta_novedad'])) { ?>
+                <input type="hidden" name="fecha_hasta_novedad" value="<?php echo htmlspecialchars($_POST['fecha_hasta_novedad'], ENT_QUOTES, 'UTF-8'); ?>">
+              <?php } ?>
+              <?php if (isset($_POST['categoria_cliente'])) { ?>
+                <input type="hidden" name="categoria_cliente" value="<?php echo htmlspecialchars($_POST['categoria_cliente'], ENT_QUOTES, 'UTF-8'); ?>">
+              <?php } ?>
+              <ul class="pagination justify-content-center">
+                <li class="page-item <?php echo ($currentPage <= 1) ? 'disabled' : ''; ?>">
+                  <?php if ($currentPage <= 1) { ?>
+                    <span class="page-link" aria-hidden="true">&laquo;</span>
+                  <?php } else { ?>
+                    <button type="submit" class="page-link" name="page" value="<?php echo $currentPage - 1; ?>">
+                      <span aria-hidden="true">&laquo;</span>
+                    </button>
+                  <?php } ?>
+                </li>
+
+                <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
+                  <li class="page-item <?php echo ($i === $currentPage) ? 'active' : ''; ?>">
+                    <?php if ($i === $currentPage) { ?>
+                      <span class="page-link"><?php echo $i; ?></span>
+                    <?php } else { ?>
+                      <button type="submit" class="page-link" name="page" value="<?php echo $i; ?>"><?php echo $i; ?></button>
+                    <?php } ?>
+                  </li>
+                <?php } ?>
+
+                <li class="page-item <?php echo ($currentPage >= $totalPages) ? 'disabled' : ''; ?>">
+                  <?php if ($currentPage >= $totalPages) { ?>
+                    <span class="page-link" aria-hidden="true">&raquo;</span>
+                  <?php } else { ?>
+                    <button type="submit" class="page-link" name="page" value="<?php echo $currentPage + 1; ?>">
+                      <span aria-hidden="true">&raquo;</span>
+                    </button>
+                  <?php } ?>
+                </li>
+              </ul>
+            </form>
+          </nav>
+        <?php } ?>
       </section>
     <?php } ?>
 

@@ -13,6 +13,20 @@ $success = getSessionSuccess();
 $promociones = handlePromocionesList();
 $locales = showLocales();
 $usoDAO = new UsoPromocionDAO();
+
+// ----- Paginacion -----
+$promocionesPerPage = 6;
+$totalPromociones = count($promociones);
+$totalPages = (int) ceil($totalPromociones / $promocionesPerPage);
+$currentPage = 1;
+
+if (isset($_POST['page']) && $totalPages > 0) {
+  $currentPage = (int) $_POST['page'];
+  $currentPage = max(1, min($currentPage, $totalPages));
+}
+
+$startIndex = ($currentPage - 1) * $promocionesPerPage;
+$promocionesPage = $totalPromociones > 0 ? array_slice($promociones, $startIndex, $promocionesPerPage) : [];
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +75,8 @@ $usoDAO = new UsoPromocionDAO();
                     class="c-form-input c-form-input-date"
                     id="fecha_desde_promocion"
                     name="fecha_desde_promocion"
-                    placeholder=" ">
+                    placeholder=" "
+                    value="<?php echo isset($_POST['fecha_desde_promocion']) ? htmlspecialchars($_POST['fecha_desde_promocion'], ENT_QUOTES, 'UTF-8') : ''; ?>">
                   <label class="c-form-label" for="fecha_desde_promocion">Fecha desde</label>
                 </div>
               </div>
@@ -73,11 +88,12 @@ $usoDAO = new UsoPromocionDAO();
                     class="c-form-input c-form-input-date"
                     id="fecha_hasta_promocion"
                     name="fecha_hasta_promocion"
-                    placeholder=" ">
+                    placeholder=" "
+                    value="<?php echo isset($_POST['fecha_hasta_promocion']) ? htmlspecialchars($_POST['fecha_hasta_promocion'], ENT_QUOTES, 'UTF-8') : ''; ?>">
                   <label class="c-form-label" for="fecha_hasta_promocion">Fecha hasta</label>
                 </div>
               </div>
-              
+
               <?php if ($tipo !== TipoUsuario::CLIENTE->value) { ?>
                 <div class="col-lg-12 col-4 my-1">
                   <div class="c-form-field">
@@ -86,9 +102,9 @@ $usoDAO = new UsoPromocionDAO();
                       id="categoria_cliente"
                       name="categoria_cliente">
                       <option value="">Seleccione una categoría</option>
-                      <option value="inicial">Inicial</option>
-                      <option value="medium">Medium</option>
-                      <option value="premium">Premium</option>
+                      <option value="inicial" <?php echo (isset($_POST['categoria_cliente']) && $_POST['categoria_cliente'] === 'inicial') ? 'selected' : ''; ?>>Inicial</option>
+                      <option value="medium" <?php echo (isset($_POST['categoria_cliente']) && $_POST['categoria_cliente'] === 'medium') ? 'selected' : ''; ?>>Medium</option>
+                      <option value="premium" <?php echo (isset($_POST['categoria_cliente']) && $_POST['categoria_cliente'] === 'premium') ? 'selected' : ''; ?>>Premium</option>
                     </select>
                     <label class="c-form-label" for="categoria_cliente">Categoría de cliente</label>
                   </div>
@@ -102,9 +118,9 @@ $usoDAO = new UsoPromocionDAO();
                       class="c-form-input c-form-input-select"
                       name="estado_promocion">
                       <option value="">Seleccione estado</option>
-                      <option value="pendiente">Pendiente</option>
-                      <option value="aprobada">Aprobada</option>
-                      <option value="denegada">Denegada</option>
+                      <option value="pendiente" <?php echo (isset($_POST['estado_promocion']) && $_POST['estado_promocion'] === 'pendiente') ? 'selected' : ''; ?>>Pendiente</option>
+                      <option value="aprobada" <?php echo (isset($_POST['estado_promocion']) && $_POST['estado_promocion'] === 'aprobada') ? 'selected' : ''; ?>>Aprobada</option>
+                      <option value="denegada" <?php echo (isset($_POST['estado_promocion']) && $_POST['estado_promocion'] === 'denegada') ? 'selected' : ''; ?>>Denegada</option>
                     </select>
                     <label class="c-form-label">Estado</label>
                   </div>
@@ -118,7 +134,7 @@ $usoDAO = new UsoPromocionDAO();
                     name="local">
                     <option value="">Seleccione un local</option>
                     <?php foreach ($locales as $l) { ?>
-                      <option value="<?php echo $l->idLocal; ?>">
+                      <option value="<?php echo $l->idLocal; ?>" <?php echo (isset($_POST['local']) && (string) $_POST['local'] === (string) $l->idLocal) ? 'selected' : ''; ?>>
                         <?php echo htmlspecialchars($l->nombreLocal); ?>
                       </option>
                     <?php } ?>
@@ -133,13 +149,13 @@ $usoDAO = new UsoPromocionDAO();
                     class="c-form-input c-form-input-select"
                     name="dia">
                     <option value="">Seleccione un día</option>
-                    <option value="1">Lunes</option>
-                    <option value="2">Martes</option>
-                    <option value="3">Miércoles</option>
-                    <option value="4">Jueves</option>
-                    <option value="5">Viernes</option>
-                    <option value="6">Sábado</option>
-                    <option value="7">Domingo</option>
+                    <option value="1" <?php echo (isset($_POST['dia']) && $_POST['dia'] === '1') ? 'selected' : ''; ?>>Lunes</option>
+                    <option value="2" <?php echo (isset($_POST['dia']) && $_POST['dia'] === '2') ? 'selected' : ''; ?>>Martes</option>
+                    <option value="3" <?php echo (isset($_POST['dia']) && $_POST['dia'] === '3') ? 'selected' : ''; ?>>Miércoles</option>
+                    <option value="4" <?php echo (isset($_POST['dia']) && $_POST['dia'] === '4') ? 'selected' : ''; ?>>Jueves</option>
+                    <option value="5" <?php echo (isset($_POST['dia']) && $_POST['dia'] === '5') ? 'selected' : ''; ?>>Viernes</option>
+                    <option value="6" <?php echo (isset($_POST['dia']) && $_POST['dia'] === '6') ? 'selected' : ''; ?>>Sábado</option>
+                    <option value="7" <?php echo (isset($_POST['dia']) && $_POST['dia'] === '7') ? 'selected' : ''; ?>>Domingo</option>
                   </select>
                   <label class="c-form-label">Día</label>
                 </div>
@@ -151,6 +167,12 @@ $usoDAO = new UsoPromocionDAO();
                   name="botonFiltrarPromociones">
                   Filtrar
                 </button>
+              </div>
+
+              <div class="col-lg-12 col-4 my-1">
+                <a class="c-btn-secondary-tonal" href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>">
+                  Limpiar filtros
+                </a>
               </div>
             </div>
           </form>
@@ -172,7 +194,7 @@ $usoDAO = new UsoPromocionDAO();
       </aside>
     </div>
 
-    <?php if (empty($promociones)) { ?>
+    <?php if ($totalPromociones === 0) { ?>
       <section class="col-8">
         <div class="alert alert-info mt-5 text-center" role="alert">
           <p>No hay promociones registradas.</p>
@@ -184,7 +206,7 @@ $usoDAO = new UsoPromocionDAO();
         <?php clearSessionMessages(); ?>
 
         <div class="row c-list">
-          <?php foreach ($promociones as $p) {
+          <?php foreach ($promocionesPage as $p) {
             $diasTexto = [
               1 => "Lun",
               2 => "Mar",
@@ -242,7 +264,7 @@ $usoDAO = new UsoPromocionDAO();
                     </div>
                   </div>
                 </div>
-                
+
                 <div class="row">
                   <div class="col-12">
                     <div class="c-list-cart-body-desc-container">
@@ -291,7 +313,7 @@ $usoDAO = new UsoPromocionDAO();
                 <form
                   method="POST"
                   action="<?php echo app_path('src/controller/uso_promocion/handle_usar_promocion.php'); ?>">
-                  
+
                   <input
                     type="hidden"
                     name="id_promo"
@@ -305,6 +327,65 @@ $usoDAO = new UsoPromocionDAO();
             </article>
           <?php } ?>
         </div>
+
+        <?php if ($totalPages > 1) { ?>
+          <nav aria-label="Navegación de páginas">
+            <form method="POST" class="d-flex justify-content-center">
+              <?php if (isset($_POST['botonFiltrarPromociones'])) { ?>
+                <input type="hidden" name="botonFiltrarPromociones" value="1">
+              <?php } ?>
+              <?php if (isset($_POST['fecha_desde_promocion'])) { ?>
+                <input type="hidden" name="fecha_desde_promocion" value="<?php echo htmlspecialchars($_POST['fecha_desde_promocion'], ENT_QUOTES, 'UTF-8'); ?>">
+              <?php } ?>
+              <?php if (isset($_POST['fecha_hasta_promocion'])) { ?>
+                <input type="hidden" name="fecha_hasta_promocion" value="<?php echo htmlspecialchars($_POST['fecha_hasta_promocion'], ENT_QUOTES, 'UTF-8'); ?>">
+              <?php } ?>
+              <?php if (isset($_POST['categoria_cliente'])) { ?>
+                <input type="hidden" name="categoria_cliente" value="<?php echo htmlspecialchars($_POST['categoria_cliente'], ENT_QUOTES, 'UTF-8'); ?>">
+              <?php } ?>
+              <?php if (isset($_POST['estado_promocion'])) { ?>
+                <input type="hidden" name="estado_promocion" value="<?php echo htmlspecialchars($_POST['estado_promocion'], ENT_QUOTES, 'UTF-8'); ?>">
+              <?php } ?>
+              <?php if (isset($_POST['local'])) { ?>
+                <input type="hidden" name="local" value="<?php echo htmlspecialchars($_POST['local'], ENT_QUOTES, 'UTF-8'); ?>">
+              <?php } ?>
+              <?php if (isset($_POST['dia'])) { ?>
+                <input type="hidden" name="dia" value="<?php echo htmlspecialchars($_POST['dia'], ENT_QUOTES, 'UTF-8'); ?>">
+              <?php } ?>
+              <ul class="pagination justify-content-center">
+                <li class="page-item <?php echo ($currentPage <= 1) ? 'disabled' : ''; ?>">
+                  <?php if ($currentPage <= 1) { ?>
+                    <span class="page-link" aria-hidden="true">&laquo;</span>
+                  <?php } else { ?>
+                    <button type="submit" class="page-link" name="page" value="<?php echo $currentPage - 1; ?>">
+                      <span aria-hidden="true">&laquo;</span>
+                    </button>
+                  <?php } ?>
+                </li>
+
+                <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
+                  <li class="page-item <?php echo ($i === $currentPage) ? 'active' : ''; ?>">
+                    <?php if ($i === $currentPage) { ?>
+                      <span class="page-link"><?php echo $i; ?></span>
+                    <?php } else { ?>
+                      <button type="submit" class="page-link" name="page" value="<?php echo $i; ?>"><?php echo $i; ?></button>
+                    <?php } ?>
+                  </li>
+                <?php } ?>
+
+                <li class="page-item <?php echo ($currentPage >= $totalPages) ? 'disabled' : ''; ?>">
+                  <?php if ($currentPage >= $totalPages) { ?>
+                    <span class="page-link" aria-hidden="true">&raquo;</span>
+                  <?php } else { ?>
+                    <button type="submit" class="page-link" name="page" value="<?php echo $currentPage + 1; ?>">
+                      <span aria-hidden="true">&raquo;</span>
+                    </button>
+                  <?php } ?>
+                </li>
+              </ul>
+            </form>
+          </nav>
+        <?php } ?>
       </section>
     <?php } ?>
   </main>

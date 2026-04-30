@@ -1,14 +1,31 @@
 <?php
 require_once __DIR__ . "/../../../controller/local/show_local.php";
-require_once __DIR__ . "/../../../controller/dueno/show_duenos.php";
 require_once __DIR__ . "/../../../controller/auth.php";
 require_once __DIR__ . "/../../../enums.php";
 
-/*filtro*/
 $tipo = getTipoUsuario();
+// ----- Filtro -----
 $locales = handleLocalesList();
 
-$duenos = showDuenos();
+// Condiciones para mostrar botones e info según tipo de usuario
+$isAdmin = $tipo === TipoUsuario::ADMIN->value;
+$isDueno = $tipo === TipoUsuario::DUENO->value;
+$canManage = $isAdmin || $isDueno;
+
+// ----- Paginacion -----
+$localesPerPage = 6;
+$totalLocales = count($locales);
+$totalPages = (int) ceil($totalLocales / $localesPerPage);
+$currentPage = 1; // Primera página por default
+
+if (isset($_POST['page']) && $totalPages > 0) {
+  $currentPage = (int) $_POST['page'];
+  // Para que no llegue valores menores a 1 o mayores a totalPages
+  $currentPage = max(1, min($currentPage, $totalPages));
+}
+
+$startIndex = ($currentPage - 1) * $localesPerPage;
+$localesPage = $totalLocales > 0 ? array_slice($locales, $startIndex, $localesPerPage) : [];
 ?>
 
 <!DOCTYPE html>
@@ -33,6 +50,11 @@ $duenos = showDuenos();
   </header>
 
   <main class="row c-page-main">
+
+    <!-- ------------- Alertas ------------- -->
+    <?php include "../../components/alerts.php"; ?>
+
+    <!-- ------------- Filtros y acciones ------------- -->
     <div class="col-lg-3 col-12">
       <aside class="c-aside">
         <div class="row c-hero">
@@ -43,6 +65,8 @@ $duenos = showDuenos();
         <div class="row">
           <form action="" method="POST" class="c-form-layout">
             <div class="row">
+
+              <!-- Filtro de nombre -->
               <div class="col-lg-12 col-md-4 col-12 my-1">
                 <div class="c-form-field">
                   <input
@@ -56,6 +80,7 @@ $duenos = showDuenos();
                 </div>
               </div>
 
+              <!-- Filtro de rubro -->
               <div class="col-lg-12 col-md-4 col-12 my-1">
                 <div class="c-form-field">
                   <input
@@ -69,7 +94,8 @@ $duenos = showDuenos();
                 </div>
               </div>
 
-              <?php if ($tipo === TipoUsuario::ADMIN->value || $tipo === TipoUsuario::DUENO->value) {  ?>
+              <!-- Filtro de estado solo para admin y dueño -->
+              <?php if ($canManage) {  ?>
                 <div class="col-lg-12 col-md-4 col-12 my-1">
                   <div class="c-form-field">
                     <select
@@ -86,11 +112,19 @@ $duenos = showDuenos();
               <?php } ?>
 
               <div class="col-lg-12 col-md-4 col-12 my-1">
-                <button type="submit" class="c-btn-primary" id="botonFiltrarLocales" name="botonFiltrarLocales">Filtrar</button>
+                <button type="submit" class="c-btn-primary" id="botonFiltrarLocales" name="botonFiltrarLocales">
+                  Filtrar
+                </button>
+              </div>
+
+              <div class="col-lg-12 col-md-4 col-12 my-1">
+                <a class="c-btn-secondary-tonal" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">
+                  Limpiar filtros
+                </a>
               </div>
 
               <!-- Botón para crear nuevo local, solo visible para admin -->
-              <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
+              <?php if ($isAdmin) { ?>
                 <div class="col-lg-12 col-md-4 col-12 my-1 mt-lg-0">
                   <a href="<?php echo app_path('src/view/pages/local/create_local.php'); ?>" class="c-btn-secondary-tonal">Crear Local</a>
                 </div>
@@ -105,19 +139,20 @@ $duenos = showDuenos();
       </aside>
     </div>
 
-    <?php include "../../components/alerts.php"; ?>
-
-    <!-- Lista de locales -->
-    <?php if (empty($locales)) { ?>
+    <!-- ------------- Lista de locales ------------- -->
+    <!-- No hay locales -->
+    <?php if ($totalLocales === 0) { ?>
       <section class="col-8">
         <div class="alert alert-info mt-5 text-center" role="alert">
           <p>No hay locales registrados.</p>
         </div>
       </section>
+
+      <!-- Si hay locales -->
     <?php } else { ?>
       <section class="col-lg-7 col-12">
         <div class="row c-list">
-          <?php foreach ($locales as $l) {
+          <?php foreach ($localesPage as $l) {
             $modalId = 'editLocalModal_' . $l->idLocal;
             $localToEdit = $l;
           ?>
@@ -126,8 +161,8 @@ $duenos = showDuenos();
                 <div class="col-lg-6 c-list-card-title">
                   <h5> <?php echo htmlspecialchars($l->nombreLocal, ENT_QUOTES, 'UTF-8') ?></h5>
                 </div>
-                <?php if ($tipo === TipoUsuario::ADMIN->value || $tipo === TipoUsuario::DUENO->value) { ?>
-
+                <!-- Estado solo para admin y dueño -->
+                <?php if ($canManage) { ?>
                   <div class="col-lg-6 c-list-card-category">
                     <span>Estado: <?php echo htmlspecialchars($l->estadoLocal, ENT_QUOTES, 'UTF-8') ?></span>
                   </div>
@@ -154,7 +189,9 @@ $duenos = showDuenos();
                       <span class="c-list-cart-body-date"><?php echo htmlspecialchars($l->rubroLocal, ENT_QUOTES, 'UTF-8') ?></span>
                     </div>
                   </div>
-                  <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
+
+                  <!-- Dueño solo para admin -->
+                  <?php if ($isAdmin) { ?>
                     <div class="col-6 text-end">
                       <div class="c-list-cart-body-info-group">
                         <label class="c-list-cart-body-label">DUEÑO</label>
@@ -165,8 +202,8 @@ $duenos = showDuenos();
                 </div>
               </div>
 
-              <!-- Estado y botones de Editar y Eliminar solo visibles para admin -->
-              <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
+              <!-- Estado y botones de Editar y Eliminar solo para admin -->
+              <?php if ($isAdmin) { ?>
                 <div class="row">
                   <div class="col-lg-6">
                     <button
@@ -185,10 +222,70 @@ $duenos = showDuenos();
                 </div>
               <?php } ?>
 
+              <!-- Modal de edición solo para admin -->
               <?php include __DIR__ . '/edit_local.php'; ?>
             </article>
           <?php } ?>
         </div>
+
+        <!-- -------------- Paginación -------------- -->
+        <nav aria-label="Navegación de páginas">
+          <form method="POST" class="d-flex justify-content-center">
+            <?php if (isset($_POST['botonFiltrarLocales'])) { ?>
+              <input type="hidden" name="botonFiltrarLocales" value="1">
+            <?php } ?>
+            <?php if (isset($_POST['nombre_local'])) { ?>
+              <input type="hidden" name="nombre_local" value="<?php echo htmlspecialchars($_POST['nombre_local'], ENT_QUOTES, 'UTF-8'); ?>">
+            <?php } ?>
+            <?php if (isset($_POST['rubro_local'])) { ?>
+              <input type="hidden" name="rubro_local" value="<?php echo htmlspecialchars($_POST['rubro_local'], ENT_QUOTES, 'UTF-8'); ?>">
+            <?php } ?>
+            <?php if (isset($_POST['estado_local'])) { ?>
+              <input type="hidden" name="estado_local" value="<?php echo htmlspecialchars($_POST['estado_local'], ENT_QUOTES, 'UTF-8'); ?>">
+            <?php } ?>
+            <ul class="pagination justify-content-center">
+              <li class="page-item <?php echo ($currentPage <= 1) ? 'disabled' : ''; ?>">
+                <?php if ($currentPage <= 1) { ?>
+                  <span class="page-link">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Anterior</span>
+                  </span>
+                <?php } else { ?>
+                  <button type="submit" class="page-link" name="page" value="<?php echo $currentPage - 1; ?>">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Anterior</span>
+                  </button>
+                <?php } ?>
+              </li>
+
+              <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
+                <li class="page-item <?php echo ($i === $currentPage) ? 'active' : ''; ?>">
+                  <?php if ($i === $currentPage) { ?>
+                    <span class="page-link"><?php echo $i; ?></span>
+                  <?php } else { ?>
+                    <button type="submit" class="page-link" name="page" value="<?php echo $i; ?>">
+                      <?php echo $i; ?>
+                    </button>
+                  <?php } ?>
+                </li>
+              <?php } ?>
+
+              <li class="page-item <?php echo ($currentPage >= $totalPages) ? 'disabled' : ''; ?>">
+                <?php if ($currentPage >= $totalPages) { ?>
+                  <span class="page-link">
+                    <span class="sr-only">Siguiente</span>
+                    <span aria-hidden="true">&raquo;</span>
+                  </span>
+                <?php } else { ?>
+                  <button type="submit" class="page-link" name="page" value="<?php echo $currentPage + 1; ?>">
+                    <span class="sr-only">Siguiente</span>
+                    <span aria-hidden="true">&raquo;</span>
+                  </button>
+                <?php } ?>
+              </li>
+            </ul>
+          </form>
+        </nav>
       </section>
     <?php } ?>
 
