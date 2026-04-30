@@ -24,6 +24,19 @@ function handlePromocionesList()
   $local = null;
   $dia = null;
 
+  $promocionDAO = new PromocionDAO();
+
+  //GET (cliente)
+  if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['id_local'])) {
+    $idLocal = $_GET['id_local'];
+
+    $usuario = getUsuarioLogueado();
+    $categoriaCliente = $usuario['categoria_cliente'] ?? null;
+
+    return $promocionDAO->getPromosValidasParaCliente($idLocal, $categoriaCliente);
+  }
+
+  //POST (filtros)
   if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['botonFiltrarPromociones'])) {
     $fechaDesde = !empty($_POST['fecha_desde_promocion']) ? $_POST['fecha_desde_promocion'] : null;
     $fechaHasta = !empty($_POST['fecha_hasta_promocion']) ? $_POST['fecha_hasta_promocion'] : null;
@@ -32,8 +45,14 @@ function handlePromocionesList()
     $dia = !empty($_POST['dia']) ? $_POST['dia'] : null;
 
     if ($tipo === TipoUsuario::DUENO->value) {
+      $categoria = !empty($_POST['categoria_cliente']) ? $_POST['categoria_cliente'] : null;
       $estado = !empty($_POST['estado_promocion']) ? $_POST['estado_promocion'] : null;
     }
+  }
+
+  if ($tipo === TipoUsuario::CLIENTE->value) {
+    $usuario = getUsuarioLogueado();
+    $categoria = $usuario['categoria_cliente'] ?? null;
   }
 
   return showPromocionesFiltered($fechaDesde, $fechaHasta, $categoria, $estado, $local, $dia);

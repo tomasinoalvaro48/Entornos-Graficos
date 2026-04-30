@@ -109,7 +109,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
                 Promociones
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/uso_promocion/promos_cliente.php'); ?>">Buscar promociones</a></li>
+                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>">Buscar promociones</a></li>
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/uso_promocion/mis_usos_cliente.php'); ?>">Mis usos de promociones</a></li>
               </ul>
             </li>

@@ -79,20 +79,22 @@ $usoDAO = new UsoPromocionDAO();
                 </div>
               </div>
               
-              <div class="col-lg-12 col-4 my-1">
-                <div class="c-form-field">
-                  <select
-                    class="c-form-input c-form-input-select"
-                    id="categoria_cliente"
-                    name="categoria_cliente">
-                    <option value="">Seleccione una categoría</option>
-                    <option value="inicial">Inicial</option>
-                    <option value="medium">Medium</option>
-                    <option value="premium">Premium</option>
-                  </select>
-                  <label class="c-form-label" for="categoria_cliente">Categoría de cliente</label>
+              <?php if ($tipo !== TipoUsuario::CLIENTE->value) { ?>
+                <div class="col-lg-12 col-4 my-1">
+                  <div class="c-form-field">
+                    <select
+                      class="c-form-input c-form-input-select"
+                      id="categoria_cliente"
+                      name="categoria_cliente">
+                      <option value="">Seleccione una categoría</option>
+                      <option value="inicial">Inicial</option>
+                      <option value="medium">Medium</option>
+                      <option value="premium">Premium</option>
+                    </select>
+                    <label class="c-form-label" for="categoria_cliente">Categoría de cliente</label>
+                  </div>
                 </div>
-              </div>
+              <?php } ?>
 
               <?php if ($tipo === TipoUsuario::DUENO->value) { ?>
                 <div class="col-lg-12 col-4 my-1">
@@ -283,6 +285,22 @@ $usoDAO = new UsoPromocionDAO();
                     </a>
                   </div>
                 </div>
+              <?php } ?>
+
+              <?php if ($tipo === TipoUsuario::CLIENTE->value) { ?>
+                <form
+                  method="POST"
+                  action="<?php echo app_path('src/controller/uso_promocion/handle_usar_promocion.php'); ?>">
+                  
+                  <input
+                    type="hidden"
+                    name="id_promo"
+                    value="<?php echo htmlspecialchars($p->idPromo, ENT_QUOTES, 'UTF-8'); ?>">
+
+                  <button type="submit" class="c-btn-primary mt-2">
+                    Usar promoción
+                  </button>
+                </form>
               <?php } ?>
             </article>
           <?php } ?>
