@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . "/../../controller/auth.php";
 require_once __DIR__ . "/../../enums.php";
+require_once __DIR__ . "/notifications_dropdown.php";
+
 $tipo = getTipoUsuario();
 $serverUri = $_SERVER["REQUEST_URI"];
 $excludePaths = [ // Rutas donde solo se muestra el logo en el header
@@ -12,6 +14,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
 
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top c-header-navbar" style="z-index: 1030;">
   <div class="container-fluid c-header-shell">
+    <!-- Logo y marca -->
     <a class="navbar-brand c-header-brand" href="<?php echo app_path(); ?>">
       <img src="<?php echo app_path('src/img/logoSoloImagen.png'); ?>" alt="Logo Rivendell" class="c-header-brand-icon" />
       <span class="c-header-brand-text">
@@ -20,14 +23,13 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
       </span>
     </a>
 
-    <?php if (!$tipo && in_array($serverUri, $excludePaths) === false) { ?>
+    <!-- Menú de navegación -->
+    <?php if (!in_array($serverUri, $excludePaths)) { ?>
+      <!-- Buscador -->
       <form class="d-flex c-header-search" role="search">
         <input class="form-control c-header-search-input" type="search" placeholder="Buscar Locales o Promociones" aria-label="Search" />
         <button class="btn c-header-search-btn" type="submit">Buscar</button>
       </form>
-    <?php } ?>
-
-    <?php if (in_array($serverUri, $excludePaths) === false) { ?>
       <button
         class="navbar-toggler c-header-toggler"
         type="button"
@@ -39,9 +41,11 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
         <span class="navbar-toggler-icon"></span>
       </button>
 
+      <!-- Opciones -->
       <div class="collapse navbar-collapse c-header-collapse" id="cHeaderNav">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 c-header-menu">
           <?php if (!$tipo) { ?>
+            <!-- Usuarios no autenticados -->
             <li class="nav-item">
               <a class="nav-link" href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>">Promociones</a>
             </li>
@@ -55,6 +59,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link" href="<?php echo app_path('src/view/pages/auth/signin.php'); ?>">Registrarse</a>
             </li>
           <?php } else if ($tipo === TipoUsuario::ADMIN->value) { ?>
+            <!-- Administrador -->
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                 Locales
@@ -94,7 +99,9 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/usuario/validar_cuentas_dueno.php'); ?>">Ver cuentas de dueños</a></li>
               </ul>
             </li>
+
           <?php } else if ($tipo === TipoUsuario::CLIENTE->value) { ?>
+            <!-- Clientes -->
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                 Locales
@@ -123,6 +130,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               </ul>
             </li>
           <?php } else if ($tipo === TipoUsuario::DUENO->value) { ?>
+            <!-- Dueños -->
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                 Locales
@@ -144,11 +152,17 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
             </li>
           <?php } ?>
 
+
+          <!-- Opciones comunes para usuarios autenticados -->
           <?php if ($tipo) { ?>
+            <!-- Notificaciones -->
+            <?php renderHeaderNotifications($tipo); ?>
+
             <li class="nav-item">
               <a class="nav-link" href="<?php echo app_path('src/controller/handle_logout.php'); ?>">Cerrar Sesión</a>
             </li>
           <?php } ?>
+
         </ul>
       </div>
     <?php } ?>
