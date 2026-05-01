@@ -100,7 +100,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
                 Locales
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/local/locales_cliente.php'); ?>">Ver locales</a></li>
+                <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">Ver locales</a></li>
               </ul>
             </li>
 

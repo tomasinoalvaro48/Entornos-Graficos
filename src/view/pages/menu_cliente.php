@@ -20,7 +20,7 @@ include __DIR__ . "/../components/carousel.php";
         <i class="bi bi-shop" style="font-size: 2rem; color: #fd7e14;"></i>
         <h5 class="card-title mt-3">Locales</h5>
         <p class="card-text">Ver todos los locales del shopping.</p>
-        <a href="<?php echo app_path('src/view/pages/local/locales_cliente.php'); ?>" class="btn btn-warning btn-sm">
+        <a href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>" class="btn btn-warning btn-sm">
           Ver Locales
         </a>
       </div>
