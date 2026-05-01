@@ -71,7 +71,8 @@ class UsoPromocionDAO extends DBFunctions
             $row['rubro_local'],
             null,
             $row['estado_elim_local']
-          )
+          ),
+          $row['estado_elim_promo']
         );
 
         array_push($usosArray, $uso);
@@ -112,7 +113,8 @@ class UsoPromocionDAO extends DBFunctions
             $row['rubro_local'],
             null,
             $row['estado_elim_local']
-          )
+          ),
+          $row['estado_elim_promo']
         );
 
         $usosArray[] = $uso;
@@ -178,6 +180,23 @@ class UsoPromocionDAO extends DBFunctions
 
     if ($usos && $usos->num_rows > 0) {
       $row = mysqli_fetch_array($usos);
+      return (int)$row['cantidad'];
+    }
+
+    return 0;
+  }
+
+  public function countUsosAceptadosByCliente($idCli)
+  {
+    $query = "SELECT COUNT(*) as cantidad
+              FROM uso_promocion
+              WHERE id_cli = $idCli
+              AND estado_uso_promo = 'aceptada';";
+
+    $result = $this->querySQL($query);
+
+    if ($result && $result->num_rows > 0) {
+      $row = mysqli_fetch_array($result);
       return (int)$row['cantidad'];
     }
 

@@ -1,9 +1,12 @@
 <?php
+
 require_once __DIR__ . "/../../controller/auth.php";
 require_once __DIR__ . "/../../enums.php";
 require_once __DIR__ . "/notifications_dropdown.php";
 
 $tipo = getTipoUsuario();
+$usuario = getUsuarioLogueado();
+
 $serverUri = $_SERVER["REQUEST_URI"];
 $excludePaths = [ // Rutas donde solo se muestra el logo en el header
   app_path('src/view/pages/auth/login.php'),
@@ -128,6 +131,14 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>">Ver novedades</a></li>
               </ul>
+            </li>
+
+            <li class="nav-item d-flex align-items-center">
+              <span class="nav-link">
+                <span class="c-list-card-category">
+                  Categoría: <?php echo strtoupper($usuario['categoria_cliente']); ?>
+                </span>
+              </span>
             </li>
           <?php } else if ($tipo === TipoUsuario::DUENO->value) { ?>
             <!-- Dueños -->

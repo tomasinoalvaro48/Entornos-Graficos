@@ -43,7 +43,11 @@ $novedadesPage = $totalNovedades > 0 ? array_slice($novedades, $startIndex, $nov
   <header>
     <?php include_once __DIR__ . '/../../components/header.php' ?>
   </header>
+
   <main class="row c-page-main">
+
+    <?php include __DIR__ . '/../../components/alerts.php' ?>
+
     <div class="col-lg-3 col-12">
       <aside class=" c-aside">
         <div class="row c-hero">

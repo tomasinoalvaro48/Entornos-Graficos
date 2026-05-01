@@ -762,3 +762,66 @@
 .c-table-btn-sm {
   height: auto;
 }
+
+/*Footer*/
+.c-footer {
+  background-color: #2d3250;
+  color: #f1f2ff;
+  padding-top: 3rem;
+  border-top: 4px solid #f9b17a;
+  margin-top: 2rem;
+}
+
+.c-footer-section-title {
+  color: #f9b17a;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+}
+
+.c-footer-text {
+  color: #a8add0;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.c-footer-bottom {
+  background-color: #1a1d2d;
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+  text-align: center;
+  color: #a8add0;
+  font-size: 0.9rem;
+}
+
+.c-footer-bottom a {
+  color: #f9b17a;
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.c-footer-bottom a:hover {
+  color: #fff;
+}
+
+.c-footer-iframe {
+  border-radius: 0.5rem;
+  width: 100%;
+  height: 100%;
+}
+
+.c-footer-link {
+  color: #a8add0;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.c-footer-link:hover {
+  color: #fff;
+}
