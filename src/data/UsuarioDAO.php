@@ -144,4 +144,13 @@ class UsuarioDAO extends DBFunctions
               WHERE id_usuario = '" . (int)$idUsuario . "';";
     return $this->querySQL($query);
   }
+
+  public function updateCategoriaCliente($idUsuario, $nuevaCategoria)
+  {
+    $query = "UPDATE usuario
+              SET categoria_cliente = '$nuevaCategoria'
+              WHERE id_usuario = " . (int)$idUsuario . ";";
+
+    return $this->querySQL($query);
+  }
 }
