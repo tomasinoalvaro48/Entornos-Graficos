@@ -7,6 +7,7 @@ require_once __DIR__ . "/../../model/Usuario.php";
 
 if (isset($_POST['botonActualizar'])) {
   $localDAO = new LocalDAO();
+  $localActual = $localDAO->getById($_GET['id']);
   $nombreLocal = $_POST['nombre_local'];
 
   // Verificar si el nuevo nombre del local ya existe en otro registro que no sea el actual
@@ -23,7 +24,7 @@ if (isset($_POST['botonActualizar'])) {
       $_POST['nombre_local'],
       $_POST['rubro_local'],
       $dueno = (new UsuarioDAO())->getById($_POST['dueno_local']),
-      $localActual->estadoLocal
+      $localActual?->estadoLocal
     ));
     setSessionSuccess("Local actualizado exitosamente.");
     header("Location: " . app_path('src/view/pages/local/local_list.php'));

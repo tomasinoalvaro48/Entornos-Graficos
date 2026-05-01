@@ -1,3 +1,10 @@
+<?php
+require_once __DIR__ . "/../../../controller/dueno/show_duenos.php";
+require_once __DIR__ . "/../../../enums.php";
+
+$duenos = showDuenos();
+?>
+
 <div
   class="modal fade"
   id="<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>"
@@ -58,7 +65,7 @@
               required>
               <option value="">Seleccionar un dueño</option>
               <?php foreach ($duenos as $d) { ?>
-                <?php if ($d->estadoDueno !== 'pendiente') { ?>
+                <?php if ($d->estadoDueno === EstadoDueno::ACEPTADO->value) { ?>
                   <option
                     value="<?php echo htmlspecialchars($d->idUsuario, ENT_QUOTES, 'UTF-8'); ?>"
                     <?php echo $d->idUsuario === $localToEdit->usuario->idUsuario ? 'selected' : ''; ?>>
