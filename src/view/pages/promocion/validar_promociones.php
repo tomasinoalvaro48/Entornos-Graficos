@@ -1,7 +1,25 @@
 <?php
 require_once __DIR__ . "/../../../controller/promocion/show_promocion.php";
+require_once __DIR__ . '/../../../controller/auth.php';
+require_once __DIR__ . '/../../../enums.php';
 
-$promociones = showPromociones();
+/*filtro*/
+$tipo = getTipoUsuario();
+$promociones = handlePromocionesValidacionList();
+
+// ----- Paginacion -----
+$promosPerPage = 6;
+$totalPromos = count($promociones);
+$totalPages = (int) ceil($totalPromos / $promosPerPage);
+$currentPage = 1;
+
+if (isset($_POST['page']) && $totalPages > 0) {
+  $currentPage = (int) $_POST['page'];
+  $currentPage = max(1, min($currentPage, $totalPages));
+}
+
+$startIndex = ($currentPage - 1) * $promosPerPage;
+$promosPage = $totalPromos > 0 ? array_slice($promociones, $startIndex, $promosPerPage) : [];
 ?>
 
 <!DOCTYPE html>
@@ -17,176 +35,211 @@ $promociones = showPromociones();
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
     rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-    crossorigin="anonymous"
-  />
-  
+    crossorigin="anonymous" />
+
   <link
     rel="stylesheet"
-    href="../../styles/styles.css"
-  />
+    href="../../styles/styles.css" />
 </head>
 
 <body>
   <header>
-    <?php include __DIR__ . '/../../components/header.php' ?>
+    <?php include_once __DIR__ . '/../../components/header.php' ?>
   </header>
 
-  <main class="container">
-    <div class="row">
-      <div class="col">
-        <h1 class="text-center">Promociones</h1>
-      </div>
-    </div>
-
-    <?php include __DIR__ . '/../../components/alerts.php'; ?>
-
-    <div class="row">
-      <div class="col">
-        <div class="table-responsive">
-          <table class="table table-striped table-hover align-middle">
-            <thead class="table-dark">
-              <tr>
-                <th>ID</th>
-                <th>Texto</th>
-                <th>Local</th>
-                <th>Estado</th>
-                <th>Acción</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <?php if (empty($promociones)) { ?>
-                <tr>
-                  <td colspan="5" class="text-center">No hay promociones nuevas.</td>
-                </tr>
-              <?php } else { ?>
-                <?php foreach ($promociones as $promo) {
-                  $estadoPromo = strtolower((string)$promo->estadoPromo);
-                  $estadoBadgeClass = 'text-bg-secondary';
-
-                  if ($estadoPromo === 'pendiente') {
-                    $estadoBadgeClass = 'text-bg-warning';
-                  } else if ($estadoPromo === 'aprobada') {
-                    $estadoBadgeClass = 'text-bg-success';
-                  } else if ($estadoPromo === 'denegada') {
-                    $estadoBadgeClass = 'text-bg-danger';
-                  }
-
-                  $modalId = 'modal-validar-promo-' . (int)$promo->idPromo;
-                ?>
-                  <tr>
-                    <td><?php echo htmlspecialchars($promo->idPromo, ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><?php echo htmlspecialchars($promo->textoPromo, ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><?php echo htmlspecialchars($promo->local->nombreLocal, ENT_QUOTES, 'UTF-8'); ?></td>
-
-                    <td>
-                      <span class="badge <?php echo $estadoBadgeClass; ?>">
-                        <?php echo strtoupper(htmlspecialchars($promo->estadoPromo, ENT_QUOTES, 'UTF-8')); ?>
-                      </span>
-                    </td>
-
-                    <td>
-                      <?php if ($promo->estadoPromo === 'pendiente') { ?>
-                        <button
-                          type="button"
-                          class="btn btn-sm btn-primary"
-                          data-bs-toggle="modal"
-                          data-bs-target="#<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>">
-                          Gestionar promo
-                        </button>
-
-                        <div class="modal fade" id="<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>" tabindex="-1" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title">Validar promoción</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                              </div>
-
-                              <div class="modal-body">
-                                <p class="mb-3">¿Qué desea hacer con esta promo?</p>
-
-                                <ul class="list-group">
-                                  <li class="list-group-item">
-                                    <strong>Texto:</strong>
-                                    <?php echo htmlspecialchars($promo->textoPromo, ENT_QUOTES, 'UTF-8'); ?>
-                                  </li>
-
-                                  <li class="list-group-item">
-                                    <strong>Vigencia:</strong>
-                                    <?php echo $promo->fechaDesdePromo->format('d/m/Y'); ?>
-                                    -
-                                    <?php echo $promo->fechaHastaPromo->format('d/m/Y'); ?>
-                                  </li>
-
-                                  <li class="list-group-item">
-                                    <strong>Categoría cliente:</strong>
-                                    <?php echo htmlspecialchars($promo->categoriaClientePromo, ENT_QUOTES, 'UTF-8'); ?>
-                                  </li>
-
-                                  <li class="list-group-item">
-                                    <strong>Días:</strong>
-                                    <?php
-                                    $dias = [];
-                                    $diasTexto = [
-                                      1 => "Lun",
-                                      2 => "Mar",
-                                      3 => "Mié",
-                                      4 => "Jue",
-                                      5 => "Vie",
-                                      6 => "Sáb",
-                                      7 => "Dom"
-                                    ];
-
-                                    foreach ($promo->diasSemanaPromo as $d) {
-                                      $dias[] = $diasTexto[$d] ?? $d;
-                                    }
-
-                                    echo implode(", ", $dias);
-                                    ?>
-                                  </li>
-
-                                  <li class="list-group-item">
-                                    <strong>Local:</strong>
-                                    <?php echo htmlspecialchars($promo->local->nombreLocal, ENT_QUOTES, 'UTF-8'); ?>
-                                  </li>
-                                </ul>
-                              </div>
-
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-
-                                <a class="btn btn-danger"
-                                  href="<?php echo app_path('src/controller/promocion/handle_validar_promocion.php'); ?>?estado=denegada&id=<?php echo $promo->idPromo; ?>">
-                                  Denegar
-                                </a>
-
-                                <a class="btn btn-success"
-                                  href="<?php echo app_path('src/controller/promocion/handle_validar_promocion.php'); ?>?estado=aprobada&id=<?php echo $promo->idPromo; ?>">
-                                  Aprobar
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      <?php } else { ?>
-                        <span class="text-muted">Promo gestionada</span>
-                      <?php } ?>
-                    </td>
-                  </tr>
-                <?php } ?>
-              <?php } ?>
-            </tbody>
-          </table>
+  <main class="row c-page-main">
+    <div class="col-lg-3 col-12">
+      <aside class="c-aside">
+        <div class="row c-hero">
+          <h1 class="c-title">Promociones</h1>
+          <p class="c-subtitle">Revisá y administrá las promociones publicadas.</p>
         </div>
-      </div>
+
+        <div class="row">
+          <form action="" method="POST" class="c-form-layout">
+            <div class="row">
+              <div class="col-lg-12 col-md-6 col-12 my-1">
+                <div class="c-form-field">
+                  <input
+                    type="text"
+                    class="c-form-input"
+                    id="nombre_local"
+                    name="nombre_local"
+                    placeholder=" "
+                    value="<?php echo isset($_POST['nombre_local']) ? htmlspecialchars($_POST['nombre_local'], ENT_QUOTES, 'UTF-8') : ''; ?>">
+                  <label class="c-form-label" for="nombre_local">Local</label>
+                </div>
+              </div>
+
+              <div class="col-lg-12 col-md-6 col-12 my-1">
+                <div class="c-form-field">
+                  <select
+                    class="c-form-input c-form-input-select"
+                    id="estado_promocion"
+                    name="estado_promocion">
+                    <option value="">Todos los Estados</option>
+                    <option value="pendiente" <?php echo (isset($_POST['estado_promocion']) && $_POST['estado_promocion'] === 'pendiente') ? 'selected' : ''; ?>>Pendiente</option>
+                    <option value="aprobada" <?php echo (isset($_POST['estado_promocion']) && $_POST['estado_promocion'] === 'aprobada') ? 'selected' : ''; ?>>Aprobada</option>
+                    <option value="denegada" <?php echo (isset($_POST['estado_promocion']) && $_POST['estado_promocion'] === 'denegada') ? 'selected' : ''; ?>>Denegada</option>
+                  </select>
+                  <label class="c-form-label" for="estado_promocion">Estado</label>
+                </div>
+              </div>
+
+              <div class="col-lg-12 col-md-6 col-12 my-1">
+                <button type="submit" class="c-btn-primary" id="botonFiltrarPromociones" name="botonFiltrarPromociones">Filtrar</button>
+              </div>
+
+              <div class="col-lg-12 col-md-6 col-12 my-1">
+                <a class="c-btn-secondary-tonal" href="<?php echo app_path('src/view/pages/promocion/validar_promociones.php'); ?>">
+                  Limpiar filtros
+                </a>
+              </div>
+            </div>
+          </form>
+
+          <div class="col-12 my-1 mt-lg-3">
+            <a class="c-btn-secondary-ghost" href="<?php echo app_path(); ?>">
+              Volver al Menú
+            </a>
+          </div>
+        </div>
+      </aside>
     </div>
 
-    <div class="row mt-4">
-      <div class="col text-center">
-        <a href="<?php echo app_path(); ?>" class="btn btn-secondary">Volver al menú</a>
-      </div>
-    </div>
+    <?php if ($totalPromos === 0) { ?>
+      <section class="col-8">
+        <?php include __DIR__ . '/../../components/alerts.php'; ?>
+        <div class="alert alert-info mt-5 text-center" role="alert">
+          <p>No hay promociones registradas.</p>
+        </div>
+      </section>
+    <?php } else { ?>
+      <section class="col-lg-7 col-12">
+        <?php include __DIR__ . '/../../components/alerts.php'; ?>
+        <div class="row c-list">
+          <?php foreach ($promosPage as $promo) {
+            $estadoPromo = strtolower((string)$promo->estadoPromo);
+          ?>
+            <article class="col-12 c-list-card">
+              <div class="row c-list-card-header">
+                <div class="col-sm-6 col-12 c-list-card-title">
+                  <h5>Promo #<?php echo htmlspecialchars($promo->idPromo, ENT_QUOTES, 'UTF-8') ?> - <?php echo htmlspecialchars($promo->local->nombreLocal, ENT_QUOTES, 'UTF-8') ?></h5>
+                </div>
+                <div class="col-sm-6 col-12 c-list-card-category">
+                  <span>Estado: <b><?php echo strtoupper(htmlspecialchars($promo->estadoPromo, ENT_QUOTES, 'UTF-8')); ?></b></span>
+                </div>
+              </div>
+
+              <div class="c-list-cart-body-container">
+                <div class="row mb-4">
+                  <div class="col-4">
+                    <div class="c-list-cart-body-info-group">
+                      <label class="c-list-cart-body-label">FECHA DESDE</label>
+                      <span class="c-list-cart-body-date"><?php echo $promo->fechaDesdePromo ? $promo->fechaDesdePromo->format('Y-m-d') : 'N/A'; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-4 text-center">
+                    <div class="c-list-cart-body-info-group">
+                      <label class="c-list-cart-body-label">DÍAS</label>
+                      <span class="c-list-cart-body-date">
+                        <?php
+                        $dias = [];
+                        $diasTexto = [1 => "Lun", 2 => "Mar", 3 => "Mié", 4 => "Jue", 5 => "Vie", 6 => "Sáb", 7 => "Dom"];
+                        foreach ($promo->diasSemanaPromo as $d) {
+                          $dias[] = $diasTexto[$d] ?? $d;
+                        }
+                        echo implode(", ", $dias);
+                        ?>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-4 text-end">
+                    <div class="c-list-cart-body-info-group">
+                      <label class="c-list-cart-body-label">FECHA HASTA</label>
+                      <span class="c-list-cart-body-date"><?php echo $promo->fechaHastaPromo ? $promo->fechaHastaPromo->format('Y-m-d') : 'N/A'; ?></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12">
+                    <div class="c-list-cart-body-desc-container">
+                      <label class="c-list-cart-body-label">DESCRIPCIÓN - Cat. <?php echo htmlspecialchars($promo->categoriaClientePromo, ENT_QUOTES, 'UTF-8'); ?></label>
+                      <p class="c-list-cart-body-desc-text">
+                        <?php echo htmlspecialchars($promo->textoPromo, ENT_QUOTES, 'UTF-8') ?>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <?php if ($estadoPromo === 'pendiente') { ?>
+                  <div class="col-md-6 col-12">
+                    <a class="c-btn-secondary-tonal"
+                      href="<?php echo app_path('src/controller/promocion/handle_validar_promocion.php'); ?>?estado=aprobada&id=<?php echo $promo->idPromo; ?>">
+                      Aprobar
+                    </a>
+                  </div>
+                  <div class="col-md-6 col-12">
+                    <a class="c-btn-danger-tonal"
+                      href="<?php echo app_path('src/controller/promocion/handle_validar_promocion.php'); ?>?estado=denegada&id=<?php echo $promo->idPromo; ?>">
+                      Denegar
+                    </a>
+                  </div>
+                <?php } else { ?>
+                  <div class="col-12 text-center text-muted">
+                    Promo gestionada
+                  </div>
+                <?php } ?>
+              </div>
+            </article>
+          <?php } ?>
+        </div>
+
+        <?php if ($totalPages > 1) { ?>
+          <nav aria-label="Navegación de páginas">
+            <form method="POST" class="d-flex justify-content-center mt-3">
+              <?php if (isset($_POST['botonFiltrarPromociones'])) { ?>
+                <input type="hidden" name="botonFiltrarPromociones" value="1">
+              <?php } ?>
+              <?php if (isset($_POST['nombre_local'])) { ?>
+                <input type="hidden" name="nombre_local" value="<?php echo htmlspecialchars($_POST['nombre_local'], ENT_QUOTES, 'UTF-8'); ?>">
+              <?php } ?>
+              <?php if (isset($_POST['estado_promocion'])) { ?>
+                <input type="hidden" name="estado_promocion" value="<?php echo htmlspecialchars($_POST['estado_promocion'], ENT_QUOTES, 'UTF-8'); ?>">
+              <?php } ?>
+              <ul class="pagination justify-content-center">
+                <li class="page-item <?php echo ($currentPage <= 1) ? 'disabled' : ''; ?>">
+                  <?php if ($currentPage <= 1) { ?>
+                    <span class="page-link" aria-hidden="true">&laquo;</span>
+                  <?php } else { ?>
+                    <button type="submit" class="page-link" name="page" value="<?php echo $currentPage - 1; ?>">
+                      <span aria-hidden="true">&laquo;</span>
+                    </button>
+                  <?php } ?>
+                </li>
+                <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
+                  <li class="page-item <?php echo ($i === $currentPage) ? 'active' : ''; ?>">
+                    <button type="submit" class="page-link" name="page" value="<?php echo $i; ?>"><?php echo $i; ?></button>
+                  </li>
+                <?php } ?>
+                <li class="page-item <?php echo ($currentPage >= $totalPages) ? 'disabled' : ''; ?>">
+                  <?php if ($currentPage >= $totalPages) { ?>
+                    <span class="page-link" aria-hidden="true">&raquo;</span>
+                  <?php } else { ?>
+                    <button type="submit" class="page-link" name="page" value="<?php echo $currentPage + 1; ?>">
+                      <span aria-hidden="true">&raquo;</span>
+                    </button>
+                  <?php } ?>
+                </li>
+              </ul>
+            </form>
+          </nav>
+        <?php } ?>
+      </section>
+    <?php } ?>
   </main>
 
   <script

@@ -182,7 +182,7 @@ $novedadesPage = $totalNovedades > 0 ? array_slice($novedades, $startIndex, $nov
 
               <?php if ($tipo === TipoUsuario::ADMIN->value) { ?>
                 <div class="row">
-                  <div class="col-lg-6">
+                  <div class="col-lg-6 col-12">
                     <button
                       class="c-btn-secondary-tonal"
                       type="button"
@@ -191,7 +191,7 @@ $novedadesPage = $totalNovedades > 0 ? array_slice($novedades, $startIndex, $nov
                       Editar
                     </button>
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-6 col-12">
                     <a class="c-btn-danger-tonal"
                       href="<?php echo app_path('src/controller/novedad/handle_delete_novedad.php'); ?>?id=<?php echo htmlspecialchars($n->codNovedad, ENT_QUOTES, 'UTF-8'); ?>">
                       Eliminar

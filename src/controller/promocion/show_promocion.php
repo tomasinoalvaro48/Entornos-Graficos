@@ -59,3 +59,17 @@ function handlePromocionesList()
 
   return showPromocionesFiltered($fechaDesde, $fechaHasta, $categoria, $estado, $local, $dia);
 }
+
+function handlePromocionesValidacionList()
+{
+  $promocionDAO = new PromocionDAO();
+
+  if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['botonFiltrarPromociones'])) {
+    $nombreLocal = !empty($_POST['nombre_local']) ? trim($_POST['nombre_local']) : null;
+    $estado = !empty($_POST['estado_promocion']) ? trim($_POST['estado_promocion']) : null;
+
+    return $promocionDAO->getFilterAdminPromociones($nombreLocal, $estado);
+  }
+
+  return $promocionDAO->getAll();
+}
