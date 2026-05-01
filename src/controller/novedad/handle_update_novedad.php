@@ -24,8 +24,10 @@ if (isset($_POST['botonActualizar'])) {
     $textoNovedad,
     $fechaDesdeNovedad,
     $fechaHastaNovedad,
-    $categoriaCliente
+    $categoriaCliente,
+    EstadoElimNovedad::ACTIVA->value
   ));
+
   setSessionSuccess("Novedad actualizada exitosamente");
   header("Location: " . app_path('src/view/pages/novedad/novedad_list.php'));
 };

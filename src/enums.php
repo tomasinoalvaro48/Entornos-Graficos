@@ -28,6 +28,12 @@ enum EstadoElimPromo: string
   case ELIMINADA = 'eliminada';
 }
 
+enum EstadoElimNovedad: string
+{
+  case ACTIVA = 'activa';
+  case ELIMINADA = 'eliminada';
+}
+
 enum EstadoMail: string
 {
   case CONFIRMADO = 'confirmado';

@@ -22,7 +22,8 @@ if (isset($_POST['botonCrearNovedad'])) {
     $textoNovedad,
     $fechaDesdeNovedad,
     $fechaHastaNovedad,
-    $categoriaCliente
+    $categoriaCliente,
+    null
   ));
   setSessionSuccess("Novedad creada exitosamente.");
   header("Location: " . app_path('src/view/pages/novedad/novedad_list.php'));
