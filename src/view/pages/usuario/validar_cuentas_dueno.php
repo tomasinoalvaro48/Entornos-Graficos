@@ -114,11 +114,26 @@ $duenos = handleDuenosList();
                     </span>
                   </td>
                   <td>
-                    <?php if ($dueno->estadoDueno === EstadoDueno::PENDIENTE->value) { ?>
-                      <div class="c-text-muted">Cuenta pendiente</div>
-                    <?php } else { ?>
-                      <div class="c-text-muted">Cuenta gestionada</div>
-                    <?php } ?>
+                    <div class="row">
+
+                      <?php if ($dueno->estadoDueno === EstadoDueno::PENDIENTE->value) { ?>
+                        <div class="col-6">
+                          <a class="c-btn-primary c-table-btn-sm col-6" href="<?php echo app_path('src/controller/dueno/handle_validar_cuenta.php'); ?>?estado=aceptado&id=<?php echo $dueno->idUsuario; ?>">
+                            Aceptar
+                          </a>
+                        </div>
+                        <div class="col-6">
+                          <a class="c-btn-danger-tonal c-table-btn-sm col-6" href="<?php echo app_path('src/controller/dueno/handle_validar_cuenta.php'); ?>?estado=rechazado&id=<?php echo $dueno->idUsuario; ?>">
+                            Rechazar
+                          </a>
+                        </div>
+
+                      <?php } else { ?>
+                        <div class="col 12">
+                          <div class="c-text-muted">Cuenta gestionada</div>
+                        </div>
+                      <?php } ?>
+                    </div>
                   </td>
                 </tr>
               <?php } ?>
