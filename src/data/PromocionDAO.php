@@ -52,7 +52,8 @@ class PromocionDAO extends DBFunctions
     $query = "SELECT *
               FROM promocion p
               INNER JOIN local l ON p.id_local = l.id_local
-              INNER JOIN usuario u ON l.id_usuario = u.id_usuario;";
+              INNER JOIN usuario u ON l.id_usuario = u.id_usuario
+              WHERE p.estado_elim_promo = 'activa';";
 
     $promociones = $this->querySQL($query);
 
@@ -89,7 +90,8 @@ class PromocionDAO extends DBFunctions
               FROM promocion p
               INNER JOIN local l ON p.id_local = l.id_local
               INNER JOIN usuario u ON l.id_usuario = u.id_usuario
-              WHERE p.id_promo = '" . $idPromo . "';";
+              WHERE p.id_promo = '" . $idPromo . "'
+              AND p.estado_elim_promo = 'activa';";
 
     $promocion = $this->querySQL($query);
 
@@ -123,7 +125,8 @@ class PromocionDAO extends DBFunctions
               FROM promocion p
               INNER JOIN local l ON p.id_local = l.id_local
               INNER JOIN usuario u ON l.id_usuario = u.id_usuario
-              WHERE p.id_local = '" . $idLocal . "';";
+              WHERE p.id_local = '" . $idLocal . "'
+              AND p.estado_elim_promo = 'activa';";
 
     $result = $this->querySQL($query);
 
@@ -178,7 +181,8 @@ class PromocionDAO extends DBFunctions
                 AND p.fecha_desde_promo <= '$hoy'
                 AND p.fecha_hasta_promo >= '$hoy'
                 AND LOWER(p.categoria_cliente_promo) IN ($categoriasSQL)
-                AND dp.id_dia = $diaHoy;";
+                AND dp.id_dia = $diaHoy
+                AND p.estado_elim_promo = 'activa';";
 
     $result = $this->querySQL($query);
 
@@ -216,7 +220,8 @@ class PromocionDAO extends DBFunctions
               INNER JOIN local l ON p.id_local = l.id_local
               INNER JOIN usuario u ON l.id_usuario = u.id_usuario
               LEFT JOIN dias_promo dp ON p.id_promo = dp.id_promo
-              WHERE 1=1";
+              WHERE 1=1
+              AND p.estado_elim_promo = 'activa' ";
 
     if ($fechaDesde && $fechaHasta) {
       $query .= " AND p.fecha_desde_promo >= '" . $fechaDesde . "'";
