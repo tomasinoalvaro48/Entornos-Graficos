@@ -1,25 +1,38 @@
-<div class="col-12 col-lg-4">
-  <div class="c-site-footer__section">
-    <p class="c-site-footer__eyebrow">Explorá</p>
-    <h5 class="c-site-footer__title">Mapa del sitio</h5>
-    <div class="list-group text-center">
-      <a class="list-group-item list-group-item-action" href="<?php echo app_path(); ?>">Inicio</a>
-      <a class="list-group-item list-group-item-action" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">Locales</a>
-      <a class="list-group-item list-group-item-action" href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>">Promociones</a>
-      <?php if (!$tipoUsuario) { ?>
-        <a class="list-group-item list-group-item-action" href="<?php echo app_path('src/view/pages/auth/login.php'); ?>">Iniciar sesión</a>
-        <a class="list-group-item list-group-item-action" href="<?php echo app_path('src/view/pages/auth/signin.php'); ?>">Registrarse</a>
-        <a class="list-group-item list-group-item-action" href="<?php echo app_path('src/view/pages/auth/signin_dueno.php'); ?>">Registrarse como Dueño</a>
-      <?php } else if ($tipoUsuario === TipoUsuario::CLIENTE->value) { ?>
-        <a class="list-group-item list-group-item-action" href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>">Novedades</a>
-        <a class="list-group-item list-group-item-action" href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>">Buscar promociones</a>
-        <a class="list-group-item list-group-item-action" href="<?php echo app_path('src/view/pages/uso_promocion/mis_usos_cliente.php'); ?>">Mis usos de promociones</a>
-      <?php } else if ($tipoUsuario === TipoUsuario::DUENO->value) { ?>
-        <a class="list-group-item list-group-item-action" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">Gestión de locales</a>
-        <a class="list-group-item list-group-item-action" href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>">Gestión de promociones</a>
-      <?php } else if ($tipoUsuario === TipoUsuario::ADMIN->value) { ?>
-        <a class="list-group-item list-group-item-action" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">Administrar locales</a>
-      <?php } ?>
-    </div>
+<div>
+  <p class="c-footer-text mb-1">Explorá</p>
+  <h5 class="c-footer-section-title">Mapa del sitio</h5>
+  <div class="d-flex flex-column text-start">
+    <a class="c-footer-link" href="<?php echo app_path(); ?>">Inicio</a>
+
+    <?php if (!$tipoUsuario) { ?>
+      <a class="c-footer-link" href="<?php echo app_path('src/view/pages/auth/login.php'); ?>">Iniciar sesión</a>
+      <a class="c-footer-link" href="<?php echo app_path('src/view/pages/auth/signin.php'); ?>">Registrarse</a>
+      <a class="c-footer-link" href="<?php echo app_path('src/view/pages/auth/signin_dueno.php'); ?>">Registrarse como Dueño</a>
+      <a class="c-footer-link" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">Locales</a>
+      <a class="c-footer-link" href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>">Promociones</a>
+
+
+    <?php } else if ($tipoUsuario === TipoUsuario::CLIENTE->value) { ?>
+      <a class="c-footer-link" href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>">Novedades</a>
+      <a class="c-footer-link" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">Locales</a>
+      <a class="c-footer-link" href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>">Buscar promociones</a>
+      <a class="c-footer-link" href="<?php echo app_path('src/view/pages/uso_promocion/mis_usos_cliente.php'); ?>">Mis usos de promociones</a>
+    <?php } else if ($tipoUsuario === TipoUsuario::DUENO->value) { ?>
+      <a class="c-footer-link" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">Gestión de locales</a>
+      <a class="c-footer-link" href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>">Gestión de promociones</a>
+      <a class="c-footer-link ps-4" href="<?php echo app_path('src/view/pages/promocion/create.php'); ?>">Crear promoción</a>
+      <a class="c-footer-link ps-4" href="<?php echo app_path('src/view/pages/uso_promocion/uso_promocion_list.php'); ?>">Gestionar Uso de Promociones</a>
+
+    <?php } else if ($tipoUsuario === TipoUsuario::ADMIN->value) { ?>
+      <a class="c-footer-link" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">Administrar locales</a>
+      <a class="c-footer-link ps-4" href="<?php echo app_path('src/view/pages/local/create.php'); ?>">Crear local</a>
+      <a class="c-footer-link" href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>">Administrar promociones</a>
+      <a class="c-footer-link" href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>">Administrar novedades</a>
+      <a class="c-footer-link ps-4" href="<?php echo app_path('src/view/pages/novedad/create.php'); ?>">Crear novedad</a>
+      <a class="c-footer-link ps-4" href="<?php echo app_path('src/view/pages/uso_promocion/reporte_promociones.php'); ?>">Reporte de Uso de Promociones</a>
+
+      <a class="c-footer-link" href="<?php echo app_path('src/view/pages/dueno/dueno_list.php'); ?>">Administrar Dueños</a>
+
+    <?php } ?>
   </div>
 </div>
