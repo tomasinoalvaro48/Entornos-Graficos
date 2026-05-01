@@ -48,7 +48,15 @@ $novedadesPage = $totalNovedades > 0 ? array_slice($novedades, $startIndex, $nov
       <aside class=" c-aside">
         <div class="row c-hero">
           <h1 class="c-title">Novedades</h1>
-          <p class="c-subtitle">Revisá y administrá los avisos publicados para cada tipo de cliente.</p>
+          <p class="c-subtitle">
+            <?php
+            if ($tipo === TipoUsuario::ADMIN->value) {
+              echo "Revisá y administrá las novedades publicadas para cada tipo de cliente.";
+            } else {
+              echo "Revisá las novedades.";
+            }
+            ?>
+          </p>
         </div>
 
         <div class="row">

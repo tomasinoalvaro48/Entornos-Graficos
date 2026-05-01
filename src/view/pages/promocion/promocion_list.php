@@ -57,9 +57,9 @@ $promocionesPage = $totalPromociones > 0 ? array_slice($promociones, $startIndex
           <p class="c-subtitle">
             <?php
             if ($tipo === TipoUsuario::DUENO->value) {
-              echo "Visualizá y gestioná tus promociones.";
+              echo "Revisá y administrá tus promociones.";
             } else {
-              echo "Visualizá todas las promociones disponibles.";
+              echo "Revisá todas las promociones disponibles.";
             }
             ?>
           </p>
