@@ -100,13 +100,13 @@ $localesPage = $totalLocales > 0 ? array_slice($locales, $startIndex, $localesPe
                   <div class="c-form-field">
                     <select
                       class="c-form-input c-form-input-select"
-                      id="estado_local"
-                      name="estado_local">
+                      id="estado_elim_local"
+                      name="estado_elim_local">
                       <option value="">Cualquier estado</option>
-                      <option value="Activo" <?php echo (isset($_POST['estado_local']) && $_POST['estado_local'] === 'Activo') ? 'selected' : ''; ?>>Activo</option>
-                      <option value="Eliminado" <?php echo (isset($_POST['estado_local']) && $_POST['estado_local'] === 'Eliminado') ? 'selected' : ''; ?>>Eliminado</option>
+                      <option value="activo" <?php echo (isset($_POST['estado_elim_local']) && $_POST['estado_elim_local'] === 'activo') ? 'selected' : ''; ?>>Activo</option>
+                      <option value="eliminado" <?php echo (isset($_POST['estado_elim_local']) && $_POST['estado_elim_local'] === 'eliminado') ? 'selected' : ''; ?>>Eliminado</option>
                     </select>
-                    <label class="c-form-label" for="estado_local">Estado</label>
+                    <label class="c-form-label" for="estado_elim_local">Estado</label>
                   </div>
                 </div>
               <?php } ?>
@@ -240,8 +240,8 @@ $localesPage = $totalLocales > 0 ? array_slice($locales, $startIndex, $localesPe
             <?php if (isset($_POST['rubro_local'])) { ?>
               <input type="hidden" name="rubro_local" value="<?php echo htmlspecialchars($_POST['rubro_local'], ENT_QUOTES, 'UTF-8'); ?>">
             <?php } ?>
-            <?php if (isset($_POST['estado_local'])) { ?>
-              <input type="hidden" name="estado_local" value="<?php echo htmlspecialchars($_POST['estado_local'], ENT_QUOTES, 'UTF-8'); ?>">
+            <?php if (isset($_POST['estado_elim_local'])) { ?>
+              <input type="hidden" name="estado_elim_local" value="<?php echo htmlspecialchars($_POST['estado_elim_local'], ENT_QUOTES, 'UTF-8'); ?>">
             <?php } ?>
             <ul class="pagination justify-content-center">
               <li class="page-item <?php echo ($currentPage <= 1) ? 'disabled' : ''; ?>">

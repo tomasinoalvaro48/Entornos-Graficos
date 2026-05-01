@@ -63,7 +63,7 @@ class LocalDAO extends DBFunctions
     }
 
     if (!empty($estado)) {
-      $query .= " AND l.estado_local = '" . $estado . "'";
+      $query .= " AND l.estado_elim_local = '" . $estado . "'";
     }
 
     $locales = $this->querySQL($query);
