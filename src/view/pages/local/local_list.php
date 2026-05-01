@@ -59,7 +59,17 @@ $localesPage = $totalLocales > 0 ? array_slice($locales, $startIndex, $localesPe
       <aside class="c-aside">
         <div class="row c-hero">
           <h1 class="c-title">Locales</h1>
-          <p class="c-subtitle">Revisá y administrá los locales registrados.</p>
+          <p class="c-subtitle">
+            <?php
+            if ($tipo === TipoUsuario::ADMIN->value) {
+              echo "Revisá y administrá los locales registrados.";
+            } else if ($tipo === TipoUsuario::DUENO->value) {
+              echo "Revisá tus locales.";
+            } else {
+              echo "Revisá todos los locales disponibles.";
+            }
+            ?>
+          </p>
         </div>
 
         <div class="row">

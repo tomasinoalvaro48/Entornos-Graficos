@@ -47,12 +47,15 @@ class LocalDAO extends DBFunctions
     return $localesArray;
   }
 
-  public function getFilter($nombre, $rubro, $estado)
+  public function getFilter($nombre, $rubro, $estado, $idUsuario = null)
   {
     $localesArray = [];
 
     // Base de la consulta
-    $query = "SELECT * FROM local l INNER JOIN usuario u ON u.id_usuario = l.id_usuario WHERE 1=1";
+    $query = "SELECT *
+              FROM local l
+              INNER JOIN usuario u ON u.id_usuario = l.id_usuario
+              WHERE 1=1";
 
     if (!empty($nombre)) {
       $query .= " AND l.nombre_local LIKE '%" . $nombre . "%'";
@@ -66,7 +69,12 @@ class LocalDAO extends DBFunctions
       $query .= " AND l.estado_elim_local = '" . $estado . "'";
     }
 
+    if (!empty($idUsuario)) {
+      $query .= " AND l.id_usuario = " . $idUsuario;
+    }
+
     $locales = $this->querySQL($query);
+
     if ($locales && $locales->num_rows > 0) {
       while ($local = mysqli_fetch_array($locales)) {
         array_push($localesArray, $this->sanitizeLocal($local));
