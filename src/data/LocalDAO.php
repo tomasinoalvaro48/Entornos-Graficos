@@ -28,7 +28,7 @@ class LocalDAO extends DBFunctions
           $localFetchArray['estado_mail'],
           $localFetchArray['token_verificacion']
         ),
-        $localFetchArray['estado_local']
+        $localFetchArray['estado_elim_local']
       );
     }
     return $l;
@@ -107,7 +107,7 @@ class LocalDAO extends DBFunctions
               FROM local
               INNER JOIN usuario ON usuario.id_usuario = local.id_usuario
               WHERE local.rubro_local = '$rubro'
-                AND local.estado_local = 'Activo';";
+                AND local.estado_elim_local = 'activo';";
 
     $result = $this->querySQL($query);
 
@@ -122,7 +122,7 @@ class LocalDAO extends DBFunctions
 
   public function create(Local $local)
   {
-    $query = "INSERT INTO local (ubicacion_local, nombre_local, rubro_local, id_usuario, estado_local) VALUES 
+    $query = "INSERT INTO local (ubicacion_local, nombre_local, rubro_local, id_usuario, estado_elim_local) VALUES 
             ('" . $local->ubiLocal . "', '" . $local->nombreLocal . "', '" . $local->rubroLocal . "', 
             " . $local->usuario->idUsuario . ", '" . EstadoLocal::ACTIVO->value . "');";
     return $this->querySQL($query);
@@ -131,14 +131,14 @@ class LocalDAO extends DBFunctions
   public function update(Local $local)
   {
     $query = "UPDATE local SET ubicacion_local = '" . $local->ubiLocal . "', nombre_local = '" . $local->nombreLocal . "',
-              rubro_local = '" . $local->rubroLocal . "', id_usuario = " . $local->usuario->idUsuario . ", estado_local = '" . $local->estadoLocal . "'
+              rubro_local = '" . $local->rubroLocal . "', id_usuario = " . $local->usuario->idUsuario . ", estado_elim_local = '" . $local->estadoLocal . "'
               WHERE id_local = " . $local->idLocal . ";";
     return $this->querySQL($query);
   }
 
   public function logicDelete($id)
   {
-    $query = "UPDATE local SET estado_local = '" . EstadoLocal::ELIMINADO->value . "' WHERE id_local = '" . $id . "';";
+    $query = "UPDATE local SET estado_elim_local = '" . EstadoLocal::ELIMINADO->value . "' WHERE id_local = '" . $id . "';";
     return $this->querySQL($query);
   }
 

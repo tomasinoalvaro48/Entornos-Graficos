@@ -91,9 +91,9 @@ $locales = showLocales();
             name="categoria_cliente"
             required>
             <option value="">Seleccione una categoría</option>
-            <option value="Inicial">Inicial</option>
-            <option value="Medium">Medium</option>
-            <option value="Premium">Premium</option>
+            <option value="inicial">Inicial</option>
+            <option value="medium">Medium</option>
+            <option value="premium">Premium</option>
           </select>
           <label class="c-form-label" for="categoria_cliente">Categoría de cliente</label>
         </div>

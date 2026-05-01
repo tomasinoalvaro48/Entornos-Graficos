@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/Local.php";
+require_once __DIR__ . "/../enums.php";
 
 class Promocion
 {
@@ -12,6 +13,7 @@ class Promocion
   public ArrayObject $diasSemanaPromo;
   public string $estadoPromo;
   public Local $local;
+  public ?string $estadoElimPromo;
 
   function __construct(
     ?int $idPromo,
@@ -21,7 +23,8 @@ class Promocion
     string $categoriaClientePromo,
     $diasSemanaPromo,
     string $estadoPromo,
-    Local $local
+    Local $local,
+    ?string $estado_elim_promo
   ) {
     $this->idPromo = $idPromo;
     $this->textoPromo = $textoPromo;
@@ -31,5 +34,6 @@ class Promocion
     $this->diasSemanaPromo = $diasSemanaPromo;
     $this->estadoPromo = $estadoPromo;
     $this->local = $local;
+    $this->estadoElimPromo = $estado_elim_promo;
   }
 }

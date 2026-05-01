@@ -17,7 +17,7 @@ class Local
     string $nombre_local,
     string $rubro_local,
     ?Usuario $usuario,
-    ?string $estado_local
+    ?string $estado_elim_local
 
   ) {
     $this->idLocal = $id_local;
@@ -25,6 +25,6 @@ class Local
     $this->nombreLocal = $nombre_local;
     $this->rubroLocal = $rubro_local;
     $this->usuario = $usuario;
-    $this->estadoLocal = $estado_local;
+    $this->estadoLocal = $estado_elim_local;
   }
 }

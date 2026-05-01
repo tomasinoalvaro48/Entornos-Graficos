@@ -4,6 +4,7 @@ require_once __DIR__ . "/../model/Promocion.php";
 require_once __DIR__ . "/../model/Local.php";
 require_once __DIR__ . "/../model/Usuario.php";
 require_once __DIR__ . "/DBFunctions.php";
+require_once __DIR__ . "/../enums.php";
 
 class PromocionDAO extends DBFunctions
 {
@@ -36,8 +37,9 @@ class PromocionDAO extends DBFunctions
             $promocionFetchArray['estado_mail'],
             $promocionFetchArray['token_verificacion']
           ),
-          $promocionFetchArray['estado_local'],
-        )
+          $promocionFetchArray['estado_elim_local']
+        ),
+        $promocionFetchArray['estado_elim_promo']
       );
     }
     return $p;
@@ -271,14 +273,15 @@ class PromocionDAO extends DBFunctions
   public function create(Promocion $p)
   {
     $query = "INSERT INTO promocion 
-    (texto_promo, fecha_desde_promo, fecha_hasta_promo, categoria_cliente_promo, estado_promo, id_local)
+    (texto_promo, fecha_desde_promo, fecha_hasta_promo, categoria_cliente_promo, estado_promo, id_local, estado_elim_promo)
     VALUES (
       '{$p->textoPromo}',
       '{$p->fechaDesdePromo->format('Y-m-d')}',
       '{$p->fechaHastaPromo->format('Y-m-d')}',
       '{$p->categoriaClientePromo}',
       '{$p->estadoPromo}',
-      {$p->local->idLocal}
+      {$p->local->idLocal},
+      '" . EstadoElimPromo::ACTIVA->value . "'
     );";
 
     $this->querySQL($query);
@@ -306,7 +309,15 @@ class PromocionDAO extends DBFunctions
     return $this->querySQL($query);
   }
 
-  public function delete($id)
+  public function logicDelete($id)
+  {
+    $query = "UPDATE promocion
+              SET estado_elim_promo = '" . EstadoElimPromo::ELIMINADA->value . "'
+              WHERE id_promo = '" . $id . "';";
+    return $this->querySQL($query);
+  }
+
+  /*public function delete($id)
   {
     $queryDias = "DELETE FROM dias_promo
                   WHERE id_promo = '" . $id . "';";
@@ -315,5 +326,5 @@ class PromocionDAO extends DBFunctions
     $query = "DELETE FROM promocion
               WHERE id_promo = '" . $id . "';";
     return $this->querySQL($query);
-  }
+  }*/
 }

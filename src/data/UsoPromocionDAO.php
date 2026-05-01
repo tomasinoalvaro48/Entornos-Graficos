@@ -70,7 +70,7 @@ class UsoPromocionDAO extends DBFunctions
             $row['nombre_local'],
             $row['rubro_local'],
             null,
-            $row['estado_local']
+            $row['estado_elim_local']
           )
         );
 
@@ -111,7 +111,7 @@ class UsoPromocionDAO extends DBFunctions
             $row['nombre_local'],
             $row['rubro_local'],
             null,
-            $row['estado_local']
+            $row['estado_elim_local']
           )
         );
 

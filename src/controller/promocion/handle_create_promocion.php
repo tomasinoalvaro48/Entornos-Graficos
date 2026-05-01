@@ -26,7 +26,8 @@ if (isset($_POST['botonCrear'])) {
       $_POST['categoria_cliente'],
       $diasSemana,
       "pendiente",
-      $localDAO->getById($_POST['id_local'])
+      $localDAO->getById($_POST['id_local']),
+      null
     ));
 
     setSessionSuccess("Promoción creada exitosamente. Queda pendiente de aprobación.");

@@ -69,7 +69,7 @@ $locales = getLocalesCliente($rubro);
           <p class="text-center">No hay locales.</p>
         <?php } else { ?>
           <?php foreach ($locales as $l) {
-            if ($l->estadoLocal !== 'Activo') {
+            if ($l->estadoLocal !== 'activo') {
               continue;
             }
           ?>

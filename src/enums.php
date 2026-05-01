@@ -18,8 +18,14 @@ enum CategoriaCliente: string
 
 enum EstadoLocal: string
 {
-  case ACTIVO = 'Activo';
-  case ELIMINADO = 'Eliminado';
+  case ACTIVO = 'activo';
+  case ELIMINADO = 'eliminado';
+}
+
+enum EstadoElimPromo: string
+{
+  case ACTIVA = 'activa';
+  case ELIMINADA = 'eliminada';
 }
 
 enum EstadoMail: string
