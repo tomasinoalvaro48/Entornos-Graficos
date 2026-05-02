@@ -100,7 +100,7 @@ $promosPage = $totalPromos > 0 ? array_slice($promociones, $startIndex, $promosP
 
           <div class="col-12 my-1 mt-lg-3">
             <a class="c-btn-secondary-ghost" href="<?php echo app_path(); ?>">
-              Volver al Menú
+              Volver al menú
             </a>
           </div>
         </div>
@@ -123,41 +123,32 @@ $promosPage = $totalPromos > 0 ? array_slice($promociones, $startIndex, $promosP
           ?>
             <article class="col-12 c-list-card">
               <div class="row c-list-card-header">
-                <div class="col-sm-6 col-12 c-list-card-title">
-                  <h5>Promo #<?php echo htmlspecialchars($promo->idPromo, ENT_QUOTES, 'UTF-8') ?> - <?php echo htmlspecialchars($promo->local->nombreLocal, ENT_QUOTES, 'UTF-8') ?></h5>
+                <div class="col-lg-6 c-list-card-title">
+                  <h5>Promoción #<?php echo htmlspecialchars($promo->idPromo, ENT_QUOTES, 'UTF-8'); ?></h5>
                 </div>
-                <div class="col-sm-6 col-12 c-list-card-category">
-                  <span>Estado: <b><?php echo strtoupper(htmlspecialchars($promo->estadoPromo, ENT_QUOTES, 'UTF-8')); ?></b></span>
+
+                <div class="col-lg-6 c-list-card-category">
+                  <span>Estado: <?php echo strtoupper(htmlspecialchars($promo->estadoPromo, ENT_QUOTES, 'UTF-8')); ?></span>
                 </div>
               </div>
 
               <div class="c-list-cart-body-container">
                 <div class="row mb-4">
-                  <div class="col-4">
+                  <div class="col-6">
                     <div class="c-list-cart-body-info-group">
                       <label class="c-list-cart-body-label">FECHA DESDE</label>
-                      <span class="c-list-cart-body-date"><?php echo $promo->fechaDesdePromo ? $promo->fechaDesdePromo->format('Y-m-d') : 'N/A'; ?></span>
-                    </div>
-                  </div>
-                  <div class="col-4 text-center">
-                    <div class="c-list-cart-body-info-group">
-                      <label class="c-list-cart-body-label">DÍAS</label>
                       <span class="c-list-cart-body-date">
-                        <?php
-                        $dias = [];
-                        $diasTexto = [1 => "Lun", 2 => "Mar", 3 => "Mié", 4 => "Jue", 5 => "Vie", 6 => "Sáb", 7 => "Dom"];
-                        foreach ($promo->diasSemanaPromo as $d) {
-                          $dias[] = $diasTexto[$d] ?? $d;
-                        }
-                        echo implode(", ", $dias);
-                        ?>
+                        <?php echo $promo->fechaDesdePromo ? $promo->fechaDesdePromo->format('Y-m-d') : 'N/A'; ?>
                       </span>
                     </div>
                   </div>
-                  <div class="col-4 text-end">
+
+                  <div class="col-6 text-end">
                     <div class="c-list-cart-body-info-group">
                       <label class="c-list-cart-body-label">FECHA HASTA</label>
-                      <span class="c-list-cart-body-date"><?php echo $promo->fechaHastaPromo ? $promo->fechaHastaPromo->format('Y-m-d') : 'N/A'; ?></span>
+                      <span class="c-list-cart-body-date">
+                        <?php echo $promo->fechaHastaPromo ? $promo->fechaHastaPromo->format('Y-m-d') : 'N/A'; ?>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -165,9 +156,29 @@ $promosPage = $totalPromos > 0 ? array_slice($promociones, $startIndex, $promosP
                 <div class="row">
                   <div class="col-12">
                     <div class="c-list-cart-body-desc-container">
-                      <label class="c-list-cart-body-label">DESCRIPCIÓN - Cat. <?php echo htmlspecialchars($promo->categoriaClientePromo, ENT_QUOTES, 'UTF-8'); ?></label>
+                      <label class="c-list-cart-body-label">DESCRIPCIÓN</label>
                       <p class="c-list-cart-body-desc-text">
-                        <?php echo htmlspecialchars($promo->textoPromo, ENT_QUOTES, 'UTF-8') ?>
+                        <?php echo htmlspecialchars($promo->textoPromo, ENT_QUOTES, 'UTF-8'); ?>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12">
+                    <div class="c-list-cart-body-desc-container">
+                      <label class="c-list-cart-body-label">DETALLE</label>
+                      <p class="c-list-cart-body-desc-text">
+                        <?php
+                          $dias = [];
+                          $diasTexto = [1=>"Lun",2=>"Mar",3=>"Mié",4=>"Jue",5=>"Vie",6=>"Sáb",7=>"Dom"];
+                          foreach ($promo->diasSemanaPromo as $d) {
+                            $dias[] = $diasTexto[$d] ?? $d;
+                          }
+                        ?>
+                        Días que aplica: <?php echo implode(", ", $dias); ?> <br>
+                        Local: <?php echo htmlspecialchars($promo->local->nombreLocal, ENT_QUOTES, 'UTF-8'); ?> <br>
+                        Categoría de cliente: <?php echo htmlspecialchars(ucfirst($promo->categoriaClientePromo), ENT_QUOTES, 'UTF-8'); ?>
                       </p>
                     </div>
                   </div>
@@ -177,19 +188,19 @@ $promosPage = $totalPromos > 0 ? array_slice($promociones, $startIndex, $promosP
               <div class="row">
                 <?php if ($estadoPromo === 'pendiente') { ?>
                   <div class="col-md-6 col-12">
-                    <a class="c-btn-secondary-tonal"
-                      href="<?php echo app_path('src/controller/promocion/handle_validar_promocion.php'); ?>?estado=aprobada&id=<?php echo $promo->idPromo; ?>">
-                      Aprobar
-                    </a>
-                  </div>
-                  <div class="col-md-6 col-12">
                     <a class="c-btn-danger-tonal"
                       href="<?php echo app_path('src/controller/promocion/handle_validar_promocion.php'); ?>?estado=denegada&id=<?php echo $promo->idPromo; ?>">
                       Denegar
                     </a>
                   </div>
+                  <div class="col-md-6 col-12">
+                    <a class="c-btn-secondary-tonal"
+                      href="<?php echo app_path('src/controller/promocion/handle_validar_promocion.php'); ?>?estado=aprobada&id=<?php echo $promo->idPromo; ?>">
+                      Aprobar
+                    </a>
+                  </div>
                 <?php } else { ?>
-                  <div class="col-12 text-center text-muted">
+                  <div class="col-12 text-center c-list-cart-body-label">
                     Promo gestionada
                   </div>
                 <?php } ?>

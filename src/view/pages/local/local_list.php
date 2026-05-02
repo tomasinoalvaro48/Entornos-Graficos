@@ -141,7 +141,9 @@ $localesPage = $totalLocales > 0 ? array_slice($locales, $startIndex, $localesPe
               <?php } ?>
 
               <div class="col-lg-12 col-md-4 col-12 my-1 mt-lg-0">
-                <a href="<?php echo app_path(); ?>" class="c-btn-secondary-ghost">Volver al Menú</a>
+                <a href="<?php echo app_path(); ?>" class="c-btn-secondary-ghost">
+                  Volver al menú
+                </a>
               </div>
             </div>
           </form>

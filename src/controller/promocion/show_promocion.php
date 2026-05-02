@@ -50,7 +50,7 @@ function handlePromocionesList()
     }
   }
 
-  if ($tipo === TipoUsuario::CLIENTE->value) {
+  if ($tipo === TipoUsuario::CLIENTE->value || $tipo === null) {
     $usuario = getUsuarioLogueado();
     $categoria = $usuario['categoria_cliente'] ?? null;
 

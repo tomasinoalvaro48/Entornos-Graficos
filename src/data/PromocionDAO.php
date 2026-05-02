@@ -229,9 +229,13 @@ class PromocionDAO extends DBFunctions
     }
 
     if (!empty($categoriaCliente)) {
-      $categorias = $this->getCategoriasPermitidas($categoriaCliente);
-      $categoriasSQL = "'" . implode("','", $categorias) . "'";
-      $query .= " AND LOWER(p.categoria_cliente_promo) IN ($categoriasSQL)";
+      if (getTipoUsuario() === TipoUsuario::DUENO->value) {
+        $query .= " AND LOWER(p.categoria_cliente_promo) = '" . strtolower($categoriaCliente) . "'";
+      } else {
+        $categorias = $this->getCategoriasPermitidas($categoriaCliente);
+        $categoriasSQL = "'" . implode("','", $categorias) . "'";
+        $query .= " AND LOWER(p.categoria_cliente_promo) IN ($categoriasSQL)";
+      }
     }
 
     if (!empty($estadoPromo)) {
