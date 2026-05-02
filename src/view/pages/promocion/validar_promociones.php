@@ -100,7 +100,7 @@ $promosPage = $totalPromos > 0 ? array_slice($promociones, $startIndex, $promosP
 
           <div class="col-12 my-1 mt-lg-3">
             <a class="c-btn-secondary-ghost" href="<?php echo app_path(); ?>">
-              Volver al Menú
+              Volver al menú
             </a>
           </div>
         </div>

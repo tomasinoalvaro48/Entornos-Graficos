@@ -133,7 +133,7 @@ $novedadesPage = $totalNovedades > 0 ? array_slice($novedades, $startIndex, $nov
           <?php } ?>
           <div class="col-lg-12 col-md-4 col-12 my-1 mt-lg-0">
             <a class="c-btn-secondary-ghost" href="<?php echo app_path(); ?>">
-              Volver al Menú
+              Volver al menú
             </a>
           </div>
         </div>

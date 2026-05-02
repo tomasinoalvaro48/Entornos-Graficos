@@ -65,7 +65,9 @@ $duenos = handleDuenosList();
               </div>
 
               <div class="col-lg-12 col-md-4 col-12 my-1 mt-lg-0">
-                <a class="c-btn-secondary-ghost" href="<?php echo app_path(); ?>">Volver al Menú</a>
+                <a class="c-btn-secondary-ghost" href="<?php echo app_path(); ?>">
+                  Volver al menú
+                </a>
               </div>
             </div>
           </form>
