@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/../model/Local.php";
+require_once __DIR__ . "/../model/Promocion.php";
 require_once __DIR__ . "/../model/Usuario.php";
 require_once __DIR__ . "/DBFunctions.php";
 require_once __DIR__ . "/../enums.php";
@@ -126,6 +127,70 @@ class LocalDAO extends DBFunctions
     }
 
     return $localesArray;
+  }
+
+  public function searchLocalesPromocionesByName($nombreBusqueda)
+  {
+    $localesById = [];
+
+    $queryLocales = "SELECT l.*, u.*
+                    FROM local l
+                    INNER JOIN usuario u ON u.id_usuario = l.id_usuario
+                    WHERE l.estado_elim_local = '" . EstadoLocal::ACTIVO->value . "'
+                      AND LOWER(l.nombre_local) LIKE '%" . $nombreBusqueda . "%';";
+
+    $locales = $this->querySQL($queryLocales);
+
+    if ($locales && $locales->num_rows > 0) {
+      while ($row = mysqli_fetch_array($locales)) {
+        $localId = $row['id_local'];
+
+        if (!isset($localesById[$localId])) {
+          $local = $this->sanitizeLocal($row);
+          $local->promociones = [];
+          $localesById[$localId] = $local;
+        }
+      }
+    }
+
+    $queryPromos = "SELECT p.*, l.*, u.*
+                    FROM promocion p
+                    INNER JOIN local l ON p.id_local = l.id_local
+                    INNER JOIN usuario u ON l.id_usuario = u.id_usuario
+                    WHERE p.estado_elim_promo = '" . EstadoElimPromo::ACTIVA->value . "'
+                      AND p.estado_promo = '" . EstadoPromo::APROBADA->value . "'
+                      AND l.estado_elim_local = '" . EstadoLocal::ACTIVO->value . "'
+                      AND LOWER(p.texto_promo) LIKE '%" . $nombreBusqueda . "%';";
+
+    $promos = $this->querySQL($queryPromos);
+
+    if ($promos && $promos->num_rows > 0) {
+      while ($row = mysqli_fetch_array($promos)) {
+        $localId = $row['id_local'];
+
+        if (!isset($localesById[$localId])) {
+          $local = $this->sanitizeLocal($row);
+          $local->promociones = [];
+          $localesById[$localId] = $local;
+        }
+
+        $promo = new Promocion(
+          $row['id_promo'],
+          $row['texto_promo'],
+          new DateTime($row['fecha_desde_promo']),
+          new DateTime($row['fecha_hasta_promo']),
+          $row['categoria_cliente_promo'],
+          new ArrayObject(),
+          $row['estado_promo'],
+          $localesById[$localId],
+          $row['estado_elim_promo']
+        );
+
+        $localesById[$localId]->promociones[] = $promo;
+      }
+    }
+
+    return array_values($localesById);
   }
 
   public function create(Local $local)

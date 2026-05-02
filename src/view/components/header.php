@@ -29,10 +29,18 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
     <!-- Menú de navegación -->
     <?php if (!in_array($serverUri, $excludePaths)) { ?>
       <!-- Buscador -->
-      <form class="d-flex c-header-search" role="search">
-        <input class="form-control c-header-search-input" type="search" placeholder="Buscar Locales o Promociones" aria-label="Search" />
+      <form class="d-flex c-header-search" role="search" method="GET" action="<?php echo app_path('src/view/pages/locales_promociones_list.php'); ?>">
+        <input
+          class="form-control c-header-search-input"
+          name="busqueda"
+          type="search"
+          placeholder="Buscar Locales o Promociones"
+          aria-label="Search"
+          required />
         <button class="btn c-header-search-btn" type="submit">Buscar</button>
       </form>
+
+      <!-- Botón para colapsar el menú en pantallas pequeñas -->
       <button
         class="navbar-toggler c-header-toggler"
         type="button"
