@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . "/../../../controller/uso_promocion/show_usos_cliente.php";
 
-$usos = getUsosCliente();
+$usos = handleUsosClienteList();
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +44,69 @@ $usos = getUsosCliente();
         </div>
 
         <div class="row">
-          <div class="col-12">
+          <form action="" method="POST" class="c-form-layout">
+            <div class="row">
+              <div class="col-12 my-1">
+                <div class="c-form-field">
+                  <input
+                    type="date"
+                    class="c-form-input c-form-input-date"
+                    name="fecha_desde_uso"
+                    value="<?php echo $_POST['fecha_desde_uso'] ?? ''; ?>">
+                  <label class="c-form-label">Fecha Desde</label>
+                </div>
+              </div>
+
+              <div class="col-12 my-1">
+                <div class="c-form-field">
+                  <input
+                    type="date"
+                    class="c-form-input c-form-input-date"
+                    name="fecha_hasta_uso"
+                    value="<?php echo $_POST['fecha_hasta_uso'] ?? ''; ?>">
+                  <label class="c-form-label">Fecha Hasta</label>
+                </div>
+              </div>
+
+              <div class="col-12 my-1">
+                <div class="c-form-field">
+                  <select class="c-form-input c-form-input-select" name="estado_uso">
+                    <option value="">Todos los estados</option>
+                    <option value="enviada" <?php echo (($_POST['estado_uso'] ?? '') === 'enviada') ? 'selected' : ''; ?>>Enviada</option>
+                    <option value="aceptada" <?php echo (($_POST['estado_uso'] ?? '') === 'aceptada') ? 'selected' : ''; ?>>Aceptada</option>
+                    <option value="rechazada" <?php echo (($_POST['estado_uso'] ?? '') === 'rechazada') ? 'selected' : ''; ?>>Rechazada</option>
+                  </select>
+                  <label class="c-form-label">Estado</label>
+                </div>
+              </div>
+
+              <div class="col-12 my-1">
+                <div class="c-form-field">
+                  <input
+                    type="text"
+                    class="c-form-input"
+                    name="local"
+                    placeholder=" "
+                    value="<?php echo $_POST['local'] ?? ''; ?>">
+                  <label class="c-form-label">Local</label>
+                </div>
+              </div>
+
+              <div class="col-12 my-1">
+                <button type="submit" name="botonFiltrarUsos" class="c-btn-primary">
+                  Filtrar
+                </button>
+              </div>
+
+              <div class="col-12 my-1">
+                <a class="c-btn-secondary-tonal" href="<?php echo app_path('src/view/pages/uso_promocion/mis_usos_cliente.php'); ?>">
+                  Limpiar filtros
+                </a>
+              </div>
+            </div>
+          </form>
+
+          <div class="col-12 my-1">
             <a class="c-btn-secondary-ghost" href="<?php echo app_path(); ?>">
               Volver al menú
             </a>
