@@ -27,6 +27,7 @@ function startSession(Usuario $usuario)
   ensureSessionActive();
   $_SESSION['id_usuario'] = $usuario->idUsuario;
   $_SESSION['tipo_usuario'] = $usuario->tipoUsuario;
+  $_SESSION['nombre_usuario'] = $usuario->nombreUsuario;
   // En caso de ser cliente, también guardamos su categoría para mostrarle las novedades correspondientes a su categoría.
   if ($usuario->categoriaCliente) {
     $_SESSION['categoria_cliente'] = $usuario->categoriaCliente;
@@ -38,6 +39,12 @@ function getTipoUsuario()
 {
   ensureSessionActive();
   return $_SESSION["tipo_usuario"] ?? null;
+}
+
+function getNombreUsuario()
+{
+  ensureSessionActive();
+  return $_SESSION["nombre_usuario"] ?? null;
 }
 
 // Función para obtener la categoría de cliente de la sesión actual (inicial, medium, premium o null si no hay sesión o no es cliente)

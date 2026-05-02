@@ -1,55 +1,75 @@
-<?php
-include __DIR__ . "/../components/carousel.php";
-?>
+<div class="container my-5 c-menu-container">
 
-<div class="container text-align-center">
-  <div class="row">
-    <div class="col-xl-8">
-      <a class="btn btn-primary btn-lg" href="#">Opciones de la Cuenta</a>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <a class="btn btn-secondary" href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>">Novedades</a>
-    </div>
-  </div>
-
-  <div class="col-md-6 col-lg-3">
-    <div class="card h-100 shadow-sm">
-      <div class="card-body text-center">
-        <i class="bi bi-shop" style="font-size: 2rem; color: #fd7e14;"></i>
-        <h5 class="card-title mt-3">Locales</h5>
-        <p class="card-text">Ver todos los locales del shopping.</p>
-        <a href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>" class="btn btn-warning btn-sm">
-          Ver Locales
-        </a>
+  <!-- Texto de bienvenida -->
+  <div class="row mb-5 text-center justify-content-center">
+    <div class="col-lg-8 col-12">
+      <div class="c-menu-welcome">
+        <h2 class="c-menu-title">BIENVENIDO/A "<?php echo getNombreUsuario(); ?>"</h2>
+        <p class="c-menu-subtitle">Accedé a las opciones disponibles para tu cuenta y explorá el shopping.</p>
       </div>
     </div>
   </div>
 
-  <div class="col-md-6 col-lg-3">
-    <div class="card h-100 shadow-sm">
-      <div class="card-body text-center">
-        <i class="bi bi-tag" style="font-size: 2rem; color: #198754;"></i>
-        <h5 class="card-title mt-3">Promociones solicitadas</h5>
-        <p class="card-text">Ver mis usos de promociones.</p>
-        <a href="<?php echo app_path('src/view/pages/uso_promocion/mis_usos_cliente.php'); ?>" class="btn btn-success btn-sm">
-          Ver Promociones
-        </a>
+  <!-- Carrusel -->
+  <div class="row mb-5 justify-content-center">
+    <div class="col-lg-10 col-12">
+      <?php include __DIR__ . "/../components/carousel.php"; ?>
+    </div>
+  </div>
+
+  <!-- Grilla de locales y promociones -->
+  <div class="row mb-4 align-items-stretch">
+    <div class="col-lg-8 col-12 mb-3 mb-lg-0">
+      <div class="c-menu-card d-flex flex-column justify-content-center align-items-center h-100">
+        <i class="bi bi-shop c-menu-icon-orange"></i>
+
+        <h3 class="c-menu-card-title">LOCALES</h3>
+        <p class="c-menu-card-text text-center mb-4">Ver todos los locales del shopping.</p>
+        <a href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>" class="c-btn-primary">Ver Locales</a>
+      </div>
+    </div>
+    <div class="col-lg-4 col-12">
+      <div class="c-menu-img-placeholder h-100 d-flex justify-content-center align-items-center">
+        <img src="<?php echo app_path('src/img/marcasLogos.png') ?>" alt="Logos de marcas en el shopping" class="c-menu-img">
       </div>
     </div>
   </div>
 
-  <div class="col-md-6 col-lg-3">
-    <div class="card h-100 shadow-sm">
-      <div class="card-body text-center">
-        <i class="bi bi-tag" style="font-size: 2rem; color: #198754;"></i>
-        <h5 class="card-title mt-3">Buscar promociones</h5>
-        <p class="card-text">Buscar promociones por código de local.</p>
-        <a href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>" class="btn btn-success btn-sm">
-          Buscar Promociones
-        </a>
+  <div class="row align-items-stretch mb-5">
+    <div class="col-lg-4 col-12 mb-3 mb-lg-0 order-2 order-lg-1">
+      <div class="c-menu-img-placeholder h-100 d-flex justify-content-center align-items-center">
+        <img src="<?php echo app_path('src/img/promociones.png') ?>" alt="Imagen de promociones" class="c-menu-img">
+      </div>
+    </div>
+    <div class="col-lg-8 col-12 order-1 order-lg-2 mb-3 mb-lg-0">
+      <div class="c-menu-card d-flex flex-column justify-content-center align-items-center h-100">
+        <i class="bi bi-tag c-menu-icon-orange"></i>
+        <h3 class="c-menu-card-title">PROMOCIONES</h3>
+        <p class="c-menu-card-text text-center mb-4">Buscá promociones y consultá tus usos de promociones.</p>
+        <a href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>" class="c-btn-primary">Buscar Promociones</a>
       </div>
     </div>
   </div>
+
+  <!-- Novedades y usos -->
+  <div class="row g-4">
+    <div class="col-md-6 col-12">
+      <div class="c-menu-card h-100 text-center">
+        <i class="bi bi-newspaper c-menu-icon-orange"></i>
+        <h3 class="c-menu-card-title mt-3">NOVEDADES</h3>
+        <p class="c-menu-card-text mb-4">Enterate de las últimas publicaciones disponibles.</p>
+        <a href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>" class="c-btn-primary">Ver Novedades</a>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-12">
+      <div class="c-menu-card h-100 text-center">
+        <i class="bi bi-tag c-menu-icon-orange"></i>
+        <h3 class="c-menu-card-title mt-3">MIS USOS DE PROMOCIONES</h3>
+        <p class="c-menu-card-text mb-4">Revisá el historial de promociones que utilizaste.</p>
+        <a href="<?php echo app_path('src/view/pages/uso_promocion/mis_usos_cliente.php'); ?>" class="c-btn-primary">Ver Usos</a>
+      </div>
+    </div>
+  </div>
+
 </div>

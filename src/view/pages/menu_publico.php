@@ -22,6 +22,8 @@
   <div class="row mb-4 align-items-stretch">
     <div class="col-lg-8 col-12 mb-3 mb-lg-0">
       <div class="c-menu-card d-flex flex-column justify-content-center align-items-center h-100">
+        <i class="bi bi-shop c-menu-icon-orange"></i>
+
         <h3 class="c-menu-card-title">NUESTROS LOCALES</h3>
         <p class="c-menu-card-text text-center mb-4">Encontrá las mejores marcas y locales comerciales en un solo lugar.</p>
         <a href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>" class="c-btn-primary">Ver Locales</a>
@@ -44,6 +46,7 @@
     </div>
     <div class="col-lg-8 col-12 order-1 order-lg-2 mb-3 mb-lg-0">
       <div class="c-menu-card d-flex flex-column justify-content-center align-items-center h-100">
+        <i class="bi bi-tag c-menu-icon-orange"></i>
         <h3 class="c-menu-card-title">PROMOCIONES EXCLUSIVAS</h3>
         <p class="c-menu-card-text text-center mb-4">Aprovechá los descuentos que tenemos preparados para vos y tu familia.</p>
         <a href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>" class="c-btn-primary">Ver Promociones</a>

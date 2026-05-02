@@ -473,6 +473,11 @@
   font-size: 1.05rem;
 }
 
+.c-menu-icon-orange {
+  color: #f9b17a;
+  font-size: 2rem;
+}
+
 .c-menu-img-placeholder {
   border-radius: 1rem;
   min-height: 360px;
