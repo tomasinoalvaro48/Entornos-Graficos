@@ -1,103 +1,58 @@
-<?php
-include __DIR__ . "/../components/carousel.php";
-?>
+<div class="container my-5 c-menu-container">
 
-<div class="container py-5">
-  <div class="row mb-4">
-    <div class="col-12 text-center">
-      <h1 class="mb-3">Panel del Dueño</h1>
-      <p class="text-muted mb-0">Gestiona tus locales y mantente al día con las novedades del sistema.</p>
+  <!-- Texto de bienvenida -->
+  <div class="row mb-5 text-center justify-content-center">
+    <div class="col-lg-8 col-12">
+      <div class="c-menu-welcome">
+        <h2 class="c-menu-title">BIENVENIDO/A DUEÑO</h2>
+        <p class="c-menu-subtitle">Gestiona tus locales y promociones desde este panel.</p>
+      </div>
     </div>
   </div>
 
+  <!-- Carrusel -->
+  <div class="row mb-5 justify-content-center">
+    <div class="col-lg-10 col-12">
+      <?php include __DIR__ . "/../components/carousel.php"; ?>
+    </div>
+  </div>
+
+  <!-- Grilla de locales -->
+  <div class="row mb-4 align-items-stretch">
+    <div class="col-lg-8 col-12 mb-3 mb-lg-0">
+      <div class="c-menu-card d-flex flex-column justify-content-center align-items-center h-100">
+        <i class="bi bi-shop c-menu-icon-orange"></i>
+        <h3 class="c-menu-card-title">MIS LOCALES</h3>
+        <p class="c-menu-card-text text-center mb-4">Visualiza y gestiona los locales cargados.</p>
+        <a href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>" class="c-btn-primary">Ver Locales</a>
+      </div>
+    </div>
+    <div class="col-lg-4 col-12">
+      <div class="c-menu-img-placeholder h-100 d-flex justify-content-center align-items-center">
+        <img src="<?php echo app_path('src/img/marcasLogos.png') ?>" alt="Logos de marcas en el shopping" class="c-menu-img">
+      </div>
+    </div>
+  </div>
+
+  <!-- Promociones y Usos -->
   <div class="row g-4">
-    <div class="col-md-6 col-lg-3">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body text-center">
-          <i class="bi bi-shop" style="font-size: 2rem; color: #fd7e14;"></i>
-          <h5 class="card-title mt-3">Mis Locales</h5>
-          <p class="card-text">Visualiza los locales cargados.</p>
-          <a href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>" class="btn btn-warning btn-sm">Ver Locales</a>
-        </div>
+    <div class="col-md-6 col-12">
+      <div class="c-menu-card h-100 text-center">
+        <i class="bi bi-tag c-menu-icon-orange"></i>
+        <h3 class="c-menu-card-title mt-3">MIS PROMOCIONES</h3>
+        <p class="c-menu-card-text mb-4">Ver, crear o eliminar tus promociones.</p>
+        <a href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>" class="c-btn-primary">Gestionar Promociones</a>
       </div>
     </div>
 
-
-
-    <div class="col-md-6 col-lg-3">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body text-center">
-          <i class="bi bi-shop" style="font-size: 2rem; color: #fd7e14;"></i>
-          <h5 class="card-title mt-3">Mis Promociones</h5>
-          <p class="card-text">Ver o eliminar mis promociones.</p>
-          <a href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>" class="btn btn-warning btn-sm">Ver Promociones</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-lg-3">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body text-center">
-          <i class="bi bi-plus-circle" style="font-size: 2rem; color: #198754;"></i>
-          <h5 class="card-title mt-3">Crear Promoción</h5>
-          <p class="card-text">Crear una nueva promoción.</p>
-          <a href="<?php echo app_path('src/view/pages/promocion/create_promocion.php'); ?>" class="btn btn-success btn-sm">Nueva Promoción</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-lg-3">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body text-center">
-          <i class="bi bi-shop" style="font-size: 2rem; color: #fd7e14;"></i>
-          <h5 class="card-title mt-3">Usos de Promociones</h5>
-          <p class="card-text">Aceptar o rechazar los usos de promociones.</p>
-          <a href="<?php echo app_path('src/view/pages/uso_promocion/validar_uso_promocion.php'); ?>" class="btn btn-warning btn-sm">Gestionar usos de promociones</a>
-        </div>
+    <div class="col-md-6 col-12">
+      <div class="c-menu-card h-100 text-center">
+        <i class="bi bi-hand-thumbs-up c-menu-icon-orange"></i>
+        <h3 class="c-menu-card-title mt-3">USOS DE PROMOCIONES</h3>
+        <p class="c-menu-card-text mb-4">Aceptar o rechazar usos de promociones.</p>
+        <a href="<?php echo app_path('src/view/pages/uso_promocion/validar_uso_promocion.php'); ?>" class="c-btn-primary">Gestionar Usos</a>
       </div>
     </div>
   </div>
 
-  <div>
-    ELIMINAR no son funciones del dueño
-    <div class="col-md-6 col-lg-3">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body text-center">
-          <i class="bi bi-plus-circle" style="font-size: 2rem; color: #198754;"></i>
-          <h5 class="card-title mt-3">Crear Local</h5>
-          <p class="card-text">Registra un nuevo local para ampliar tu oferta.</p>
-          <a href="<?php echo app_path('src/view/pages/local/create_local.php'); ?>" class="btn btn-success btn-sm">Nuevo Local</a>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="col-md-6 col-lg-3">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body text-center">
-          <i class="bi bi-pencil-square" style="font-size: 2rem; color: #20c997;"></i>
-          <h5 class="card-title mt-3">Publicar Novedad</h5>
-          <p class="card-text">Comparte anuncios y noticias importantes.</p>
-          <a href="<?php echo app_path('src/view/pages/novedad/novedad_create.php'); ?>" class="btn btn-info btn-sm text-white">Crear Novedad</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-lg-3">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body text-center">
-          <i class="bi bi-megaphone" style="font-size: 2rem; color: #0d6efd;"></i>
-          <h5 class="card-title mt-3">Novedades</h5>
-          <p class="card-text">Consulta las novedades publicadas para tus clientes.</p>
-          <a href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>" class="btn btn-primary btn-sm">Ver Novedades</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="row mt-5">
-      <div class="col-12 text-center">
-        <a href="<?php echo app_path('src/controller/handle_logout.php'); ?>" class="btn btn-outline-secondary">Cerrar sesión</a>
-      </div>
-    </div>
-  </div>
 </div>
