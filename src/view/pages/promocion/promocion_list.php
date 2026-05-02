@@ -94,7 +94,7 @@ $promocionesPage = $totalPromociones > 0 ? array_slice($promociones, $startIndex
                 </div>
               </div>
 
-              <?php if ($tipo !== TipoUsuario::CLIENTE->value) { ?>
+              <?php if ($tipo === TipoUsuario::DUENO->value) { ?>
                 <div class="col-lg-12 col-4 my-1">
                   <div class="c-form-field">
                     <select
@@ -109,9 +109,7 @@ $promocionesPage = $totalPromociones > 0 ? array_slice($promociones, $startIndex
                     <label class="c-form-label" for="categoria_cliente">Categoría de cliente</label>
                   </div>
                 </div>
-              <?php } ?>
-
-              <?php if ($tipo === TipoUsuario::DUENO->value) { ?>
+                
                 <div class="col-lg-12 col-4 my-1">
                   <div class="c-form-field">
                     <select
