@@ -31,135 +31,112 @@ $usos = showUsosPromocion();
     <?php include __DIR__ . '/../../components/header.php' ?>
   </header>
 
-  <main class="container">
-    <div class="row">
-      <div class="col">
-        <h1 class="text-center">Solicitudes de uso de promociones</h1>
-      </div>
-    </div>
-
-    <?php include __DIR__ . '/../../components/alerts.php'; ?>
-
-    <div class="row">
-      <div class="col">
-        <div class="table-responsive">
-          <table class="table table-striped table-hover align-middle">
-            <thead class="table-dark">
-              <tr>
-                <th>Cliente</th>
-                <th>Promo</th>
-                <th>Local</th>
-                <th>Fecha</th>
-                <th>Estado</th>
-                <th>Acción</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <?php if (empty($usos)) { ?>
-                <tr>
-                  <td colspan="5" class="text-center">No hay solicitudes.</td>
-                </tr>
-              <?php } else { ?>
-                <?php foreach ($usos as $uso) {
-                  $estado = strtolower((string)$uso->estado);
-                  $estadoBadgeClass = 'text-bg-secondary';
-
-                  if ($estado === 'enviada') {
-                    $estadoBadgeClass = 'text-bg-warning';
-                  } else if ($estado === 'aceptada') {
-                    $estadoBadgeClass = 'text-bg-success';
-                  } else if ($estado === 'rechazada') {
-                    $estadoBadgeClass = 'text-bg-danger';
-                  }
-
-                  $modalId = 'modal-validar-uso-' . $uso->idCli . '-' . $uso->idPromo;
-                ?>
-                  <tr>
-                    <td><?php echo htmlspecialchars($uso->idCli, ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><?php echo htmlspecialchars($uso->promo->textoPromo, ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><?php echo htmlspecialchars($uso->promo->local->nombreLocal, ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><?php echo htmlspecialchars($uso->fechaUso->format('d/m/Y'), ENT_QUOTES, 'UTF-8'); ?></td>
-
-                    <td>
-                      <span class="badge <?php echo $estadoBadgeClass; ?>">
-                        <?php echo strtoupper(htmlspecialchars($uso->estado, ENT_QUOTES, 'UTF-8')); ?>
-                      </span>
-                    </td>
-
-                    <td>
-                      <?php if ($uso->estado === 'enviada') { ?>
-                        <button
-                          type="button"
-                          class="btn btn-sm btn-primary"
-                          data-bs-toggle="modal"
-                          data-bs-target="#<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>">
-                          Gestionar uso de promoción
-                        </button>
-
-                        <div class="modal fade" id="<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>" tabindex="-1" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title">Validar uso de promoción</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                              </div>
-
-                              <div class="modal-body">
-                                <p class="mb-3">¿Qué desea hacer con este uso de promoción?</p>
-
-                                <ul class="list-group">
-                                  <li class="list-group-item">
-                                    <strong>ID Cliente:</strong>
-                                    <?php echo htmlspecialchars($uso->idCli, ENT_QUOTES, 'UTF-8'); ?>
-                                  </li>
-
-                                  <li class="list-group-item">
-                                    <strong>ID Promo:</strong>
-                                    <?php echo htmlspecialchars($uso->idPromo, ENT_QUOTES, 'UTF-8'); ?>
-                                  </li>
-
-                                  <li class="list-group-item">
-                                    <strong>Fecha uso promo:</strong>
-                                    <?php echo htmlspecialchars($uso->fechaUso->format('d/m/Y'), ENT_QUOTES, 'UTF-8'); ?>
-                                  </li>
-                                </ul>
-                              </div>
-
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-
-                                <a class="btn btn-danger"
-                                  href="<?php echo app_path('src/controller/uso_promocion/handle_validar_uso_promocion.php'); ?>?estado=rechazada&id_cli=<?php echo $uso->idCli; ?>&id_promo=<?php echo $uso->idPromo; ?>">
-                                  Rechazar
-                                </a>
-
-                                <a class="btn btn-success"
-                                  href="<?php echo app_path('src/controller/uso_promocion/handle_validar_uso_promocion.php'); ?>?estado=aceptada&id_cli=<?php echo $uso->idCli; ?>&id_promo=<?php echo $uso->idPromo; ?>">
-                                  Aceptar
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      <?php } else { ?>
-                        <span class="text-muted">Uso de promo gestionado</span>
-                      <?php } ?>
-                    </td>
-                  </tr>
-                <?php } ?>
-              <?php } ?>
-            </tbody>
-          </table>
+  <main class="row c-page-main">
+    <div class="col-lg-3 col-12">
+      <aside class="c-aside">
+        <div class="row c-hero">
+          <h1 class="c-title">Usos de promociones</h1>
+          <p class="c-subtitle">Revisá y administrá las solicitudes de uso de promociones.</p>
         </div>
-      </div>
+
+        <div class="col-12 my-1 mt-lg-3">
+          <a class="c-btn-secondary-ghost" href="<?php echo app_path(); ?>">
+            Volver al menú
+          </a>
+        </div>
+      </aside>
     </div>
 
-    <div class="row mt-4">
-      <div class="col text-center">
-        <a href="<?php echo app_path(); ?>" class="btn btn-secondary">Volver al menú</a>
-      </div>
-    </div>
+    <section class="col-lg-7 col-12">
+      <?php include __DIR__ . '/../../components/alerts.php'; ?>
+
+      <?php if (empty($usos)) { ?>
+        <div class="alert alert-info mt-5 text-center">
+          No hay solicitudes.
+        </div>
+      <?php } else { ?>
+        <div class="row c-list">
+          <?php foreach ($usos as $uso) {
+            $estado = strtolower((string)$uso->estado);
+          ?>
+            <article class="col-12 c-list-card">
+              <div class="row c-list-card-header">
+                <div class="col-lg-6 c-list-card-title">
+                  <h5>
+                    Cliente #<?php echo htmlspecialchars($uso->idCli); ?>
+                    -
+                    Promo #<?php echo htmlspecialchars($uso->idPromo); ?>
+                  </h5>
+                </div>
+
+                <div class="col-lg-6 text-end">
+                  <span class="c-list-card-category">
+                    <?php echo strtoupper(htmlspecialchars($uso->estado)); ?>
+                  </span>
+                </div>
+              </div>
+
+              <div class="c-list-cart-body-container">
+                <div class="row mb-4">
+                  <div class="col-6">
+                    <div class="c-list-cart-body-info-group">
+                      <label class="c-list-cart-body-label">FECHA</label>
+                      <span class="c-list-cart-body-date">
+                        <?php echo $uso->fechaUso->format('d/m/Y'); ?>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-6 text-end">
+                    <div class="c-list-cart-body-info-group">
+                      <label class="c-list-cart-body-label">LOCAL</label>
+                      <span class="c-list-cart-body-date">
+                        <?php echo htmlspecialchars($uso->promo->local->nombreLocal); ?>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12">
+                    <div class="c-list-cart-body-desc-container">
+                      <label class="c-list-cart-body-label">PROMOCIÓN</label>
+                      <p class="c-list-cart-body-desc-text">
+                        <?php echo htmlspecialchars($uso->promo->textoPromo); ?>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <?php if ($estado === 'enviada') { ?>
+                  <div class="col-md-6 col-12">
+                    <a class="c-btn-danger-tonal"
+                      href="<?php echo app_path('src/controller/uso_promocion/handle_validar_uso_promocion.php'); ?>
+                      ?estado=rechazada&id_cli=<?php echo $uso->idCli; ?>&id_promo=<?php echo $uso->idPromo; ?>">
+                      Rechazar
+                    </a>
+                  </div>
+
+                  <div class="col-md-6 col-12">
+                    <a class="c-btn-secondary-tonal"
+                      href="<?php echo app_path('src/controller/uso_promocion/handle_validar_uso_promocion.php'); ?>
+                      ?estado=aceptada&id_cli=<?php echo $uso->idCli; ?>&id_promo=<?php echo $uso->idPromo; ?>">
+                      Aceptar
+                    </a>
+                  </div>
+                <?php } else { ?>
+                  <div class="col-12 text-center c-list-cart-body-label">
+                    Uso ya gestionado
+                  </div>
+                <?php } ?>
+              </div>
+            </article>
+          <?php } ?>
+        </div>
+      <?php } ?>
+    </section>
   </main>
 
   <script
