@@ -12,9 +12,11 @@ if (isset($_POST['botonCrear'])) {
   if (empty($_POST['dias_semana'])) {
     setSessionError("Debe seleccionar al menos un día.");
     header("Location: " . app_path('src/view/pages/promocion/create_promocion.php'));
+    exit;
   } else if ($_POST['fecha_desde'] > $_POST['fecha_hasta']) {
     setSessionError("La fecha desde no puede ser mayor a la fecha hasta.");
     header("Location: " . app_path('src/view/pages/promocion/create_promocion.php'));
+    exit;
   } else {
     $diasSemana = new ArrayObject($_POST['dias_semana']);
 

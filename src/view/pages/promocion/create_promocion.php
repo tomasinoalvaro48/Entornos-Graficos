@@ -2,9 +2,6 @@
 require_once __DIR__ . "/../../../controller/local/show_local.php";
 require_once __DIR__ . "/../../../controller/auth.php";
 
-$error = getSessionError();
-clearSessionMessages();
-
 $locales = showLocales();
 ?>
 
@@ -146,6 +143,12 @@ $locales = showLocales();
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous">
+  </script>
+
+  <script>
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById("fecha_desde").min = today;
+    document.getElementById("fecha_hasta").min = today;
   </script>
 </body>
 
