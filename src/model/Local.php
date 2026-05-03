@@ -9,6 +9,7 @@ class Local
   public string $rubroLocal;
   public ?Usuario $usuario;
   public ?string $estadoLocal;
+  public ?array $promociones;
 
 
   function __construct(
@@ -17,7 +18,8 @@ class Local
     string $nombre_local,
     string $rubro_local,
     ?Usuario $usuario,
-    ?string $estado_elim_local
+    ?string $estado_elim_local,
+    ?array $promociones = null
 
   ) {
     $this->idLocal = $id_local;
@@ -26,5 +28,6 @@ class Local
     $this->rubroLocal = $rubro_local;
     $this->usuario = $usuario;
     $this->estadoLocal = $estado_elim_local;
+    $this->promociones = $promociones;
   }
 }

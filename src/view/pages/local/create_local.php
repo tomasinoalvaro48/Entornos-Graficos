@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . "/../../../controller/dueno/show_duenos.php";
 require_once __DIR__ . "/../../../controller/auth.php";
+require_once __DIR__ . "/../../../enums.php";
 
 $duenos = showDuenos();
 ?>
@@ -77,11 +78,13 @@ $duenos = showDuenos();
             required>
             <option value="">Seleccionar un dueño</option>
             <?php foreach ($duenos as $d) {
-              echo ("
+              if ($d->estadoDueno === EstadoDueno::ACEPTADO->value && $d->estadoMail === EstadoMail::CONFIRMADO->value) {
+                echo ("
               <option value='" . htmlspecialchars($d->idUsuario, ENT_QUOTES, 'UTF-8') . "'>
                 " . htmlspecialchars($d->nombreUsuario, ENT_QUOTES, 'UTF-8') . "
               </option>"
-              );
+                );
+              }
             } ?>
           </select>
           <label class="c-form-label" for="dueno_local">Dueño del Local</label>

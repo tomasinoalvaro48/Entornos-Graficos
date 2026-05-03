@@ -16,6 +16,13 @@ enum CategoriaCliente: string
   case PREMIUM = 'premium';
 }
 
+enum EstadoPromo: string
+{
+  case PENDIENTE = 'pendiente';
+  case APROBADA = 'aprobada';
+  case DENEGADA = 'denegada';
+}
+
 enum EstadoLocal: string
 {
   case ACTIVO = 'activo';
