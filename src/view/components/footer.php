@@ -82,8 +82,6 @@ $tipoUsuario = getTipoUsuario();
   <div class="c-footer-bottom">
     <div class="mb-2">
       <a href="<?php echo app_path('src/view/pages/terminos.php'); ?>">Términos y condiciones</a>
-      <span aria-hidden="true" class="text-secondary">|</span>
-      <a href="<?php echo app_path('src/view/pages/politica_privacidad.php'); ?>">Política de privacidad</a>
     </div>
     <p class="mb-0">Copyright &copy; 2026 - Todos los derechos reservados | Contacto: rivendell.plaza@gmail.com</p>
   </div>

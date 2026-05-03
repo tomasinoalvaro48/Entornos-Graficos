@@ -478,6 +478,17 @@
   font-size: 2rem;
 }
 
+.c-menu-icon-orange-sm {
+  color: #f9b17a;
+  font-size: 1.5rem;
+  min-width: 2rem;
+}
+
+.c-menu-icon-orange-lg {
+  color: #f9b17a;
+  font-size: 3rem;
+}
+
 .c-menu-img-placeholder {
   border-radius: 1rem;
   min-height: 360px;
@@ -500,6 +511,24 @@
   object-fit: cover;
   display: block;
   border-radius: 1rem;
+}
+
+/* Header helper classes (avoid inline styles) */
+.c-header-navbar {
+  z-index: 1030;
+}
+
+.c-toggler-icon {
+  width: 1.2em;
+  height: 1.2em;
+  display: inline-block;
+  filter: invert(1);
+}
+
+/* Ensure h5 inside menu cards is readable on dark background */
+.c-menu-card h5 {
+  color: #f1f2ff;
+  font-weight: 700;
 }
 
 /* Carousel: make images more rounded and taller, keep object-fit */
