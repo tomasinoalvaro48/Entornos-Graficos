@@ -227,18 +227,17 @@
   font-size: 2rem;
 }
 
-/* Estilo para la pÃ­ldora de la derecha */
 .c-list-card-category {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   background-color: #ffa866;
   color: #2d3250;
   font-weight: 700;
   padding: 0.35rem 1rem;
   border-radius: 50px;
-  display: inline-block;
   font-size: 0.9rem;
-  text-align: right;
-  width: fit-content;
-  margin-left: auto;
 }
 
 /*card body*/
@@ -913,6 +912,6 @@
 
   .c-header-notifications-menu {
     width: 100%;
-    min-width: 0;
+    min-width: 300px;
   }
 }

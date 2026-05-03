@@ -15,7 +15,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
 ];
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top c-header-navbar" style="z-index: 1030;">
+<nav class="navbar navbar-expand-xl navbar-dark sticky-top c-header-navbar" style="z-index: 1030;">
   <div class="container-fluid c-header-shell">
     <!-- Logo y marca -->
     <a class="navbar-brand c-header-brand" href="<?php echo app_path(); ?>">
@@ -25,6 +25,11 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
         <span class="c-header-brand-subtitle">Plaza</span>
       </span>
     </a>
+
+    <?php if ($tipo) { ?>
+      <!-- Notificaciones -->
+      <?php renderHeaderNotifications($tipo); ?>
+    <?php } ?>
 
     <!-- Menú de navegación -->
     <?php if (!in_array($serverUri, $excludePaths)) { ?>
@@ -141,13 +146,10 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               </ul>
             </li>
 
-            <li class="nav-item d-flex align-items-center">
-              <span class="nav-link">
-                <span class="c-list-card-category">
-                  Categoría: <?php echo strtoupper($usuario['categoria_cliente']); ?>
-                </span>
-              </span>
+            <li class="nav-item ">
+              <span class="c-list-card-category">Categoría: <?php echo strtoupper($usuario['categoria_cliente']); ?></span>
             </li>
+
           <?php } else if ($tipo === TipoUsuario::DUENO->value) { ?>
             <!-- Dueños -->
             <li class="nav-item dropdown">
@@ -174,9 +176,6 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
 
           <!-- Opciones comunes para usuarios autenticados -->
           <?php if ($tipo) { ?>
-            <!-- Notificaciones -->
-            <?php renderHeaderNotifications($tipo); ?>
-
             <li class="nav-item">
               <a class="nav-link" href="<?php echo app_path('src/controller/handle_logout.php'); ?>">Cerrar Sesión</a>
             </li>
