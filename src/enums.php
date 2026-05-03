@@ -46,3 +46,17 @@ enum EstadoDueno: string
   case RECHAZADO = 'rechazado';
   case ACEPTADO = 'aceptado';
 }
+
+enum EstadoValidacionPromo: string
+{
+  case PENDIENTE = 'pendiente';
+  case RECHAZADA = 'rechazada';
+  case APROBADA = 'aprobada';
+}
+
+enum EstadoUsoPromo: string
+{
+  case PENDIENTE = 'pendiente';
+  case RECHAZADA = 'rechazada';
+  case APROBADA = 'aprobada';
+}
