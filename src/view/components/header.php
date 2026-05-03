@@ -173,14 +173,6 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
             </li>
           <?php } ?>
 
-
-          <!-- Opciones comunes para usuarios autenticados -->
-          <?php if ($tipo) { ?>
-            <li class="nav-item">
-              <a class="nav-link" href="<?php echo app_path('src/controller/handle_logout.php'); ?>">Cerrar Sesión</a>
-            </li>
-          <?php } ?>
-
           <!-- Menú Hamburguesa / Opciones Adicionales -->
           <li class="nav-item dropdown">
             <a class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

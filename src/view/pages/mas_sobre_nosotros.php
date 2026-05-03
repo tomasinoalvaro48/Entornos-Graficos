@@ -112,7 +112,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-8 col-12">
           <div class="c-menu-card text-center">
-            <h3 class="c-menu-card-title mb-3">¿TE ESPERAMOS!</h3>
+            <h3 class="c-menu-card-title mb-3">¡TE ESPERAMOS!</h3>
             <p class="c-menu-card-text mb-4">Descubrí todo lo que tenemos para vos en Rivendell Plaza.</p>
           </div>
         </div>
