@@ -16,6 +16,12 @@ enum CategoriaCliente: string
   case PREMIUM = 'premium';
 }
 
+enum EstadoLocal: string
+{
+  case ACTIVO = 'activo';
+  case ELIMINADO = 'eliminado';
+}
+
 enum EstadoPromo: string
 {
   case PENDIENTE = 'pendiente';
@@ -23,10 +29,11 @@ enum EstadoPromo: string
   case DENEGADA = 'denegada';
 }
 
-enum EstadoLocal: string
+enum EstadoUsoPromo: string
 {
-  case ACTIVO = 'activo';
-  case ELIMINADO = 'eliminado';
+  case ENVIADA = 'enviada';
+  case ACEPTADA = 'aceptada';
+  case RECHAZADA = 'rechazada';
 }
 
 enum EstadoElimPromo: string
@@ -52,18 +59,4 @@ enum EstadoDueno: string
   case PENDIENTE = 'pendiente';
   case RECHAZADO = 'rechazado';
   case ACEPTADO = 'aceptado';
-}
-
-enum EstadoValidacionPromo: string
-{
-  case PENDIENTE = 'pendiente';
-  case RECHAZADA = 'rechazada';
-  case APROBADA = 'aprobada';
-}
-
-enum EstadoUsoPromo: string
-{
-  case PENDIENTE = 'pendiente';
-  case RECHAZADA = 'rechazada';
-  case APROBADA = 'aprobada';
 }
