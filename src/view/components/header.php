@@ -185,19 +185,27 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
-                <a class="dropdown-item" href="<?php echo app_path('src/view/pages/mas_sobre_nosotros.php'); ?>">Más sobre nosotros</a>
+                <a class="dropdown-item" href="<?php echo app_path('src/view/pages/mas_sobre_nosotros.php'); ?>">
+                  Más sobre nosotros
+                </a>
               </li>
               <?php if ($tipo) { ?>
+                <li>
+                  <a class="dropdown-item" href="<?php echo app_path('src/view/pages/auth/change_password.php'); ?>">
+                    Modificar contraseña
+                  </a>
+                </li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
                 <li>
-                  <a class="dropdown-item text-danger" href="<?php echo app_path('src/controller/handle_logout.php'); ?>">Cerrar Sesión</a>
+                  <a class="dropdown-item text-danger" href="<?php echo app_path('src/controller/handle_logout.php'); ?>">
+                    Cerrar Sesión
+                  </a>
                 </li>
               <?php } ?>
             </ul>
           </li>
-
         </ul>
       </div>
     <?php } ?>
