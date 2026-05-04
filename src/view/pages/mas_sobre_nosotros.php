@@ -9,7 +9,7 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     rel="stylesheet"
     crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../styles/styles.css" />
 </head>
 
@@ -112,7 +112,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-8 col-12">
           <div class="c-menu-card text-center">
-            <h3 class="c-menu-card-title mb-3">¿TE ESPERAMOS!</h3>
+            <h3 class="c-menu-card-title mb-3">¡TE ESPERAMOS!</h3>
             <p class="c-menu-card-text mb-4">Descubrí todo lo que tenemos para vos en Rivendell Plaza.</p>
           </div>
         </div>

@@ -35,11 +35,8 @@ $localFiltro = $_GET['local'] ?? '';
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
     crossorigin="anonymous"
   />
-  
-  <link
-    rel="stylesheet"
-    href="../../styles/styles.css"
-  />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="../../styles/styles.css" />
 </head>
 
 <body>
@@ -47,182 +44,166 @@ $localFiltro = $_GET['local'] ?? '';
     <?php include __DIR__ . '/../../components/header.php' ?>
   </header>
 
-  <main>
-    <div class="container mt-4">
-      <div class="row">
-        <div class="col">
-          <h1>Reporte de uso de promociones</h1>
-        </div>
-      </div>
-
-      <form method="GET" class="row mt-3 mb-4">
-        <div class="col-md-4">
-          <input 
-            type="text" 
-            name="busqueda" 
-            class="form-control"
-            placeholder="Buscar promoción o local"
-            value="<?php echo $_GET['busqueda'] ?? ''; ?>"
-          >
+  <main class="row c-page-main">
+    <div class="col-lg-3 col-12">
+      <aside class="c-aside">
+        <div class="c-hero">
+          <h1 class="c-title">Reporte de uso de promociones</h1>
         </div>
 
-        <div class="col-md-3">
-          <select name="dia" class="form-select">
-            <option value="">Filtrar por día</option>
-            <?php
-            $diasSelect = [
-              1 => "Lunes",
-              2 => "Martes",
-              3 => "Miércoles",
-              4 => "Jueves",
-              5 => "Viernes",
-              6 => "Sábado",
-              7 => "Domingo"
-            ];
-            foreach ($diasSelect as $num => $nombre) {
-              $selected = (isset($_GET['dia']) && $_GET['dia'] == $num) ? 'selected' : '';
-              echo "<option value='$num' $selected>$nombre</option>";
-            }
-            ?>
-          </select>
-        </div>
+        <form method="GET" class="c-form-layout">
+          <div class="c-form-field">
+            <input type="text" name="busqueda" class="c-form-input" placeholder=" "
+              value="<?php echo htmlspecialchars($busqueda); ?>">
+            <label class="c-form-label">Buscar promo o local</label>
+          </div>
 
-        <div class="col-md-3">
-          <select name="local" class="form-select">
-            <option value="">Filtrar por local</option>
-            <?php
-            $locales = [];
-            foreach ($promociones as $p) {
-              $locales[$p->local->idLocal] = $p->local->nombreLocal;
-            }
-            foreach ($locales as $id => $nombre) {
-              $selected = (isset($_GET['local']) && $_GET['local'] == $id) ? 'selected' : '';
-              echo "<option value='$id' $selected>$nombre</option>";
-            }
-            ?>
-          </select>
-        </div>
-
-        <div class="col-md-2">
-          <button type="submit" class="btn btn-primary w-100">Filtrar</button>
-        </div>
-      </form>
-
-      <?php if (empty($promociones)) { ?>
-        <p class="text-center mt-4">No hay promociones.</p>
-      <?php } ?>
-
-      <?php foreach ($promociones as $p) {
-        if (!empty($busqueda)) {
-          $texto = strtolower($p->textoPromo);
-          $localNombre = strtolower($p->local->nombreLocal);
-          $busquedaLower = strtolower($busqueda);
-
-          if (!str_contains($texto, $busquedaLower) && !str_contains($localNombre, $busquedaLower)) {
-            continue;
-          }
-        }
-
-        if (!empty($diaFiltro)) {
-          if (!in_array($diaFiltro, $p->diasSemanaPromo->getArrayCopy())) {
-            continue;
-          }
-        }
-
-        if (!empty($localFiltro)) {
-          if ($p->local->idLocal != $localFiltro) {
-            continue;
-          }
-        }
-      ?>
-        <div class="card mt-4 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">
-              <?php echo htmlspecialchars($p->textoPromo, ENT_QUOTES, 'UTF-8'); ?>
-            </h5>
-
-            <p>
-              <b>Local:</b>
-              <?php echo htmlspecialchars($p->local->nombreLocal, ENT_QUOTES, 'UTF-8'); ?>
-            </p>
-
-            <p>
-              <b>Vigencia:</b>
-              <?php echo $p->fechaDesdePromo->format('d/m/Y'); ?>
-              -
-              <?php echo $p->fechaHastaPromo->format('d/m/Y'); ?>
-            </p>
-
-            <p>
-              <b>Días de la semana:</b>
+          <div class="c-form-field">
+            <select name="dia" class="c-form-input c-form-input-select">
+              <option value="">Todos los días</option>
               <?php
-              $dias = [];
-              foreach ($p->diasSemanaPromo as $d) {
-                $diasTexto = [
-                  1 => "Lun",
-                  2 => "Mar",
-                  3 => "Mié",
-                  4 => "Jue",
-                  5 => "Vie",
-                  6 => "Sáb",
-                  7 => "Dom"
-                ];
-                $dias[] = $diasTexto[$d] ?? $d;
+              $diasSelect = [1=>"Lunes",2=>"Martes",3=>"Miércoles",4=>"Jueves",5=>"Viernes",6=>"Sábado",7=>"Domingo"];
+              foreach ($diasSelect as $num => $nombre) {
+                $selected = ($diaFiltro == $num) ? 'selected' : '';
+                echo "<option value='$num' $selected>$nombre</option>";
               }
-              echo implode(", ", $dias);
               ?>
-            </p>
-
-            <p>
-              <b>Categoría cliente:</b>
-              <?php echo htmlspecialchars($p->categoriaClientePromo, ENT_QUOTES, 'UTF-8'); ?>
-            </p>
-
-            <p>
-              <b>Estado:</b>
-              <?php echo htmlspecialchars($p->estadoPromo, ENT_QUOTES, 'UTF-8'); ?>
-            </p>
-
-            <hr>
-
-            <h6>Usos de la promoción:</h6>
-
-            <?php if (!empty($usosPorPromo[$p->idPromo])) { ?>
-              <?php foreach ($usosPorPromo[$p->idPromo] as $u) { ?>
-                <div class="border rounded p-2 mb-2">
-                  <p class="mb-1">
-                    <b>Cliente:</b>
-                    <?php echo htmlspecialchars($u->nombreCliente, ENT_QUOTES, 'UTF-8'); ?>
-                  </p>
-
-                  <p class="mb-1">
-                    <b>Fecha uso:</b>
-                    <?php echo $u->fechaUso->format('d/m/Y'); ?>
-                  </p>
-
-                  <p class="mb-0">
-                    <b>Estado:</b>
-                    <?php echo htmlspecialchars($u->estado, ENT_QUOTES, 'UTF-8'); ?>
-                  </p>
-                </div>
-              <?php } ?>
-            <?php } else { ?>
-              <p>No hay usos para esta promoción.</p>
-            <?php } ?>
+            </select>
+            <label class="c-form-label">Día</label>
           </div>
-        </div>
-      <?php } ?>
 
-      <div class="container text-center">
-        <div class="row mt-5">
-          <div class="col">
-            <a href="<?php echo app_path(); ?>" class="btn btn-secondary">
-              Volver al menú
-            </a>
+          <div class="c-form-field">
+            <select name="local" class="c-form-input c-form-input-select">
+              <option value="">Todos los locales</option>
+              <?php
+              $locales = [];
+              foreach ($promociones as $p) {
+                $locales[$p->local->idLocal] = $p->local->nombreLocal;
+              }
+              foreach ($locales as $id => $nombre) {
+                $selected = ($localFiltro == $id) ? 'selected' : '';
+                echo "<option value='$id' $selected>$nombre</option>";
+              }
+              ?>
+            </select>
+            <label class="c-form-label">Local</label>
           </div>
-        </div>
-      </div>
+
+          <button type="submit" class="c-btn-primary">
+            Filtrar
+          </button>
+
+          <a class="c-btn-secondary-tonal"
+            href="<?php echo app_path('src/view/pages/uso_promocion/reporte_promociones.php'); ?>">
+            Limpiar filtros
+          </a>
+
+          <a class="c-btn-secondary-ghost" href="<?php echo app_path(); ?>">
+            Volver al menú
+          </a>
+        </form>
+      </aside>
     </div>
+
+    <section class="col-lg-7 col-12">
+      <div class="row c-list">
+        <?php if (empty($promociones)) { ?>
+          <div class="alert alert-info text-center mt-5">
+            No hay promociones.
+          </div>
+        <?php } ?>
+
+        <?php foreach ($promociones as $p) {
+          if ($busqueda) {
+            $texto = strtolower($p->textoPromo);
+            $localNombre = strtolower($p->local->nombreLocal);
+
+            if (!str_contains($texto, strtolower($busqueda)) && !str_contains($localNombre, strtolower($busqueda))) {
+              continue;
+            }
+          }
+
+          if ($diaFiltro && !in_array($diaFiltro, $p->diasSemanaPromo->getArrayCopy())) {
+            continue;
+          }
+
+          if ($localFiltro && $p->local->idLocal != $localFiltro) {
+            continue;
+          }
+
+          $diasTexto = [1=>"Lun",2=>"Mar",3=>"Mié",4=>"Jue",5=>"Vie",6=>"Sáb",7=>"Dom"];
+          $dias = [];
+          foreach ($p->diasSemanaPromo as $d) {
+            $dias[] = $diasTexto[$d] ?? $d;
+          }
+        ?>
+
+        <article class="col-12 c-list-card">
+          <div class="row c-list-card-header">
+            <div class="col-lg-6">
+              <h5 class="c-list-card-title">Promo #<?php echo $p->idPromo; ?></h5>
+            </div>
+            <div class="col-lg-6 text-end">
+              <span class="c-list-card-category">
+                <?php echo strtoupper($p->estadoPromo); ?>
+              </span>
+            </div>
+          </div>
+
+          <div class="c-list-cart-body-container">
+            <div class="row mb-4">
+              <div class="col-6">
+                <label class="c-list-cart-body-label">FECHA DESDE</label>
+                <span class="c-list-cart-body-date">
+                  <?php echo $p->fechaDesdePromo->format('d/m/Y'); ?>
+                </span>
+              </div>
+              <div class="col-6 text-end">
+                <label class="c-list-cart-body-label">FECHA HASTA</label>
+                <span class="c-list-cart-body-date">
+                  <?php echo $p->fechaHastaPromo->format('d/m/Y'); ?>
+                </span>
+              </div>
+            </div>
+
+            <div class="c-list-cart-body-desc-container">
+              <label class="c-list-cart-body-label">DESCRIPCIÓN</label>
+              <p class="c-list-cart-body-desc-text">
+                <?php echo htmlspecialchars($p->textoPromo); ?>
+              </p>
+            </div>
+
+            <div class="c-list-cart-body-desc-container mt-2">
+              <label class="c-list-cart-body-label">DETALLE</label>
+              <p class="c-list-cart-body-desc-text">
+                Local: <?php echo htmlspecialchars($p->local->nombreLocal); ?><br>
+                Días: <?php echo implode(", ", $dias); ?><br>
+                Categoría: <?php echo htmlspecialchars($p->categoriaClientePromo); ?>
+              </p>
+            </div>
+
+            <div class="mt-3">
+              <label class="c-list-cart-body-label">USOS</label>
+
+              <?php if (!empty($usosPorPromo[$p->idPromo])) { ?>
+                <?php foreach ($usosPorPromo[$p->idPromo] as $u) { ?>
+                  <div class="c-list-cart-body-desc-container mt-2">
+                    <p class="c-list-cart-body-desc-text">
+                      <b>Cliente:</b> <?php echo htmlspecialchars($u->nombreCliente); ?><br>
+                      <b>Fecha:</b> <?php echo $u->fechaUso->format('d/m/Y'); ?><br>
+                      <b>Estado:</b> <?php echo htmlspecialchars($u->estado); ?>
+                    </p>
+                  </div>
+                <?php } ?>
+              <?php } else { ?>
+                <p class="c-text-muted">No hay usos.</p>
+              <?php } ?>
+            </div>
+          </div>
+        </article>
+        <?php } ?>
+      </div>
+    </section>
   </main>
 
   <script

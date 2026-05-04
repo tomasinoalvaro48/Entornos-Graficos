@@ -9,7 +9,7 @@ require_once __DIR__ . '/../../../controller/auth.php';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Nueva contraseña</title>
+  <title>Cambiar contraseña</title>
 
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
@@ -21,25 +21,31 @@ require_once __DIR__ . '/../../../controller/auth.php';
 </head>
 
 <body>
+  <header>
+    <?php include '../../components/header.php' ?>
+  </header>
+
   <main class="c-page-main align-items-center">
     <section class="c-card">
       <?php include '../../components/alerts.php'; ?>
 
       <header class="c-hero">
-        <h1 class="c-title">Nueva contraseña</h1>
+        <h1 class="c-title">Cambiar contraseña</h1>
       </header>
 
-      <form action="<?php echo app_path('src/controller/handle_reset_password.php'); ?>" method="POST" class="c-form-layout">
-        <input type="hidden" name="mail" value="<?php echo htmlspecialchars($_GET['mail'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
-        <input type="hidden" name="token" value="<?php echo htmlspecialchars($_GET['token'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+      <form action="<?php echo app_path('src/controller/handle_change_password.php'); ?>" method="POST" class="c-form-layout">
+        <div class="c-form-field">
+          <input type="password" name="pass_actual" class="c-form-input" placeholder=" " required>
+          <label class="c-form-label">Contraseña actual</label>
+        </div>
 
         <div class="c-form-field">
-          <input type="password" name="pass" class="c-form-input" placeholder=" " required>
+          <input type="password" name="pass_nueva" class="c-form-input" placeholder=" " required>
           <label class="c-form-label">Nueva contraseña</label>
         </div>
 
         <div class="c-form-field">
-          <input type="password" name="pass2" class="c-form-input" placeholder=" " required>
+          <input type="password" name="pass_repetir" class="c-form-input" placeholder=" " required>
           <label class="c-form-label">Repetir contraseña</label>
         </div>
 
@@ -47,18 +53,12 @@ require_once __DIR__ . '/../../../controller/auth.php';
           Cambiar contraseña
         </button>
 
-        <a href="<?php echo app_path('src/view/pages/auth/login.php'); ?>" class="c-btn-secondary-ghost">
-          Volver al login
+        <a href="<?php echo app_path('index.php'); ?>" class="c-btn-secondary-ghost">
+          Volver al menú
         </a>
       </form>
     </section>
   </main>
-
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-    crossorigin="anonymous">
-  </script>
 </body>
 
 </html>
