@@ -25,7 +25,7 @@ $novedadesPage = $totalNovedades > 0 ? array_slice($novedades, $startIndex, $nov
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">

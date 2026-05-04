@@ -30,12 +30,14 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
     <?php if (!in_array($serverUri, $excludePaths)) { ?>
       <!-- Buscador -->
       <form class="d-flex c-header-search" role="search" method="GET" action="<?php echo app_path('src/view/pages/locales_promociones_list.php'); ?>">
+        <label for="c-header-search-input" class="visually-hidden" style="position: absolute; left: -9999px;">Buscar Locales o Promociones</label>
         <input
+          id="c-header-search-input"
           class="form-control c-header-search-input"
           name="busqueda"
           type="search"
           placeholder="Buscar Locales o Promociones"
-          aria-label="Search"
+          aria-label="Buscar Locales o Promociones"
           required />
         <button class="btn c-header-search-btn" type="submit">Buscar</button>
       </form>
