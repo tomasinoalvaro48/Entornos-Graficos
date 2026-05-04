@@ -1,9 +1,5 @@
 <?php
 require_once __DIR__ . '/../../../controller/auth.php';
-
-$error = getSessionError();
-$success = getSessionSuccess();
-clearSessionMessages();
 ?>
 
 <!DOCTYPE html>
@@ -25,41 +21,44 @@ clearSessionMessages();
 </head>
 
 <body>
-  <div class="container text-center">
-    <h1>Cambiar contraseña</h1>
+  <header>
+    <?php include '../../components/header.php' ?>
+  </header>
 
-    <?php if ($error) { ?>
-      <div class="alert alert-danger"><?php echo $error; ?></div>
-    <?php } ?>
+  <main class="c-page-main align-items-center">
+    <section class="c-card">
+      <?php include '../../components/alerts.php'; ?>
 
-    <?php if ($success) { ?>
-      <div class="alert alert-success"><?php echo $success; ?></div>
-    <?php } ?>
+      <header class="c-hero">
+        <h1 class="c-title">Cambiar contraseña</h1>
+      </header>
 
-    <form action="<?php echo app_path('src/controller/handle_change_password.php'); ?>" method="POST">
-      <div>
-        <label>Contraseña actual</label>
-        <input type="password" name="pass_actual" class="form-control" required>
-      </div>
+      <form action="<?php echo app_path('src/controller/handle_change_password.php'); ?>" method="POST" class="c-form-layout">
+        <div class="c-form-field">
+          <input type="password" name="pass_actual" class="c-form-input" placeholder=" " required>
+          <label class="c-form-label">Contraseña actual</label>
+        </div>
 
-      <div>
-        <label>Nueva contraseña</label>
-        <input type="password" name="pass_nueva" class="form-control" required>
-      </div>
+        <div class="c-form-field">
+          <input type="password" name="pass_nueva" class="c-form-input" placeholder=" " required>
+          <label class="c-form-label">Nueva contraseña</label>
+        </div>
 
-      <div>
-        <label>Repetir nueva contraseña</label>
-        <input type="password" name="pass_repetir" class="form-control" required>
-      </div>
+        <div class="c-form-field">
+          <input type="password" name="pass_repetir" class="c-form-input" placeholder=" " required>
+          <label class="c-form-label">Repetir contraseña</label>
+        </div>
 
-      <button type="submit" class="btn btn-primary mt-3">
-        Cambiar contraseña
-      </button>
-    </form>
+        <button type="submit" class="c-btn-primary">
+          Cambiar contraseña
+        </button>
 
-    <a href="<?php echo app_path('index.php'); ?>" class="btn btn-secondary mt-2">
-      Volver al menú
-    </a>
-  </div>
+        <a href="<?php echo app_path('index.php'); ?>" class="c-btn-secondary-ghost">
+          Volver al menú
+        </a>
+      </form>
+    </section>
+  </main>
 </body>
+
 </html>
