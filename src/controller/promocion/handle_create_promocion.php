@@ -8,6 +8,28 @@ require_once __DIR__ . "/../../model/Local.php";
 if (isset($_POST['botonCrear'])) {
   $promocionDAO = new PromocionDAO();
   $localDAO = new LocalDAO();
+  $imagenPromo = 'default_promo.svg';
+
+  if (isset($_FILES['imagen_promo']) && $_FILES['imagen_promo']['error'] === UPLOAD_ERR_OK && is_uploaded_file($_FILES['imagen_promo']['tmp_name'])) {
+    $uploadDir = __DIR__ . '/../../img/promociones/';
+    if (!is_dir($uploadDir)) {
+      mkdir($uploadDir, 0777, true);
+    }
+
+    $nombreArchivo = basename($_FILES['imagen_promo']['name']);
+    $extension = strtolower(pathinfo($nombreArchivo, PATHINFO_EXTENSION));
+    $permitidas = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'];
+
+    if (in_array($extension, $permitidas, true)) {
+      $nombreFinal = 'promo_' . time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', pathinfo($nombreArchivo, PATHINFO_FILENAME)) . '.' . $extension;
+      $rutaDestino = $uploadDir . $nombreFinal;
+
+      if (move_uploaded_file($_FILES['imagen_promo']['tmp_name'], $rutaDestino)) {
+        $imagenPromo = $nombreFinal;
+      }
+    }
+  }
+
 
   if (empty($_POST['dias_semana'])) {
     setSessionError("Debe seleccionar al menos un día.");
@@ -29,7 +51,9 @@ if (isset($_POST['botonCrear'])) {
       $diasSemana,
       "pendiente",
       $localDAO->getById($_POST['id_local']),
-      null
+      null,
+      $imagenPromo
+
     ));
 
     setSessionSuccess("Promoción creada exitosamente. Queda pendiente de aprobación.");

@@ -184,7 +184,8 @@ class LocalDAO extends DBFunctions
           new ArrayObject(),
           $row['estado_promo'],
           $localesById[$localId],
-          $row['estado_elim_promo']
+          $row['estado_elim_promo'],
+          $row['imagen_promo']
         );
 
         $localesById[$localId]->promociones[] = $promo;

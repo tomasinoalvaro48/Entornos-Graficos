@@ -18,18 +18,9 @@ $locales = showLocales();
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
     rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-<<<<<<< HEAD
     crossorigin="anonymous" />
-
-  <link
-    rel="stylesheet"
-    href="../../styles/styles.css" />
-=======
-    crossorigin="anonymous"
-  />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="../../styles/styles.css"/>
->>>>>>> 6acab3cc99a5471a6e1f672c305e5a7ed46bb3a7
+  <link rel="stylesheet" href="../../styles/styles.css" />
 </head>
 
 <body>
@@ -45,7 +36,7 @@ $locales = showLocales();
         <h1 class="c-title">Crear Promoción</h1>
       </header>
 
-      <form action="<?php echo app_path('src/controller/promocion/handle_create_promocion.php'); ?>" method="POST" class="c-form-layout">
+      <form action="<?php echo app_path('src/controller/promocion/handle_create_promocion.php'); ?>" method="POST" enctype="multipart/form-data" class="c-form-layout">
         <div class="c-form-field">
           <input
             type="text"
@@ -114,6 +105,20 @@ $locales = showLocales();
               ";
             }
             ?>
+          </div>
+        </div>
+
+        <div>
+          <label class="c-list-cart-body-label">Imagen de la promoción</label>
+          <div class="c-form-field mt-2">
+            <input
+              type="file"
+              class="c-form-input"
+              id="imagen_promo"
+              name="imagen_promo"
+              accept="image/*"
+              placeholder=" ">
+            <label for="imagen_promo" class="c-form-label">Seleccionar imagen</label>
           </div>
         </div>
 

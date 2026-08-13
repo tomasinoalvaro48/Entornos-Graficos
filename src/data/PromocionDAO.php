@@ -37,9 +37,11 @@ class PromocionDAO extends DBFunctions
             $promocionFetchArray['estado_mail'],
             $promocionFetchArray['token_verificacion']
           ),
-          $promocionFetchArray['estado_elim_local']
+          $promocionFetchArray['estado_elim_local'],
+          $promocionFetchArray['imagen_local']
         ),
-        $promocionFetchArray['estado_elim_promo']
+        $promocionFetchArray['estado_elim_promo'],
+        $promocionFetchArray['imagen_promo']
       );
     }
     return $p;
@@ -331,7 +333,7 @@ class PromocionDAO extends DBFunctions
   public function create(Promocion $p)
   {
     $query = "INSERT INTO promocion 
-    (texto_promo, fecha_desde_promo, fecha_hasta_promo, categoria_cliente_promo, estado_promo, id_local, estado_elim_promo)
+    (texto_promo, fecha_desde_promo, fecha_hasta_promo, categoria_cliente_promo, estado_promo, id_local, estado_elim_promo, imagen_promo)
     VALUES (
       '{$p->textoPromo}',
       '{$p->fechaDesdePromo->format('Y-m-d')}',
@@ -339,7 +341,8 @@ class PromocionDAO extends DBFunctions
       '{$p->categoriaClientePromo}',
       '{$p->estadoPromo}',
       {$p->local->idLocal},
-      '" . EstadoElimPromo::ACTIVA->value . "'
+      '" . EstadoElimPromo::ACTIVA->value . "',
+      '{$p->imagenPromo}'
     );";
 
     $this->querySQL($query);

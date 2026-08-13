@@ -232,6 +232,17 @@ $promocionesPage = $totalPromociones > 0 ? array_slice($promociones, $startIndex
                 </div>
               </div>
 
+              <?php $promoImage = !empty($p->imagenPromo) ? $p->imagenPromo : 'default_promo.svg'; ?>
+              <div class="row mb-3">
+                <div class="col-12">
+                  <img
+                    src="<?php echo app_path('src/img/promociones/' . htmlspecialchars($promoImage, ENT_QUOTES, 'UTF-8')); ?>"
+                    alt="Imagen de promoción"
+                    class="img-fluid rounded shadow-sm"
+                    style="max-height: 180px; object-fit: cover; width: 100%;">
+                </div>
+              </div>
+
               <div class="c-list-cart-body-container">
                 <div class="row mb-4">
                   <div class="col-6">

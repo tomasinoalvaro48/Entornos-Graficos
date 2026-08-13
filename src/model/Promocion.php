@@ -12,6 +12,7 @@ class Promocion
   public string $categoriaClientePromo;
   public ArrayObject $diasSemanaPromo;
   public string $estadoPromo;
+  public string $imagenPromo;
   public Local $local;
   public ?string $estadoElimPromo;
 
@@ -24,7 +25,8 @@ class Promocion
     $diasSemanaPromo,
     string $estadoPromo,
     Local $local,
-    ?string $estado_elim_promo
+    ?string $estado_elim_promo,
+    string $imagenPromo
   ) {
     $this->idPromo = $idPromo;
     $this->textoPromo = $textoPromo;
@@ -35,5 +37,6 @@ class Promocion
     $this->estadoPromo = $estadoPromo;
     $this->local = $local;
     $this->estadoElimPromo = $estado_elim_promo;
+    $this->imagenPromo = $imagenPromo;
   }
 }
