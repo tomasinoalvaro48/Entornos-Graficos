@@ -17,7 +17,7 @@ $duenos = showDuenos();
         <h1 class="c-title modal-title" id="<?php echo htmlspecialchars($modalId, ENT_QUOTES, 'UTF-8'); ?>Label">Editar Local</h1>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="<?php echo app_path('src/controller/local/handle_update_local.php'); ?>?id=<?php echo htmlspecialchars($localToEdit->idLocal, ENT_QUOTES, 'UTF-8') ?>" method="POST" class="c-form-layout px-0 pt-3">
+      <form action="<?php echo app_path('src/controller/local/handle_update_local.php'); ?>?id=<?php echo htmlspecialchars($localToEdit->idLocal, ENT_QUOTES, 'UTF-8') ?>" method="POST" enctype="multipart/form-data" class="c-form-layout px-0 pt-3">
         <div class="modal-body text-start border-0 px-0">
           <input type="hidden" name="id_local" value="<?php echo htmlspecialchars($localToEdit->idLocal, ENT_QUOTES, 'UTF-8'); ?>">
 
@@ -75,6 +75,17 @@ $duenos = showDuenos();
               } ?>
             </select>
             <label for="dueno_local_<?php echo htmlspecialchars($localToEdit->idLocal, ENT_QUOTES, 'UTF-8'); ?>" class="c-form-label">Dueño del Local</label>
+          </div>
+
+          <div class="c-form-field mb-3">
+            <input
+              type="file"
+              class="c-form-input"
+              id="imagen_local_<?php echo htmlspecialchars($localToEdit->idLocal, ENT_QUOTES, 'UTF-8'); ?>"
+              name="imagen_local"
+              accept="image/*"
+              placeholder=" ">
+            <label for="imagen_local_<?php echo htmlspecialchars($localToEdit->idLocal, ENT_QUOTES, 'UTF-8'); ?>" class="c-form-label">Imagen del Local</label>
           </div>
         </div>
 

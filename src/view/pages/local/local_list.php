@@ -183,6 +183,17 @@ $localesPage = $totalLocales > 0 ? array_slice($locales, $startIndex, $localesPe
 
               </div>
 
+              <?php $localImage = !empty($l->imagenLocal) ? $l->imagenLocal : 'default_local.svg'; ?>
+              <div class="row mb-3">
+                <div class="col-12">
+                  <img
+                    src="<?php echo app_path('src/img/locales/' . htmlspecialchars($localImage, ENT_QUOTES, 'UTF-8')); ?>"
+                    alt="Imagen de <?php echo htmlspecialchars($l->nombreLocal, ENT_QUOTES, 'UTF-8'); ?>"
+                    class="img-fluid rounded shadow-sm"
+                    style="max-height: 180px; object-fit: cover; width: 100%;">
+                </div>
+              </div>
+
               <div class="c-list-cart-body-container">
                 <div class="row">
                   <div class="col-12">

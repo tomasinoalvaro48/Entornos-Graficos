@@ -36,7 +36,7 @@ $duenos = showDuenos();
         <h1 class="c-title">Crear Local</h1>
       </header>
 
-      <form action="<?php echo app_path('src/controller/local/handle_create_local.php'); ?>" method="POST" class="c-form-layout">
+      <form action="<?php echo app_path('src/controller/local/handle_create_local.php'); ?>" method="POST" enctype="multipart/form-data" class="c-form-layout">
 
         <div class="c-form-field">
           <input
@@ -89,6 +89,17 @@ $duenos = showDuenos();
             } ?>
           </select>
           <label class="c-form-label" for="dueno_local">Dueño del Local</label>
+        </div>
+
+        <div class="c-form-field">
+          <input
+            type="file"
+            class="c-form-input"
+            id="imagen_local"
+            name="imagen_local"
+            accept="image/*"
+            placeholder=" ">
+          <label class="c-form-label" for="imagen_local">Imagen del Local</label>
         </div>
 
         <button type="submit" class="c-btn-primary" id="botonCrear" name="botonCrear">Crear Local</button>
