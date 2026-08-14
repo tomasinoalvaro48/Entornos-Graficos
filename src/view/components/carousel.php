@@ -1,18 +1,14 @@
-<div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4000" data-bs-pause="hover">
+<div id="carouselExampleIndicators" class="carousel slide">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="https://picsum.photos/id/1015/1200/400" class="d-block w-100" alt="Paisaje 1">
+      <img src="<?php echo app_path('src/img/carousel/edificio-frente.png') ?>" class="d-block w-100" alt="Imágen del exterior del shopping">
     </div>
     <div class="carousel-item">
-      <img src="https://picsum.photos/id/1016/1200/400" class="d-block w-100" alt="Paisaje 2">
-    </div>
-    <div class="carousel-item">
-      <img src="https://picsum.photos/id/1024/1200/400" class="d-block w-100" alt="Paisaje 3">
+      <img src="<?php echo app_path('src/img/carousel/edificio-interior.png') ?>" class="d-block w-100" alt="Imágen del interior del shopping">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
