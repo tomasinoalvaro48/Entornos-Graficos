@@ -1,0 +1,66 @@
+.c-menu-welcome {
+  padding: 2rem;
+  background-color: #2d3462;
+  border: 1px solid rgba(249, 177, 122, 0.2);
+  border-radius: 1rem;
+}
+
+.c-menu-title {
+  color: #2d3462;
+  font-family: "Raleway", sans-serif;
+  font-weight: 900;
+  text-decoration: underline #f9b17a;
+}
+
+.c-menu-subtitle {
+  color: #2d3462;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+.c-menu-card {
+  background-color: #2d3462;
+  border-radius: 1rem;
+  padding: 1rem;
+  padding-bottom: 0;
+  box-shadow: 0 10px 25px rgba(8, 12, 31, 0.3);
+  border: 1px solid rgba(252, 163, 100, 0.15);
+}
+
+.c-menu-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(8, 12, 31, 0.5);
+  border-color: rgba(252, 163, 100, 0.4);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.c-menu-card-title {
+  color: #f9b17a;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+}
+
+.c-menu-card-text {
+  color: #a8add0;
+  text-decoration: none;
+}
+
+.c-menu-card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.c-menu-icon-orange {
+  color: #f9b17a;
+  font-size: 3rem;
+}
+
+.c-menu-card-img {
+  max-width: 100%;
+  height: 150px;
+  border-radius: 0.5rem;
+}
