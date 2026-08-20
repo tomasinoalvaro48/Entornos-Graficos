@@ -1,8 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Ringbearer&display=swap');
-
-/* Reusable component styles used by login main */
-
-/*main*/
+﻿/*main*/
 .c-page-main {
   min-height: 90vh;
   display: flex;
@@ -13,10 +9,8 @@
 
 /*card*/
 .c-card {
-  margin: 1.5rem;
   width: 100%;
-
-  max-width: 400px;
+  max-width: fit-content;
   padding: 2.2rem 2rem;
   border-radius: 1.4rem;
   background-color: #2d3250;
@@ -420,63 +414,6 @@
   height: auto;
 }
 
-/*Menu Publico*/
-.c-menu-welcome {
-  padding: 2rem;
-  background-color: #2d3462;
-  border: 1px solid rgba(249, 177, 122, 0.2);
-  border-radius: 1rem;
-}
-
-.c-menu-title {
-  color: #f9b17a;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.c-menu-subtitle {
-  color: #f1f2ff;
-  font-size: 1.1rem;
-  margin-top: 1rem;
-  margin-bottom: 0;
-}
-
-.c-menu-card {
-  background-color: #2d3462;
-  border-radius: 1rem;
-  padding: 3rem 2rem;
-  box-shadow: 0 10px 25px rgba(8, 12, 31, 0.3);
-  border: 1px solid rgba(252, 163, 100, 0.15);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.c-menu-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(8, 12, 31, 0.5);
-  border-color: rgba(252, 163, 100, 0.4);
-}
-
-.c-menu-card-title {
-  color: #f9b17a;
-  font-weight: 700;
-  font-size: 1.5rem;
-  letter-spacing: 0.5px;
-}
-
-.c-menu-card-text {
-  color: #a8add0;
-  font-size: 1.05rem;
-}
-
-.c-menu-icon-orange {
-  color: #f9b17a;
-  font-size: 2rem;
-}
-
 .c-menu-icon-orange-sm {
   color: #f9b17a;
   font-size: 1.5rem;
@@ -530,14 +467,6 @@
   font-weight: 700;
 }
 
-/* Carousel: make images more rounded and taller, keep object-fit */
-.carousel-inner .carousel-item img {
-  border-radius: 1rem;
-  height: 420px;
-  width: 100%;
-  object-fit: cover;
-}
-
 /*footer*/
 
 .c-footer {
@@ -550,7 +479,7 @@
 
 .c-footer-section-title {
   color: #f9b17a;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 700;
   margin-bottom: 1rem;
   text-transform: uppercase;
@@ -650,7 +579,7 @@
 
 .c-header-brand-title {
   color: #f9b17a;
-  font-family: 'Ringbearer', serif;
+  font-family: "Ringbearer", serif;
   font-size: 1.95rem;
   font-weight: 400;
   letter-spacing: 0.02rem;
@@ -659,7 +588,7 @@
 .c-header-brand-subtitle {
   margin-top: 0.1rem;
   color: #f9b17a;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.28rem;
@@ -730,7 +659,7 @@
 }
 
 .c-header-menu .nav-link::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0.95rem;
   right: 0.95rem;

@@ -1,6 +1,7 @@
 <?php
-
 require_once __DIR__ . '/src/config/env.php';
+require_once __DIR__ . '/src/controller/local/show_local.php';
+require_once __DIR__ . '/src/controller/promocion/show_promocion.php';
 
 function getMainPage()
 {
@@ -19,6 +20,10 @@ function getMainPage()
   }
   return $page;
 }
+
+$locales = handleLocalesList();
+$promociones = handlePromocionesList();
+
 ?>
 
 
@@ -37,6 +42,7 @@ function getMainPage()
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
   <link rel="stylesheet" href="src/view/styles/styles.css" />
   <link rel="stylesheet" href="src/view/styles/carousel.css" />
+  <link rel="stylesheet" href="src/view/styles/menu.css" />
 </head>
 
 <body>
