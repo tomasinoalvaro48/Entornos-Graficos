@@ -147,15 +147,20 @@ $localFiltro = $_GET['local'] ?? '';
                   data-bs-target="#collapsePromo<?php echo $p->idPromo; ?>"
                   aria-expanded="false"
                   aria-controls="collapsePromo<?php echo $p->idPromo; ?>">
-                  <div class="col-4">
-                    <h5 class="c-list-card-title">Promo #<?php echo $p->idPromo; ?></h5>
+                  <div class="col-6">
+                    <h5 class="c-list-card-title">
+                      <?php
+                      $texto = $p->textoPromo;
+                      echo htmlspecialchars(mb_strlen($texto, 'UTF-8') > 35 ? mb_substr($texto, 0, 35, 'UTF-8') . '...' : $texto);
+                      ?>
+                    </h5>
                   </div>
-                  <div class="col-4 text-center">
+                  <div class="col-3 text-center">
                     <span class="c-list-cart-body-date">
                       <?php echo htmlspecialchars($p->local->nombreLocal); ?>
                     </span>
                   </div>
-                  <div class="col-4">
+                  <div class="col-3">
                     <span class="c-list-card-category">
                       <?php echo strtoupper($p->estadoPromo); ?>
                     </span>
