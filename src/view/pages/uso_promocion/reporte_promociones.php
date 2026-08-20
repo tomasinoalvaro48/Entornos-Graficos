@@ -155,14 +155,22 @@ $localFiltro = $_GET['local'] ?? '';
                       ?>
                     </h5>
                   </div>
-                  <div class="col-3 text-center">
+                  <div class="col-2 text-center">
                     <span class="c-list-cart-body-date">
                       <?php echo htmlspecialchars($p->local->nombreLocal); ?>
                     </span>
                   </div>
-                  <div class="col-3">
+                  <div class="col-2">
                     <span class="c-list-card-category">
                       <?php echo strtoupper($p->estadoPromo); ?>
+                    </span>
+                  </div>
+                  <div class="col-2 text-center">
+                    <span class="c-list-cart-body-date">
+                      <?php if (!empty($usosPorPromo[$p->idPromo]))
+                        echo htmlspecialchars("Usos: " . count($usosPorPromo[$p->idPromo]));
+                      else
+                        echo htmlspecialchars("No hay usos"); ?>
                     </span>
                   </div>
                 </button>
