@@ -12,7 +12,15 @@
       <i class="bi bi-shop c-menu-icon-orange"></i><h2 class="c-menu-title">NUESTROS LOCALES</h2>
     </div>
   </div>
-  <div class="row">
+  <div class="row mb-2">
+    <div class="col-12">
+      <div class="c-menu-card d-flex flex-column justify-content-center align-items-center">
+        <p class="c-menu-card-text">Encontrá las mejores marcas y locales comerciales en un solo lugar.</p>
+        <a href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>" class="c-btn-primary">Ver Todos los Locales</a>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-5">
     <?php
       if (count($locales) > 0) {
         foreach (array_slice($locales, 0, 8) as $local) {
@@ -30,14 +38,6 @@
     }
     ?>
   </div>
-  <div class="row align-items-stretch mb-5">
-    <div class="col-12">
-      <div class="c-menu-card d-flex flex-column justify-content-center align-items-center">
-        <p class="c-menu-card-text text-center">Encontrá las mejores marcas y locales comerciales en un solo lugar.</p>
-        <a href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>" class="c-btn-primary">Ver Locales</a>
-      </div>
-    </div>
-  </div>
 
 
   <!-- Promociones -->
@@ -46,7 +46,15 @@
       <i class="bi bi-tag c-menu-icon-orange"></i><h2 class="c-menu-title">NUESTRAS PROMOCIONES</h2>
     </div>
   </div>
-  <div class="row">
+  <div class="row mb-2">
+    <div class="col-12 order-1 order-lg-2">
+      <div class="c-menu-card d-flex flex-column justify-content-center align-items-center h-100">
+        <p class="c-menu-card-text">Aprovechá los descuentos que tenemos preparados para vos y tu familia.</p>
+        <a href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>" class="c-btn-primary">Ver Todas las Promociones</a>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
     <?php
       if (count($promociones) > 0) {
         foreach (array_slice($promociones, 0, 8) as $promo) {
@@ -63,12 +71,5 @@
       }
       }
     ?>
-  </div>
-    <div class="col-12 order-1 order-lg-2">
-      <div class="c-menu-card d-flex flex-column justify-content-center align-items-center h-100">
-        <p class="c-menu-card-text text-center">Aprovechá los descuentos que tenemos preparados para vos y tu familia.</p>
-        <a href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>" class="c-btn-primary">Ver Todas las Promociones</a>
-      </div>
-    </div>
   </div>
 </div>
