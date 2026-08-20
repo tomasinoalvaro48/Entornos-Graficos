@@ -1,5 +1,6 @@
 .env
 vendor/
 src/img/locales/*
-src/img/promciones/*
 !src/img/locales/default_local.svg
+src/img/promociones/*
+!src/img/promociones/default_promo.svg
