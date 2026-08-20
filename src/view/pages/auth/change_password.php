@@ -59,6 +59,11 @@ require_once __DIR__ . '/../../../controller/auth.php';
       </form>
     </section>
   </main>
+
+  <footer>
+    <?php include_once __DIR__ . '/../../components/footer.php'; ?>
+  </footer>
+
 </body>
 
 </html>

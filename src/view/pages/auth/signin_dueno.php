@@ -63,7 +63,9 @@
     </section>
   </main>
 
-
+  <footer>
+    <?php include_once __DIR__ . '/../../components/footer.php'; ?>
+  </footer>
 
 
   <script
