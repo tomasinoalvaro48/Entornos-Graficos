@@ -88,18 +88,59 @@ $agrupados = showUsosPromocionAgrupados();
                 <div id="collapsePromo<?php echo $idPromo; ?>" class="accordion-collapse collapse">
                   <div class="accordion-body c-accordion-body">
                     
-                    <div class="c-list-cart-body-container mb-3">
+                    <div class="c-list-cart-body-container">
+                      <div class="row mb-4">
+                        <div class="col-6">
+                          <div class="c-list-cart-body-info-group">
+                            <label class="c-list-cart-body-label">FECHA DESDE</label>
+                            <span class="c-list-cart-body-date">
+                              <?php echo $promo->fechaDesdePromo ? $promo->fechaDesdePromo->format('Y-m-d') : 'N/A'; ?>
+                            </span>
+                          </div>
+                        </div>
+
+                        <div class="col-6 text-end">
+                          <div class="c-list-cart-body-info-group">
+                            <label class="c-list-cart-body-label">FECHA HASTA</label>
+                            <span class="c-list-cart-body-date">
+                              <?php echo $promo->fechaHastaPromo ? $promo->fechaHastaPromo->format('Y-m-d') : 'N/A'; ?>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
                       <div class="row">
                         <div class="col-12">
                           <div class="c-list-cart-body-desc-container">
-                            <label class="c-list-cart-body-label">PROMOCIÓN</label>
+                            <label class="c-list-cart-body-label">DESCRIPCIÓN</label>
                             <p class="c-list-cart-body-desc-text">
-                              <?php echo htmlspecialchars($promo->textoPromo); ?>
+                              <?php echo htmlspecialchars($promo->textoPromo, ENT_QUOTES, 'UTF-8'); ?>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="c-list-cart-body-desc-container">
+                            <label class="c-list-cart-body-label">DETALLE</label>
+                            <p class="c-list-cart-body-desc-text">
+                              <?php
+                                $dias = [];
+                                $diasTexto = [1=>"Lun",2=>"Mar",3=>"Mié",4=>"Jue",5=>"Vie",6=>"Sáb",7=>"Dom"];
+                                foreach ($promo->diasSemanaPromo as $d) {
+                                  $dias[] = $diasTexto[$d] ?? $d;
+                                }
+                              ?>
+                              <strong>Días que aplica:</strong> <?php echo implode(", ", $dias); ?> <br>
+                              <strong>Local:</strong> <?php echo htmlspecialchars($promo->local->nombreLocal, ENT_QUOTES, 'UTF-8'); ?> <br>
+                              <strong>Categoría de cliente:</strong> <?php echo htmlspecialchars(ucfirst($promo->categoriaClientePromo), ENT_QUOTES, 'UTF-8'); ?>
                             </p>
                           </div>
                         </div>
                       </div>
                     </div>
+
 
                     <div class="c-table-container">
                       <table class="c-table">
