@@ -26,15 +26,14 @@ $localFiltro = $_GET['local'] ?? '';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <title>Reporte de uso de promociones</title>
 
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
     rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-    crossorigin="anonymous"
-  />
+    crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../../styles/styles.css" />
 </head>
@@ -62,7 +61,7 @@ $localFiltro = $_GET['local'] ?? '';
             <select name="dia" class="c-form-input c-form-input-select">
               <option value="">Todos los días</option>
               <?php
-              $diasSelect = [1=>"Lunes",2=>"Martes",3=>"Miércoles",4=>"Jueves",5=>"Viernes",6=>"Sábado",7=>"Domingo"];
+              $diasSelect = [1 => "Lunes", 2 => "Martes", 3 => "Miércoles", 4 => "Jueves", 5 => "Viernes", 6 => "Sábado", 7 => "Domingo"];
               foreach ($diasSelect as $num => $nombre) {
                 $selected = ($diaFiltro == $num) ? 'selected' : '';
                 echo "<option value='$num' $selected>$nombre</option>";
@@ -131,76 +130,109 @@ $localFiltro = $_GET['local'] ?? '';
             continue;
           }
 
-          $diasTexto = [1=>"Lun",2=>"Mar",3=>"Mié",4=>"Jue",5=>"Vie",6=>"Sáb",7=>"Dom"];
+          $diasTexto = [1 => "Lun", 2 => "Mar", 3 => "Mié", 4 => "Jue", 5 => "Vie", 6 => "Sáb", 7 => "Dom"];
           $dias = [];
           foreach ($p->diasSemanaPromo as $d) {
             $dias[] = $diasTexto[$d] ?? $d;
           }
         ?>
 
-        <article class="col-12 c-list-card">
-          <div class="row c-list-card-header">
-            <div class="col-lg-6">
-              <h5 class="c-list-card-title">Promo #<?php echo $p->idPromo; ?></h5>
-            </div>
-            <div class="col-lg-6 text-end">
-              <span class="c-list-card-category">
-                <?php echo strtoupper($p->estadoPromo); ?>
-              </span>
-            </div>
-          </div>
 
-          <div class="c-list-cart-body-container">
-            <div class="row mb-4">
-              <div class="col-6">
-                <label class="c-list-cart-body-label">FECHA DESDE</label>
-                <span class="c-list-cart-body-date">
-                  <?php echo $p->fechaDesdePromo->format('d/m/Y'); ?>
-                </span>
-              </div>
-              <div class="col-6 text-end">
-                <label class="c-list-cart-body-label">FECHA HASTA</label>
-                <span class="c-list-cart-body-date">
-                  <?php echo $p->fechaHastaPromo->format('d/m/Y'); ?>
-                </span>
-              </div>
-            </div>
 
-            <div class="c-list-cart-body-desc-container">
-              <label class="c-list-cart-body-label">DESCRIPCIÓN</label>
-              <p class="c-list-cart-body-desc-text">
-                <?php echo htmlspecialchars($p->textoPromo); ?>
-              </p>
-            </div>
-
-            <div class="c-list-cart-body-desc-container mt-2">
-              <label class="c-list-cart-body-label">DETALLE</label>
-              <p class="c-list-cart-body-desc-text">
-                Local: <?php echo htmlspecialchars($p->local->nombreLocal); ?><br>
-                Días: <?php echo implode(", ", $dias); ?><br>
-                Categoría: <?php echo htmlspecialchars($p->categoriaClientePromo); ?>
-              </p>
-            </div>
-
-            <div class="mt-3">
-              <label class="c-list-cart-body-label">USOS</label>
-
-              <?php if (!empty($usosPorPromo[$p->idPromo])) { ?>
-                <?php foreach ($usosPorPromo[$p->idPromo] as $u) { ?>
-                  <div class="c-list-cart-body-desc-container mt-2">
-                    <p class="c-list-cart-body-desc-text">
-                      <b>Cliente:</b> <?php echo htmlspecialchars($u->nombreCliente); ?><br>
-                      <b>Fecha:</b> <?php echo $u->fechaUso->format('d/m/Y'); ?><br>
-                      <b>Estado:</b> <?php echo htmlspecialchars($u->estado); ?>
-                    </p>
+          <article class="col-12 accordion" id="accordionPromo<?php echo $p->idPromo; ?>">
+            <div class="accordion-item c-accordion-item">
+              <h2 class="accordion-header c-accordion-header">
+                <button class="accordion-button collapsed c-accordion-button" type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapsePromo<?php echo $p->idPromo; ?>"
+                  aria-expanded="false"
+                  aria-controls="collapsePromo<?php echo $p->idPromo; ?>">
+                  <div class="col-6">
+                    <h5 class="c-list-card-title">
+                      <?php
+                      $texto = $p->textoPromo;
+                      echo htmlspecialchars(mb_strlen($texto, 'UTF-8') > 35 ? mb_substr($texto, 0, 35, 'UTF-8') . '...' : $texto);
+                      ?>
+                    </h5>
                   </div>
-                <?php } ?>
-              <?php } else { ?>
-                <p class="c-text-muted">No hay usos.</p>
-              <?php } ?>
+                  <div class="col-2 text-center">
+                    <span class="c-list-cart-body-date">
+                      <?php echo htmlspecialchars($p->local->nombreLocal); ?>
+                    </span>
+                  </div>
+                  <div class="col-2">
+                    <span class="c-list-card-category">
+                      <?php echo strtoupper($p->estadoPromo); ?>
+                    </span>
+                  </div>
+                  <div class="col-2 text-center">
+                    <span class="c-list-cart-body-date">
+                      <?php if (!empty($usosPorPromo[$p->idPromo]))
+                        echo htmlspecialchars("Usos: " . count($usosPorPromo[$p->idPromo]));
+                      else
+                        echo htmlspecialchars("No hay usos"); ?>
+                    </span>
+                  </div>
+                </button>
+              </h2>
+              <div id="collapsePromo<?php echo $p->idPromo; ?>" class="accordion-collapse collapse">
+                <div class="accordion-body c-accordion-body">
+                  <div class="c-list-cart-body-container">
+                    <div class="row mb-4">
+                      <div class="col-6">
+                        <label class="c-list-cart-body-label">FECHA DESDE</label>
+                        <span class="c-list-cart-body-date">
+                          <?php echo $p->fechaDesdePromo->format('d/m/Y'); ?>
+                        </span>
+                      </div>
+                      <div class="col-6 text-end">
+                        <label class="c-list-cart-body-label">FECHA HASTA</label>
+                        <span class="c-list-cart-body-date">
+                          <?php echo $p->fechaHastaPromo->format('d/m/Y'); ?>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="c-list-cart-body-desc-container">
+                      <label class="c-list-cart-body-label">DESCRIPCIÓN</label>
+                      <p class="c-list-cart-body-desc-text">
+                        <?php echo htmlspecialchars($p->textoPromo); ?>
+                      </p>
+                    </div>
+
+                    <div class="c-list-cart-body-desc-container mt-2">
+                      <label class="c-list-cart-body-label">DETALLE</label>
+                      <p class="c-list-cart-body-desc-text">
+                        Local: <?php echo htmlspecialchars($p->local->nombreLocal); ?><br>
+                        Días: <?php echo implode(", ", $dias); ?><br>
+                        Categoría: <?php echo htmlspecialchars($p->categoriaClientePromo); ?>
+                      </p>
+                    </div>
+
+                    <div class="mt-3">
+                      <label class="c-list-cart-body-label">USOS</label>
+
+                      <?php if (!empty($usosPorPromo[$p->idPromo])) { ?>
+                        <?php foreach ($usosPorPromo[$p->idPromo] as $u) { ?>
+                          <div class="c-list-cart-body-desc-container mt-2">
+                            <p class="c-list-cart-body-desc-text">
+                              <b>Cliente:</b> <?php echo htmlspecialchars($u->nombreCliente); ?><br>
+                              <b>Fecha:</b> <?php echo $u->fechaUso->format('d/m/Y'); ?><br>
+                              <b>Estado:</b> <?php echo htmlspecialchars($u->estado); ?>
+                            </p>
+                          </div>
+                        <?php } ?>
+                      <?php } else { ?>
+                        <p class="c-text-muted">No hay usos.</p>
+                      <?php } ?>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
         <?php } ?>
       </div>
     </section>

@@ -70,9 +70,11 @@ class UsoPromocionDAO extends DBFunctions
             $row['nombre_local'],
             $row['rubro_local'],
             null,
-            $row['estado_elim_local']
+            $row['estado_elim_local'],
+            $row['imagen_local']
           ),
-          $row['estado_elim_promo']
+          $row['estado_elim_promo'],
+          $row['imagen_promo']
         );
 
         array_push($usosArray, $uso);
@@ -112,9 +114,11 @@ class UsoPromocionDAO extends DBFunctions
             $row['nombre_local'],
             $row['rubro_local'],
             null,
-            $row['estado_elim_local']
+            $row['estado_elim_local'],
+            $row['imagen_local']
           ),
-          $row['estado_elim_promo']
+          $row['estado_elim_promo'],
+          $row['imagen_promo']
         );
 
         $usosArray[] = $uso;
@@ -193,9 +197,11 @@ class UsoPromocionDAO extends DBFunctions
             $row['nombre_local'],
             $row['rubro_local'],
             null,
-            $row['estado_elim_local']
+            $row['estado_elim_local'],
+            $row['imagen_local']
           ),
-          $row['estado_elim_promo']
+          $row['estado_elim_promo'],
+          $row['imagen_promo']
         );
 
         $usosArray[] = $uso;
