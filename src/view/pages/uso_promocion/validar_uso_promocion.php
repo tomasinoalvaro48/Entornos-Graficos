@@ -17,8 +17,7 @@ $agrupados = showUsosPromocionAgrupados();
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
     rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-    crossorigin="anonymous"
-  />
+    crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../../styles/styles.css" />
 </head>
@@ -87,7 +86,7 @@ $agrupados = showUsosPromocionAgrupados();
                 </h2>
                 <div id="collapsePromo<?php echo $idPromo; ?>" class="accordion-collapse collapse">
                   <div class="accordion-body c-accordion-body">
-                    
+
                     <div class="c-list-cart-body-container">
                       <div class="row mb-4">
                         <div class="col-6">
@@ -126,15 +125,15 @@ $agrupados = showUsosPromocionAgrupados();
                             <label class="c-list-cart-body-label">DETALLE</label>
                             <p class="c-list-cart-body-desc-text">
                               <?php
-                                $dias = [];
-                                $diasTexto = [1=>"Lun",2=>"Mar",3=>"Mié",4=>"Jue",5=>"Vie",6=>"Sáb",7=>"Dom"];
-                                foreach ($promo->diasSemanaPromo as $d) {
-                                  $dias[] = $diasTexto[$d] ?? $d;
-                                }
+                              $dias = [];
+                              $diasTexto = [1 => "Lun", 2 => "Mar", 3 => "Mié", 4 => "Jue", 5 => "Vie", 6 => "Sáb", 7 => "Dom"];
+                              foreach ($promo->diasSemanaPromo as $d) {
+                                $dias[] = $diasTexto[$d] ?? $d;
+                              }
                               ?>
                               <strong>Días que aplica:</strong> <?php echo implode(", ", $dias); ?> <br>
                               <strong>Local:</strong> <?php echo htmlspecialchars($promo->local->nombreLocal, ENT_QUOTES, 'UTF-8'); ?> <br>
-                              <strong>Categoría de cliente:</strong> <?php echo htmlspecialchars(ucfirst($promo->categoriaClientePromo), ENT_QUOTES, 'UTF-8'); ?>
+                              <strong>Categoría de cliente:</strong> <?php echo htmlspecialchars($promo->categoriaClientePromo, ENT_QUOTES, 'UTF-8'); ?>
                             </p>
                           </div>
                         </div>
@@ -165,7 +164,7 @@ $agrupados = showUsosPromocionAgrupados();
                             }
                           ?>
                             <tr>
-                              <td><?php echo htmlspecialchars($uso->idCli, ENT_QUOTES, 'UTF-8'); ?></td>
+                              <td><?php echo htmlspecialchars($uso->cliente->nombreUsuario, ENT_QUOTES, 'UTF-8'); ?></td>
                               <td><?php echo $uso->fechaUso->format('d/m/Y'); ?></td>
                               <td>
                                 <span class="badge <?php echo $estadoBadgeClass; ?>">
