@@ -165,6 +165,17 @@ $novedadesPage = $totalNovedades > 0 ? array_slice($novedades, $startIndex, $nov
                 </div>
               </div>
 
+              <?php $novedadImage = !empty($n->imagenNovedad) ? $n->imagenNovedad : 'default_novedad.svg'; ?>
+              <div class="row mb-3">
+                <div class="col-12">
+                  <img
+                    src="<?php echo app_path('src/img/novedades/' . htmlspecialchars($novedadImage, ENT_QUOTES, 'UTF-8')); ?>"
+                    alt="Imagen de novedad"
+                    class="img-fluid rounded shadow-sm"
+                    style="max-height: 180px; object-fit: cover; width: 100%;">
+                </div>
+              </div>
+
               <div class="c-list-cart-body-container">
                 <div class="row mb-4">
                   <div class="col-6">

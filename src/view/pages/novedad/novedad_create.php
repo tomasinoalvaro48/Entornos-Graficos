@@ -31,7 +31,7 @@ $today = new DateTime();
         <h1 class="c-title">Crear Novedad</h1>
       </header>
 
-      <form action="<?php echo app_path('src/controller/novedad/handle_create_novedad.php'); ?>" method="POST" class="c-form-layout">
+      <form action="<?php echo app_path('src/controller/novedad/handle_create_novedad.php'); ?>" method="POST" enctype="multipart/form-data" class="c-form-layout">
         <div class="c-form-field">
           <input
             type="text"
@@ -85,6 +85,20 @@ $today = new DateTime();
             <option value="premium">Premium</option>
           </select>
           <label class="c-form-label" for="categoria_cliente">Categoría de Cliente</label>
+        </div>
+
+        <div>
+          <label class="c-list-cart-body-label">Imagen de la novedad</label>
+          <div class="c-form-field mt-2">
+            <input
+              type="file"
+              class="c-form-input"
+              id="imagen_novedad"
+              name="imagen_novedad"
+              accept="image/*"
+              placeholder=" ">
+            <label for="imagen_novedad" class="c-form-label">Seleccionar imagen</label>
+          </div>
         </div>
 
         <button type="submit" class="c-btn-primary" id="botonCrearNovedad" name="botonCrearNovedad">Crear Novedad</button>

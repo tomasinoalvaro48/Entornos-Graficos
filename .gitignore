@@ -2,4 +2,6 @@
 vendor/
 src/img/locales/*
 src/img/promciones/*
+src/img/novedades/*
 !src/img/locales/default_local.svg
+!src/img/novedades/default_novedad.svg
