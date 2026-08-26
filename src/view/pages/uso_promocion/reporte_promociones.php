@@ -213,15 +213,40 @@ $localFiltro = $_GET['local'] ?? '';
                       <label class="c-list-cart-body-label">USOS</label>
 
                       <?php if (!empty($usosPorPromo[$p->idPromo])) { ?>
-                        <?php foreach ($usosPorPromo[$p->idPromo] as $u) { ?>
-                          <div class="c-list-cart-body-desc-container mt-2">
-                            <p class="c-list-cart-body-desc-text">
-                              <b>Cliente:</b> <?php echo htmlspecialchars($u->nombreCliente); ?><br>
-                              <b>Fecha:</b> <?php echo $u->fechaUso->format('d/m/Y'); ?><br>
-                              <b>Estado:</b> <?php echo htmlspecialchars($u->estado); ?>
-                            </p>
-                          </div>
-                        <?php } ?>
+                        <div class="c-table-container">
+                          <table class="c-table">
+                            <thead>
+                              <tr>
+                                <th>Cliente</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php foreach ($usosPorPromo[$p->idPromo] as $u) {
+                                $estadoUso = strtolower((string)$u->estado);
+                                $estadoBadgeClass = 'text-bg-secondary';
+                                if ($estadoUso === 'enviada') {
+                                  $estadoBadgeClass = 'text-bg-warning';
+                                } elseif ($estadoUso === 'aceptada') {
+                                  $estadoBadgeClass = 'text-bg-success';
+                                } elseif ($estadoUso === 'rechazada') {
+                                  $estadoBadgeClass = 'text-bg-danger';
+                                }
+                              ?>
+                                <tr>
+                                  <td><?php echo htmlspecialchars($u->nombreCliente); ?></td>
+                                  <td><?php echo $u->fechaUso->format('d/m/Y'); ?></td>
+                                  <td>
+                                    <span class="badge <?php echo $estadoBadgeClass; ?>">
+                                      <?php echo strtoupper(htmlspecialchars($u->estado)); ?>
+                                    </span>
+                                  </td>
+                                </tr>
+                              <?php } ?>
+                            </tbody>
+                          </table>
+                        </div>
                       <?php } else { ?>
                         <p class="c-text-muted">No hay usos.</p>
                       <?php } ?>
