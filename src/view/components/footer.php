@@ -5,13 +5,6 @@ require_once __DIR__ . "/../../enums.php";
 $tipoUsuario = getTipoUsuario();
 ?>
 
-<?php
-require_once __DIR__ . "/../../controller/auth.php";
-require_once __DIR__ . "/../../enums.php";
-
-$tipoUsuario = getTipoUsuario();
-?>
-
 <footer class="c-footer">
   <div class="container-fluid">
     <div class="row align-items-start">
