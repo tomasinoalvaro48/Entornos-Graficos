@@ -5,3 +5,4 @@ src/img/promociones/*
 src/img/novedades/*
 !src/img/locales/default_local.svg
 !src/img/novedades/default_novedad.svg
+!src/img/promociones/default_promocion.svg
