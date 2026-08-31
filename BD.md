@@ -123,5 +123,93 @@ INSERT INTO tp_entornos_graficos.usuario (nombre_usuario, email_usuario, clave_u
 	VALUES ('Dueño Aceptado', 'dueA@d', md5('123456'), 'dueno', 'aceptado', 'confirmado');
 
 INSERT INTO tp_entornos_graficos.usuario (nombre_usuario, email_usuario, clave_usuario, tipo_usuario, estado_dueno, estado_mail) 
-	VALUES ('Dueño Rechazado', 'dueR@d', md5('123456'), 'dueno', 'aceptado', 'confirmado');
-    
+	VALUES ('Dueño Rechazado', 'dueR@d', md5('123456'), 'dueno', 'rechazado', 'confirmado');
+
+#Cargas de locales - TEST
+INSERT INTO tp_entornos_graficos.local (nombre_local, ubicacion_local, rubro_local, id_usuario, estado_elim_local, imagen_local)
+	VALUES ('Pizzería Don Mario', 'Av. Siempre Viva 742', 'gastronomia', 5, 'activo', 'default_local.svg');
+
+INSERT INTO tp_entornos_graficos.local (nombre_local, ubicacion_local, rubro_local, id_usuario, estado_elim_local, imagen_local)
+	VALUES ('Heladería Fría', 'Calle Falsa 123', 'gastronomia', 5, 'activo', 'default_local.svg');
+
+INSERT INTO tp_entornos_graficos.local (nombre_local, ubicacion_local, rubro_local, id_usuario, estado_elim_local, imagen_local)
+	VALUES ('Óptica Visión', 'Belgrano 456', 'salud', 5, 'activo', 'default_local.svg');
+
+INSERT INTO tp_entornos_graficos.local (nombre_local, ubicacion_local, rubro_local, id_usuario, estado_elim_local, imagen_local)
+	VALUES ('Librería Central', 'San Martín 789', 'comercio', 5, 'activo', 'default_local.svg');
+
+INSERT INTO tp_entornos_graficos.local (nombre_local, ubicacion_local, rubro_local, id_usuario, estado_elim_local, imagen_local)
+	VALUES ('Gym Power', 'Mitre 321', 'deporte', 5, 'eliminado', 'default_local.svg');
+
+#Cargas de promociones - TEST
+INSERT INTO tp_entornos_graficos.promocion (texto_promo, fecha_desde_promo, fecha_hasta_promo, categoria_cliente_promo, estado_promo, id_local, estado_elim_promo, imagen_promo)
+	VALUES ('2x1 en pizzas grandes', '2026-09-01', '2026-09-30', 'inicial', 'aprobada', 1, 'activa', 'default_promo.svg');
+
+INSERT INTO tp_entornos_graficos.promocion (texto_promo, fecha_desde_promo, fecha_hasta_promo, categoria_cliente_promo, estado_promo, id_local, estado_elim_promo, imagen_promo)
+	VALUES ('20% OFF en helados', '2026-09-01', '2026-09-15', 'medium', 'aprobada', 2, 'activa', 'default_promo.svg');
+
+INSERT INTO tp_entornos_graficos.promocion (texto_promo, fecha_desde_promo, fecha_hasta_promo, categoria_cliente_promo, estado_promo, id_local, estado_elim_promo, imagen_promo)
+	VALUES ('Lentes de sol 3 cuotas sin interés', '2026-08-15', '2026-10-15', 'premium', 'aprobada', 3, 'activa', 'default_promo.svg');
+
+INSERT INTO tp_entornos_graficos.promocion (texto_promo, fecha_desde_promo, fecha_hasta_promo, categoria_cliente_promo, estado_promo, id_local, estado_elim_promo, imagen_promo)
+	VALUES ('15% en útiles escolares', '2026-08-01', '2026-08-31', 'inicial', 'pendiente', 4, 'activa', 'default_promo.svg');
+
+INSERT INTO tp_entornos_graficos.promocion (texto_promo, fecha_desde_promo, fecha_hasta_promo, categoria_cliente_promo, estado_promo, id_local, estado_elim_promo, imagen_promo)
+	VALUES ('Clase de prueba gratis', '2026-07-01', '2026-07-31', 'medium', 'denegada', 5, 'eliminada', 'default_promo.svg');
+
+INSERT INTO tp_entornos_graficos.promocion (texto_promo, fecha_desde_promo, fecha_hasta_promo, categoria_cliente_promo, estado_promo, id_local, estado_elim_promo, imagen_promo)
+	VALUES ('Combo familiar pizza + bebida', '2026-09-10', '2026-12-31', 'premium', 'aprobada', 1, 'activa', 'default_promo.svg');
+
+#Cargas de dias_promo - TEST
+INSERT INTO tp_entornos_graficos.dias_promo (id_dia, id_promo)
+	VALUES (1, 1), (3, 1), (5, 1);
+
+INSERT INTO tp_entornos_graficos.dias_promo (id_dia, id_promo)
+	VALUES (6, 2), (7, 2);
+
+INSERT INTO tp_entornos_graficos.dias_promo (id_dia, id_promo)
+	VALUES (1, 3), (2, 3), (3, 3), (4, 3), (5, 3);
+
+INSERT INTO tp_entornos_graficos.dias_promo (id_dia, id_promo)
+	VALUES (1, 4), (2, 4), (3, 4), (4, 4), (5, 4), (6, 4);
+
+INSERT INTO tp_entornos_graficos.dias_promo (id_dia, id_promo)
+	VALUES (1, 5), (3, 5), (5, 5);
+
+INSERT INTO tp_entornos_graficos.dias_promo (id_dia, id_promo)
+	VALUES (5, 6), (6, 6), (7, 6);
+
+#Cargas de uso_promocion - TEST
+INSERT INTO tp_entornos_graficos.uso_promocion (id_cli, id_promo, fecha_uso_promo, estado_uso_promo)
+	VALUES (2, 1, '2026-09-05', 'aceptada');
+
+INSERT INTO tp_entornos_graficos.uso_promocion (id_cli, id_promo, fecha_uso_promo, estado_uso_promo)
+	VALUES (3, 2, '2026-09-03', 'aceptada');
+
+INSERT INTO tp_entornos_graficos.uso_promocion (id_cli, id_promo, fecha_uso_promo, estado_uso_promo)
+	VALUES (4, 3, NULL, 'enviada');
+
+INSERT INTO tp_entornos_graficos.uso_promocion (id_cli, id_promo, fecha_uso_promo, estado_uso_promo)
+	VALUES (4, 6, NULL, 'enviada');
+
+INSERT INTO tp_entornos_graficos.uso_promocion (id_cli, id_promo, fecha_uso_promo, estado_uso_promo)
+	VALUES (3, 1, '2026-09-10', 'rechazada');
+
+INSERT INTO tp_entornos_graficos.uso_promocion (id_cli, id_promo, fecha_uso_promo, estado_uso_promo)
+	VALUES (4, 2, '2026-09-08', 'aceptada');
+
+#Cargas de novedades - TEST
+INSERT INTO tp_entornos_graficos.novedad (texto_nov, fecha_desde_nov, fecha_hasta_nov, categoria_cliente_nov, estado_elim_novedad, imagen_novedad)
+	VALUES ('¡Nueva sucursal de Pizzería Don Mario en zona norte!', '2026-09-01', '2026-09-30', 'inicial', 'activa', 'default_novedad.svg');
+
+INSERT INTO tp_entornos_graficos.novedad (texto_nov, fecha_desde_nov, fecha_hasta_nov, categoria_cliente_nov, estado_elim_novedad, imagen_novedad)
+	VALUES ('Semana del helado artesanal - Nuevos sabores disponibles', '2026-09-01', '2026-09-07', 'medium', 'activa', 'default_novedad.svg');
+
+INSERT INTO tp_entornos_graficos.novedad (texto_nov, fecha_desde_nov, fecha_hasta_nov, categoria_cliente_nov, estado_elim_novedad, imagen_novedad)
+	VALUES ('Óptica Visión: Llegaron los nuevos modelos Ray-Ban 2026', '2026-08-20', '2026-10-20', 'premium', 'activa', 'default_novedad.svg');
+
+INSERT INTO tp_entornos_graficos.novedad (texto_nov, fecha_desde_nov, fecha_hasta_nov, categoria_cliente_nov, estado_elim_novedad, imagen_novedad)
+	VALUES ('Feria del libro en Librería Central - Descuentos especiales', '2026-08-01', '2026-08-31', 'inicial', 'eliminada', 'default_novedad.svg');
+
+INSERT INTO tp_entornos_graficos.novedad (texto_nov, fecha_desde_nov, fecha_hasta_nov, categoria_cliente_nov, estado_elim_novedad, imagen_novedad)
+	VALUES ('Gym Power reabre con equipamiento renovado', '2026-09-15', '2026-10-15', 'medium', 'activa', 'default_novedad.svg');
