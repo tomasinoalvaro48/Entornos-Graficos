@@ -114,6 +114,11 @@
   color: transparent;
 }
 
+.c-form-input::-ms-reveal,
+.c-form-input::-ms-clear {
+  display: none;
+}
+
 /*label input*/
 
 .c-form-label {
