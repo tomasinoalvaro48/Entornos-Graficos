@@ -60,6 +60,7 @@ $localFiltro = $_GET['local'] ?? '';
     crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../../styles/styles.css" />
+  <link rel="stylesheet" href="../../styles/menu.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
