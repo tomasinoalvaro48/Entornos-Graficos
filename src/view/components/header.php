@@ -82,7 +82,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                 Locales
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">Ver locales</a></li>
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/local/create_local.php'); ?>">Crear local</a></li>
               </ul>
@@ -92,7 +92,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                 Promociones
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/promocion/validar_promociones.php'); ?>">Ver y gestionar promociones</a></li>
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/uso_promocion/reporte_promociones.php'); ?>">Reporte de uso de promociones</a></li>
               </ul>
@@ -102,7 +102,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                 Novedades
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>">Ver novedades</a></li>
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/novedad/novedad_create.php'); ?>">Crear novedad</a></li>
               </ul>
@@ -112,7 +112,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                 Usuarios
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/usuario/validar_cuentas_dueno.php?estado=pendiente'); ?>">Administrar cuentas de dueños</a></li>
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/usuario/validar_cuentas_dueno.php'); ?>">Ver cuentas de dueños</a></li>
               </ul>
@@ -124,7 +124,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                 Locales
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">Ver locales</a></li>
               </ul>
             </li>
@@ -133,7 +133,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                 Promociones
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>">Buscar promociones</a></li>
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/uso_promocion/mis_usos_cliente.php'); ?>">Mis usos de promociones</a></li>
               </ul>
@@ -143,7 +143,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                 Novedades
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>">Ver novedades</a></li>
               </ul>
             </li>
@@ -155,7 +155,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                 Locales
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">Ver mis locales</a></li>
               </ul>
             </li>
@@ -164,7 +164,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                 Promociones
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>">Ver mis promociones</a></li>
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/promocion/create_promocion.php'); ?>">Crear promoción</a></li>
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/uso_promocion/validar_uso_promocion.php'); ?>">Gestionar usos de promociones</a></li>
