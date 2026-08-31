@@ -93,7 +93,7 @@ $agrupados = showUsosPromocionAgrupados();
                           <div class="c-list-cart-body-info-group">
                             <label class="c-list-cart-body-label">FECHA DESDE</label>
                             <span class="c-list-cart-body-date">
-                              <?php echo $promo->fechaDesdePromo ? $promo->fechaDesdePromo->format('Y-m-d') : 'N/A'; ?>
+                              <?php echo $promo->fechaDesdePromo ? $promo->fechaDesdePromo->format('d-m-Y') : 'N/A'; ?>
                             </span>
                           </div>
                         </div>
@@ -102,7 +102,7 @@ $agrupados = showUsosPromocionAgrupados();
                           <div class="c-list-cart-body-info-group">
                             <label class="c-list-cart-body-label">FECHA HASTA</label>
                             <span class="c-list-cart-body-date">
-                              <?php echo $promo->fechaHastaPromo ? $promo->fechaHastaPromo->format('Y-m-d') : 'N/A'; ?>
+                              <?php echo $promo->fechaHastaPromo ? $promo->fechaHastaPromo->format('d-m-Y') : 'N/A'; ?>
                             </span>
                           </div>
                         </div>
@@ -165,7 +165,7 @@ $agrupados = showUsosPromocionAgrupados();
                           ?>
                             <tr>
                               <td><?php echo htmlspecialchars($uso->cliente->nombreUsuario, ENT_QUOTES, 'UTF-8'); ?></td>
-                              <td><?php echo $uso->fechaUso->format('d/m/Y'); ?></td>
+                              <td><?php echo $uso->fechaUso->format('d-m-Y'); ?></td>
                               <td>
                                 <span class="badge <?php echo $estadoBadgeClass; ?>">
                                   <?php echo strtoupper(htmlspecialchars($uso->estado, ENT_QUOTES, 'UTF-8')); ?>

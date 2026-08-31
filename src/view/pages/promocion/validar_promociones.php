@@ -155,7 +155,7 @@ $promosPage = $totalPromos > 0 ? array_slice($promociones, $startIndex, $promosP
                           <div class="c-list-cart-body-info-group">
                             <label class="c-list-cart-body-label">FECHA DESDE</label>
                             <span class="c-list-cart-body-date">
-                              <?php echo $promo->fechaDesdePromo ? $promo->fechaDesdePromo->format('Y-m-d') : 'N/A'; ?>
+                              <?php echo $promo->fechaDesdePromo ? $promo->fechaDesdePromo->format('d-m-Y') : 'N/A'; ?>
                             </span>
                           </div>
                         </div>
@@ -164,7 +164,7 @@ $promosPage = $totalPromos > 0 ? array_slice($promociones, $startIndex, $promosP
                           <div class="c-list-cart-body-info-group">
                             <label class="c-list-cart-body-label">FECHA HASTA</label>
                             <span class="c-list-cart-body-date">
-                              <?php echo $promo->fechaHastaPromo ? $promo->fechaHastaPromo->format('Y-m-d') : 'N/A'; ?>
+                              <?php echo $promo->fechaHastaPromo ? $promo->fechaHastaPromo->format('d-m-Y') : 'N/A'; ?>
                             </span>
                           </div>
                         </div>

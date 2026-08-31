@@ -154,7 +154,7 @@ $usos = handleUsosClienteList();
                     <div class="c-list-cart-body-info-group">
                       <label class="c-list-cart-body-label">FECHA DE USO</label>
                       <span class="c-list-cart-body-date">
-                        <?php echo htmlspecialchars($uso->fechaUso->format('d/m/Y'), ENT_QUOTES, 'UTF-8'); ?>
+                        <?php echo htmlspecialchars($uso->fechaUso->format('d-m-Y'), ENT_QUOTES, 'UTF-8'); ?>
                       </span>
                     </div>
                   </div>
@@ -186,9 +186,9 @@ $usos = handleUsosClienteList();
                       <label class="c-list-cart-body-label">VIGENCIA</label>
                       <p class="c-list-cart-body-desc-text">
                         <?php
-                        echo htmlspecialchars($uso->promo->fechaDesdePromo->format('d/m/Y'), ENT_QUOTES, 'UTF-8');
+                        echo htmlspecialchars($uso->promo->fechaDesdePromo->format('d-m-Y'), ENT_QUOTES, 'UTF-8');
                         echo " - ";
-                        echo htmlspecialchars($uso->promo->fechaHastaPromo->format('d/m/Y'), ENT_QUOTES, 'UTF-8');
+                        echo htmlspecialchars($uso->promo->fechaHastaPromo->format('d-m-Y'), ENT_QUOTES, 'UTF-8');
                         ?>
                       </p>
                     </div>
