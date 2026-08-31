@@ -181,13 +181,13 @@ $novedadesPage = $totalNovedades > 0 ? array_slice($novedades, $startIndex, $nov
                   <div class="col-6">
                     <div class="c-list-cart-body-info-group">
                       <label class="c-list-cart-body-label">FECHA DESDE</label>
-                      <span class="c-list-cart-body-date"><?php echo $n->fechaDesdeNovedad ? htmlspecialchars($n->fechaDesdeNovedad->format('Y-m-d'), ENT_QUOTES, 'UTF-8') : 'N/A'; ?></span>
+                      <span class="c-list-cart-body-date"><?php echo $n->fechaDesdeNovedad ? htmlspecialchars($n->fechaDesdeNovedad->format('d-m-Y'), ENT_QUOTES, 'UTF-8') : 'N/A'; ?></span>
                     </div>
                   </div>
                   <div class="col-6 text-end">
                     <div class="c-list-cart-body-info-group">
                       <label class="c-list-cart-body-label">FECHA HASTA</label>
-                      <span class="c-list-cart-body-date"><?php echo $n->fechaHastaNovedad ? htmlspecialchars($n->fechaHastaNovedad->format('Y-m-d'), ENT_QUOTES, 'UTF-8') : 'N/A'; ?></span>
+                      <span class="c-list-cart-body-date"><?php echo $n->fechaHastaNovedad ? htmlspecialchars($n->fechaHastaNovedad->format('d-m-Y'), ENT_QUOTES, 'UTF-8') : 'N/A'; ?></span>
                     </div>
                   </div>
                 </div>

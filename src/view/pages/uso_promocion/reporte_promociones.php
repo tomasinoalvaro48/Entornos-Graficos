@@ -182,13 +182,13 @@ $localFiltro = $_GET['local'] ?? '';
                       <div class="col-6">
                         <label class="c-list-cart-body-label">FECHA DESDE</label>
                         <span class="c-list-cart-body-date">
-                          <?php echo $p->fechaDesdePromo->format('d/m/Y'); ?>
+                          <?php echo $p->fechaDesdePromo->format('d-m-Y'); ?>
                         </span>
                       </div>
                       <div class="col-6 text-end">
                         <label class="c-list-cart-body-label">FECHA HASTA</label>
                         <span class="c-list-cart-body-date">
-                          <?php echo $p->fechaHastaPromo->format('d/m/Y'); ?>
+                          <?php echo $p->fechaHastaPromo->format('d-m-Y'); ?>
                         </span>
                       </div>
                     </div>
@@ -236,7 +236,7 @@ $localFiltro = $_GET['local'] ?? '';
                               ?>
                                 <tr>
                                   <td><?php echo htmlspecialchars($u->nombreCliente); ?></td>
-                                  <td><?php echo $u->fechaUso->format('d/m/Y'); ?></td>
+                                  <td><?php echo $u->fechaUso->format('d-m-Y'); ?></td>
                                   <td>
                                     <span class="badge <?php echo $estadoBadgeClass; ?>">
                                       <?php echo strtoupper(htmlspecialchars($u->estado)); ?>
