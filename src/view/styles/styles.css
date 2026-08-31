@@ -991,3 +991,61 @@
     min-width: 300px;
   }
 }
+
+/* ================================================================================== */
+/* Dashboard / KPI Styles */
+/* ================================================================================== */
+
+.c-kpi-value {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.c-kpi-value--accent {
+  color: #f9b17a;
+}
+
+.c-kpi-value--success {
+  color: #4ade80;
+}
+
+.c-kpi-subtitle {
+  font-size: 0.85rem;
+  color: #e0e0e0;
+}
+
+.c-kpi-estado-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.c-kpi-estado-value--success {
+  color: #4ade80;
+}
+
+.c-kpi-estado-value--warning {
+  color: #facc15;
+}
+
+.c-kpi-estado-value--danger {
+  color: #ef4444;
+}
+
+.c-kpi-estado-label {
+  font-size: 0.75rem;
+  color: #e0e0e0;
+}
+
+.c-chart-wrapper {
+  height: 250px;
+  position: relative;
+}
+
+.c-section-title {
+  color: #2d3250;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
