@@ -82,7 +82,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                 Locales
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">Ver locales</a></li>
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/local/create_local.php'); ?>">Crear local</a></li>
               </ul>
@@ -92,7 +92,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                 Promociones
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/promocion/validar_promociones.php'); ?>">Ver y gestionar promociones</a></li>
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/uso_promocion/reporte_promociones.php'); ?>">Reporte de uso de promociones</a></li>
               </ul>
@@ -102,7 +102,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                 Novedades
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>">Ver novedades</a></li>
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/novedad/novedad_create.php'); ?>">Crear novedad</a></li>
               </ul>
@@ -112,7 +112,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                 Usuarios
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/usuario/validar_cuentas_dueno.php?estado=pendiente'); ?>">Administrar cuentas de dueños</a></li>
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/usuario/validar_cuentas_dueno.php'); ?>">Ver cuentas de dueños</a></li>
               </ul>
@@ -124,7 +124,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                 Locales
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">Ver locales</a></li>
               </ul>
             </li>
@@ -133,7 +133,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                 Promociones
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>">Buscar promociones</a></li>
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/uso_promocion/mis_usos_cliente.php'); ?>">Mis usos de promociones</a></li>
               </ul>
@@ -143,14 +143,11 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                 Novedades
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/novedad/novedad_list.php'); ?>">Ver novedades</a></li>
               </ul>
             </li>
 
-            <li class="nav-item ">
-              <span class="c-list-card-category">Categoría: <?php echo strtoupper($usuario['categoria_cliente']); ?></span>
-            </li>
 
           <?php } else if ($tipo === TipoUsuario::DUENO->value) { ?>
             <!-- Dueños -->
@@ -158,7 +155,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                 Locales
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">Ver mis locales</a></li>
               </ul>
             </li>
@@ -167,7 +164,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                 Promociones
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>">Ver mis promociones</a></li>
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/promocion/create_promocion.php'); ?>">Crear promoción</a></li>
                 <li><a class="dropdown-item" href="<?php echo app_path('src/view/pages/uso_promocion/validar_uso_promocion.php'); ?>">Gestionar usos de promociones</a></li>
@@ -175,33 +172,109 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
             </li>
           <?php } ?>
 
-          <!-- Menú Hamburguesa / Opciones Adicionales -->
+          <!-- Menú usuario / Opciones Adicionales -->
           <li class="nav-item dropdown">
-            <a class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-list c-menu-icon-orange"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li>
-                <a class="dropdown-item" href="<?php echo app_path('src/view/pages/mas_sobre_nosotros.php'); ?>">
-                  Más sobre nosotros
-                </a>
-              </li>
-              <?php if ($tipo) { ?>
+            <?php if ($tipo) { ?>
+              <?php
+                $nombreUsuario = $usuario['nombre_usuario'] ?? 'Usuario';
+                $emailUsuario = $usuario['email_usuario'] ?? '';
+                $inicialUsuario = mb_strtoupper(mb_substr($nombreUsuario, 0, 1));
+              ?>
+              <a class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="c-user-avatar"><?php echo htmlspecialchars($inicialUsuario); ?></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end c-user-dropdown">
+                <!-- Cabecera del perfil -->
+                <li class="c-user-dropdown-header">
+                  <span class="c-user-avatar c-user-avatar-lg"><?php echo htmlspecialchars($inicialUsuario); ?></span>
+                  <div class="c-user-dropdown-info">
+                    <span class="c-user-dropdown-name"><?php echo htmlspecialchars($nombreUsuario); ?></span>
+                    <span class="c-user-dropdown-email"><?php echo htmlspecialchars($emailUsuario); ?></span>
+                  </div>
+                </li>
+
+                <?php if ($tipo === TipoUsuario::CLIENTE->value) { ?>
+                  <?php
+                    // Consultar usos aceptados en tiempo real
+                    require_once __DIR__ . "/../../data/UsoPromocionDAO.php";
+                    $usoDAO = new UsoPromocionDAO();
+                    $cantidadUsos = $usoDAO->countUsosAceptadosByCliente($usuario['id_usuario']);
+                    $categoriaActual = $usuario['categoria_cliente'] ?? 'inicial';
+
+                    // Calcular progreso hacia la siguiente categoría
+                    if ($categoriaActual === 'premium') {
+                      $categoriaSiguiente = null;
+                      $progresoPorcentaje = 100;
+                      $usosActuales = $cantidadUsos;
+                      $usosNecesarios = $cantidadUsos;
+                    } elseif ($categoriaActual === 'medium') {
+                      $categoriaSiguiente = 'Premium';
+                      $usosNecesarios = 6;
+                      $usosActuales = $cantidadUsos;
+                      $progresoPorcentaje = min(100, round(($cantidadUsos / $usosNecesarios) * 100));
+                    } else {
+                      $categoriaSiguiente = 'Medium';
+                      $usosNecesarios = 3;
+                      $usosActuales = $cantidadUsos;
+                      $progresoPorcentaje = min(100, round(($cantidadUsos / $usosNecesarios) * 100));
+                    }
+                  ?>
+                  <!-- Barra de progreso de categoría -->
+                  <li class="c-user-progress">
+                    <div class="c-user-progress-label">
+                      <?php if ($categoriaSiguiente) { ?>
+                        <span><?php echo ucfirst($categoriaActual); ?> → <?php echo $categoriaSiguiente; ?></span>
+                        <span><?php echo $usosActuales; ?> / <?php echo $usosNecesarios; ?> promos</span>
+                      <?php } else { ?>
+                        <span>Premium</span>
+                        <span>¡Máximo nivel!</span>
+                      <?php } ?>
+                    </div>
+                    <div class="c-user-progress-track">
+                      <div class="c-user-progress-fill" style="width: <?php echo $progresoPorcentaje; ?>%"></div>
+                    </div>
+                    <?php if ($categoriaSiguiente) { ?>
+                      <div class="c-user-progress-hint">
+                        Te faltan <?php echo ($usosNecesarios - $usosActuales); ?> promo<?php echo ($usosNecesarios - $usosActuales) !== 1 ? 's' : ''; ?> para subir a <?php echo $categoriaSiguiente; ?>
+                      </div>
+                    <?php } ?>
+                  </li>
+                <?php } ?>
+
+                <li><hr class="dropdown-divider c-user-dropdown-divider"></li>
                 <li>
-                  <a class="dropdown-item" href="<?php echo app_path('src/view/pages/auth/change_password.php'); ?>">
+                  <a class="dropdown-item c-user-dropdown-item" href="<?php echo app_path('src/view/pages/mas_sobre_nosotros.php'); ?>">
+                    <i class="bi bi-info-circle-fill c-user-dropdown-item-icon"></i>
+                    Más sobre nosotros
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item c-user-dropdown-item" href="<?php echo app_path('src/view/pages/auth/change_password.php'); ?>">
+                    <i class="bi bi-key-fill c-user-dropdown-item-icon"></i>
                     Modificar contraseña
                   </a>
                 </li>
+                <li><hr class="dropdown-divider c-user-dropdown-divider"></li>
                 <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li>
-                  <a class="dropdown-item text-danger" href="<?php echo app_path('src/controller/handle_logout.php'); ?>">
+                  <a class="dropdown-item c-user-dropdown-item c-user-dropdown-item--danger" href="<?php echo app_path('src/controller/handle_logout.php'); ?>">
+                    <i class="bi bi-box-arrow-right c-user-dropdown-item-icon"></i>
                     Cerrar Sesión
                   </a>
                 </li>
-              <?php } ?>
-            </ul>
+              </ul>
+            <?php } else { ?>
+              <a class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-list c-menu-icon-orange"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end c-user-dropdown">
+                <li>
+                  <a class="dropdown-item c-user-dropdown-item" href="<?php echo app_path('src/view/pages/mas_sobre_nosotros.php'); ?>">
+                    <i class="bi bi-info-circle-fill c-user-dropdown-item-icon"></i>
+                    Más sobre nosotros
+                  </a>
+                </li>
+              </ul>
+            <?php } ?>
           </li>
         </ul>
       </div>

@@ -119,89 +119,111 @@ $promosPage = $totalPromos > 0 ? array_slice($promociones, $startIndex, $promosP
           <?php foreach ($promosPage as $promo) {
             $estadoPromo = strtolower((string)$promo->estadoPromo);
           ?>
-            <article class="col-12 c-list-card">
-              <div class="row c-list-card-header">
-                <div class="col-lg-6 c-list-card-title">
-                  <h5>Promoción #<?php echo htmlspecialchars($promo->idPromo, ENT_QUOTES, 'UTF-8'); ?></h5>
-                </div>
-
-                <div class="col-lg-6 c-list-card-category">
-                  <span>Estado: <?php echo strtoupper(htmlspecialchars($promo->estadoPromo, ENT_QUOTES, 'UTF-8')); ?></span>
-                </div>
-              </div>
-
-              <div class="c-list-cart-body-container">
-                <div class="row mb-4">
-                  <div class="col-6">
-                    <div class="c-list-cart-body-info-group">
-                      <label class="c-list-cart-body-label">FECHA DESDE</label>
-                      <span class="c-list-cart-body-date">
-                        <?php echo $promo->fechaDesdePromo ? $promo->fechaDesdePromo->format('Y-m-d') : 'N/A'; ?>
-                      </span>
-                    </div>
-                  </div>
-
-                  <div class="col-6 text-end">
-                    <div class="c-list-cart-body-info-group">
-                      <label class="c-list-cart-body-label">FECHA HASTA</label>
-                      <span class="c-list-cart-body-date">
-                        <?php echo $promo->fechaHastaPromo ? $promo->fechaHastaPromo->format('Y-m-d') : 'N/A'; ?>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-12">
-                    <div class="c-list-cart-body-desc-container">
-                      <label class="c-list-cart-body-label">DESCRIPCIÓN</label>
-                      <p class="c-list-cart-body-desc-text">
-                        <?php echo htmlspecialchars($promo->textoPromo, ENT_QUOTES, 'UTF-8'); ?>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-12">
-                    <div class="c-list-cart-body-desc-container">
-                      <label class="c-list-cart-body-label">DETALLE</label>
-                      <p class="c-list-cart-body-desc-text">
+            <article class="col-12 accordion" id="accordionPromo<?php echo $promo->idPromo; ?>">
+              <div class="accordion-item c-accordion-item">
+                <h2 class="accordion-header c-accordion-header">
+                  <button class="accordion-button collapsed c-accordion-button" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapsePromo<?php echo $promo->idPromo; ?>"
+                    aria-expanded="false"
+                    aria-controls="collapsePromo<?php echo $promo->idPromo; ?>">
+                    <div class="col-6">
+                      <h5 class="c-list-card-title">
                         <?php
-                          $dias = [];
-                          $diasTexto = [1=>"Lun",2=>"Mar",3=>"Mié",4=>"Jue",5=>"Vie",6=>"Sáb",7=>"Dom"];
-                          foreach ($promo->diasSemanaPromo as $d) {
-                            $dias[] = $diasTexto[$d] ?? $d;
-                          }
+                        $texto = $promo->textoPromo;
+                        echo htmlspecialchars(mb_strlen($texto, 'UTF-8') > 35 ? mb_substr($texto, 0, 35, 'UTF-8') . '...' : $texto);
                         ?>
-                        Días que aplica: <?php echo implode(", ", $dias); ?> <br>
-                        Local: <?php echo htmlspecialchars($promo->local->nombreLocal, ENT_QUOTES, 'UTF-8'); ?> <br>
-                        Categoría de cliente: <?php echo htmlspecialchars(ucfirst($promo->categoriaClientePromo), ENT_QUOTES, 'UTF-8'); ?>
-                      </p>
+                      </h5>
+                    </div>
+                    <div class="col-3 text-center">
+                      <span class="c-list-cart-body-date">
+                        <?php echo htmlspecialchars($promo->local->nombreLocal); ?>
+                      </span>
+                    </div>
+                    <div class="col-3">
+                      <span class="c-list-card-category">
+                        <?php echo strtoupper(htmlspecialchars($promo->estadoPromo, ENT_QUOTES, 'UTF-8')); ?>
+                      </span>
+                    </div>
+                  </button>
+                </h2>
+                <div id="collapsePromo<?php echo $promo->idPromo; ?>" class="accordion-collapse collapse">
+                  <div class="accordion-body c-accordion-body">
+                    <div class="c-list-cart-body-container">
+                      <div class="row mb-4">
+                        <div class="col-6">
+                          <div class="c-list-cart-body-info-group">
+                            <label class="c-list-cart-body-label">FECHA DESDE</label>
+                            <span class="c-list-cart-body-date">
+                              <?php echo $promo->fechaDesdePromo ? $promo->fechaDesdePromo->format('d-m-Y') : 'N/A'; ?>
+                            </span>
+                          </div>
+                        </div>
+
+                        <div class="col-6 text-end">
+                          <div class="c-list-cart-body-info-group">
+                            <label class="c-list-cart-body-label">FECHA HASTA</label>
+                            <span class="c-list-cart-body-date">
+                              <?php echo $promo->fechaHastaPromo ? $promo->fechaHastaPromo->format('d-m-Y') : 'N/A'; ?>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="c-list-cart-body-desc-container">
+                            <label class="c-list-cart-body-label">DESCRIPCIÓN</label>
+                            <p class="c-list-cart-body-desc-text">
+                              <?php echo htmlspecialchars($promo->textoPromo, ENT_QUOTES, 'UTF-8'); ?>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="c-list-cart-body-desc-container">
+                            <label class="c-list-cart-body-label">DETALLE</label>
+                            <p class="c-list-cart-body-desc-text">
+                              <?php
+                                $dias = [];
+                                $diasTexto = [1=>"Lun",2=>"Mar",3=>"Mié",4=>"Jue",5=>"Vie",6=>"Sáb",7=>"Dom"];
+                                foreach ($promo->diasSemanaPromo as $d) {
+                                  $dias[] = $diasTexto[$d] ?? $d;
+                                }
+                              ?>
+                              Días que aplica: <?php echo implode(", ", $dias); ?> <br>
+                              Local: <?php echo htmlspecialchars($promo->local->nombreLocal, ENT_QUOTES, 'UTF-8'); ?> <br>
+                              Categoría de cliente: <?php echo htmlspecialchars(ucfirst($promo->categoriaClientePromo), ENT_QUOTES, 'UTF-8'); ?>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <?php if ($estadoPromo === 'pendiente') { ?>
+                        <div class="col-md-6 col-12">
+                          <a class="c-btn-danger-tonal"
+                            href="<?php echo app_path('src/controller/promocion/handle_validar_promocion.php'); ?>?estado=denegada&id=<?php echo $promo->idPromo; ?>">
+                            Denegar
+                          </a>
+                        </div>
+                        <div class="col-md-6 col-12">
+                          <a class="c-btn-secondary-tonal"
+                            href="<?php echo app_path('src/controller/promocion/handle_validar_promocion.php'); ?>?estado=aprobada&id=<?php echo $promo->idPromo; ?>">
+                            Aprobar
+                          </a>
+                        </div>
+                      <?php } else { ?>
+                        <div class="col-12 text-center c-list-cart-body-label mt-2">
+                          Promo gestionada
+                        </div>
+                      <?php } ?>
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div class="row">
-                <?php if ($estadoPromo === 'pendiente') { ?>
-                  <div class="col-md-6 col-12">
-                    <a class="c-btn-danger-tonal"
-                      href="<?php echo app_path('src/controller/promocion/handle_validar_promocion.php'); ?>?estado=denegada&id=<?php echo $promo->idPromo; ?>">
-                      Denegar
-                    </a>
-                  </div>
-                  <div class="col-md-6 col-12">
-                    <a class="c-btn-secondary-tonal"
-                      href="<?php echo app_path('src/controller/promocion/handle_validar_promocion.php'); ?>?estado=aprobada&id=<?php echo $promo->idPromo; ?>">
-                      Aprobar
-                    </a>
-                  </div>
-                <?php } else { ?>
-                  <div class="col-12 text-center c-list-cart-body-label">
-                    Promo gestionada
-                  </div>
-                <?php } ?>
               </div>
             </article>
           <?php } ?>
@@ -250,6 +272,10 @@ $promosPage = $totalPromos > 0 ? array_slice($promociones, $startIndex, $promosP
       </section>
     <?php } ?>
   </main>
+
+  <footer>
+    <?php include_once __DIR__ . '/../../components/footer.php' ?>
+  </footer>
 
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

@@ -28,6 +28,7 @@ function startSession(Usuario $usuario)
   $_SESSION['id_usuario'] = $usuario->idUsuario;
   $_SESSION['tipo_usuario'] = $usuario->tipoUsuario;
   $_SESSION['nombre_usuario'] = $usuario->nombreUsuario;
+  $_SESSION['email_usuario'] = $usuario->emailUsuario;
   // En caso de ser cliente, también guardamos su categoría para mostrarle las novedades correspondientes a su categoría.
   if ($usuario->categoriaCliente) {
     $_SESSION['categoria_cliente'] = $usuario->categoriaCliente;
@@ -61,6 +62,8 @@ function getUsuarioLogueado()
   return [
     'id_usuario' => $_SESSION['id_usuario'] ?? null,
     'tipo_usuario' => $_SESSION['tipo_usuario'] ?? null,
+    'nombre_usuario' => $_SESSION['nombre_usuario'] ?? null,
+    'email_usuario' => $_SESSION['email_usuario'] ?? null,
     'categoria_cliente' => $_SESSION['categoria_cliente'] ?? null
   ];
 }

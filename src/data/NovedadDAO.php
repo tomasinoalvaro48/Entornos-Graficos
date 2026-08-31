@@ -16,7 +16,8 @@ class NovedadDAO extends DBFunctions
         $novedadFetchArray['fecha_desde_nov'] ? new DateTime($novedadFetchArray['fecha_desde_nov']) : null,
         $novedadFetchArray['fecha_hasta_nov'] ? new DateTime($novedadFetchArray['fecha_hasta_nov']) : null,
         $novedadFetchArray['categoria_cliente_nov'],
-        $novedadFetchArray['estado_elim_novedad']
+        $novedadFetchArray['estado_elim_novedad'],
+        $novedadFetchArray['imagen_novedad'] ?? 'default_novedad.svg'
       );
     return $n;
   }
@@ -42,8 +43,8 @@ class NovedadDAO extends DBFunctions
   {
     $fechaDesde = $novedad->fechaDesdeNovedad ? "'" . $novedad->fechaDesdeNovedad->format('Y-m-d') . "'" : "NULL";
     $fechaHasta = $novedad->fechaHastaNovedad ? "'" . $novedad->fechaHastaNovedad->format('Y-m-d') . "'" : "NULL";
-    $query = "INSERT INTO novedad(texto_nov, fecha_desde_nov, fecha_hasta_nov, categoria_cliente_nov, estado_elim_novedad)
-              VALUES ('" . $novedad->textoNovedad . "', " . $fechaDesde . ", " . $fechaHasta . ", '" . $novedad->categoriaCliente . "', '" . EstadoElimNovedad::ACTIVA->value . "')";
+    $query = "INSERT INTO novedad(texto_nov, fecha_desde_nov, fecha_hasta_nov, categoria_cliente_nov, estado_elim_novedad, imagen_novedad)
+              VALUES ('" . $novedad->textoNovedad . "', " . $fechaDesde . ", " . $fechaHasta . ", '" . $novedad->categoriaCliente . "', '" . EstadoElimNovedad::ACTIVA->value . "', '" . $novedad->imagenNovedad . "')";
     return $this->querySQL($query);
   }
 
@@ -159,7 +160,7 @@ class NovedadDAO extends DBFunctions
     $fechaDesde = $novedad->fechaDesdeNovedad ? "'" . $novedad->fechaDesdeNovedad->format('Y-m-d') . "'" : "NULL";
     $fechaHasta = $novedad->fechaHastaNovedad ? "'" . $novedad->fechaHastaNovedad->format('Y-m-d') . "'" : "NULL";
     $query = "UPDATE novedad
-              SET texto_nov = '" . $novedad->textoNovedad . "', fecha_desde_nov = " . $fechaDesde . ", fecha_hasta_nov = " . $fechaHasta . ", categoria_cliente_nov = '" . $novedad->categoriaCliente . "'
+              SET texto_nov = '" . $novedad->textoNovedad . "', fecha_desde_nov = " . $fechaDesde . ", fecha_hasta_nov = " . $fechaHasta . ", categoria_cliente_nov = '" . $novedad->categoriaCliente . "', imagen_novedad = '" . $novedad->imagenNovedad . "'
               WHERE id_novedad = '" . $novedad->codNovedad . "'";
     return $this->querySQL($query);
   }

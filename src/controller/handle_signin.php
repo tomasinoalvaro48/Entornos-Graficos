@@ -42,6 +42,12 @@ if (isset($_POST['botonCrearCliente'])) {
     exit();
   }
 
+  if (strlen($claveUsuario) < 8 || !preg_match('/[A-Z]/', $claveUsuario) || !preg_match('/[0-9]/', $claveUsuario)) {
+    setSessionError("La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.");
+    header("Location: " . app_path('src/view/pages/auth/signin.php'));
+    exit();
+  }
+
   // Generar un token de verificación único
   $token = bin2hex(random_bytes(16));
   // Enviar el correo de verificación
@@ -91,6 +97,12 @@ if (isset($_POST['botonSolicitarDueno'])) {
   // Verificar que las contraseñas coincidan
   if ($claveUsuario !== $claveUsuarioConf) {
     setSessionError("Las contraseñas no coinciden. Por favor, intente nuevamente.");
+    header("Location: " . app_path('src/view/pages/auth/signin_dueno.php'));
+    exit();
+  }
+
+  if (strlen($claveUsuario) < 8 || !preg_match('/[A-Z]/', $claveUsuario) || !preg_match('/[0-9]/', $claveUsuario)) {
+    setSessionError("La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.");
     header("Location: " . app_path('src/view/pages/auth/signin_dueno.php'));
     exit();
   }

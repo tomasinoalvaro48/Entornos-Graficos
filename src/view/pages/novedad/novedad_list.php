@@ -165,18 +165,29 @@ $novedadesPage = $totalNovedades > 0 ? array_slice($novedades, $startIndex, $nov
                 </div>
               </div>
 
+              <?php $novedadImage = !empty($n->imagenNovedad) ? $n->imagenNovedad : 'default_novedad.svg'; ?>
+              <div class="row mb-3">
+                <div class="col-12">
+                  <img
+                    src="<?php echo app_path('src/img/novedades/' . htmlspecialchars($novedadImage, ENT_QUOTES, 'UTF-8')); ?>"
+                    alt="Imagen de novedad"
+                    class="img-fluid rounded shadow-sm"
+                    style="max-height: 180px; object-fit: cover; width: 100%;">
+                </div>
+              </div>
+
               <div class="c-list-cart-body-container">
                 <div class="row mb-4">
                   <div class="col-6">
                     <div class="c-list-cart-body-info-group">
                       <label class="c-list-cart-body-label">FECHA DESDE</label>
-                      <span class="c-list-cart-body-date"><?php echo $n->fechaDesdeNovedad ? htmlspecialchars($n->fechaDesdeNovedad->format('Y-m-d'), ENT_QUOTES, 'UTF-8') : 'N/A'; ?></span>
+                      <span class="c-list-cart-body-date"><?php echo $n->fechaDesdeNovedad ? htmlspecialchars($n->fechaDesdeNovedad->format('d-m-Y'), ENT_QUOTES, 'UTF-8') : 'N/A'; ?></span>
                     </div>
                   </div>
                   <div class="col-6 text-end">
                     <div class="c-list-cart-body-info-group">
                       <label class="c-list-cart-body-label">FECHA HASTA</label>
-                      <span class="c-list-cart-body-date"><?php echo $n->fechaHastaNovedad ? htmlspecialchars($n->fechaHastaNovedad->format('Y-m-d'), ENT_QUOTES, 'UTF-8') : 'N/A'; ?></span>
+                      <span class="c-list-cart-body-date"><?php echo $n->fechaHastaNovedad ? htmlspecialchars($n->fechaHastaNovedad->format('d-m-Y'), ENT_QUOTES, 'UTF-8') : 'N/A'; ?></span>
                     </div>
                   </div>
                 </div>
@@ -272,6 +283,9 @@ $novedadesPage = $totalNovedades > 0 ? array_slice($novedades, $startIndex, $nov
 
   </main>
 
+  <footer>
+    <?php include_once __DIR__ . '/../../components/footer.php' ?>
+  </footer>
 
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

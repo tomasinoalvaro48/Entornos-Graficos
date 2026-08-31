@@ -75,7 +75,7 @@ function renderHeaderNotifications()
     // Solo se muestran las 5 primeras novedades para no saturar el dropdown -> cambiar si queremos aumentar/disminuir
     $newNovedades = array_slice($newNovedades, 0, 5);
     foreach ($newNovedades as $novedad) {
-      $fecha = $novedad->fechaDesdeNovedad ? $novedad->fechaDesdeNovedad->format('d/m/Y') : 'Sin fecha';
+      $fecha = $novedad->fechaDesdeNovedad ? $novedad->fechaDesdeNovedad->format('d-m-Y') : 'Sin fecha';
       $items[] = [
         'title' => 'Nueva novedad',
         'text' => $novedad->textoNovedad,

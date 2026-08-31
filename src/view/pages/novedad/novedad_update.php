@@ -12,7 +12,7 @@
         <h1 class="c-title modal-title">Editar Novedad</h1>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="<?php echo app_path('src/controller/novedad/handle_update_novedad.php'); ?>?id_novedad=<?php echo htmlspecialchars($novedadToEdit->codNovedad, ENT_QUOTES, 'UTF-8') ?>" method="POST" class="c-form-layout px-0 pt-3">
+      <form action="<?php echo app_path('src/controller/novedad/handle_update_novedad.php'); ?>?id_novedad=<?php echo htmlspecialchars($novedadToEdit->codNovedad, ENT_QUOTES, 'UTF-8') ?>" method="POST" enctype="multipart/form-data" class="c-form-layout px-0 pt-3">
         <div class="modal-body text-start border-0 px-0">
           <input type="hidden" name="id_novedad" value="<?php echo htmlspecialchars($novedadToEdit->codNovedad, ENT_QUOTES, 'UTF-8'); ?>">
 
@@ -68,6 +68,29 @@
               <option value="premium" <?php echo ($novedadToEdit->categoriaCliente === 'premium') ? 'selected' : ''; ?>>Premium</option>
             </select>
             <label for="categoria_cliente_<?php echo $novedadToEdit->codNovedad; ?>" class="c-form-label">Categoría de Cliente</label>
+          </div>
+
+          <div class="mb-3">
+            <label class="c-list-cart-body-label">Imagen de la novedad</label>
+            <?php $currentImage = !empty($novedadToEdit->imagenNovedad) ? $novedadToEdit->imagenNovedad : 'default_novedad.svg'; ?>
+            <input type="hidden" name="imagen_novedad_actual" value="<?php echo htmlspecialchars($currentImage, ENT_QUOTES, 'UTF-8'); ?>">
+            <div class="mt-2 mb-2">
+              <img
+                src="<?php echo app_path('src/img/novedades/' . htmlspecialchars($currentImage, ENT_QUOTES, 'UTF-8')); ?>"
+                alt="Imagen actual"
+                class="img-fluid rounded shadow-sm"
+                style="max-height: 120px; object-fit: cover; width: 100%;">
+            </div>
+            <div class="c-form-field">
+              <input
+                type="file"
+                class="c-form-input"
+                id="imagen_novedad_<?php echo $novedadToEdit->codNovedad; ?>"
+                name="imagen_novedad"
+                accept="image/*"
+                placeholder=" ">
+              <label for="imagen_novedad_<?php echo $novedadToEdit->codNovedad; ?>" class="c-form-label">Cambiar imagen</label>
+            </div>
           </div>
 
         </div>

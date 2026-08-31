@@ -28,6 +28,12 @@ if ($passNueva !== $passRepetir) {
   exit();
 }
 
+if (strlen($passNueva) < 8 || !preg_match('/[A-Z]/', $passNueva) || !preg_match('/[0-9]/', $passNueva)) {
+  setSessionError("La nueva contraseña debe tener al menos 8 caracteres, una mayúscula y un número.");
+  header("Location: " . app_path('src/view/pages/auth/change_password.php'));
+  exit();
+}
+
 $usuarioDAO = new UsuarioDAO();
 $usuario = $usuarioDAO->getById($usuarioLogueado['id_usuario']);
 
