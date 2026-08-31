@@ -71,6 +71,12 @@
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous">
   </script>
+
+<script>
+  const passInputId = 'pass_dueno';
+  const passConfInputId = 'pass_dueno_conf';
+  <?php include_once __DIR__ . "/password_validator.js"; ?>
+</script>
 </body>
 
 </html>
