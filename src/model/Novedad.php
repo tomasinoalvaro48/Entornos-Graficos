@@ -15,6 +15,7 @@ class Novedad
   public ?DateTime $fechaHastaNovedad;
   public string $categoriaCliente;
   public ?string $estadoElimNovedad;
+  public string $imagenNovedad;
 
   public function __construct(
     ?int $codNovedad,
@@ -22,7 +23,8 @@ class Novedad
     ?DateTime $fechaDesdeNovedad,
     ?DateTime $fechaHastaNovedad,
     string $categoriaCliente,
-    ?string $estado_elim_novedad
+    ?string $estado_elim_novedad,
+    string $imagenNovedad = 'default_novedad.svg'
   ) {
     $this->codNovedad = $codNovedad;
     $this->textoNovedad = substr($textoNovedad, 0, 200);
@@ -30,5 +32,6 @@ class Novedad
     $this->fechaHastaNovedad = $fechaHastaNovedad;
     $this->categoriaCliente = substr($categoriaCliente, 0, 15);
     $this->estadoElimNovedad = $estado_elim_novedad;
+    $this->imagenNovedad = $imagenNovedad;
   }
-}
+}

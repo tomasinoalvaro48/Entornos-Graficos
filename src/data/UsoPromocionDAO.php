@@ -3,6 +3,7 @@
 require_once __DIR__ . "/../model/UsoPromocion.php";
 require_once __DIR__ . "/../model/Promocion.php";
 require_once __DIR__ . "/../model/Local.php";
+require_once __DIR__ . "/../model/Usuario.php";
 require_once __DIR__ . "/DBFunctions.php";
 
 class UsoPromocionDAO extends DBFunctions
@@ -45,10 +46,11 @@ class UsoPromocionDAO extends DBFunctions
   {
     $usosArray = [];
 
-    $query = "SELECT up.*, p.*, l.*
+    $query = "SELECT up.*, p.*, l.*, usu.*
               FROM uso_promocion up
               INNER JOIN promocion p ON up.id_promo = p.id_promo
-              INNER JOIN local l ON p.id_local = l.id_local;";
+              INNER JOIN local l ON p.id_local = l.id_local
+              INNER JOIN usuario usu ON up.id_cli = usu.id_usuario;";
 
     $usos = $this->querySQL($query);
 
@@ -75,6 +77,28 @@ class UsoPromocionDAO extends DBFunctions
           ),
           $row['estado_elim_promo'],
           $row['imagen_promo']
+        );
+
+        $dias = [];
+        $diasQuery = "SELECT id_dia FROM dias_promo WHERE id_promo = " . $row['id_promo'];
+        $diasResult = $this->querySQL($diasQuery);
+        if ($diasResult && $diasResult->num_rows > 0) {
+          while ($d = mysqli_fetch_array($diasResult)) {
+            $dias[] = $d['id_dia'];
+          }
+        }
+        $uso->promo->diasSemanaPromo = new ArrayObject($dias);
+
+        $uso->cliente = new Usuario(
+          $row['id_usuario'],
+          $row['nombre_usuario'],
+          $row['email_usuario'],
+          $row['clave_usuario'],
+          $row['tipo_usuario'],
+          $row['categoria_cliente'],
+          $row['estado_dueno'],
+          $row['estado_mail'],
+          $row['token_verificacion']
         );
 
         array_push($usosArray, $uso);
@@ -120,6 +144,16 @@ class UsoPromocionDAO extends DBFunctions
           $row['estado_elim_promo'],
           $row['imagen_promo']
         );
+
+        $dias = [];
+        $diasQuery = "SELECT id_dia FROM dias_promo WHERE id_promo = " . $row['id_promo'];
+        $diasResult = $this->querySQL($diasQuery);
+        if ($diasResult && $diasResult->num_rows > 0) {
+          while ($d = mysqli_fetch_array($diasResult)) {
+            $dias[] = $d['id_dia'];
+          }
+        }
+        $uso->promo->diasSemanaPromo = new ArrayObject($dias);
 
         $usosArray[] = $uso;
       }
@@ -203,6 +237,16 @@ class UsoPromocionDAO extends DBFunctions
           $row['estado_elim_promo'],
           $row['imagen_promo']
         );
+
+        $dias = [];
+        $diasQuery = "SELECT id_dia FROM dias_promo WHERE id_promo = " . $row['id_promo'];
+        $diasResult = $this->querySQL($diasQuery);
+        if ($diasResult && $diasResult->num_rows > 0) {
+          while ($d = mysqli_fetch_array($diasResult)) {
+            $dias[] = $d['id_dia'];
+          }
+        }
+        $uso->promo->diasSemanaPromo = new ArrayObject($dias);
 
         $usosArray[] = $uso;
       }

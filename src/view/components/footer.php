@@ -5,13 +5,6 @@ require_once __DIR__ . "/../../enums.php";
 $tipoUsuario = getTipoUsuario();
 ?>
 
-<?php
-require_once __DIR__ . "/../../controller/auth.php";
-require_once __DIR__ . "/../../enums.php";
-
-$tipoUsuario = getTipoUsuario();
-?>
-
 <footer class="c-footer">
   <div class="container-fluid">
     <div class="row align-items-start">
@@ -29,7 +22,7 @@ $tipoUsuario = getTipoUsuario();
           <div class="ratio ratio-4x3">
             <iframe
               class="c-footer-iframe"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d87798.73420402437!2d7.824284571523132!3d46.55341446915892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478fa0073b1165c7%3A0x5392dbb55902c31!2sLauterbrunnen%2C%20Switzerland!5e0!3m2!1sen!2sar!4v1777058542666!5m2!1sen!2sar"
+              src="https://maps.google.com/maps?q=-32.894901,-60.692411&hl=es&z=15&output=embed"
               allowfullscreen=""
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade">

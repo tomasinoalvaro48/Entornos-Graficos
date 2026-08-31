@@ -249,7 +249,7 @@ $promocionesPage = $totalPromociones > 0 ? array_slice($promociones, $startIndex
                     <div class="c-list-cart-body-info-group">
                       <label class="c-list-cart-body-label">FECHA DESDE</label>
                       <span class="c-list-cart-body-date">
-                        <?php echo $p->fechaDesdePromo->format('Y-m-d'); ?>
+                        <?php echo $p->fechaDesdePromo->format('d-m-Y'); ?>
                       </span>
                     </div>
                   </div>
@@ -258,7 +258,7 @@ $promocionesPage = $totalPromociones > 0 ? array_slice($promociones, $startIndex
                     <div class="c-list-cart-body-info-group">
                       <label class="c-list-cart-body-label">FECHA HASTA</label>
                       <span class="c-list-cart-body-date">
-                        <?php echo $p->fechaHastaPromo->format('Y-m-d'); ?>
+                        <?php echo $p->fechaHastaPromo->format('d-m-Y'); ?>
                       </span>
                     </div>
                   </div>
@@ -399,6 +399,10 @@ $promocionesPage = $totalPromociones > 0 ? array_slice($promociones, $startIndex
       </section>
     <?php } ?>
   </main>
+
+  <footer>
+    <?php include_once __DIR__ . '/../../components/footer.php' ?>
+  </footer>
 
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
