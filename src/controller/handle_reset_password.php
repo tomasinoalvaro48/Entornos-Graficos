@@ -17,6 +17,14 @@ if (isset($_POST['pass'], $_POST['pass2'])) {
     exit();
   }
 
+  if (strlen($_POST['pass']) < 8 || !preg_match('/[A-Z]/', $_POST['pass']) || !preg_match('/[0-9]/', $_POST['pass'])) {
+    setSessionError("La nueva contraseña debe tener al menos 8 caracteres, una mayúscula y un número.");
+    header("Location: " . app_path('src/view/pages/auth/new_password.php') .
+      '?mail=' . urlencode($_POST['mail']) .
+      '&token=' . urlencode($_POST['token']));
+    exit();
+  }
+
   $usuarioDAO = new UsuarioDAO();
   $usuario = $usuarioDAO->getByEmail($_POST['mail']);
 
