@@ -264,7 +264,7 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
               </ul>
             <?php } else { ?>
               <a class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-list c-menu-icon-orange"></i>
+                <i class="bi bi-list fs-4"></i>
               </a>
               <ul class="dropdown-menu dropdown-menu-end c-user-dropdown">
                 <li>
