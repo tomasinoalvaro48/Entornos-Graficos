@@ -65,10 +65,10 @@ $excludePaths = [ // Rutas donde solo se muestra el logo en el header
           <?php if (!$tipo) { ?>
             <!-- Usuarios no autenticados -->
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>">Promociones</a>
+              <a class="nav-link" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">Locales</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo app_path('src/view/pages/local/local_list.php'); ?>">Locales</a>
+              <a class="nav-link" href="<?php echo app_path('src/view/pages/promocion/promocion_list.php'); ?>">Promociones</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo app_path('src/view/pages/auth/login.php'); ?>">Iniciar sesion</a>
