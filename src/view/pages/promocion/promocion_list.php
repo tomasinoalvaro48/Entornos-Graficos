@@ -311,7 +311,7 @@ $promocionesPage = $totalPromociones > 0 ? array_slice($promociones, $startIndex
               <?php if ($tipo === TipoUsuario::DUENO->value) { ?>
                 <div class="row">
                   <div class="col-lg-12">
-                    <a class="c-btn-danger-tonal"
+                    <a class="c-btn-danger-tonal btn-delete-trigger" data-delete-msg="¿Estás seguro de que queres eliminar la promoción #<?php echo htmlspecialchars($p->idPromo, ENT_QUOTES, 'UTF-8'); ?>?"
                       href="<?php echo app_path('src/controller/promocion/handle_delete_promocion.php'); ?>?id=<?php echo htmlspecialchars($p->idPromo, ENT_QUOTES, 'UTF-8'); ?>">
                       Eliminar
                     </a>
@@ -404,6 +404,8 @@ $promocionesPage = $totalPromociones > 0 ? array_slice($promociones, $startIndex
     <?php include_once __DIR__ . '/../../components/footer.php' ?>
   </footer>
 
+  <?php include_once __DIR__ . '/../../components/confirm_delete_modal.php'; ?>
+  
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
