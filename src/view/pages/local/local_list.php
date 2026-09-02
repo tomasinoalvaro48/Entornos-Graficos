@@ -239,9 +239,15 @@ $localesPage = $totalLocales > 0 ? array_slice($locales, $startIndex, $localesPe
                     </button>
                   </div>
                   <div class="col-lg-6">
-                    <a href="<?php echo app_path('src/controller/local/handle_logic_delete_local.php'); ?>?id=<?php echo htmlspecialchars($l->idLocal, ENT_QUOTES, 'UTF-8'); ?>" class="c-btn-danger-tonal">
-                      Eliminar
-                    </a>
+                    <?php if ($l->estadoLocal === EstadoLocal::ELIMINADO->value) { ?>
+                      <button class="c-btn-secondary-tonal" disabled style="background-color: #cccccc; color: #666666; cursor: not-allowed; opacity: 0.6;">
+                        Eliminar
+                      </button>
+                    <?php } else { ?>
+                      <a href="<?php echo app_path('src/controller/local/handle_logic_delete_local.php'); ?>?id=<?php echo htmlspecialchars($l->idLocal, ENT_QUOTES, 'UTF-8'); ?>" class="c-btn-danger-tonal">
+                        Eliminar
+                      </a>
+                    <?php } ?>
                   </div>
                 </div>
               <?php } ?>

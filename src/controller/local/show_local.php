@@ -25,14 +25,16 @@ function handleLocalesList()
   $rubro = null;
   $estado = null;
 
+  if ($tipo !== TipoUsuario::ADMIN->value && $tipo !== TipoUsuario::DUENO->value) {
+    $estado = EstadoLocal::ACTIVO->value;
+  }
+
   if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['botonFiltrarLocales'])) {
     $nombre = !empty($_POST['nombre_local']) ? $_POST['nombre_local'] : null;
     $rubro = !empty($_POST['rubro_local']) ? $_POST['rubro_local'] : null;
 
     if ($tipo === TipoUsuario::ADMIN->value || $tipo === TipoUsuario::DUENO->value) {
       $estado = !empty($_POST['estado_elim_local']) ? $_POST['estado_elim_local'] : null;
-    } else {
-      $estado = EstadoLocal::ACTIVO->value; // Para clientes, solo mostrar locales activos
     }
   }
 

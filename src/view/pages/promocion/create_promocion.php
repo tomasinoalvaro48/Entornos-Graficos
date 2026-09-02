@@ -130,7 +130,9 @@ $locales = showLocales();
             required>
             <option value="">Seleccionar local</option>
             <?php foreach ($locales as $l) {
-              echo "<option value='{$l->idLocal}'>{$l->nombreLocal}</option>";
+              if ($l->estadoLocal === EstadoLocal::ACTIVO->value) {
+                echo "<option value='{$l->idLocal}'>{$l->nombreLocal}</option>";
+              }
             } ?>
           </select>
           <label class="c-form-label" for="id_local">Local</label>
