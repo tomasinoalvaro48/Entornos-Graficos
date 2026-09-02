@@ -161,6 +161,8 @@ $locales = showLocales();
     const today = new Date().toISOString().split('T')[0];
     document.getElementById("fecha_desde").min = today;
     document.getElementById("fecha_hasta").min = today;
+    
+    <?php include_once __DIR__ . "/fecha_validator.js"; ?>
   </script>
 </body>
 

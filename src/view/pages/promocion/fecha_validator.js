@@ -1,7 +1,7 @@
-document.querySelectorAll('input[id^="fecha_desde_novedad"]').forEach(fechaDesdeInput => {
+document.querySelectorAll('input[id^="fecha_desde"]').forEach(fechaDesdeInput => {
   const baseId = fechaDesdeInput.id;
-  const suffix = baseId.substring('fecha_desde_novedad'.length);
-  const fechaHastaInput = document.getElementById('fecha_hasta_novedad' + suffix);
+  const suffix = baseId.substring('fecha_desde'.length);
+  const fechaHastaInput = document.getElementById('fecha_hasta' + suffix);
 
   if (fechaHastaInput) {
     function syncFechaHastaMin() {
@@ -11,6 +11,9 @@ document.querySelectorAll('input[id^="fecha_desde_novedad"]').forEach(fechaDesde
         if (fechaHastaInput.value && fechaHastaInput.value < fechaDesde) {
           fechaHastaInput.value = fechaDesde;
         }
+      } else {
+        const today = new Date().toISOString().split('T')[0];
+        fechaHastaInput.min = today;
       }
     }
 
